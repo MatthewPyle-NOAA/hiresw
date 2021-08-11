@@ -174,7 +174,7 @@ c      CALL W3TAGB('ETA_SNDP',1999,0267,0084,'NP22')
 C
 C   SET MODEL TOP PRESSURE
 C
-       PTOP=3.0*100.0
+       PTOP=2.0*100.0
         write(0,*) 'PTOP is: ', PTOP
 C
 C   READ IN SWITCHES TO CONTROL WHETHER TO DO...
@@ -321,16 +321,17 @@ C
         
 C       Flip P, T, and Q
         DO L=1,LMH
-        TFL(L)=T(LMH-L+1)
-        QFL(L)=Q(LMH-L+1)
-        PFL(L)=P(LMH-L+1)
+        TFL(L)=T(L)
+        QFL(L)=Q(L)
+        PFL(L)=P(L)
         ENDDO
 
         PINT(1)=PTOP
-        DO L=1,LMH
-          DP1=PFL(L)-PINT(L)
-          PINT(L+1)=PFL(L)+DP1
+        DO L=1,LMH-1
+          DP1=PFL(L+1)-PFL(L)
+          PINT(L+1)=PFL(L)+0.5*DP1
         ENDDO
+        PINT(LMH+1)=PFL(LMH)+0.5*DP1
         ZINT(LMH+1)=FPACK(3)
         DO L=LMH,1,-1
          TV2=TFL(L)*(1.0+0.608*QFL(L))

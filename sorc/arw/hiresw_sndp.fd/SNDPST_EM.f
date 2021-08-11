@@ -317,16 +317,18 @@ C
         
 C       Flip P, T, and Q
         DO L=1,LMH
-        TFL(L)=T(LMH-L+1)
-        QFL(L)=Q(LMH-L+1)
-        PFL(L)=P(LMH-L+1)
+        TFL(L)=T(L)
+        QFL(L)=Q(L)
+        PFL(L)=P(L)
         ENDDO
 
         PINT(1)=PTOP
-        DO L=1,LMH
-          DP1=PFL(L)-PINT(L)
-          PINT(L+1)=PFL(L)+DP1
+        DO L=1,LMH-1
+          DP1=PFL(L+1)-PFL(L)
+          PINT(L+1)=PFL(L)+0.5*DP1
+          write(0,*) 'L, DP1, PINT(L+1): ', L, DP1, PINT(L+1)
         ENDDO
+        PINT(LMH+1)=PINT(LMH)+0.5*DP1
         ZINT(LMH+1)=FPACK(3)
         DO L=LMH,1,-1
          TV2=TFL(L)*(1.0+0.608*QFL(L))
