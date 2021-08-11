@@ -1,0 +1,135 @@
++ target=NULL
++ [[ NULL == \l\i\n\u\x\.\g\n\u ]]
++ [[ NULL == \l\i\n\u\x\.\i\n\t\e\l ]]
++ source ./sorc/machine-setup.sh
++ export MOD_PATH
++ source ./modulefiles/build.wcoss_cray
++ rm -fr ./build
++ mkdir ./build
++ cd ./build
++ [[ wcoss_cray == \w\c\o\s\s\_\c\r\a\y ]]
++ cmake .. -DCMAKE_INSTALL_PREFIX=../ -DEMC_EXEC_DIR=ON
+-- The C compiler identification is Intel 18.0.1.20171018
+-- The Fortran compiler identification is Intel 18.0.1.20171018
+-- Cray Programming Environment 2.3.0 C
+-- Check for working C compiler: /opt/cray/craype/2.3.0/bin/cc
+-- Check for working C compiler: /opt/cray/craype/2.3.0/bin/cc -- works
+-- Detecting C compiler ABI info
+-- Detecting C compiler ABI info - done
+-- Detecting C compile features
+-- Detecting C compile features - done
+-- Cray Programming Environment 2.3.0 Fortran
+-- Check for working Fortran compiler: /opt/cray/craype/2.3.0/bin/ftn
+-- Check for working Fortran compiler: /opt/cray/craype/2.3.0/bin/ftn  -- works
+-- Detecting Fortran compiler ABI info
+-- Detecting Fortran compiler ABI info - done
+-- Checking whether /opt/cray/craype/2.3.0/bin/ftn supports Fortran 90
+-- Checking whether /opt/cray/craype/2.3.0/bin/ftn supports Fortran 90 -- yes
+-- Setting build type to 'Release' as none was specified.
+-- Found ZLIB: /usrx/local/prod/zlib/1.2.7/intel/haswell/lib/libz.a (found version "1.2.7") 
+-- Found PNG: /usrx/local/prod/png/1.2.49/intel/haswell/lib/libpng.a (found version "1.2.49") 
+-- Found JPEG: /usr/lib64/libjpeg.a (found version "62") 
+-- Found Jasper: /usrx/local/prod/jasper/1.900.1/intel/haswell/lib/libjasper.a (found version "1.900.1") 
+-- Found NetCDF: /usrx/local/prod/NetCDF/4.7.4/intel/sandybridge/include (found version "4.7.4") found components: C Fortran 
+-- FindNetCDF defines targets:
+--   - NetCDF_VERSION [4.7.4]
+--   - NetCDF_PARALLEL [TRUE]
+--   - NetCDF_C_CONFIG_EXECUTABLE [/usrx/local/prod/NetCDF/4.7.4/intel/sandybridge/bin/nc-config]
+--   - NetCDF::NetCDF_C [STATIC] [Root: /usrx/local/prod/NetCDF/4.7.4/intel/sandybridge] Lib: /usrx/local/prod/NetCDF/4.7.4/intel/sandybridge/lib/libnetcdf.a 
+--   - NetCDF_Fortran_CONFIG_EXECUTABLE [/usrx/local/prod/NetCDF/4.7.4/intel/sandybridge/bin/nf-config]
+--   - NetCDF::NetCDF_Fortran [STATIC] [Root: /usrx/local/prod/NetCDF/4.7.4/intel/sandybridge] Lib: /usrx/local/prod/NetCDF/4.7.4/intel/sandybridge/lib/libnetcdff.a 
+-- Found MPI_C: /opt/cray/craype/2.3.0/bin/cc (found version "3.0") 
+-- Found MPI_Fortran: /opt/cray/craype/2.3.0/bin/ftn (found version "3.0") 
+-- Found MPI: TRUE (found version "3.0")  
+-- Found ESMF library: /gpfs/hps/usrx/local/prod/ESMF/8.0.1/intel/sandybridge/lib/libesmf.a
+-- Found wgrib2: /gpfs/hps/nco/ops/nwprod/lib/wgrib2/v2.0.8/intel/lib/libwgrib2.a (found version 2.0.8)
+-- Found OpenMP_Fortran: -qopenmp (found version "5.0") 
+-- Found OpenMP: TRUE (found version "5.0") found components: Fortran 
+-- Found gfsio: /gpfs/hps/nco/ops/nwprod/lib/gfsio/v1.1.0/intel/libgfsio_v1.1.0_4.a  
+-- Found sfcio: /gpfs/hps/nco/ops/nwprod/lib/sfcio/v1.0.0/intel/libsfcio_v1.0.0_4.a  
+-- Found w3nco: /gpfs/hps/nco/ops/nwprod/lib/w3nco/v2.0.6/intel/libw3nco_v2.0.6_d.a  
+-- Found landsfcutil: /gpfs/hps/nco/ops/nwprod/lib/landsfcutil/v2.1.0/intel/liblandsfcutil_v2.1.0_4.a  
+-- Found bacio: /gpfs/hps/nco/ops/nwprod/lib/bacio/v2.0.2/intel/libbacio_v2.0.2_4.a  
+-- Found nemsio: /gpfs/hps/nco/ops/nwprod/lib/nemsio/v2.2.3/intel/libnemsio_v2.2.3.a  
+-- Found nemsiogfs: /gpfs/hps/nco/ops/nwprod/lib/nemsiogfs/v2.0.1/intel/libnemsiogfs_v2.0.1.a  
+-- Found sigio: /gpfs/hps/nco/ops/nwprod/lib/sigio/v2.1.0/intel/libsigio_v2.1.0_4.a  
+-- Found sp: /gpfs/hps/nco/ops/nwprod/lib/sp/v2.0.2/intel/libsp_v2.0.2_d.a  
+-- Found ip: /gpfs/hps/nco/ops/nwprod/lib/ip/v3.0.0/intel/libip_v3.0.0_d.a  
+-- Found w3emc: /gpfs/hps/nco/ops/nwprod/lib/w3emc/v2.2.0/intel/libw3emc_v2.2.0_d.a  
+-- Found g2: /gpfs/hps/nco/ops/nwprod/lib/g2/v2.5.0/intel/libg2_v2.5.0_d.a  
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /gpfs/hps/nco/ops/nwpara/hiresw.v8.0.1/sorc/fv3/hireswfv3_utils.fd/build
++ make -j 8 VERBOSE=1
+/gpfs/hps/usrx/local/prod/cmake/3.16.2/bin/cmake -S/gpfs/hps/nco/ops/nwpara/hiresw.v8.0.1/sorc/fv3/hireswfv3_utils.fd -B/gpfs/hps/nco/ops/nwpara/hiresw.v8.0.1/sorc/fv3/hireswfv3_utils.fd/build --check-build-system CMakeFiles/Makefile.cmake 0
+/gpfs/hps/usrx/local/prod/cmake/3.16.2/bin/cmake -E cmake_progress_start /gpfs/hps/nco/ops/nwpara/hiresw.v8.0.1/sorc/fv3/hireswfv3_utils.fd/build/CMakeFiles /gpfs/hps/nco/ops/nwpara/hiresw.v8.0.1/sorc/fv3/hireswfv3_utils.fd/build/CMakeFiles/progress.marks
+make -f CMakeFiles/Makefile2 all
+make[1]: Entering directory `/gpfs/hps/nco/ops/nwpara/hiresw.v8.0.1/sorc/fv3/hireswfv3_utils.fd/build'
+make -f sorc/chgres_cube.fd/CMakeFiles/chgres_cube.dir/build.make sorc/chgres_cube.fd/CMakeFiles/chgres_cube.dir/depend
+make[2]: Entering directory `/gpfs/hps/nco/ops/nwpara/hiresw.v8.0.1/sorc/fv3/hireswfv3_utils.fd/build'
+cd /gpfs/hps/nco/ops/nwpara/hiresw.v8.0.1/sorc/fv3/hireswfv3_utils.fd/build && /gpfs/hps/usrx/local/prod/cmake/3.16.2/bin/cmake -E cmake_depends "Unix Makefiles" /gpfs/hps/nco/ops/nwpara/hiresw.v8.0.1/sorc/fv3/hireswfv3_utils.fd /gpfs/hps/nco/ops/nwpara/hiresw.v8.0.1/sorc/fv3/hireswfv3_utils.fd/sorc/chgres_cube.fd /gpfs/hps/nco/ops/nwpara/hiresw.v8.0.1/sorc/fv3/hireswfv3_utils.fd/build /gpfs/hps/nco/ops/nwpara/hiresw.v8.0.1/sorc/fv3/hireswfv3_utils.fd/build/sorc/chgres_cube.fd /gpfs/hps/nco/ops/nwpara/hiresw.v8.0.1/sorc/fv3/hireswfv3_utils.fd/build/sorc/chgres_cube.fd/CMakeFiles/chgres_cube.dir/DependInfo.cmake --color=
+Dependee "/gpfs/hps/nco/ops/nwpara/hiresw.v8.0.1/sorc/fv3/hireswfv3_utils.fd/build/sorc/chgres_cube.fd/CMakeFiles/chgres_cube.dir/DependInfo.cmake" is newer than depender "/gpfs/hps/nco/ops/nwpara/hiresw.v8.0.1/sorc/fv3/hireswfv3_utils.fd/build/sorc/chgres_cube.fd/CMakeFiles/chgres_cube.dir/depend.internal".
+Dependee "/gpfs/hps/nco/ops/nwpara/hiresw.v8.0.1/sorc/fv3/hireswfv3_utils.fd/build/sorc/chgres_cube.fd/CMakeFiles/CMakeDirectoryInformation.cmake" is newer than depender "/gpfs/hps/nco/ops/nwpara/hiresw.v8.0.1/sorc/fv3/hireswfv3_utils.fd/build/sorc/chgres_cube.fd/CMakeFiles/chgres_cube.dir/depend.internal".
+Scanning dependencies of target chgres_cube
+make[2]: Leaving directory `/gpfs/hps/nco/ops/nwpara/hiresw.v8.0.1/sorc/fv3/hireswfv3_utils.fd/build'
+make -f sorc/chgres_cube.fd/CMakeFiles/chgres_cube.dir/build.make sorc/chgres_cube.fd/CMakeFiles/chgres_cube.dir/build
+make[2]: Entering directory `/gpfs/hps/nco/ops/nwpara/hiresw.v8.0.1/sorc/fv3/hireswfv3_utils.fd/build'
+[ 15%] Building Fortran object sorc/chgres_cube.fd/CMakeFiles/chgres_cube.dir/program_setup.f90.o
+cd /gpfs/hps/nco/ops/nwpara/hiresw.v8.0.1/sorc/fv3/hireswfv3_utils.fd/build/sorc/chgres_cube.fd && /opt/cray/craype/2.3.0/bin/ftn  -I/gpfs/hps/nco/ops/nwprod/lib/nemsio/v2.2.3/intel/include/nemsio_v2.2.3 -I/gpfs/hps/nco/ops/nwprod/lib/sfcio/v1.0.0/intel/include/sfcio_v1.0.0_4 -I/gpfs/hps/nco/ops/nwprod/lib/sigio/v2.1.0/intel/include/sigio_v2.1.0_4 -I/gpfs/hps/usrx/local/prod/ESMF/8.0.1/intel/sandybridge/mod -I/gpfs/hps/usrx/local/prod/ESMF/8.0.1/intel/sandybridge/include -I/usrx/local/prod/NetCDF/4.7.4/intel/sandybridge/include -I/usrx/local/prod/HDF5/1.10.6/intel/sandybridge/include -I/gpfs/hps/nco/ops/nwprod/lib/wgrib2/v2.0.8/intel/include  -g -traceback -r8 -convert big_endian -assume byterecl -O3 -fp-model precise   -qopenmp -c /gpfs/hps/nco/ops/nwpara/hiresw.v8.0.1/sorc/fv3/hireswfv3_utils.fd/sorc/chgres_cube.fd/program_setup.f90 -o CMakeFiles/chgres_cube.dir/program_setup.f90.o
+[ 23%] Building Fortran object sorc/chgres_cube.fd/CMakeFiles/chgres_cube.dir/utils.f90.o
+[ 23%] Building Fortran object sorc/chgres_cube.fd/CMakeFiles/chgres_cube.dir/search_util.f90.o
+cd /gpfs/hps/nco/ops/nwpara/hiresw.v8.0.1/sorc/fv3/hireswfv3_utils.fd/build/sorc/chgres_cube.fd && /opt/cray/craype/2.3.0/bin/ftn  -I/gpfs/hps/nco/ops/nwprod/lib/nemsio/v2.2.3/intel/include/nemsio_v2.2.3 -I/gpfs/hps/nco/ops/nwprod/lib/sfcio/v1.0.0/intel/include/sfcio_v1.0.0_4 -I/gpfs/hps/nco/ops/nwprod/lib/sigio/v2.1.0/intel/include/sigio_v2.1.0_4 -I/gpfs/hps/usrx/local/prod/ESMF/8.0.1/intel/sandybridge/mod -I/gpfs/hps/usrx/local/prod/ESMF/8.0.1/intel/sandybridge/include -I/usrx/local/prod/NetCDF/4.7.4/intel/sandybridge/include -I/usrx/local/prod/HDF5/1.10.6/intel/sandybridge/include -I/gpfs/hps/nco/ops/nwprod/lib/wgrib2/v2.0.8/intel/include  -g -traceback -r8 -convert big_endian -assume byterecl -O3 -fp-model precise   -qopenmp -c /gpfs/hps/nco/ops/nwpara/hiresw.v8.0.1/sorc/fv3/hireswfv3_utils.fd/sorc/chgres_cube.fd/utils.f90 -o CMakeFiles/chgres_cube.dir/utils.f90.o
+cd /gpfs/hps/nco/ops/nwpara/hiresw.v8.0.1/sorc/fv3/hireswfv3_utils.fd/build/sorc/chgres_cube.fd && /opt/cray/craype/2.3.0/bin/ftn  -I/gpfs/hps/nco/ops/nwprod/lib/nemsio/v2.2.3/intel/include/nemsio_v2.2.3 -I/gpfs/hps/nco/ops/nwprod/lib/sfcio/v1.0.0/intel/include/sfcio_v1.0.0_4 -I/gpfs/hps/nco/ops/nwprod/lib/sigio/v2.1.0/intel/include/sigio_v2.1.0_4 -I/gpfs/hps/usrx/local/prod/ESMF/8.0.1/intel/sandybridge/mod -I/gpfs/hps/usrx/local/prod/ESMF/8.0.1/intel/sandybridge/include -I/usrx/local/prod/NetCDF/4.7.4/intel/sandybridge/include -I/usrx/local/prod/HDF5/1.10.6/intel/sandybridge/include -I/gpfs/hps/nco/ops/nwprod/lib/wgrib2/v2.0.8/intel/include  -g -traceback -r8 -convert big_endian -assume byterecl -O3 -fp-model precise   -qopenmp -c /gpfs/hps/nco/ops/nwpara/hiresw.v8.0.1/sorc/fv3/hireswfv3_utils.fd/sorc/chgres_cube.fd/search_util.f90 -o CMakeFiles/chgres_cube.dir/search_util.f90.o
+/gpfs/hps/usrx/local/prod/cmake/3.16.2/bin/cmake -E cmake_copy_f90_mod sorc/chgres_cube.fd/program_setup.mod sorc/chgres_cube.fd/CMakeFiles/chgres_cube.dir/program_setup.mod.stamp Intel
+/gpfs/hps/usrx/local/prod/cmake/3.16.2/bin/cmake -E touch sorc/chgres_cube.fd/CMakeFiles/chgres_cube.dir/program_setup.f90.o.provides.build
+[ 38%] Building Fortran object sorc/chgres_cube.fd/CMakeFiles/chgres_cube.dir/model_grid.F90.o
+cd /gpfs/hps/nco/ops/nwpara/hiresw.v8.0.1/sorc/fv3/hireswfv3_utils.fd/build/sorc/chgres_cube.fd && /opt/cray/craype/2.3.0/bin/ftn  -I/gpfs/hps/nco/ops/nwprod/lib/nemsio/v2.2.3/intel/include/nemsio_v2.2.3 -I/gpfs/hps/nco/ops/nwprod/lib/sfcio/v1.0.0/intel/include/sfcio_v1.0.0_4 -I/gpfs/hps/nco/ops/nwprod/lib/sigio/v2.1.0/intel/include/sigio_v2.1.0_4 -I/gpfs/hps/usrx/local/prod/ESMF/8.0.1/intel/sandybridge/mod -I/gpfs/hps/usrx/local/prod/ESMF/8.0.1/intel/sandybridge/include -I/usrx/local/prod/NetCDF/4.7.4/intel/sandybridge/include -I/usrx/local/prod/HDF5/1.10.6/intel/sandybridge/include -I/gpfs/hps/nco/ops/nwprod/lib/wgrib2/v2.0.8/intel/include  -g -traceback -r8 -convert big_endian -assume byterecl -O3 -fp-model precise   -qopenmp -c /gpfs/hps/nco/ops/nwpara/hiresw.v8.0.1/sorc/fv3/hireswfv3_utils.fd/sorc/chgres_cube.fd/model_grid.F90 -o CMakeFiles/chgres_cube.dir/model_grid.F90.o
+[ 38%] Building Fortran object sorc/chgres_cube.fd/CMakeFiles/chgres_cube.dir/thompson_mp_climo_data.F90.o
+cd /gpfs/hps/nco/ops/nwpara/hiresw.v8.0.1/sorc/fv3/hireswfv3_utils.fd/build/sorc/chgres_cube.fd && /opt/cray/craype/2.3.0/bin/ftn  -I/gpfs/hps/nco/ops/nwprod/lib/nemsio/v2.2.3/intel/include/nemsio_v2.2.3 -I/gpfs/hps/nco/ops/nwprod/lib/sfcio/v1.0.0/intel/include/sfcio_v1.0.0_4 -I/gpfs/hps/nco/ops/nwprod/lib/sigio/v2.1.0/intel/include/sigio_v2.1.0_4 -I/gpfs/hps/usrx/local/prod/ESMF/8.0.1/intel/sandybridge/mod -I/gpfs/hps/usrx/local/prod/ESMF/8.0.1/intel/sandybridge/include -I/usrx/local/prod/NetCDF/4.7.4/intel/sandybridge/include -I/usrx/local/prod/HDF5/1.10.6/intel/sandybridge/include -I/gpfs/hps/nco/ops/nwprod/lib/wgrib2/v2.0.8/intel/include  -g -traceback -r8 -convert big_endian -assume byterecl -O3 -fp-model precise   -qopenmp -c /gpfs/hps/nco/ops/nwpara/hiresw.v8.0.1/sorc/fv3/hireswfv3_utils.fd/sorc/chgres_cube.fd/thompson_mp_climo_data.F90 -o CMakeFiles/chgres_cube.dir/thompson_mp_climo_data.F90.o
+/gpfs/hps/usrx/local/prod/cmake/3.16.2/bin/cmake -E cmake_copy_f90_mod sorc/chgres_cube.fd/search_util.mod sorc/chgres_cube.fd/CMakeFiles/chgres_cube.dir/search_util.mod.stamp Intel
+/gpfs/hps/usrx/local/prod/cmake/3.16.2/bin/cmake -E touch sorc/chgres_cube.fd/CMakeFiles/chgres_cube.dir/search_util.f90.o.provides.build
+/gpfs/hps/usrx/local/prod/cmake/3.16.2/bin/cmake -E cmake_copy_f90_mod sorc/chgres_cube.fd/thompson_mp_climo_data.mod sorc/chgres_cube.fd/CMakeFiles/chgres_cube.dir/thompson_mp_climo_data.mod.stamp Intel
+/gpfs/hps/usrx/local/prod/cmake/3.16.2/bin/cmake -E touch sorc/chgres_cube.fd/CMakeFiles/chgres_cube.dir/thompson_mp_climo_data.F90.o.provides.build
+/gpfs/hps/usrx/local/prod/cmake/3.16.2/bin/cmake -E cmake_copy_f90_mod sorc/chgres_cube.fd/model_grid.mod sorc/chgres_cube.fd/CMakeFiles/chgres_cube.dir/model_grid.mod.stamp Intel
+/gpfs/hps/usrx/local/prod/cmake/3.16.2/bin/cmake -E touch sorc/chgres_cube.fd/CMakeFiles/chgres_cube.dir/model_grid.F90.o.provides.build
+[ 46%] Building Fortran object sorc/chgres_cube.fd/CMakeFiles/chgres_cube.dir/grib2_util.F90.o
+cd /gpfs/hps/nco/ops/nwpara/hiresw.v8.0.1/sorc/fv3/hireswfv3_utils.fd/build/sorc/chgres_cube.fd && /opt/cray/craype/2.3.0/bin/ftn  -I/gpfs/hps/nco/ops/nwprod/lib/nemsio/v2.2.3/intel/include/nemsio_v2.2.3 -I/gpfs/hps/nco/ops/nwprod/lib/sfcio/v1.0.0/intel/include/sfcio_v1.0.0_4 -I/gpfs/hps/nco/ops/nwprod/lib/sigio/v2.1.0/intel/include/sigio_v2.1.0_4 -I/gpfs/hps/usrx/local/prod/ESMF/8.0.1/intel/sandybridge/mod -I/gpfs/hps/usrx/local/prod/ESMF/8.0.1/intel/sandybridge/include -I/usrx/local/prod/NetCDF/4.7.4/intel/sandybridge/include -I/usrx/local/prod/HDF5/1.10.6/intel/sandybridge/include -I/gpfs/hps/nco/ops/nwprod/lib/wgrib2/v2.0.8/intel/include  -g -traceback -r8 -convert big_endian -assume byterecl -O3 -fp-model precise   -qopenmp -c /gpfs/hps/nco/ops/nwpara/hiresw.v8.0.1/sorc/fv3/hireswfv3_utils.fd/sorc/chgres_cube.fd/grib2_util.F90 -o CMakeFiles/chgres_cube.dir/grib2_util.F90.o
+[ 53%] Building Fortran object sorc/chgres_cube.fd/CMakeFiles/chgres_cube.dir/static_data.F90.o
+cd /gpfs/hps/nco/ops/nwpara/hiresw.v8.0.1/sorc/fv3/hireswfv3_utils.fd/build/sorc/chgres_cube.fd && /opt/cray/craype/2.3.0/bin/ftn  -I/gpfs/hps/nco/ops/nwprod/lib/nemsio/v2.2.3/intel/include/nemsio_v2.2.3 -I/gpfs/hps/nco/ops/nwprod/lib/sfcio/v1.0.0/intel/include/sfcio_v1.0.0_4 -I/gpfs/hps/nco/ops/nwprod/lib/sigio/v2.1.0/intel/include/sigio_v2.1.0_4 -I/gpfs/hps/usrx/local/prod/ESMF/8.0.1/intel/sandybridge/mod -I/gpfs/hps/usrx/local/prod/ESMF/8.0.1/intel/sandybridge/include -I/usrx/local/prod/NetCDF/4.7.4/intel/sandybridge/include -I/usrx/local/prod/HDF5/1.10.6/intel/sandybridge/include -I/gpfs/hps/nco/ops/nwprod/lib/wgrib2/v2.0.8/intel/include  -g -traceback -r8 -convert big_endian -assume byterecl -O3 -fp-model precise   -qopenmp -c /gpfs/hps/nco/ops/nwpara/hiresw.v8.0.1/sorc/fv3/hireswfv3_utils.fd/sorc/chgres_cube.fd/static_data.F90 -o CMakeFiles/chgres_cube.dir/static_data.F90.o
+/gpfs/hps/usrx/local/prod/cmake/3.16.2/bin/cmake -E cmake_copy_f90_mod sorc/chgres_cube.fd/grib2_util.mod sorc/chgres_cube.fd/CMakeFiles/chgres_cube.dir/grib2_util.mod.stamp Intel
+/gpfs/hps/usrx/local/prod/cmake/3.16.2/bin/cmake -E touch sorc/chgres_cube.fd/CMakeFiles/chgres_cube.dir/grib2_util.F90.o.provides.build
+[ 61%] Building Fortran object sorc/chgres_cube.fd/CMakeFiles/chgres_cube.dir/input_data.F90.o
+cd /gpfs/hps/nco/ops/nwpara/hiresw.v8.0.1/sorc/fv3/hireswfv3_utils.fd/build/sorc/chgres_cube.fd && /opt/cray/craype/2.3.0/bin/ftn  -I/gpfs/hps/nco/ops/nwprod/lib/nemsio/v2.2.3/intel/include/nemsio_v2.2.3 -I/gpfs/hps/nco/ops/nwprod/lib/sfcio/v1.0.0/intel/include/sfcio_v1.0.0_4 -I/gpfs/hps/nco/ops/nwprod/lib/sigio/v2.1.0/intel/include/sigio_v2.1.0_4 -I/gpfs/hps/usrx/local/prod/ESMF/8.0.1/intel/sandybridge/mod -I/gpfs/hps/usrx/local/prod/ESMF/8.0.1/intel/sandybridge/include -I/usrx/local/prod/NetCDF/4.7.4/intel/sandybridge/include -I/usrx/local/prod/HDF5/1.10.6/intel/sandybridge/include -I/gpfs/hps/nco/ops/nwprod/lib/wgrib2/v2.0.8/intel/include  -g -traceback -r8 -convert big_endian -assume byterecl -O3 -fp-model precise   -qopenmp -c /gpfs/hps/nco/ops/nwpara/hiresw.v8.0.1/sorc/fv3/hireswfv3_utils.fd/sorc/chgres_cube.fd/input_data.F90 -o CMakeFiles/chgres_cube.dir/input_data.F90.o
+/gpfs/hps/usrx/local/prod/cmake/3.16.2/bin/cmake -E cmake_copy_f90_mod sorc/chgres_cube.fd/static_data.mod sorc/chgres_cube.fd/CMakeFiles/chgres_cube.dir/static_data.mod.stamp Intel
+/gpfs/hps/usrx/local/prod/cmake/3.16.2/bin/cmake -E touch sorc/chgres_cube.fd/CMakeFiles/chgres_cube.dir/static_data.F90.o.provides.build
+/gpfs/hps/usrx/local/prod/cmake/3.16.2/bin/cmake -E cmake_copy_f90_mod sorc/chgres_cube.fd/input_data.mod sorc/chgres_cube.fd/CMakeFiles/chgres_cube.dir/input_data.mod.stamp Intel
+/gpfs/hps/usrx/local/prod/cmake/3.16.2/bin/cmake -E touch sorc/chgres_cube.fd/CMakeFiles/chgres_cube.dir/input_data.F90.o.provides.build
+[ 76%] Building Fortran object sorc/chgres_cube.fd/CMakeFiles/chgres_cube.dir/atmosphere.F90.o
+cd /gpfs/hps/nco/ops/nwpara/hiresw.v8.0.1/sorc/fv3/hireswfv3_utils.fd/build/sorc/chgres_cube.fd && /opt/cray/craype/2.3.0/bin/ftn  -I/gpfs/hps/nco/ops/nwprod/lib/nemsio/v2.2.3/intel/include/nemsio_v2.2.3 -I/gpfs/hps/nco/ops/nwprod/lib/sfcio/v1.0.0/intel/include/sfcio_v1.0.0_4 -I/gpfs/hps/nco/ops/nwprod/lib/sigio/v2.1.0/intel/include/sigio_v2.1.0_4 -I/gpfs/hps/usrx/local/prod/ESMF/8.0.1/intel/sandybridge/mod -I/gpfs/hps/usrx/local/prod/ESMF/8.0.1/intel/sandybridge/include -I/usrx/local/prod/NetCDF/4.7.4/intel/sandybridge/include -I/usrx/local/prod/HDF5/1.10.6/intel/sandybridge/include -I/gpfs/hps/nco/ops/nwprod/lib/wgrib2/v2.0.8/intel/include  -g -traceback -r8 -convert big_endian -assume byterecl -O3 -fp-model precise   -qopenmp -c /gpfs/hps/nco/ops/nwpara/hiresw.v8.0.1/sorc/fv3/hireswfv3_utils.fd/sorc/chgres_cube.fd/atmosphere.F90 -o CMakeFiles/chgres_cube.dir/atmosphere.F90.o
+[ 76%] Building Fortran object sorc/chgres_cube.fd/CMakeFiles/chgres_cube.dir/surface.F90.o
+cd /gpfs/hps/nco/ops/nwpara/hiresw.v8.0.1/sorc/fv3/hireswfv3_utils.fd/build/sorc/chgres_cube.fd && /opt/cray/craype/2.3.0/bin/ftn  -I/gpfs/hps/nco/ops/nwprod/lib/nemsio/v2.2.3/intel/include/nemsio_v2.2.3 -I/gpfs/hps/nco/ops/nwprod/lib/sfcio/v1.0.0/intel/include/sfcio_v1.0.0_4 -I/gpfs/hps/nco/ops/nwprod/lib/sigio/v2.1.0/intel/include/sigio_v2.1.0_4 -I/gpfs/hps/usrx/local/prod/ESMF/8.0.1/intel/sandybridge/mod -I/gpfs/hps/usrx/local/prod/ESMF/8.0.1/intel/sandybridge/include -I/usrx/local/prod/NetCDF/4.7.4/intel/sandybridge/include -I/usrx/local/prod/HDF5/1.10.6/intel/sandybridge/include -I/gpfs/hps/nco/ops/nwprod/lib/wgrib2/v2.0.8/intel/include  -g -traceback -r8 -convert big_endian -assume byterecl -O3 -fp-model precise   -qopenmp -c /gpfs/hps/nco/ops/nwpara/hiresw.v8.0.1/sorc/fv3/hireswfv3_utils.fd/sorc/chgres_cube.fd/surface.F90 -o CMakeFiles/chgres_cube.dir/surface.F90.o
+/gpfs/hps/usrx/local/prod/cmake/3.16.2/bin/cmake -E cmake_copy_f90_mod sorc/chgres_cube.fd/atmosphere.mod sorc/chgres_cube.fd/CMakeFiles/chgres_cube.dir/atmosphere.mod.stamp Intel
+/gpfs/hps/usrx/local/prod/cmake/3.16.2/bin/cmake -E touch sorc/chgres_cube.fd/CMakeFiles/chgres_cube.dir/atmosphere.F90.o.provides.build
+/gpfs/hps/usrx/local/prod/cmake/3.16.2/bin/cmake -E cmake_copy_f90_mod sorc/chgres_cube.fd/surface.mod sorc/chgres_cube.fd/CMakeFiles/chgres_cube.dir/surface.mod.stamp Intel
+/gpfs/hps/usrx/local/prod/cmake/3.16.2/bin/cmake -E touch sorc/chgres_cube.fd/CMakeFiles/chgres_cube.dir/surface.F90.o.provides.build
+[ 92%] Building Fortran object sorc/chgres_cube.fd/CMakeFiles/chgres_cube.dir/chgres.F90.o
+cd /gpfs/hps/nco/ops/nwpara/hiresw.v8.0.1/sorc/fv3/hireswfv3_utils.fd/build/sorc/chgres_cube.fd && /opt/cray/craype/2.3.0/bin/ftn  -I/gpfs/hps/nco/ops/nwprod/lib/nemsio/v2.2.3/intel/include/nemsio_v2.2.3 -I/gpfs/hps/nco/ops/nwprod/lib/sfcio/v1.0.0/intel/include/sfcio_v1.0.0_4 -I/gpfs/hps/nco/ops/nwprod/lib/sigio/v2.1.0/intel/include/sigio_v2.1.0_4 -I/gpfs/hps/usrx/local/prod/ESMF/8.0.1/intel/sandybridge/mod -I/gpfs/hps/usrx/local/prod/ESMF/8.0.1/intel/sandybridge/include -I/usrx/local/prod/NetCDF/4.7.4/intel/sandybridge/include -I/usrx/local/prod/HDF5/1.10.6/intel/sandybridge/include -I/gpfs/hps/nco/ops/nwprod/lib/wgrib2/v2.0.8/intel/include  -g -traceback -r8 -convert big_endian -assume byterecl -O3 -fp-model precise   -qopenmp -c /gpfs/hps/nco/ops/nwpara/hiresw.v8.0.1/sorc/fv3/hireswfv3_utils.fd/sorc/chgres_cube.fd/chgres.F90 -o CMakeFiles/chgres_cube.dir/chgres.F90.o
+[ 92%] Building Fortran object sorc/chgres_cube.fd/CMakeFiles/chgres_cube.dir/write_data.F90.o
+cd /gpfs/hps/nco/ops/nwpara/hiresw.v8.0.1/sorc/fv3/hireswfv3_utils.fd/build/sorc/chgres_cube.fd && /opt/cray/craype/2.3.0/bin/ftn  -I/gpfs/hps/nco/ops/nwprod/lib/nemsio/v2.2.3/intel/include/nemsio_v2.2.3 -I/gpfs/hps/nco/ops/nwprod/lib/sfcio/v1.0.0/intel/include/sfcio_v1.0.0_4 -I/gpfs/hps/nco/ops/nwprod/lib/sigio/v2.1.0/intel/include/sigio_v2.1.0_4 -I/gpfs/hps/usrx/local/prod/ESMF/8.0.1/intel/sandybridge/mod -I/gpfs/hps/usrx/local/prod/ESMF/8.0.1/intel/sandybridge/include -I/usrx/local/prod/NetCDF/4.7.4/intel/sandybridge/include -I/usrx/local/prod/HDF5/1.10.6/intel/sandybridge/include -I/gpfs/hps/nco/ops/nwprod/lib/wgrib2/v2.0.8/intel/include  -g -traceback -r8 -convert big_endian -assume byterecl -O3 -fp-model precise   -qopenmp -c /gpfs/hps/nco/ops/nwpara/hiresw.v8.0.1/sorc/fv3/hireswfv3_utils.fd/sorc/chgres_cube.fd/write_data.F90 -o CMakeFiles/chgres_cube.dir/write_data.F90.o
+[100%] Linking Fortran executable chgres_cube
+cd /gpfs/hps/nco/ops/nwpara/hiresw.v8.0.1/sorc/fv3/hireswfv3_utils.fd/build/sorc/chgres_cube.fd && /gpfs/hps/usrx/local/prod/cmake/3.16.2/bin/cmake -E cmake_link_script CMakeFiles/chgres_cube.dir/link.txt --verbose=1
+/opt/cray/craype/2.3.0/bin/ftn   -g -traceback -r8 -convert big_endian -assume byterecl -O3 -fp-model precise CMakeFiles/chgres_cube.dir/atmosphere.F90.o CMakeFiles/chgres_cube.dir/chgres.F90.o CMakeFiles/chgres_cube.dir/grib2_util.F90.o CMakeFiles/chgres_cube.dir/input_data.F90.o CMakeFiles/chgres_cube.dir/model_grid.F90.o CMakeFiles/chgres_cube.dir/program_setup.f90.o CMakeFiles/chgres_cube.dir/search_util.f90.o CMakeFiles/chgres_cube.dir/static_data.F90.o CMakeFiles/chgres_cube.dir/surface.F90.o CMakeFiles/chgres_cube.dir/thompson_mp_climo_data.F90.o CMakeFiles/chgres_cube.dir/utils.f90.o CMakeFiles/chgres_cube.dir/write_data.F90.o  -o chgres_cube  /gpfs/hps/nco/ops/nwprod/lib/nemsio/v2.2.3/intel/libnemsio_v2.2.3.a /gpfs/hps/nco/ops/nwprod/lib/sfcio/v1.0.0/intel/libsfcio_v1.0.0_4.a /gpfs/hps/nco/ops/nwprod/lib/sigio/v2.1.0/intel/libsigio_v2.1.0_4.a /gpfs/hps/nco/ops/nwprod/lib/bacio/v2.0.2/intel/libbacio_v2.0.2_4.a /gpfs/hps/nco/ops/nwprod/lib/sp/v2.0.2/intel/libsp_v2.0.2_d.a /gpfs/hps/nco/ops/nwprod/lib/w3nco/v2.0.6/intel/libw3nco_v2.0.6_d.a /gpfs/hps/usrx/local/prod/ESMF/8.0.1/intel/sandybridge/lib/libesmf.a /gpfs/hps/nco/ops/nwprod/lib/wgrib2/v2.0.8/intel/lib/libwgrib2_api.a /gpfs/hps/nco/ops/nwprod/lib/wgrib2/v2.0.8/intel/lib/libwgrib2.a /usrx/local/prod/NetCDF/4.7.4/intel/sandybridge/lib/libnetcdff.a -L/gpfs/hps/usrx/local/prod/ESMF/8.0.1/intel/sandybridge/lib -L/gpfs/hps/usrx/local/prod/ESMF/8.0.1/intel/sandybridge/lib -cxxlib -lrt -ldl -lnetcdff -lnetcdf -lhdf5_hl -lhdf5 /usrx/local/prod/zlib/1.2.7/intel/sandybridge/lib/libz.a -lm -L/usrx/local/prod/NetCDF/4.7.4/intel/sandybridge/lib -lnetcdff /opt/intel/compilers_and_libraries_2018.1.163/linux/compiler/lib/intel64/libifcoremt.a /opt/intel/compilers_and_libraries_2018.1.163/linux/compiler/lib/intel64/libiomp5.a -lirng -ldecimal 
+/usrx/local/prod/NetCDF/4.7.4/intel/sandybridge/lib/libhdf5.a(H5PLint.o): In function `H5PL__open':
+H5PLint.c:(.text+0x422): warning: Using 'dlopen' in statically linked applications requires at runtime the shared libraries from the glibc version used for linking
+/gpfs/hps/usrx/local/prod/ESMF/8.0.1/intel/sandybridge/lib/libesmf.a(ESMCI_VMKernel.o): In function `ESMCI::socketClientInit(char const*, int, double)':
+/gpfs/hps/usrx/local/prod/ESMF/8.0.1/intel/sandybridge/src/Infrastructure/VM/src/ESMCI_VMKernel.C:6592: warning: Using 'gethostbyname' in statically linked applications requires at runtime the shared libraries from the glibc version used for linking
+make[2]: Leaving directory `/gpfs/hps/nco/ops/nwpara/hiresw.v8.0.1/sorc/fv3/hireswfv3_utils.fd/build'
+[100%] Built target chgres_cube
+make[1]: Leaving directory `/gpfs/hps/nco/ops/nwpara/hiresw.v8.0.1/sorc/fv3/hireswfv3_utils.fd/build'
+/gpfs/hps/usrx/local/prod/cmake/3.16.2/bin/cmake -E cmake_progress_start /gpfs/hps/nco/ops/nwpara/hiresw.v8.0.1/sorc/fv3/hireswfv3_utils.fd/build/CMakeFiles 0
++ make install
+[100%] Built target chgres_cube
+Install the project...
+-- Install configuration: "Release"
+-- Installing: /gpfs/hps/nco/ops/nwpara/hiresw.v8.0.1/sorc/fv3/hireswfv3_utils.fd/exec/chgres_cube
++ exit

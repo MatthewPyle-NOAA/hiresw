@@ -1,0 +1,61 @@
+ncep/1.0(21):ERROR:105: Unable to locate a modulefile for 'ugni'
+ncep/1.0(21):ERROR:105: Unable to locate a modulefile for 'xpmem'
+ncep/1.0(21):ERROR:105: Unable to locate a modulefile for 'dvs'
+ncep/1.0(21):ERROR:105: Unable to locate a modulefile for 'alps'
+Currently Loaded Modulefiles:
+  1) eswrap/1.3.3-1.020200.1280.0
+  2) ncep/1.0
+  3) craype-sandybridge
+  4) craype-network-aries
+  5) intel/15.0.3.187
+  6) craype/2.3.0
+  7) cray-libsci/13.0.3
+  8) udreg/2.3.2-1.0502.10518.2.17.ari
+  9) ugni/6.0-1.0502.10863.8.29.ari
+ 10) pmi/5.0.6-1.0000.10439.140.2.ari
+ 11) dmapp/7.0.1-1.0502.11080.8.76.ari
+ 12) gni-headers/4.0-1.0502.10859.7.8.ari
+ 13) xpmem/0.1-2.0502.64982.5.3.ari
+ 14) dvs/2.5_0.9.0-1.0502.2188.1.116.ari
+ 15) alps/5.2.4-2.0502.9774.31.11.ari
+ 16) rca/1.0.0-2.0502.60530.1.62.ari
+ 17) atp/1.8.1
+ 18) PrgEnv-intel/5.2.82
+ 19) prod_util/1.0.33
+ 20) crtm-intel/2.2.6
+ 21) sigio-intel/2.1.0
+ 22) jasper-gnu-sandybridge/1.900.1
+ 23) png-gnu-sandybridge/1.2.49
+ 24) zlib-gnu-sandybridge/1.2.7
+ 25) sfcio-intel/1.0.0
+ 26) nemsio-intel/2.2.2
+ 27) bufr-intel/11.3.0
+ 28) bacio-intel/2.0.1
+ 29) g2-intel/3.1.0
+ 30) gfsio-intel/1.1.0
+ 31) ip-intel/3.0.0
+ 32) sp-intel/2.0.2
+ 33) w3emc-intel/2.2.0
+ 34) w3nco-intel/2.0.6
+ 35) cray-netcdf/4.3.2
+ 36) g2tmpl-intel/1.5.0
+ 37) wrfio-intel/1.1.1
+ 38) ../modulefiles_fv3/build_v8.0.0-cray-intel
+rm: cannot remove `*.o': No such file or directory
+make: *** [delete] Error 1
+ftn -convert big_endian -O     -c -o BFRHDR.o BFRHDR.f
+ftn -convert big_endian -O     -c -o BFRIZE.o BFRIZE.f
+ftn -convert big_endian -O     -c -o CALHEL.o CALHEL.f
+ftn -convert big_endian -O     -c -o CALWXT.o CALWXT.f
+ftn -convert big_endian -O     -c -o SMIX.o SMIX.f
+ftn -convert big_endian -O     -c -o SNDPST.o SNDPST.f
+ftn -convert big_endian -O     -c -o SNDPST_FV3S.o SNDPST_FV3S.f
+ftn -convert big_endian -O     -c -o VAP.o VAP.f
+ftn -convert big_endian -O     -c -o WETBLB.o WETBLB.f
+ftn -convert big_endian -O     -c -o CALVIS.o CALVIS.f
+ftn -convert big_endian -O     -c -o CALWXT_RAMER.o CALWXT_RAMER.f
+ftn -convert big_endian -O     -c -o CALWXT_EXPLICIT.o CALWXT_EXPLICIT.f
+ftn -convert big_endian -O     -c -o CALWXT_REVISED.o CALWXT_REVISED.f
+ftn -convert big_endian -O     -c -o CALWXT_BOURG.o CALWXT_BOURG.f
+ftn -convert big_endian -O     -c -o CALWXT_DOMINANT.o CALWXT_DOMINANT.f
+ftn -convert big_endian  -o hireswfv3_sndp.x BFRHDR.o BFRIZE.o CALHEL.o CALWXT.o SMIX.o SNDPST.o SNDPST_FV3S.o VAP.o WETBLB.o CALVIS.o CALWXT_RAMER.o CALWXT_EXPLICIT.o CALWXT_REVISED.o CALWXT_BOURG.o CALWXT_DOMINANT.o /gpfs/hps/nco/ops/nwprod/lib/bufr/v11.3.0/intel/libbufr_v11.3.0_4_64.a

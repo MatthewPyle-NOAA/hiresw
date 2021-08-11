@@ -1,0 +1,78 @@
+Currently Loaded Modulefiles:
+  1) modules/3.2.10.3
+  2) eswrap/1.3.3-1.020200.1280.0
+  3) dvs/2.5_0.9.0-1.0502.2481.23.7.ari
+  4) alps/5.2.4-2.0502.9822.32.1.ari
+  5) ncep/1.0
+  6) craype-sandybridge
+  7) craype-network-aries
+  8) intel/15.0.3.187
+  9) craype/2.3.0
+ 10) cray-libsci/13.0.3
+ 11) udreg/2.3.2-1.0502.10518.2.17.ari
+ 12) ugni/6.0-1.0502.10863.8.29.ari
+ 13) pmi/5.0.6-1.0000.10439.140.2.ari
+ 14) dmapp/7.0.1-1.0502.11080.8.76.ari
+ 15) gni-headers/4.0-1.0502.10859.7.8.ari
+ 16) xpmem/0.1-2.0502.64982.5.3.ari
+ 17) dvs/2.5_0.9.0-1.0502.2188.1.116.ari
+ 18) alps/5.2.4-2.0502.9774.31.11.ari
+ 19) rca/1.0.0-2.0502.60530.1.62.ari
+ 20) atp/1.8.1
+ 21) PrgEnv-intel/5.2.82
+ 22) prod_util/1.0.33
+ 23) crtm-intel/2.2.6
+ 24) sigio-intel/2.1.0
+ 25) jasper-gnu-sandybridge/1.900.1
+ 26) png-gnu-sandybridge/1.2.49
+ 27) zlib-gnu-sandybridge/1.2.7
+ 28) sfcio-intel/1.0.0
+ 29) nemsio-intel/2.2.2
+ 30) bufr-intel/11.3.0
+ 31) bacio-intel/2.0.1
+ 32) g2-intel/3.1.0
+ 33) gfsio-intel/1.1.0
+ 34) ip-intel/3.0.0
+ 35) sp-intel/2.0.2
+ 36) w3emc-intel/2.2.0
+ 37) w3nco-intel/2.0.6
+ 38) cray-netcdf/4.3.2
+ 39) g2tmpl-intel/1.5.0
+ 40) wrfio-intel/1.1.1
+ 41) ../modulefiles_fv3/build_v8.0.0-cray-intel
+/bin/rm -f  *.lst *.o *.mod
+ftn -c -O -fp-model precise  -convert big_endian -assume noold_ldout_format -FR  -g -traceback   -I/gpfs/hps/nco/ops/nwprod/lib/nemsio/v2.2.2/intel/include/nemsio_v2.2.2 module_internal_header_util.f90
+ftn -c -O -fp-model precise  -convert big_endian -assume noold_ldout_format -FR  -g -traceback   -I/gpfs/hps/nco/ops/nwprod/lib/nemsio/v2.2.2/intel/include/nemsio_v2.2.2 getIVariableB.f90
+ftn -c -O -fp-model precise  -convert big_endian -assume noold_ldout_format -FR  -g -traceback   -I/gpfs/hps/nco/ops/nwprod/lib/nemsio/v2.2.2/intel/include/nemsio_v2.2.2 getIVariable.f90
+ftn -c -O -fp-model precise  -convert big_endian -assume noold_ldout_format -FR  -g -traceback   -I/gpfs/hps/nco/ops/nwprod/lib/nemsio/v2.2.2/intel/include/nemsio_v2.2.2 getVariableB.f90
+ftn -c -O -fp-model precise  -convert big_endian -assume noold_ldout_format -FR  -g -traceback   -I/gpfs/hps/nco/ops/nwprod/lib/nemsio/v2.2.2/intel/include/nemsio_v2.2.2 getVariable.f90
+ftn -c -O -fp-model precise  -convert big_endian -assume noold_ldout_format -FR  -g -traceback   -I/gpfs/hps/nco/ops/nwprod/lib/nemsio/v2.2.2/intel/include/nemsio_v2.2.2 kinds_mod.f90
+ftn -c -O -fp-model precise  -convert big_endian -assume noold_ldout_format -FR  -g -traceback   -I/gpfs/hps/nco/ops/nwprod/lib/nemsio/v2.2.2/intel/include/nemsio_v2.2.2 count_recs_wrf_binary_file.f90
+ftn -c -O -fp-model precise  -convert big_endian -assume noold_ldout_format -FR  -g -traceback   -I/gpfs/hps/nco/ops/nwprod/lib/nemsio/v2.2.2/intel/include/nemsio_v2.2.2 inventory_wrf_binary_file.f90
+ftn -c -O -fp-model precise  -convert big_endian -assume noold_ldout_format -FR  -g -traceback   -I/gpfs/hps/nco/ops/nwprod/lib/nemsio/v2.2.2/intel/include/nemsio_v2.2.2 next_buf.f90
+ftn -c -O -fp-model precise  -convert big_endian -assume noold_ldout_format -FR  -g -traceback   -I/gpfs/hps/nco/ops/nwprod/lib/nemsio/v2.2.2/intel/include/nemsio_v2.2.2 retrieve_index.f90
+ftn -c -O -fp-model precise  -convert big_endian -assume noold_ldout_format -FR  -g -traceback   -I/gpfs/hps/nco/ops/nwprod/lib/nemsio/v2.2.2/intel/include/nemsio_v2.2.2 GETNEMSANDPLACE.f90
+ftn -c -O -fp-model precise  -convert big_endian -assume noold_ldout_format -FR  -g -traceback   -I/gpfs/hps/nco/ops/nwprod/lib/nemsio/v2.2.2/intel/include/nemsio_v2.2.2 PARA_RANGE.f90
+ftn -c -O -fp-model precise  -convert big_endian -assume noold_ldout_format  -g -traceback   -I/gpfs/hps/nco/ops/nwprod/lib/nemsio/v2.2.2/intel/include/nemsio_v2.2.2  VRBLS2D_mod.f
+ftn -c -O -fp-model precise  -convert big_endian -assume noold_ldout_format  -g -traceback   -I/gpfs/hps/nco/ops/nwprod/lib/nemsio/v2.2.2/intel/include/nemsio_v2.2.2  VRBLS3D_mod.f
+ftn -c -O -fp-model precise  -convert big_endian -assume noold_ldout_format  -g -traceback   -I/gpfs/hps/nco/ops/nwprod/lib/nemsio/v2.2.2/intel/include/nemsio_v2.2.2  MASKS_mod.f
+ftn -c -O -fp-model precise  -convert big_endian -assume noold_ldout_format  -g -traceback   -I/gpfs/hps/nco/ops/nwprod/lib/nemsio/v2.2.2/intel/include/nemsio_v2.2.2  SOIL_mod.f
+ftn -c -O -fp-model precise  -convert big_endian -assume noold_ldout_format  -g -traceback   -I/gpfs/hps/nco/ops/nwprod/lib/nemsio/v2.2.2/intel/include/nemsio_v2.2.2  WRFBUFR.f
+ftn -c -O -fp-model precise  -convert big_endian -assume noold_ldout_format  -g -traceback   -I/gpfs/hps/nco/ops/nwprod/lib/nemsio/v2.2.2/intel/include/nemsio_v2.2.2  PROF_EM.f
+ftn -c -O -fp-model precise  -convert big_endian -assume noold_ldout_format  -g -traceback   -I/gpfs/hps/nco/ops/nwprod/lib/nemsio/v2.2.2/intel/include/nemsio_v2.2.2  PROF_NMM.f
+ftn -c -O -fp-model precise  -convert big_endian -assume noold_ldout_format  -g -traceback   -I/gpfs/hps/nco/ops/nwprod/lib/nemsio/v2.2.2/intel/include/nemsio_v2.2.2  PROF_NMM_NET.f
+ftn -c -O -fp-model precise  -convert big_endian -assume noold_ldout_format  -g -traceback   -I/gpfs/hps/nco/ops/nwprod/lib/nemsio/v2.2.2/intel/include/nemsio_v2.2.2  PROF_EM_NET.f
+ftn -c -O -fp-model precise  -convert big_endian -assume noold_ldout_format  -g -traceback   -I/gpfs/hps/nco/ops/nwprod/lib/nemsio/v2.2.2/intel/include/nemsio_v2.2.2  PROF_NMMB_SERIAL.f
+ftn -c -O -fp-model precise  -convert big_endian -assume noold_ldout_format  -g -traceback   -I/gpfs/hps/nco/ops/nwprod/lib/nemsio/v2.2.2/intel/include/nemsio_v2.2.2  PROF_FV3SAR_NET.f
+ftn -c -O -fp-model precise  -convert big_endian -assume noold_ldout_format  -g -traceback   -I/gpfs/hps/nco/ops/nwprod/lib/nemsio/v2.2.2/intel/include/nemsio_v2.2.2  iw3jdn.f
+ftn -c -O -fp-model precise  -convert big_endian -assume noold_ldout_format  -g -traceback   -I/gpfs/hps/nco/ops/nwprod/lib/nemsio/v2.2.2/intel/include/nemsio_v2.2.2  w3fs26.f
+ftn -c -O -fp-model precise  -convert big_endian -assume noold_ldout_format  -g -traceback   -I/gpfs/hps/nco/ops/nwprod/lib/nemsio/v2.2.2/intel/include/nemsio_v2.2.2  w3movdat.f
+ftn -c -O -fp-model precise  -convert big_endian -assume noold_ldout_format  -g -traceback   -I/gpfs/hps/nco/ops/nwprod/lib/nemsio/v2.2.2/intel/include/nemsio_v2.2.2  w3reddat.f
+ftn -c -O -fp-model precise  -convert big_endian -assume noold_ldout_format  -g -traceback   -I/gpfs/hps/nco/ops/nwprod/lib/nemsio/v2.2.2/intel/include/nemsio_v2.2.2  gdswiz.f
+ftn -c -O -fp-model precise  -convert big_endian -assume noold_ldout_format  -g -traceback   -I/gpfs/hps/nco/ops/nwprod/lib/nemsio/v2.2.2/intel/include/nemsio_v2.2.2  gdswiz01.f
+ftn -c -O -fp-model precise  -convert big_endian -assume noold_ldout_format  -g -traceback   -I/gpfs/hps/nco/ops/nwprod/lib/nemsio/v2.2.2/intel/include/nemsio_v2.2.2  gdswiz03.f
+ftn -c -O -fp-model precise  -convert big_endian -assume noold_ldout_format  -g -traceback   -I/gpfs/hps/nco/ops/nwprod/lib/nemsio/v2.2.2/intel/include/nemsio_v2.2.2  gdswiz05.f
+ftn  -o hireswfv3_bufr.x module_internal_header_util.o getIVariableB.o getIVariable.o getVariableB.o getVariable.o kinds_mod.o count_recs_wrf_binary_file.o inventory_wrf_binary_file.o next_buf.o retrieve_index.o GETNEMSANDPLACE.o PARA_RANGE.o VRBLS2D_mod.o VRBLS3D_mod.o MASKS_mod.o SOIL_mod.o WRFBUFR.o PROF_EM.o PROF_NMM.o  PROF_NMM_NET.o PROF_EM_NET.o PROF_NMMB_SERIAL.o PROF_FV3SAR_NET.o iw3jdn.o w3fs26.o w3movdat.o w3reddat.o gdswiz.o gdswiz01.o gdswiz03.o gdswiz05.o ./wrflibs/libwrflib.a ./wrflibs/pack_utils.o ./wrflibs/libfftpack.a ./wrflibs/libio_grib1.a ./wrflibs/libio_grib_share.a ./wrflibs/libwrfio_int.a ./wrflibs/libwrfio_nf.a ./wrflibs/libesmf_time.a ./wrflibs/librsl_lite.a /gpfs/hps/nco/ops/nwprod/lib/nemsio/v2.2.2/intel/libnemsio_v2.2.2.a /gpfs/hps/nco/ops/nwprod/lib/w3emc/v2.2.0/intel/libw3emc_v2.2.0_4.a /gpfs/hps/nco/ops/nwprod/lib/w3nco/v2.0.6/intel/libw3nco_v2.0.6_4.a /gpfs/hps/nco/ops/nwprod/lib/bacio/v2.0.1/intel/libbacio_v2.0.1_4.a    
+/opt/cray/hdf5/1.8.13/INTEL/140/lib/libhdf5.a(H5PL.o): In function `H5PL_load':
+H5PL.c:(.text+0x3b7): warning: Using 'dlopen' in statically linked applications requires at runtime the shared libraries from the glibc version used for linking
+/bin/rm -f  *.lst *.o *.mod
