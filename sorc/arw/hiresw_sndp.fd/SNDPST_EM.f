@@ -326,14 +326,16 @@ C       Flip P, T, and Q
         DO L=1,LMH-1
           DP1=PFL(L+1)-PFL(L)
           PINT(L+1)=PFL(L)+0.5*DP1
-          write(0,*) 'L, DP1, PINT(L+1): ', L, DP1, PINT(L+1)
+!          write(0,*) 'L, DP1, PINT(L+1): ', L, DP1, PINT(L+1)
         ENDDO
         PINT(LMH+1)=PINT(LMH)+0.5*DP1
         ZINT(LMH+1)=FPACK(3)
+!        write(0,*) 'L,PINT,ZINT: ',LMH+1,PINT(LMH+1),ZINT(LMH+1)
         DO L=LMH,1,-1
          TV2=TFL(L)*(1.0+0.608*QFL(L))
          ZZ=ROG*TV2*ALOG(PINT(L+1)/PINT(L))
          ZINT(L)=ZINT(L+1)+ZZ
+!          write(0,*) 'L,PINT,ZINT,TFL: ', L, PINT(L),ZINT(L),TFL(L)
         ENDDO
 C
 C     CALL PRECIP TYPE SUBROUTINE.
