@@ -67,7 +67,7 @@
      &                             iseed,g,pthresh,                          &
      &                             t,q,pmid,pint,lmh,prec,zint,ptype,me)
 !     use mersenne_twister, only: random_number
-      use mersenne_twister
+!tmp      use mersenne_twister
       implicit none
 !
 !    input:
@@ -99,9 +99,12 @@
       enddo
 !
       jlen = jend - jsta + 1
-      call random_setseed(iseed)
-      call random_number(rn)
+!tmp      call random_setseed(iseed)
+!tmp      call random_number(rn)
 !     call random_number(rn,iseed)
+!   set to a rain-favoring value to check bit-reproduceability
+      rn(1:2*im*jm)=0.501
+
 !
 !!$omp  parallel do                                                   &
 !     & private(a,lmhk,tlmhk,iwrml,psfck,lhiwrm,pintk1,pintk2,area1,  &
