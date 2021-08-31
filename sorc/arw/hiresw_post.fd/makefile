@@ -21,20 +21,25 @@ DEBUG    = -g  -traceback
 #
 # Now the hard part. NCEPPOST needs 19 libraries, WOW!!!!!
 #
+#
+#
 
-SFCIO_INC  = -I${SFCIO_INC4}
-SFCIO_LIB  = ${SFCIO_LIB4}
-
+# SFCIO_INC  = -I${SFCIO_INC}
+# SFCIO_LIB  = ${SFCIO_LIB}
 BACIO_LIB  = ${BACIO_LIB4}
 
-SIGIO_INC  = -I${SIGIO_INC4}
-SIGIO_LIB  = ${SIGIO_LIB4}
 
-WRFPATH    = /gpfs/hps/nco/ops/nwprod/wrf_shared.v1.1.0-intel
-WRF_INC    = -I$(WRFPATH)/external/io_quilt -I$(WRFPATH)/frame
-WRF_LIB    = $(WRFPATH)/main/libwrflib.a  \
+# WRFPATH    = /gpfs/hps/nco/ops/nwprod/wrf_shared.v1.1.0-intel
+WRFPATH =  ../hiresw_wrfarwfcst.fd
+# WRF_INC    = -I$(WRFPATH)/external/io_quilt -I$(WRFPATH)/frame
+WRF_INC    = -I$(WRFPATH)/frame
+WRF_LIB    = $(WRFPATH)/main/libwrflib.a \
              $(WRFPATH)/frame/pack_utils.o  \
              $(WRFPATH)/frame/module_internal_header_util.o \
+             $(WRFPATH)/frame/wrf_debug.o  \
+             $(WRFPATH)/frame/module_machine.o  \
+             $(WRFPATH)/frame/module_wrf_error.o  \
+             $(WRFPATH)/frame/test_stub.o  \
              $(WRFPATH)/external/io_grib1/libio_grib1.a \
              $(WRFPATH)/external/io_grib_share/libio_grib_share.a \
              $(WRFPATH)/external/io_int/libwrfio_int.a \
@@ -42,24 +47,28 @@ WRF_LIB    = $(WRFPATH)/main/libwrflib.a  \
              $(WRFPATH)/external/esmf_time_f90/libesmf_time.a \
              $(WRFPATH)/external/RSL_LITE/librsl_lite.a
 
-G2_INC     = -I${G2_INC4} -I${G2TMPL_INC}
+# G2_INC     = -I${G2_INC} -I${G2TMPL_INC}
+G2BOTH_INC = -I${G2_INC4} -I${G2TMPL_INC}
 G2_LIB     = ${G2TMPL_LIB} ${G2_LIB4} ${JASPER_LIB} ${PNG_LIB} ${Z_LIB}
 
-XML_INC    = -I${XMLPARSE_INC}
-XML_LIB    = ${XMLPARSE_LIB}
+XML_INC    = -I${XML2_INC}
+XML_LIB    = ${LIBXML2_LIB}
 
-GFSIO_INC  = -I${GFSIO_INC4}
-GFSIO_LIB  = ${GFSIO_LIB4}
+# GFSIO_INC  = -I${GFSIO_INC}
+# GFSIO_LIB  = ${GFSIO_LIB}
 
 IP_LIB     = ${IP_LIB4}
 
 SP_LIB     = ${SP_LIB4}
 
-W3_INC     = -I${W3EMC_INC4}
-W3_LIB     = ${W3NCO_LIB4} ${W3EMC_LIB4}
+W3_INC     = -I${W3NCO_INC4}
+W3_LIB     = ${W3NCO_LIB4} ${W3EMC_LIB}
 
 NETCDFPATH = ${NETCDF}
-NETCDF_LIB = $(NETCDFPATH)/lib/libnetcdf_c++.a $(NETCDFPATH)/lib/libnetcdf.a
+# NETCDF_LIB = $(NETCDFPATH)/lib/libnetcdf_c++.a $(NETCDFPATH)/lib/libnetcdf.a
+# NETCDF_LIB = -L$(NETCDFPATH)/lib -lnetcdf -lnetcdff
+NETCDF_LIB = -L$(NETCDFPATH)/lib -lnetcdff -lnetcdf
+
 NETCDF_INC = -I$(NETCDFPATH)/include
 
 #
@@ -67,18 +76,18 @@ NETCDF_INC = -I$(NETCDFPATH)/include
 #
 FFLAGS   = $(OPTS) $(FREE) $(TRAPS) $(DEBUG) \
            $(WRF_INC) \
-           $(XML_INC) \
-           $(G2_INC) \
+           $(G2BOTH_INC) \
            -I$(NEMSIO_INC) \
-           $(GFSIO_INC) \
-           $(SIGIO_INC) \
-           $(SFCIO_INC) \
+           -I$(GFSIO_INC) \
+           -I$(SIGIO_INC) \
+           -I$(SFCIO_INC) \
            $(W3_INC) \
            -I$(CRTM_INC) \
+           -I$(XMLPARSE_INC) \
            $(NETCDF_INC)
 
 LIBS     = $(WRF_LIB) \
-           $(XML_LIB) \
+           -L$(XMLPARSE_LIB) -lxmlparse \
            $(G2_LIB) \
            $(NEMSIO_LIB) \
            $(GFSIO_LIB) \
@@ -165,7 +174,8 @@ OBJS =  wrf_io_flags.o getVariable.o getIVariableN.o \
 	$(CPP) $(CPPFLAGS) $< > $*.f
 
 $(TARGET): $(OBJS)
-	$(FC) -openmp -o $@ $(OBJST) $(OBJXML) $(OBJS) $(LIBS)
+	$(FC) -openmp -o $@ $(OBJS) $(LIBS)
+#	$(FC) -openmp -o $@ $(OBJST) $(OBJXML) $(OBJS) $(LIBS)
 
 .f.o:
 	$(FC) $(FFLAGS) -c $<

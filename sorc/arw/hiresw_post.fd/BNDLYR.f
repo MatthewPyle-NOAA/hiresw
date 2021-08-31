@@ -68,7 +68,8 @@
       use vrbls3d, only: pint, q, uh, vh, pmid, t, omga, wh, cwm
       use masks, only: lmh
       use params_mod, only: d00, gi, pq0, a2, a3, a4
-      use ctlblk_mod, only: jsta_2l, jend_2u, lm, jsta, jend, modelname, jsta_m, jend_m,&
+      use ctlblk_mod, only: jsta_2l, jend_2u, lm, jsta, jend, &
+              modelname, jsta_m, jend_m,&
               im, jm, nbnd
       use gridspec_mod, only: gridtype
       use physcons, only: con_rd, con_rv, con_eps, con_epsm1
@@ -124,6 +125,7 @@
         ENDDO
       ENDDO
 
+
 !          COMPUTE MOISTURE CONVERGENCE FOR EVERY LEVEL
       DO L=1,LM
           DO J=JSTA_2L,JEND_2U
@@ -146,8 +148,7 @@
 !     MASS WEIGHTED LAYER MEAN P, T, Q, U, V, OMEGA, 
 !     WAND PRECIPITABLE WATER IN EACH BOUNDARY LAYER FROM THE SURFACE UP.
 !     
-!$omp  parallel do
-!$omp& private(dp,pm,qsat)
+!$omp  parallel do private(dp,pm,qsat)
       DO LBND=1,NBND
         DO J=JSTA,JEND
         DO I=1,IM
@@ -256,10 +257,10 @@
        END IF
        
        
-      ENDDO
+      ENDDO ! LBND
+
 !
-!$omp  parallel do
-!$omp& private(rpsum)
+!$omp  parallel do private(rpsum)
       DO LBND=1,NBND
         DO J=JSTA,JEND
         DO I=1,IM
@@ -293,13 +294,12 @@
          ENDDO
 	END IF 
       ENDDO
+
 !
 !  IF NO ETA MID LAYER PRESSURES FELL WITHIN A BND LYR,
 !   FIND THE CLOSEST LAYER TO THE BND LYR AND ASSIGN THE VALUES THERE
 !
-!$omp  parallel do
-!$omp& private(delp,dp,l,pm,pmin,qsat)
-!$omp&         
+!$omp  parallel do private(delp,dp,l,pm,pmin,qsat)
       DO LBND=1,NBND
         DO J=JSTA,JEND
         DO I=1,IM
@@ -353,6 +353,7 @@
           ENDIF
         ENDDO
         ENDDO
+
 !
         IF(gridtype=='E')THEN
 	 DO J=JSTA_M,JEND_M
@@ -412,8 +413,8 @@
           ENDIF
          ENDDO
          ENDDO     
-        END IF 
-      ENDDO
+        END IF  ! gridtype
+      ENDDO ! LBND
 !
       DEALLOCATE (PBINT)
       DEALLOCATE (QSBND)

@@ -1,5 +1,16 @@
 
 
+
+
+
+
+
+
+
+
+
+
+
       subroutine pngpack(fld,width,height,idrstmpl,cpack,lcpack)
 !$$$  SUBPROGRAM DOCUMENTATION BLOCK
 !                .      .    .                                       .
@@ -62,7 +73,6 @@
       integer,parameter :: zero=0
       integer :: enc_png
       character(len=1),allocatable :: ctemp(:)
-
       
       ndpts=width*height
       bscale=2.0**real(-idrstmpl(2))
@@ -158,7 +168,6 @@
       idrstmpl(1)=iref
       idrstmpl(4)=nbits
       idrstmpl(5)=0         ! original data were reals
-
 
 
       return

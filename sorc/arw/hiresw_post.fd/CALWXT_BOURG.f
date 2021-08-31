@@ -65,7 +65,7 @@
       subroutine calwxt_bourg_post(im,jm,jsta_2l,jend_2u,jsta,jend,lm,lp1,   &
      &                        iseed,g,pthresh,                          &
      &                        t,q,pmid,pint,lmh,prec,zint,ptype)
-      use mersenne_twister, only: random_number
+!mp      use mersenne_twister, only: random_number
       implicit none
 !
 !    input:
@@ -104,9 +104,9 @@
         rn(1:2*im*jm)=0.51
 
 !
-!$omp  parallel do
-!$omp& private(a,lmhk,tlmhk,iwrml,psfck,lhiwrm,pintk1,pintk2,area1,
-!$omp&         areape,dzkl,surfw,r1,r2)
+!$omp  parallel do &
+!$omp & private(a,lmhk,tlmhk,iwrml,psfck,lhiwrm,pintk1,pintk2,area1, &
+!$omp &         areape,dzkl,surfw,r1,r2)
       do j=jsta,jend
       do i=1,im
       lmhk=nint(lmh(i,j))

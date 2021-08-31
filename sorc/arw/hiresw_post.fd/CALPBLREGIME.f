@@ -80,19 +80,19 @@
 !
 !     COMPUTE BULK RICHARDSON NUMBER AS CODED IN WRF module_sf_sfclay
 !
-!$omp  parallel do
-!$omp& private(uhkl,ulkl,vhkl,vlkl,rib,ubot,utop,vbot,vtop,
-!$omp&         betta,ricr,ustarr,wmin,tvhtop,ztop,
-!$omp&         wndsl,wndslp,betta,ricr,ustarr,wmin 
-!$omp&       ,IFRSTLEV
-!$omp&       ,ICALPBL
-!$omp&       ,LVLP
-!$omp&       ,RIF
-!$omp&       ,RIBP
-!$omp&       ,UBOT1
-!$omp&       ,VBOT1
-!$omp&       ,ZBOT1
-!$omp&       ,THVBOT1)
+!$omp  parallel do &
+!$omp & private(uhkl,ulkl,vhkl,vlkl,rib,ubot,utop,vbot,vtop, &
+!$omp &         betta,ricr,ustarr,wmin,tvhtop,ztop, &
+!$omp &         wndsl,wndslp,betta,ricr,ustarr,wmin  &
+!$omp &       ,IFRSTLEV &
+!$omp &       ,ICALPBL &
+!$omp &       ,LVLP &
+!$omp &       ,RIF &
+!$omp &       ,RIBP &
+!$omp &       ,UBOT1 &
+!$omp &       ,VBOT1 &
+!$omp &       ,ZBOT1 &
+!$omp &       ,THVBOT1)
 !
       IF(GRIDTYPE /= 'A')THEN
 	 call exch(UH(1,jsta_2l,LM))

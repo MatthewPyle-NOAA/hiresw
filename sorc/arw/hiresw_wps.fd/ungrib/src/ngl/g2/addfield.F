@@ -1,5 +1,5 @@
-      subroutine addfield(cgrib,lcgrib,ipdsnum,ipdstmpl,ipdstmplen,
-     &                    coordlist,numcoord,idrsnum,idrstmpl,
+      subroutine addfield(cgrib,lcgrib,ipdsnum,ipdstmpl,ipdstmplen, &
+     &                    coordlist,numcoord,idrsnum,idrstmpl, &
      &                    idrstmplen,fld,ngrdpts,ibmap,bmap,ierr)
 !$$$  SUBPROGRAM DOCUMENTATION BLOCK
 !                .      .    .                                       .
@@ -127,7 +127,7 @@
       ctemp=cgrib(1)//cgrib(2)//cgrib(3)//cgrib(4)
       if ( ctemp.ne.grib ) then
         print *,'addfield: GRIB not found in given message.'
-        print *,'addfield: Call to routine gribcreate required',
+        print *,'addfield: Call to routine gribcreate required', &
      &          ' to initialize GRIB messge.'
         ierr=1
         return
@@ -139,10 +139,10 @@
 !
 !  Check to see if GRIB message is already complete
 !  
-      ctemp=cgrib(lencurr-3)//cgrib(lencurr-2)//cgrib(lencurr-1)
+      ctemp=cgrib(lencurr-3)//cgrib(lencurr-2)//cgrib(lencurr-1) &
      &      //cgrib(lencurr)
       if ( ctemp.eq.c7777 ) then
-        print *,'addfield: GRIB message already complete.  Cannot',
+        print *,'addfield: GRIB message already complete.  Cannot', &
      &          ' add new section.'
         ierr=2
         return
@@ -191,9 +191,9 @@
 !  Sections 4 through 7 can only be added after section 3 or 7.
 !
       if ( (isecnum.ne.3) .and. (isecnum.ne.7) ) then
-        print *,'addfield: Sections 4-7 can only be added after',
+        print *,'addfield: Sections 4-7 can only be added after', &
      &          ' Section 3 or 7.'
-        print *,'addfield: Section ',isecnum,' was the last found in',
+        print *,'addfield: Section ',isecnum,' was the last found in', &
      &          ' given GRIB message.'
         ierr=4
         return
@@ -201,11 +201,11 @@
 !  Sections 4 through 7 can only be added if section 3 was previously defined.
 !
       elseif (.not.issec3) then
-        print *,'addfield: Sections 4-7 can only be added if Section',
+        print *,'addfield: Sections 4-7 can only be added if Section', &
      &          ' 3 was previously included.'
-        print *,'addfield: Section 3 was not found in',
+        print *,'addfield: Section 3 was not found in', &
      &          ' given GRIB message.'
-        print *,'addfield: Call to routine addgrid required',
+        print *,'addfield: Call to routine addgrid required', &
      &          ' to specify Grid definition.'
         ierr=6
         return
@@ -365,8 +365,8 @@
         call pngpack(pfld,width,height,idrstmpl,cpack,lcpack)
 #endif   /* USE_PNG */
       else
-        print *,'addfield: Data Representation Template 5.',idrsnum,
-     *          ' not yet implemented.'
+        print *,'addfield: Data Representation Template 5.',idrsnum, &
+     &          ' not yet implemented.'
         ierr=7
         return
       endif
@@ -433,7 +433,7 @@
       !  one already exists in the current GRIB message.
       !
       if ((ibmap.eq.254).and.(.not.isprevbmap)) then
-        print *,'addfield: Requested previously defined bitmap, ',
+        print *,'addfield: Requested previously defined bitmap, ', &
      &        ' but one does not exist in the current GRIB message.'
         ierr=8
         return

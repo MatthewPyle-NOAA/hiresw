@@ -22,12 +22,12 @@ fi
 #------------------------------------
 # install forecast
 #------------------------------------
- ${CP} hireswfv3_forecast.fd/NEMS/exe/NEMS.x            $EXEdir/hireswfv3_forecast
+  ${CP} hireswfv3_forecast.fd/NEMS/exe/NEMS.x            $EXEdir/hireswfv3_forecast
 
 #------------------------------------
 # install post
 #------------------------------------
- ${CP} hireswfv3_post.fd/exec/ncep_post                 $EXEdir/hireswfv3_post
+#  ${CP} hireswfv3_post.fd/exec/ncep_post                 $EXEdir/hireswfv3_post
 
 #------------------------------------
 # install bufrpost
@@ -67,12 +67,7 @@ fi
 #------------------------------------
 # install chgres_cube
 #------------------------------------
- ${CP} hireswfv3_utils.fd/exec/chgres_cube          $EXEdir/hireswfv3_chgres_cube
-
-#------------------------------------
-# install sfc_climo_gen
-#------------------------------------
-#  ${CP} hireswfv3_utils.fd/exec/sfc_climo_gen            $EXEdir/hireswfv3_sfc_climo_gen
+# ${CP} hireswfv3_utils.fd/exec/chgres_cube          $EXEdir/hireswfv3_chgres_cube
 
 
 echo;echo " .... Install system finished .... "

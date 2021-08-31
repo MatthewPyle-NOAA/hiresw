@@ -72,8 +72,7 @@
 !
 !     COMPUTE VIRTUAL POTENTIAL TEMPERATURE.
 !
-!$omp  parallel do
-!$omp& private(ape)
+!$omp  parallel do private(ape)
       DO L=LM,1,-1
         DO J=JSTA,JEND
         DO I=1,IM
@@ -86,19 +85,19 @@
 !     COMPUTE BULK RICHARDSON NUMBER AS CODED IN GFS MODEL
 !     AND RAOBS FOR VERIFICATION
 !
-!$omp  parallel do
-!$omp& private(uhkl,ulkl,vhkl,vlkl,rib,ubot,utop,vbot,vtop,
-!$omp&         betta,ricr,ustarr,wmin,tvhtop,ztop,
-!$omp&         wndsl,wndslp,betta,ricr,ustarr,wmin 
-!$omp&       ,IFRSTLEV
-!$omp&       ,ICALPBL
-!$omp&       ,LVLP
-!$omp&       ,RIF
-!$omp&       ,RIBP
-!$omp&       ,UBOT1
-!$omp&       ,VBOT1
-!$omp&       ,ZBOT1
-!$omp&       ,THVBOT1)
+!$omp  parallel do &
+!$omp & private(uhkl,ulkl,vhkl,vlkl,rib,ubot,utop,vbot,vtop, &
+!$omp &         betta,ricr,ustarr,wmin,tvhtop,ztop, &
+!$omp &         wndsl,wndslp,betta,ricr,ustarr,wmin  &
+!$omp &       ,IFRSTLEV &
+!$omp &       ,ICALPBL &
+!$omp &       ,LVLP &
+!$omp &       ,RIF &
+!$omp &       ,RIBP &
+!$omp &       ,UBOT1 &
+!$omp &       ,VBOT1 &
+!$omp &       ,ZBOT1 &
+!$omp &       ,THVBOT1)
 
         DO J=JSTA_M,JEND_M
         DO I=2,IM-1

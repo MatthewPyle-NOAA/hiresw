@@ -126,12 +126,12 @@
 !     
 !     LOOP OVER HORIZONTAL GRID.
 !     
-!$omp  parallel do
-!$omp& private(dz,p100,p18,p47,p84,p85,
-!$omp&         p96,p98,pm,qdiv,qk,qkhn,qkhs,qkm1,qm,qm8510,
-!$omp&         qmcvg,qs,qudx,qvdy,r2dx,r2dy,rh,rh1847,rh4710,
-!$omp&         rh4796,rh8498,tm,tmt0,tmt15,z1847,z4710,z4796,
-!$omp&         z8498,z8510,q1d,u1d,v1d,qcnvg)
+!$omp  parallel do &
+!$omp & private(dz,p100,p18,p47,p84,p85, &
+!$omp &         p96,p98,pm,qdiv,qk,qkhn,qkhs,qkm1,qm,qm8510, &
+!$omp &         qmcvg,qs,qudx,qvdy,r2dx,r2dy,rh,rh1847,rh4710, &
+!$omp &         rh4796,rh8498,tm,tmt0,tmt15,z1847,z4710,z4796, &
+!$omp &         z8498,z8510,q1d,u1d,v1d,qcnvg)
       DO L=1,LM
 !          COMPUTE MOISTURE CONVERGENCE
        DO J=JSTA_2L,JEND_2U

@@ -1,11 +1,16 @@
 #! /bin/sh
 set -eux
+
 module purge
 
-module load ncep
-module load craype-sandybridge
-module use -a /opt/cray/modulefiles
-module load ../modulefiles_arw/HIRESW/v8.0.0
+# module load ncep
+# module load craype-sandybridge
+# module use -a /opt/cray/modulefiles
+
+# source /apps/prod/lmodules/startLmod
+
+module use -a ../modulefiles_arw/HIRESW
+module load v8.0.0
 module list
 
 
@@ -21,7 +26,7 @@ BUILD_hiresw_wrfarwfcst=1
 BUILD_hiresw_bucket=1
 BUILD_hiresw_wrfbufr=1
 BUILD_hiresw_wps=1
-BUILD_hiresw_post=1
+BUILD_hiresw_post=0
 BUILD_hiresw_smartinitg2=1
 BUILD_hiresw_smartprecipg2=1
 BUILD_hiresw_sndp=1

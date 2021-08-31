@@ -30,6 +30,7 @@ echo "Compiling ${MAKE_OPT} into $BUILD_NAME.exe on $BUILD_TARGET"
 # ----------------------------------------------------------------------
 # Make sure we have a "make" and reasonable threads.
 
+
 gnu_make=gmake
 if ( ! which $gnu_make ) ; then
     echo WARNING: Cannot find gmake in \$PATH.  I will use \"make\" instead.
@@ -61,6 +62,7 @@ COMPONENTS="FMS,FV3"
 if [[ "${MAKE_OPT}" == *"CCPP=Y"* ]]; then
   COMPONENTS="CCPP,$COMPONENTS"
 fi
+
 
 if [[ "${MAKE_OPT}" == *"WW3=Y"* ]]; then
   COMPONENTS="WW3,$COMPONENTS"
@@ -102,9 +104,12 @@ if [[ "${MAKE_OPT}" == *"CCPP=Y"* ]]; then
   mkdir -p $PATHTR/ccpp/include
 fi
 
+echo compile_gmake_5
+#  $gnu_make -k --debug=v COMPONENTS="$COMPONENTS" TEST_BUILD_NAME="$BUILD_NAME" \
   $gnu_make -k COMPONENTS="$COMPONENTS" TEST_BUILD_NAME="$BUILD_NAME" \
            BUILD_ENV="$BUILD_TARGET" FV3_MAKEOPT="$MAKE_OPT" \
            NEMS_BUILDOPT="$NEMS_BUILDOPT" build
+echo compile_gmake_6
 
 if [ $clean_after = YES ] ; then
   $gnu_make -k COMPONENTS="$COMPONENTS" TEST_BUILD_NAME="$BUILD_NAME" \

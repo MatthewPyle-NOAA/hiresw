@@ -115,10 +115,10 @@
 !     
 !     LOOP OVER HORIZONTAL GRID.
 !
-!$omp  parallel do
-!$omp& private(llmh,pavg,psfc,qavg,rhoavg,rrhog,
-!$omp&         tau,tauavg,tausfc,tausl,tavg,tvrbar,tvrsfc,tvrsl,
-!$omp&         tvrt,tvrtal,zbar,zl,zsfc)
+!$omp  parallel do &
+!$omp & private(llmh,pavg,psfc,qavg,rhoavg,rrhog,& 
+!$omp &         tau,tauavg,tausfc,tausl,tavg,tvrbar,tvrsfc,tvrsl, &
+!$omp &         tvrt,tvrtal,zbar,zl,zsfc)
        DO J=JSTA,JEND
        DO I=1,IM
          LLMH = NINT(LMH(I,J))

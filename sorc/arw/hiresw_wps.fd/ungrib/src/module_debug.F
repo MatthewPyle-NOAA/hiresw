@@ -11,7 +11,8 @@ module module_debug
 #endif
 #endif
 
-   integer, parameter :: QUIET=-100, LOGFILE=-2, DEBUG=0, INFORM=1, WARN=2, ERROR=3, STDOUT=100
+   integer, parameter :: QUIET=-100, LOGFILE=-2, DEBUG=0, &
+            INFORM=1, WARN=2, ERROR=3, STDOUT=100
 
    integer :: the_debug_level = DEBUG
 
@@ -114,7 +115,8 @@ module module_debug
       iend = len_trim(fmtstring)
 
 #if (defined _GEOGRID) || (defined _METGRID)
-      if (assertion .and. (.not. (level == STDOUT .and. my_proc_id /= IO_NODE))) then
+      if (assertion .and. (.not. (level == STDOUT .and. &
+               my_proc_id /= IO_NODE))) then
 #else
       if (assertion) then
 #endif
@@ -126,39 +128,49 @@ module module_debug
             call date_and_time(date=cur_date,time=cur_time)
          end if
 
-         if (level == LOGFILE .and. .not.continuing_line_logfile) then
-            write(print_date,'(a10)') cur_date(1:4)//'-'//cur_date(5:6)//'-'//cur_date(7:8)
-            write(print_time,'(a12)') cur_time(1:2)//':'//cur_time(3:4)//':'//cur_time(5:10)
+         if (level == LOGFILE .and. .not.continuing_line_logfile)then
+            write(print_date,'(a10)') cur_date(1:4)//'-' &
+                     //cur_date(5:6)//'-'//cur_date(7:8)
+            write(print_time,'(a12)') cur_time(1:2)//':' &
+                     //cur_time(3:4)//':'//cur_time(5:10)
             write(ctemp,'(a)') print_date//' '//print_time//' --- '
-            call cio_prints(1,ctemp,len(print_date//' '//print_time//' --- '))
+       call cio_prints(1,ctemp, len(print_date//' '//print_time//' --- '))
          else if (level == DEBUG .and. .not.continuing_line_debug) then
-            write(print_date,'(a10)') cur_date(1:4)//'-'//cur_date(5:6)//'-'//cur_date(7:8)
-            write(print_time,'(a12)') cur_time(1:2)//':'//cur_time(3:4)//':'//cur_time(5:10)
+            write(print_date,'(a10)') cur_date(1:4)//'-' &
+                     //cur_date(5:6)//'-'//cur_date(7:8)
+            write(print_time,'(a12)') cur_time(1:2)//':' &
+                    //cur_time(3:4)//':'//cur_time(5:10)
             write(ctemp,'(a)') print_date//' '//print_time//' --- '
-            call cio_prints(1,ctemp,len(print_date//' '//print_time//' --- '))
+       call cio_prints(1,ctemp, len(print_date//' '//print_time//' --- '))
             write(ctemp,'(a)') 'DEBUG: '
             call cio_prints(1,ctemp,7)
          else if (level == INFORM .and. .not.continuing_line_inform) then
-            write(print_date,'(a10)') cur_date(1:4)//'-'//cur_date(5:6)//'-'//cur_date(7:8)
-            write(print_time,'(a12)') cur_time(1:2)//':'//cur_time(3:4)//':'//cur_time(5:10)
+            write(print_date,'(a10)') cur_date(1:4)//'-' &
+                    //cur_date(5:6)//'-'//cur_date(7:8)
+            write(print_time,'(a12)') cur_time(1:2)//':' &
+                    //cur_time(3:4)//':'//cur_time(5:10)
             write(ctemp,'(a)') print_date//' '//print_time//' --- '
-            call cio_prints(1,ctemp,len(print_date//' '//print_time//' --- '))
+       call cio_prints(1,ctemp, len(print_date//' '//print_time//' --- '))
             write(ctemp,'(a)') 'INFORM: '
             if (level >= the_debug_level) &
                call cio_prints(0,ctemp,8)
             call cio_prints(1,ctemp,8)
          else if (level == WARN .and. .not.continuing_line_warn) then
-            write(print_date,'(a10)') cur_date(1:4)//'-'//cur_date(5:6)//'-'//cur_date(7:8)
-            write(print_time,'(a12)') cur_time(1:2)//':'//cur_time(3:4)//':'//cur_time(5:10)
+            write(print_date,'(a10)') cur_date(1:4)//'-' &
+                     //cur_date(5:6)//'-'//cur_date(7:8)
+            write(print_time,'(a12)') cur_time(1:2)//':' &
+                     //cur_time(3:4)//':'//cur_time(5:10)
             write(ctemp,'(a)') print_date//' '//print_time//' --- '
-            call cio_prints(1,ctemp,len(print_date//' '//print_time//' --- '))
+       call cio_prints(1,ctemp, len(print_date//' '//print_time//' --- '))
             write(ctemp,'(a)') 'WARNING: '
             if (level >= the_debug_level) &
                call cio_prints(0,ctemp,9)
             call cio_prints(1,ctemp,9)
-         else if (level == ERROR .and. .not.continuing_line_error) then
-            write(print_date,'(a10)') cur_date(1:4)//'-'//cur_date(5:6)//'-'//cur_date(7:8)
-            write(print_time,'(a12)') cur_time(1:2)//':'//cur_time(3:4)//':'//cur_time(5:10)
+         else if (level == ERROR .and. .not.continuing_line_error)then
+            write(print_date,'(a10)') cur_date(1:4)//'-' &
+                    //cur_date(5:6)//'-'//cur_date(7:8)
+            write(print_time,'(a12)') cur_time(1:2)//':' &
+                    //cur_time(3:4)//':'//cur_time(5:10)
             write(ctemp,'(a)') print_date//' '//print_time//' --- '
             call cio_prints(1,ctemp,len(print_date//' '//print_time//' --- '))
             write(ctemp,'(a)') 'ERROR: '

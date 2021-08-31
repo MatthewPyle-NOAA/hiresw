@@ -208,8 +208,8 @@
 !        CALL EXCH(ZINT(1,jsta_2l,L))
 !      END DO
 ! 
-!$omp  parallel do
-!$omp& private(htsfc,ie,iw,pdslvk,pkl,psfck)
+!$omp  parallel do &
+!$omp & private(htsfc,ie,iw,pdslvk,pkl,psfck)
       IF(gridtype/='A')CALL EXCH(FIS(1:IM,JSTA_2L:JEND_2U))
       DO L = 1,LM
         IF(gridtype/='A')CALL EXCH(ZMID(1:IM,JSTA_2L:JEND_2U,L)) 
@@ -313,8 +313,8 @@
       ENDDO
 
 !
-!$omp  parallel do
-!$omp& private(umean6,vmean6,umean5,vmean5,umean1,vmean1,ushr6,vshr6)
+!$omp  parallel do &
+!$omp & private(umean6,vmean6,umean5,vmean5,umean1,vmean1,ushr6,vshr6)
 
       DO J=JSTART,JSTOP
       DO I=ISTART,ISTOP
@@ -396,8 +396,8 @@
 !
 !       COMPUTE STORM-RELATIVE HELICITY
 !
-!$omp  parallel do
-!$omp& private(du1,du2,dv1,dv2,dz,dz1,dz2,dzabv,ie,iw,z1,z2,z3)
+!$omp  parallel do &
+!$omp & private(du1,du2,dv1,dv2,dz,dz1,dz2,dzabv,ie,iw,z1,z2,z3)
       DO N=1,2 ! for dfferent helicity depth
       DO L = 2,LM-1
         if(GRIDTYPE /= 'A')then

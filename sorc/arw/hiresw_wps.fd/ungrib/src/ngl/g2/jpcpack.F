@@ -140,15 +140,15 @@
         nsize=lcpack      ! needed for input to enc_jpeg2000
         allocate(ctemp(nbytes*ndpts))
         call sbytes(ctemp,ifld,0,nbytes*8,0,ndpts)
-        lcpack=enc_jpeg2000(ctemp,width,height,nbits,idrstmpl(6),
+        lcpack=enc_jpeg2000(ctemp,width,height,nbits,idrstmpl(6), &
      &                      idrstmpl(7),retry,cpack,nsize)
         if (lcpack.le.0) then
            print *,'jpcpack: ERROR Packing JPC=',lcpack
            if (lcpack.eq.-3) then
               retry=1
               print *,'jpcpack: Retrying....'
-              lcpack=enc_jpeg2000(ctemp,width,height,nbits,idrstmpl(6),
-     &                         idrstmpl(7),retry,cpack,nsize)
+              lcpack=enc_jpeg2000(ctemp,width,height,nbits, & 
+     &             idrstmpl(6),idrstmpl(7),retry,cpack,nsize)
               if (lcpack.le.0) then
                  print *,'jpcpack: Retry Failed.'
               else

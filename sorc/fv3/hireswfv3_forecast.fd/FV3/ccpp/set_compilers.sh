@@ -10,6 +10,14 @@ case "$MACHINE_ID" in
             export F77=ftn
             export F90=ftn
             ;;
+        wcoss2)
+            export LD=ftn
+            export CC=cc
+            export CXX=CC
+            export FC=ftn
+            export F77=ftn
+            export F90=ftn
+            ;;
         wcoss_dell_p3)
             export CC=mpiicc
             export CXX=mpiicpc

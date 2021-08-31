@@ -1,11 +1,11 @@
 set -x
-module purge
 
-module load ncep
-module load craype-sandybridge
-module use -a /opt/cray/modulefiles
-module load ../modulefiles/HIRESW/v8.0.0
-module list
+# module purge
+# module load ncep
+# module load craype-sandybridge
+# module use -a /opt/cray/modulefiles
+# module load ../modulefiles/HIRESW/v8.0.0
+# module list
 
 
 ##################################
@@ -20,7 +20,7 @@ INSTALL_hiresw_wrfarwfcst=1
 INSTALL_hiresw_bucket=1
 INSTALL_hiresw_wrfbufr=1
 INSTALL_hiresw_wps=1
-INSTALL_hiresw_post=1
+INSTALL_hiresw_post=0
 INSTALL_hiresw_smartinitg2=1
 INSTALL_hiresw_smartprecipg2=1
 INSTALL_hiresw_sndp=1

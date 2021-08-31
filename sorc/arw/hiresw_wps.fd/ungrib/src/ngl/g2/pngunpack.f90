@@ -1,5 +1,16 @@
 
 
+
+
+
+
+
+
+
+
+
+
+
       subroutine pngunpack(cpack,len,idrstmpl,ndpts,fld)
 !$$$  SUBPROGRAM DOCUMENTATION BLOCK
 !                .      .    .                                       .
@@ -43,7 +54,6 @@
       real :: ref,bscale,dscale
       integer :: dec_png,width,height
 
-
       ieee = idrstmpl(1)
       call rdieee(ieee,ref,1)
       bscale = 2.0**real(idrstmpl(2))
@@ -67,7 +77,6 @@
            fld(j)=ref
          enddo
       endif
-
 
 
       return

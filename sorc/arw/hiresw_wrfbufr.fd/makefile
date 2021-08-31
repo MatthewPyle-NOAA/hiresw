@@ -31,20 +31,20 @@ FC       = ${COMP_MP}
 CPP      = /lib/cpp -P
 ARCH     =
 CPPFLAGS = 
-OPTS     = -O2 -xAVX  -convert big_endian -assume noold_ldout_format
+OPTS     = -O2  -convert big_endian -assume noold_ldout_format
 FREE     = -FR
 TRAPS    = 
 DEBUG    = -g # -traceback -fpe0 -ftrapuv # -check all 
 
- WRFLIB    = ./wrflibs/libwrflib.a  \
-             ./wrflibs/pack_utils.o  \
-             ./wrflibs/libfftpack.a \
-            ./wrflibs/libio_grib1.a \
-            ./wrflibs/libio_grib_share.a \
-            ./wrflibs/libwrfio_int.a \
-            ./wrflibs/libwrfio_nf.a \
-            ./wrflibs/libesmf_time.a \
-            ./wrflibs/librsl_lite.a
+WRFLIB   = ./wrflibs/libwrflib.a  \
+           ./wrflibs/pack_utils.o  \
+           ./wrflibs/libfftpack.a \
+           ./wrflibs/libio_grib1.a \
+           ./wrflibs/libio_grib_share.a \
+           ./wrflibs/libwrfio_int.a \
+           ./wrflibs/libwrfio_nf.a \
+           ./wrflibs/libesmf_time.a \
+           ./wrflibs/librsl_lite.a
 
 
 #
@@ -56,7 +56,7 @@ LDFLAGS  =
 LIBS     = $(WRFLIB) \
            $(NEMSIO_LIB) \
            $(W3EMC_LIB4) $(W3NCO_LIB4) $(BACIO_LIB4) \
-           $(NETCDF_LDFLAGS_F)
+           $(NETCDF_LIB)/libnetcdf.so  $(NETCDF_LIB)/libnetcdff.so
 #
 #
 # free-format object files

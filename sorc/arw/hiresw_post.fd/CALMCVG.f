@@ -91,8 +91,8 @@
       CALL EXCH_F(Q1D)
       CALL EXCH_F(VWND)
 !
-!$omp  parallel do
-!$omp& private(qdiv,qudx,qvdy,r2dx,r2dy)
+!$omp  parallel do &
+!$omp & private(qdiv,qudx,qvdy,r2dx,r2dy)
       IF(gridtype=='A')THEN
        DO J=JSTA_M,JEND_M
         DO I=2,IM-1
@@ -129,8 +129,8 @@
 !       CALL EXCH_F(VWND)
 
 !
-!$omp  parallel do
-!$omp& private(iend,qdiv,qudx,qvdy,r2dx,r2dy)
+!$omp  parallel do &
+!$omp & private(iend,qdiv,qudx,qvdy,r2dx,r2dy)
        DO J=JSTA_M2,JEND_M2
         IEND=IM-1-MOD(J,2)
         DO I=2,IEND
@@ -148,8 +148,8 @@
      
        CALL EXCH_F(UWND)
 !
-!$omp  parallel do
-!$omp& private(iend,qdiv,qudx,qvdy,r2dx,r2dy)
+!$omp  parallel do &
+!$omp & private(iend,qdiv,qudx,qvdy,r2dx,r2dy)
        DO J=JSTA_M,JEND_M
         DO I=2,IM-1
           R2DX   = 1./DX(I,J)

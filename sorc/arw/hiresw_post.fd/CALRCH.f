@@ -78,8 +78,7 @@
 !
 !     COMPUTE VIRTUAL POTENTIAL TEMPERATURE.
 !
-!$omp  parallel do
-!$omp& private(ape)
+!$omp  parallel do private(ape)
       DO L=LM,1,-1
         DO J=JSTA,JEND
         DO I=1,IM
@@ -93,10 +92,10 @@
 !     SUBROUTINE PROFQ2.F.  OUTER LOOP OVER THE VERTICAL. 
 !     INTTER LOOP OVER THE HORIZONTAL.
 !
-!$omp  parallel do
-!$omp& private(cs,ct,dthvkl,dukl,dvkl,dzkl,elkl,elklsq,
-!$omp&         q2kl,qroot,rdzkl,ri,uhkl,ulkl,vhkl,vlkl,
-!$omp&         wndsl,wndslp)
+!$omp  parallel do &
+!$omp & private(cs,ct,dthvkl,dukl,dvkl,dzkl,elkl,elklsq, &
+!$omp &         q2kl,qroot,rdzkl,ri,uhkl,ulkl,vhkl,vlkl, &
+!$omp &         wndsl,wndslp)
       DO L = 1,LM1
 !
         if(GRIDTYPE /= 'A')THEN  

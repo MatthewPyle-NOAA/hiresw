@@ -25,7 +25,7 @@ EXEdir=../../exec/fv3
 # Check final exec folder exists
 if [ ! -d $EXEdir ]; then
   echo "Creating $EXEdir folder"
-  mkdir $EXEdir
+  mkdir -p $EXEdir
 fi
 
 #------------------------------------

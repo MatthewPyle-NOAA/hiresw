@@ -1,5 +1,16 @@
 
 
+
+
+
+
+
+
+
+
+
+
+
       subroutine jpcpack(fld,width,height,idrstmpl,cpack,lcpack)
 !$$$  SUBPROGRAM DOCUMENTATION BLOCK
 !                .      .    .                                       .
@@ -73,7 +84,6 @@
       integer,parameter :: zero=0
       integer :: enc_jpeg2000
       character(len=1),allocatable :: ctemp(:)
-
       
       ndpts=width*height
       bscale=2.0**real(-idrstmpl(2))
@@ -142,15 +152,15 @@
         nsize=lcpack      ! needed for input to enc_jpeg2000
         allocate(ctemp(nbytes*ndpts))
         call sbytes(ctemp,ifld,0,nbytes*8,0,ndpts)
-        lcpack=enc_jpeg2000(ctemp,width,height,nbits,idrstmpl(6),
+        lcpack=enc_jpeg2000(ctemp,width,height,nbits,idrstmpl(6), &
      &                      idrstmpl(7),retry,cpack,nsize)
         if (lcpack.le.0) then
            print *,'jpcpack: ERROR Packing JPC=',lcpack
            if (lcpack.eq.-3) then
               retry=1
               print *,'jpcpack: Retrying....'
-              lcpack=enc_jpeg2000(ctemp,width,height,nbits,idrstmpl(6),
-     &                         idrstmpl(7),retry,cpack,nsize)
+              lcpack=enc_jpeg2000(ctemp,width,height,nbits, & 
+     &             idrstmpl(6),idrstmpl(7),retry,cpack,nsize)
               if (lcpack.le.0) then
                  print *,'jpcpack: Retry Failed.'
               else
@@ -176,7 +186,6 @@
       idrstmpl(4)=nbits
       idrstmpl(5)=0         ! original data were reals
       if (idrstmpl(6).eq.0) idrstmpl(7)=255       ! lossy not used
-
 
       return
       end
