@@ -73,7 +73,7 @@ OBJS    =       \
 		clog.o
 
 #compile as a .o but do not link into the main library
-SPECIAL =       module_internal_header_util.o pack_utils.o
+SPECIAL =       module_internal_header_util.o pack_utils.o test_stub.o
    
 
 include ../configure.wrf
@@ -173,6 +173,10 @@ pack_utils.o :
 module_internal_header_util.o :
 	$(CPP) $(CPPFLAGS) -I../inc module_internal_header_util.F > module_internal_header_util.f90
 	$(SFC) -c $(PROMOTION) $(FCSUFFIX) $(FCDEBUG) $(FCBASEOPTS) module_internal_header_util.f90
+
+test_stub.o :
+	$(CPP) $(CPPFLAGS) -I../inc test_stub.F > test_stub.f90
+	$(SFC) -c $(PROMOTION) $(FCSUFFIX) $(FCDEBUG) $(FCBASEOPTS) test_stub.f90
 
 clean:
 	@ echo 'use the clean script'

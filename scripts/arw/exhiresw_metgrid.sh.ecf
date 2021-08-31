@@ -72,24 +72,15 @@ echo "$USHhiresw/hiresw_wps_metgrid_gen.sh $NEST $cyc 48 48 9 $MODEL $send" >> p
 chmod 775 poe.a poe.b poe.c poe.d poe.e
 chmod 775 poe.aa poe.bb poe.cc poe.dd
 
-aprun -n 1 -N 1 -d 1 ./poe.a &
-
-aprun -n 1 -N 1 -d 1 ./poe.b &
-
-aprun -n 1 -N 1 -d 1 ./poe.c &
-
-aprun -n 1 -N 1 -d 1 ./poe.d &
-
-aprun -n 1 -N 1 -d 1 ./poe.e &
-
-aprun -n 1 -N 1 -d 1 ./poe.aa &
-
-aprun -n 1 -N 1 -d 1 ./poe.bb &
-
-aprun -n 1 -N 1 -d 1 ./poe.cc &
-
-aprun -n 1 -N 1 -d 1 ./poe.dd &
-
+./poe.a &
+./poe.b &
+./poe.c &
+./poe.d &
+./poe.e &
+./poe.aa &
+./poe.bb &
+./poe.cc &
+./poe.dd &
 wait
 
 export err=$?
