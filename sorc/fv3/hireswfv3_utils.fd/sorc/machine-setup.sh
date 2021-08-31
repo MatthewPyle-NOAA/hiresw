@@ -69,6 +69,14 @@ elif [[ -d /gpfs/hps && -e /etc/SuSE-release ]] ; then
     module use /opt/modulefiles
     module load modules
 
+elif [[ -d /lfs/h1 ]]; then
+	# wcoss2
+# source /apps/prod/lmodules/startLmod
+target=wcoss2
+echo target is wcoss2
+module purge
+echo purged modules
+
 elif [[ -L /usrx && "$( readlink /usrx 2> /dev/null )" =~ dell ]] ; then
     # We are on NOAA Venus or Mars
     if ( ! eval module help > /dev/null 2>&1 ) ; then
@@ -106,6 +114,8 @@ elif [[ "$(hostname)" =~ "odin" ]]; then
 else
     echo WARNING: UNKNOWN PLATFORM 1>&2
 fi
+
+echo down here
 
 unset __ms_shell
 unset __ms_ksh_test
