@@ -49,7 +49,7 @@ WRF_LIB    = $(WRFPATH)/main/libwrflib.a \
 
 # G2_INC     = -I${G2_INC} -I${G2TMPL_INC}
 G2BOTH_INC = -I${G2_INC4} -I${G2TMPL_INC}
-G2_LIB     = ${G2TMPL_LIB} ${G2_LIB4} ${JASPER_LIB} ${PNG_LIB} ${Z_LIB}
+G2_LIB     = ${G2_LIB4} ${G2TMPL_LIB} ${JASPER_LIB} ${PNG_LIB} ${Z_LIB}
 
 XML_INC    = -I${XML2_INC}
 XML_LIB    = ${LIBXML2_LIB}

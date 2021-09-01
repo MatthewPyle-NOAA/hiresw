@@ -331,7 +331,7 @@ fi
 
 . prep_step
 
-export FORT_BUFFERED=true
+# export FORT_BUFFERED=true
 
 
 # define default runline option, which will be overridden
@@ -342,7 +342,7 @@ if [ $MODEL = "nmmb" ]; then
     runline="aprun -n $NTASK -N $PTILE ./hiresw_nmmbfcst"
 else
     cp $EXEChiresw/hiresw_wrfarwfcst .
-    runline="aprun -n $NTASK -N $PTILE ./hiresw_wrfarwfcst"
+    runline="mpiexec -n $NTASK -ppn $PTILE ./hiresw_wrfarwfcst"
 fi
 
 if [ $RUNLOC = "conusarw" ]

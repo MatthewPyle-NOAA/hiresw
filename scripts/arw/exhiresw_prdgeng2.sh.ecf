@@ -102,7 +102,7 @@ echo "$USHhiresw/hiresw_prdgen_big_grid_g2.sh $fhr $NEST $cyc $MODEL 0 &" >> $DA
 echo "$USHhiresw/hiresw_prdgen_oldgrid_g2.sh $fhr $NEST $cyc $MODEL 0 &" >> $DATA/poescript_${fhr}
 echo "wait" >> $DATA/poescript_${fhr}
 chmod 775 $DATA/poescript_${fhr}
-command="aprun -n 1 -N 1 -d 2 $DATA/poescript_${fhr} "
+command="$DATA/poescript_${fhr} "
 fi
 
 export MP_PGMMODEL=mpmd
