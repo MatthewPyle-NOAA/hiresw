@@ -52,9 +52,9 @@ BUFRSPAN=1
 NPROCBUFR=1
 elif [ $DOM$CORE == "prarw" ]
 then
-MODPROCS=230
-MODSPAN=115
-MODNODES=2
+MODPROCS=124
+MODNODES=1
+MODSPAN=124
 POSTPROCS=2
 POSTSPAN=2
 PRDGENPROCS=2
@@ -63,8 +63,9 @@ BUFRSPAN=1
 NPROCBUFR=1
 elif [ $DOM$CORE == "prmem2arw" ]
 then
-MODPROCS=192
-MODSPAN=24
+MODPROCS=124
+MODNODES=1
+MODSPAN=124
 POSTPROCS=2
 POSTSPAN=2
 PRDGENPROCS=2
@@ -73,8 +74,11 @@ BUFRSPAN=1
 NPROCBUFR=1
 elif [ $DOM$CORE == "guamarw" ]
 then
-MODPROCS=165
-MODSPAN=24
+MODPROCS=94
+MODNODES=1
+NCPUSMOD=90
+NCPUSQUILT=4
+MODSPAN=90
 POSTPROCS=2
 POSTSPAN=2
 PRDGENPROCS=2
@@ -183,6 +187,7 @@ cat sub_model.lsf_in_cray_retro | sed s:_DOM_:${DOM}:g | sed s:_CORE_:${CORE}:g 
 sed s:_DATE_:${DATE}:g |  sed s:_SPAN_:${MODSPAN}:g | sed s:_NODES_:${MODNODES}:g | sed s:_NPROC_:${MODPROCS}:g  > sub_model.lsf_${DOM}_${CORE}_${CYC}_retro
 
 fi
+
 cat sub_post.lsf_in_cray_retro | sed s:_DOM_:${DOM}:g | sed s:_CORE_:${CORE}:g | sed s:_CYC_:${CYC}:g | \
 sed s:_DATE_:${DATE}:g |  sed s:_POSTSPAN_:${POSTSPAN}:g |  sed s:_NPROC_:${POSTPROCS}:g  > sub_post.lsf_${DOM}_${CORE}_${CYC}_retro
 
