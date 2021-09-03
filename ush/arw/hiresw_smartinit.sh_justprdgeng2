@@ -461,33 +461,26 @@ echo "./m.poe &" >> wgrib2.poe
 echo "wait" >> wgrib2.poe
 
 chmod 775 wgrib2.poe
-export MP_PGMMODEL=mpmd
-export MP_CMDFILE=wgrib2.poe
-#time mpirun.lsf
-time aprun -n 1 -N 1 -d $NTASK ./wgrib2.poe
+# time aprun -n 1 -N 1 -d $NTASK ./wgrib2.poe
+./wgrib2.poe
 export err=$?;  err_chk
 
 else
 
-echo "#!/bin/ksh" > wgrib2.poe
-echo "./a.poe &" >> wgrib2.poe
-echo "./b.poe &" >> wgrib2.poe
-echo "./c.poe &" >> wgrib2.poe
-echo "./d.poe &" >> wgrib2.poe
-echo "./e.poe &" >> wgrib2.poe
-echo "./f.poe &" >> wgrib2.poe
-echo "./g.poe &" >> wgrib2.poe
-echo "./h.poe &" >> wgrib2.poe
-echo "./i.poe &" >> wgrib2.poe
-echo "./l.poe &" >> wgrib2.poe
-echo "./m.poe &" >> wgrib2.poe
-echo "wait" >> wgrib2.poe
+echo "./a.poe" > wgrib2.poe
+echo "./b.poe" >> wgrib2.poe
+echo "./c.poe" >> wgrib2.poe
+echo "./d.poe" >> wgrib2.poe
+echo "./e.poe" >> wgrib2.poe
+echo "./f.poe" >> wgrib2.poe
+echo "./g.poe" >> wgrib2.poe
+echo "./h.poe" >> wgrib2.poe
+echo "./i.poe" >> wgrib2.poe
+echo "./l.poe" >> wgrib2.poe
+echo "./m.poe" >> wgrib2.poe
 
-chmod 775 wgrib2.poe
-export MP_PGMMODEL=mpmd
-export MP_CMDFILE=wgrib2.poe
-#time mpirun.lsf
-time aprun -n 1 -N 1 -d 11 ./wgrib2.poe
+# time aprun -n 1 -N 1 -d 11 ./wgrib2.poe
+mpiexec -cpu-bind core --configfile ./wgrib2.poe
 export err=$?;  err_chk
 
 fi

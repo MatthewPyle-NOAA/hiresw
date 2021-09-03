@@ -1,39 +1,43 @@
-#BSUB -oo /gpfs/hps3/emc/meso/noscrub/Matthew.Pyle/hiresw.v7.0.0/logs/test_wrfbufrsnd.out__DOM___CYC___CORE_
-#BSUB -eo /gpfs/hps3/emc/meso/noscrub/Matthew.Pyle/hiresw.v7.0.0/logs/test_wrfbufrsnd.err__DOM___CYC___CORE_
-#BSUB -q "devhigh"
-#BSUB -J HIRESW_BUFR
-#BSUB -P HRW-T2O
-#BSUB -M 2000
-#BSUB -W 1:29
-#BSUB -cwd /gpfs/hps3/emc/meso/noscrub/Matthew.Pyle/
-###BSUB -extsched 'CRAYLINUX[]' -R '1*{select[craylinux && !vnode]} + _NPROCBUFR_*{select[craylinux && vnode]span[ptile=_PTILEBUFR_] cu[type=cabinet]}' rusage[mem=3000]
-#BSUB -extsched 'CRAYLINUX[]' -R '1*{select[craylinux && !vnode]} + 1*{select[craylinux && vnode]span[ptile=1] cu[type=cabinet]}' rusage[mem=50000]
 
 
-export numprocs=1
-export spanprocs=1
-export NTASK=1
-export PTILE=1
+#PBS -j oe
+#PBS -o /lfs/h2/emc/eib/noscrub/Matthew.Pyle/hiresw.v8.0.5/launch_info/logs/bufr__DOM__CYC_.log
+#PBS -e /lfs/h2/emc/eib/noscrub/Matthew.Pyle/hiresw.v8.0.5/launch_info/logs/bufr__DOM__CYC_.log
+#PBS -l place=vscatter,select=1:ncpus=_NPROCBUFR_:mem=128GB
+#PBS -q dev
+#PBS -l walltime=001:17:05
+
+
+export numprocs=_NPROCBUFR_
+export spanprocs=_NPROCBUFR_
+export NTASK=_NPROCBUFR_
+export PTILE=_NPROCBUFR_
 
 export obsproc_shared_bufr_cword_ver=v1.0.0
+#
 
-module load prod_envir
+module purge
+module load envvar/1.0
+module load PrgEnv-intel/8.1.0
+module load craype/2.7.8
+module load intel/19.1.3.304
+module load cray-mpich/8.1.7
+module load cray-pals/1.0.12
 module load prod_util
+module load prod_envir
+module load netcdf/4.7.4
+module load bufr/11.4.0
+
 
 # module load ics
 # module load ibmpe
 
-export MP_EUILIB=us
-
-export OMP_NUM_THREADS=1
-export MP_TASK_AFFINITY=core:1
-export MP_MPILIB=mpich2
-
 # export MP_IOAGENT_CNT=all
 #
 
-vers=`cat /u/Matthew.Pyle/hiresw_version_test`
-export HOMEhiresw=/gpfs/hps3/emc/meso/noscrub/Matthew.Pyle/hiresw.${vers}
+# vers=`cat /u/Matthew.Pyle/hiresw_version_test`
+export HOMEhiresw=/lfs/h2/emc/eib/noscrub/Matthew.Pyle/hiresw.v8.0.5
+
 
 export RUN_ENVIR=test
 export envir=test
@@ -45,14 +49,19 @@ export cyc=_CYC_
 export MODEL=_CORE_
 export DATE=_DATE_
 
+export PDY=${DATE}
+
 export SENDDBN=NO
 
 # export DATEroot=/gpfs/hps/nco/ops/com/date
 # DATE=`cat $DATEroot/t${cyc}z | cut -c7-14`
 
-export DATAROOT=/gpfs/hps3/ptmp/Matthew.Pyle/tmpnwprd
-export MYCOMROOT=/gpfs/hps2/ptmp/Matthew.Pyle/com
-export COMROOT=/gpfs/hps/nco/ops/com
+# export DATAROOT=/gpfs/hps3/ptmp/Matthew.Pyle/tmpnwprd
+# export MYCOMROOT=/gpfs/hps2/ptmp/Matthew.Pyle/com
+export DATAROOT=/lfs/h2/emc/stmp/Matthew.Pyle/tmpnwprd
+export MYCOMROOT=/lfs/h2/emc/ptmp/Matthew.Pyle/com
+
+# export COMROOT=/gpfs/hps/nco/ops/com
 
 export COMOUT=${MYCOMROOT}/${NET}/$envir/${RUN}.${DATE}
 export COMIN=${MYCOMROOT}/${NET}/$envir/${RUN}.${DATE}
@@ -60,4 +69,16 @@ export COMIN=${MYCOMROOT}/${NET}/$envir/${RUN}.${DATE}
 export INPUT_DATA=${DATAROOT}/hiresw.forecast_${NEST}_${MODEL}_${cyc}_${envir}_retro
 export DATA=${DATAROOT}/hiresw.bufrpost_${NEST}_${MODEL}_${cyc}_${envir}_retro
 
-$HOMEhiresw/jobs/JHIRESW_WRFBUFRSND_retro
+export OBSPROC=/lfs/h1/ops/canned/packages/hps/obsproc_shared/bufr_cword.v1.0.1
+
+export HOMEobsproc_shared_bufr_cword=${OBSPROC}
+export USHobsproc_shared_bufr_cword=${HOMEobsproc_shared_bufr_cword}/ush
+export EXECobsproc_shared_bufr_cword=${HOMEobsproc_shared_bufr_cword}/exec
+
+hrs="00 01 02 03 04 05 06 07 08 09 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48"
+
+for hr in $hrs
+do
+export fhr=${hr}
+$HOMEhiresw/jobs/JHIRESW_WRFBUFRSND
+done

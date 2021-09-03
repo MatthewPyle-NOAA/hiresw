@@ -3,7 +3,7 @@
         USE GRIB_MOD
 
 !                .      .    .                                       .
-! SUBPROGRAM:    SMARTPECIP
+! SUBPROGRAM:    SMARTPRECIP
 !   PRGMMR: MANIKIN        ORG: W/NP22     DATE:  07-03-07
 
 ! ABSTRACT: PRODUCES 3,6 or 12-HOUR TOTAL AND CONVECTIVE PRECIPITATION BUCKETS
@@ -440,7 +440,8 @@
 !=======================================================
 !      OUTPUT 3, 6 or 12 hr PRECIP BUCKETS
 !=======================================================
-      ALLOCATE (APCPOUT(NUMVAL),CAPCPOUT(NUMVAL),SNOWOUT(NUMVAL),STAT=kret)
+      ALLOCATE (APCPOUT(NUMVAL),CAPCPOUT(NUMVAL), &
+                            SNOWOUT(NUMVAL),STAT=kret)
       IF(kret.ne.0)THEN
        WRITE(*,*)'ERROR allocation source location: ',numval
        STOP
@@ -533,9 +534,11 @@
       ENDIF
 
       KPDS(5)=61
-      print *, 'writing precip', KPDS(5),KPDS(14),KPDS(15),LUGB5,MAXVAL(APCPOUT)
+      print *, 'writing precip', KPDS(5),KPDS(14),KPDS(15),&
+                                LUGB5,MAXVAL(APCPOUT)
       WRITE(FNAME(6:7),FMT='(I2)')LUGB5
       CALL BAOPEN(LUGB5,FNAME,IRETGB)
+        write(0,*) 'IRETGB from baopen: ', IRETGB
 !      CALL PUTGB(LUGB5,NUMVAL,KPDS,KGDS,MASK,APCPOUT,IRET)
       call putgb2(LUGB5,GFLD,IRET)
       print *,'putgb2 return code:',iret
@@ -552,7 +555,8 @@
       gfld%fld=SNOWOUT
 
       KPDS(5)=65
-      print *, 'writing SNOW', KPDS(5),KPDS(14),KPDS(15),LUGB7, MAXVAL(SNOWOUT)
+      print *, 'writing SNOW', KPDS(5),KPDS(14),KPDS(15), &
+                              LUGB7, MAXVAL(SNOWOUT)
       WRITE(FNAME(6:7),FMT='(I2)')LUGB7
       CALL BAOPEN(LUGB7,FNAME,IRET)
 !      CALL PUTGB(LUGB7,NUMVAL,KPDS,KGDS,MASK,SNOWOUT,IRET)

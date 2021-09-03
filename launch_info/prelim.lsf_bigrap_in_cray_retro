@@ -17,6 +17,8 @@ module load cray-pals/1.0.12
 module load prod_util
 module load wgrib2
 
+module load netcdf/4.7.4
+
 module load g2/3.4.1
 module load g2tmpl/1.9.1
 

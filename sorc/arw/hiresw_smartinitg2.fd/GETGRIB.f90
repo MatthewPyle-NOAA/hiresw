@@ -341,6 +341,19 @@
       endif !LFULL
 
 !  get sfc height 
+
+        if (ALLOCATED(GRID)) then
+                write(0,*) 'already allocated GRID'
+        else
+                ALLOCATE (GRID(ITOT))
+        endif
+
+        if (ALLOCATED(MASK)) then
+                write(0,*) 'already allocated MASK'
+        else
+                ALLOCATE (MASK(ITOT))
+        endif
+
 !tst      ALLOCATE (GRID(ITOT),MASK(ITOT),STAT=kret)
 !tst      print *,'GRID ALLOCATED',ITOT,' kret',kret
 

@@ -13,7 +13,8 @@
    LOGICAL*1, ALLOCATABLE  :: MASK(:)
 
 contains
-     SUBROUTINE SETVAR(LUB,LUI,NUMV,J,JPDS,JGDS,KF, K,KPDS,KGDS,MASK,GRID,VARB,IRET,ISTAT)
+     SUBROUTINE SETVAR(LUB,LUI,NUMV,J,JPDS,JGDS,KF, K, &
+                      KPDS,KGDS,MASK,GRID,VARB,IRET,ISTAT)
 !============================================================================
 !     This Routine reads in a grib field and initializes a 2-D variable
 !     Requested from w3lib GETGRB routine
@@ -203,7 +204,7 @@ contains
 
 !JTM    write(6,*)' IRET FROM GETGB1S ',IRGS,JR
         IF(IRGS .NE. 0) THEN
-          WRITE(6,*)' PROBLEMS ON 1ST READ OF GRIB FILE SO ABORT'
+          WRITE(6,*)' (a)PROBLEMS ON 1ST READ OF GRIB FILE SO ABORT'
           WRITE(6,280) IGDN,JPDS(4),JPDS(5)
           ISTAT = IRGS
           STOP 'ABORT RDHDRS: GRIB HDR READ ERROR '
@@ -290,6 +291,7 @@ contains
 
         CALL GETIDX(LUB,LUI,CBUF,NLEN,NNUM,IRGI)
         write(0,*) 'NLEN, NNUM from GETIDX: ', NLEN, NNUM
+                write(0,*) 'IRGI from GETIDX: ', IRGI
       IF(IRGI .NE. 0) THEN
         WRITE(6,*)' PROBLEMS READING GRIB INDEX FILE SO ABORT'
         ISTAT = IRGI
@@ -312,12 +314,16 @@ contains
         JPDT=-9999
         JGDTN=-1
         JGDT=-9999
+        J=0
 
-        write(0,*) 'to GETGB2S call: '
+        write(0,*) 'to GETGB2S call for : '
+                write(0,*) 'NLEN: ' , NLEN
+                write(0,*) 'NNUM: ' , NNUM
+                write(0,*) 'J: ' ,  J
         call GETGB2S(CBUF,NLEN,NNUM,J,JDISC,JIDS,JPDTN,JPDT,JGDTN, &
                         JGDT,K,GFLD,LPOS,IRGS)
         IF(IRGS .NE. 0) THEN
-          WRITE(6,*)' PROBLEMS ON 1ST READ OF GRIB FILE SO ABORT'
+          WRITE(6,*)' (b) PROBLEMS ON 1ST READ OF GRIB FILE SO ABORT'
           WRITE(6,*) 'IRGS: ', IRGS
         ENDIF
 
@@ -358,7 +364,7 @@ contains
 
 !JTM    write(6,*)' IRET FROM GETGB1S ',IRGS,JR
         IF(IRGS .NE. 0) THEN
-          WRITE(6,*)' PROBLEMS ON 1ST READ OF GRIB FILE SO ABORT'
+          WRITE(6,*)'(c) PROBLEMS ON 1ST READ OF GRIB FILE SO ABORT'
           WRITE(6,280) IGDN,JPDS(4),JPDS(5)
           ISTAT = IRGS
           STOP 'ABORT RDHDRS: GRIB HDR READ ERROR '
