@@ -200,6 +200,8 @@
       J = 0;JPDS = -1;JPDS(3) = IGDNUM
       JPDS(5) = 065;JPDS(6) = 001
 
+        write(0,*) 'to snowfall processing'
+
         if (IARW .eq. 0) then
 
       JPDS(14) = FHR3
@@ -228,6 +230,7 @@
 
         else
 
+        write(0,*) 'set SNOW1 to gfld%fld'
         SNOW1=gfld%fld
 
         do K=1,gfld%ipdtlen
@@ -287,6 +290,8 @@
 
         call getgb2(LUGB2,0,0,0,JIDS,JPDTN,JPDT,JGDTN,JGDT, &
                     UNPACK,K,GFLD,IRET)
+
+               write(0,*) 'IRET from getgb2 for SNOW2: ', IRET
 
         SNOW2=gfld%fld
 
@@ -534,14 +539,14 @@
       ENDIF
 
       KPDS(5)=61
-      print *, 'writing precip', KPDS(5),KPDS(14),KPDS(15),&
+      write(0,*) 'writing precip', KPDS(5),KPDS(14),KPDS(15),&
                                 LUGB5,MAXVAL(APCPOUT)
       WRITE(FNAME(6:7),FMT='(I2)')LUGB5
       CALL BAOPEN(LUGB5,FNAME,IRETGB)
         write(0,*) 'IRETGB from baopen: ', IRETGB
 !      CALL PUTGB(LUGB5,NUMVAL,KPDS,KGDS,MASK,APCPOUT,IRET)
       call putgb2(LUGB5,GFLD,IRET)
-      print *,'putgb2 return code:',iret
+      write(0,*) 'putgb2 return code:',iret
       CALL BACLOSE(LUGB5,IRET)
 
 !      KPDS(5)=63
@@ -555,13 +560,14 @@
       gfld%fld=SNOWOUT
 
       KPDS(5)=65
-      print *, 'writing SNOW', KPDS(5),KPDS(14),KPDS(15), &
+      write(0,*) 'writing SNOW', KPDS(5),KPDS(14),KPDS(15), &
                               LUGB7, MAXVAL(SNOWOUT)
       WRITE(FNAME(6:7),FMT='(I2)')LUGB7
       CALL BAOPEN(LUGB7,FNAME,IRET)
+      write(0,*) 'IRET from BAOPEN for SNOW: ', IRET
 !      CALL PUTGB(LUGB7,NUMVAL,KPDS,KGDS,MASK,SNOWOUT,IRET)
       call putgb2(LUGB7,GFLD,IRET)
-      print *,'putgb2 return code:',iret
+      write(0,*) 'putgb2 return code for SNOW:',iret
       CALL BACLOSE(LUGB7,IRET)
 
       STOP
