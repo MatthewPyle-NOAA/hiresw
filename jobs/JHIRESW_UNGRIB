@@ -19,14 +19,10 @@ fi
 mkdir -p $DATA
 cd $DATA 
 
-
 # Run setpdy and initialize PDY variables
 export cycle=${cycle:-t${cyc}z}
-if [ $RUN_ENVIR = 'nco' ]
-then
- setpdy.sh
- . ./PDY
-fi
+setpdy.sh
+. ./PDY
 
 export SENDDBN=NO
 
@@ -52,11 +48,10 @@ export RUN=${RUN:-hiresw}
 
 PDYm6h=`$NDATE -6 $PDY$cyc | cut -c1-8`
 
-export COMOUT=${COMOUT:-/${COMROOT:?}/${NET}/${envir}/${RUN}.${PDY}}
-export COMINgfs=${COMINgfs:-$(compath.py gfs/prod/gfs.$PDYm6h)}
-export COMINnam=${COMINnam:-$(compath.py nam/prod/nam.$PDY)}
-export COMINnamold=${COMINnamold:-$(compath.py nam/prod/nam.$PDYm6h)}
-# export COMINhur=${COMINhur:-$(compath.py hur/prod/inpdata)}
+export COMOUT=${COMOUT:-$(compath.py -o $NET/${hiresw_ver})/${RUN}.${PDY}}
+export COMINgfs=${COMINgfs:-$(compath.py ${envir}/com/gfs/${gfs_ver}/gfs.$PDYm6h)}
+export COMINnam=${COMINnam:-$(compath.py ${envir}/com/nam/${nam_ver}/nam.$PDY)}
+export COMINnamold=${COMINnamold:-$(compath.py ${envir}/com/nam/${nam_ver}/nam.$PDYm6h)}
 
 mkdir -p -m 775 $COMOUT
  

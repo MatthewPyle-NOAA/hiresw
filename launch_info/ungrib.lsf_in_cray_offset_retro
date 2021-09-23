@@ -1,8 +1,8 @@
 #! /bin/sh
 
 #PBS -j oe 
-#PBS -o /lfs/h2/emc/lam/noscrub/Matthew.Pyle/hiresw.v8.0.5/launch_info/logs/test_ungrib.out__DOM___CORE__CYC_
-#PBS -e /lfs/h2/emc/lam/noscrub/Matthew.Pyle/hiresw.v8.0.5/launch_info/logs/test_ungrib.out__DOM___CORE__CYC_
+#PBS -o /lfs/h2/emc/lam/noscrub/Matthew.Pyle/hiresw.v8.0.5/launch_info/logs/test_ungrib.out__DOM__CORE__CYC_
+#PBS -e /lfs/h2/emc/lam/noscrub/Matthew.Pyle/hiresw.v8.0.5/launch_info/logs/test_ungrib.out__DOM__CORE__CYC_
 #PBS -l select=1:ncpus=4:mem=8GB
 #PBS -q dev
 #PBS -A HIRESW-DEV
@@ -61,7 +61,10 @@ export COMROOT=/lfs/h2/emc/ptmp/Matthew.Pyle/${envir}/com
 mkdir -p $DATAROOT
 mkdir -p $COMROOT
 
-export COMOUT=`compath.py -o $NET/${hiresw_ver})/$RUN.${PDY}`
+export COMOUT=${COMOUT:-$(compath.py -o $NET/${hiresw_ver})/$RUN.${PDY}}
+
+echo set COMOUT as $COMOUT
+echo past J-job
 
 export DATA=${DATAROOT}/hiresw.ungrib_${NEST}_${MODEL}_${cyc}_${envir}_retro
 
@@ -74,6 +77,5 @@ done
 
 $HOMEhiresw/jobs/JHIRESW_UNGRIB
 
-echo past J-job
 
 qsub ${HOMEhiresw}/launch_info/sub_metgrid.lsf__DOM___CORE___CYC__retro

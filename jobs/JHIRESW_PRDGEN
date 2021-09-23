@@ -27,12 +27,9 @@ cd $DATA
 ####################################
 # PDY and CDATE are passed in through Rocoto xml
 
-if [ $RUN_ENVIR = 'nco' ]
-then
 export cycle=${cycle:-t${cyc}z}
 setpdy.sh
 . ./PDY
-fi
 
 ####################################
 # Specify Execution Areas
@@ -68,8 +65,8 @@ export RUN=${RUN:-hiresw}
 #####################################
 # Define COM directories
 #####################################
-export COMIN=${COMIN:-${COMROOT:?}/${NET}/${envir}/${RUN}.${PDY}}
-export COMOUT=${COMOUT:-${COMROOT:?}/${NET}/${envir}/${RUN}.${PDY}}
+export COMIN=${COMOUT:-$(compath.py -o $NET/${hiresw_ver})/${RUN}.${PDY}/}
+export COMOUT=${COMOUT:-$(compath.py -o $NET/${hiresw_ver})/${RUN}.${PDY}/}
 mkdir -p $COMOUT
 
 export pgmout="OUTPUT.$$"
