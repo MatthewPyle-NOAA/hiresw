@@ -1,18 +1,8 @@
-
-#BSUB -oo /gpfs/hps3/emc/meso/noscrub/Matthew.Pyle/hiresw.v7.0.0/logs/test_metgrid.out__DOM___CORE___CYC_
-#BSUB -eo /gpfs/hps3/emc/meso/noscrub/Matthew.Pyle/hiresw.v7.0.0/logs/test_metgrid.err__DOM___CORE___CYC_
-#BSUB -q "devhigh"
-#BSUB -J HIRESW_METGRID
-#BSUB -W 0:29
-#BSUB -cwd /gpfs/hps3/emc/meso/noscrub/Matthew.Pyle/
-#BSUB -P HRW-T2O
-#BSUB -M 3000
-#BSUB -extsched 'CRAYLINUX[]' -R '1*{select[craylinux && !vnode]} + 9*{select[craylinux && vnode]span[ptile=1] cu[type=cabinet]}' rusage[mem=3000]
-
 #PBS -j oe
-#PBS -o /lfs/h2/emc/eib/noscrub/Matthew.Pyle/hiresw.v8.0.5/launch_info/logs/metgrid__DOM__CYC_.log
-#PBS -e /lfs/h2/emc/eib/noscrub/Matthew.Pyle/hiresw.v8.0.5/launch_info/logs/metgrid__DOM__CYC_.log
+#PBS -o /lfs/h2/emc/lam/noscrub/Matthew.Pyle/hiresw.v8.0.5/launch_info/logs/metgrid__DOM__CYC_.log
+#PBS -e /lfs/h2/emc/lam/noscrub/Matthew.Pyle/hiresw.v8.0.5/launch_info/logs/metgrid__DOM__CYC_.log
 #PBS -l select=1:ncpus=9:mem=80GB
+#PBS -A HIRESW-DEV
 #PBS -q dev
 #PBS -l walltime=000:15:05
 
@@ -48,7 +38,7 @@ module load zlib/1.2.11
 export NTASK=9
 export PTILE=1
 
-export HOMEhiresw=/lfs/h2/emc/eib/noscrub/Matthew.Pyle/hiresw.v8.0.5
+export HOMEhiresw=/lfs/h2/emc/lam/noscrub/Matthew.Pyle/hiresw.v8.0.5
 
 export RUN_ENVIR=test
 export envir=test

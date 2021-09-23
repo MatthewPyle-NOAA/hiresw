@@ -1,36 +1,44 @@
-
 #PBS -j oe
-#PBS -o /lfs/h2/emc/lam/noscrub/Matthew.Pyle/hiresw.v8.0.5/launch_info/logs/test_smartinitb.out_himem2_arw00
-#PBS -e /lfs/h2/emc/lam/noscrub/Matthew.Pyle/hiresw.v8.0.5/launch_info/logs/test_smartinitb.out_himem2_arw00
-#PBS -l select=1:ncpus=1:mem=32GB
-#PBS -q dev
+#PBS -o /lfs/h2/emc/lam/noscrub/Matthew.Pyle/hiresw.v8.0.5/launch_info/logs/test_awips.out__DOM__CORE__CYC_
+#PBS -e /lfs/h2/emc/lam/noscrub/Matthew.Pyle/hiresw.v8.0.5/launch_info/logs/test_awips.err__DOM__CORE__CYC_
+#PBS -l select=1:ncpus=1:mem=128GB
 #PBS -A HIRESW-DEV
-#PBS -l walltime=000:59:05
-#
+#PBS -q dev
+#PBS -l walltime=001:27:00
+
+# export MP_EUILIB=us
+# export OMP_NUM_THREADS=1
 
 export SENDCOM=YES
+
 
 module purge
 module load envvar/1.0
 module load PrgEnv-intel/8.1.0
-
+module load craype/2.7.8
 module load intel/19.1.3.304
-module load craype/2.7.6
-module load cray-mpich/8.1.4
+module load cray-mpich/8.1.7
 module load cray-pals/1.0.12
 module load prod_util
-module load wgrib2
-module load grib_util
+module load prod_envir
+module load netcdf/4.7.4
 
-module load g2/3.4.4
+module load wgrib2
+
+module load g2/3.4.1
 module load g2tmpl/1.9.1
 
 module load jasper/2.0.25
 module load libpng/1.6.37
 module load zlib/1.2.11
 module load libjpeg/9c
+module load grib_util/1.2.2
 
+# vers=`cat /u/Matthew.Pyle/hiresw_version_test`
+# export HOMEhiresw=/gpfs/hps3/emc/meso/noscrub/Matthew.Pyle/hiresw.${vers}
+#
 export HOMEhiresw=/lfs/h2/emc/lam/noscrub/Matthew.Pyle/hiresw.v8.0.5
+
 
 export RUN_ENVIR=test
 export envir=test
@@ -42,24 +50,32 @@ export cyc=_CYC_
 export MODEL=_CORE_
 export DATE=_DATE_
 
-export PDY=${DATE}
-
 # export DATEroot=/gpfs/hps/nco/ops/com/date
 # DATE=`cat $DATEroot/t${cyc}z | cut -c7-14`
+#
+
+
+export PDY=${DATE}
+
+
 
 export DATAROOT=/lfs/h2/emc/stmp/Matthew.Pyle/tmpnwprd
 export MYCOMROOT=/lfs/h2/emc/ptmp/Matthew.Pyle/com
 
 # export COMROOT=/gpfs/hps/nco/ops/com
 
-export COMOUT=${MYCOMROOT}/${NET}/$envir/${RUN}.${DATE}
-
 # export MYCOMROOTPERM=/gpfs/hps3/emc/meso/noscrub/Matthew.Pyle/com
 # export COMOUTPERM=${MYCOMROOTPERM}/${NET}/$envir/${RUN}.${DATE}
 
-export COMIN=${MYCOMROOT}/${NET}/$envir/${RUN}.${DATE}
-export INPUT_DATA=${DATAROOT}/hiresw.smartinit_${NEST}_${MODEL}_${cyc}_${envir}_retro
-export PRDGEN_DATA=${DATAROOT}/hiresw.prdgen_${NEST}_${MODEL}_${cyc}_${envir}_retro
-export DATA=${DATAROOT}/hiresw.smartinitb_${NEST}_${MODEL}_${cyc}_${envir}_retro
+export SENDDBN=NO
+export SENDCOM=YES
 
-$HOMEhiresw/jobs/JHIRESW_SMARTINITB
+export PCOM=${MYCOMROOT}/${NET}/$envir/${RUN}.${DATE}/wmo
+export COMOUT=${MYCOMROOT}/${NET}/$envir/${RUN}.${DATE}
+export COMIN=${MYCOMROOT}/${NET}/$envir/${RUN}.${DATE}
+
+export DATA=${DATAROOT}/hiresw.awips_${NEST}_${MODEL}_${cyc}_${envir}
+
+mkdir -p $DATA
+
+$HOMEhiresw/jobs/JHIRESW_AWIPS
