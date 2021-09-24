@@ -8,6 +8,9 @@
 #PBS -l walltime=000:59:05
 #
 
+export HOMEhiresw=/lfs/h2/emc/lam/noscrub/Matthew.Pyle/hiresw.v8.0.5
+source ${HOMEhiresw}/versions/arw/run.ver
+
 export SENDCOM=YES
 
 module purge
@@ -18,19 +21,18 @@ module load intel/19.1.3.304
 module load craype/2.7.6
 module load cray-mpich/8.1.4
 module load cray-pals/1.0.12
-module load prod_util
-module load wgrib2
-module load grib_util
 
-module load g2/3.4.4
-module load g2tmpl/1.9.1
+module load prod_util/${prod_util_ver}
+module load wgrib2/${wgrib2_ver}
+module load grib_util/${grib_util_ver}
 
-module load jasper/2.0.25
-module load libpng/1.6.37
-module load zlib/1.2.11
-module load libjpeg/9c
+module load g2/${g2_ver}
+module load g2tmpl/${g2tmpl_ver}
+module load jasper/${jasper_ver}
+module load libpng/${libpng_ver}
+module load zlib/${zlib_ver}
 
-export HOMEhiresw=/lfs/h2/emc/lam/noscrub/Matthew.Pyle/hiresw.v8.0.5
+module load libjpeg/${libjpeg_ver}
 
 export RUN_ENVIR=test
 export envir=test
@@ -44,20 +46,12 @@ export DATE=_DATE_
 
 export PDY=${DATE}
 
-# export DATEroot=/gpfs/hps/nco/ops/com/date
-# DATE=`cat $DATEroot/t${cyc}z | cut -c7-14`
+export DATAROOT=/lfs/h2/emc/stmp/Matthew.Pyle/tmp
+export COMROOT=/lfs/h2/emc/ptmp/Matthew.Pyle/${envir}/com
 
-export DATAROOT=/lfs/h2/emc/stmp/Matthew.Pyle/tmpnwprd
-export MYCOMROOT=/lfs/h2/emc/ptmp/Matthew.Pyle/com
+export COMOUT=${COMOUT:-$(compath.py -o $NET/${hiresw_ver})/$RUN.${PDY}}
+export COMIN=${COMOUT:-$(compath.py -o $NET/${hiresw_ver})/$RUN.${PDY}}
 
-# export COMROOT=/gpfs/hps/nco/ops/com
-
-export COMOUT=${MYCOMROOT}/${NET}/$envir/${RUN}.${DATE}
-
-# export MYCOMROOTPERM=/gpfs/hps3/emc/meso/noscrub/Matthew.Pyle/com
-# export COMOUTPERM=${MYCOMROOTPERM}/${NET}/$envir/${RUN}.${DATE}
-
-export COMIN=${MYCOMROOT}/${NET}/$envir/${RUN}.${DATE}
 export INPUT_DATA=${DATAROOT}/hiresw.smartinit_${NEST}_${MODEL}_${cyc}_${envir}_retro
 export PRDGEN_DATA=${DATAROOT}/hiresw.prdgen_${NEST}_${MODEL}_${cyc}_${envir}_retro
 export DATA=${DATAROOT}/hiresw.smartinitb_${NEST}_${MODEL}_${cyc}_${envir}_retro

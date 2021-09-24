@@ -51,8 +51,8 @@ export PDY=${DATE}
 export DATAROOT=/lfs/h2/emc/stmp/Matthew.Pyle/tmp
 
 export COMROOT=/lfs/h2/emc/ptmp/Matthew.Pyle/${envir}/com
-export COMOUT=`(compath.py -o $NET/${hiresw_ver})/$RUN.${PDY}`
-export COMIN=`(compath.py -o $NET/${hiresw_ver})/$RUN.${PDY}`
+export COMOUT=${COMOUT:-$(compath.py -o $NET/${hiresw_ver})/$RUN.${PDY}}
+export COMIN=${COMIN:-$(compath.py -o $NET/${hiresw_ver})/$RUN.${PDY}}
 
 export INPUT_DATA=${DATAROOT}/hiresw.forecast_${NEST}_${MODEL}_${cyc}_${envir}_retro
 export DATA=${DATAROOT}/hiresw.post_${NEST}_${MODEL}_${cyc}_${envir}_retro

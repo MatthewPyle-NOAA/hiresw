@@ -19,9 +19,9 @@ module load craype/2.7.6
 module load cray-mpich/8.1.4
 module load cray-pals/1.0.12
 
-module load prod_util
-module load prod_envir
-module load wgrib2
+module load prod_util/${prod_util_ver}
+module load prod_envir/${prod_envir_ver}
+module load wgrib2/${wgrib2_ver}
 
 module load g2/${g2_ver}
 module load g2tmpl/${g2tmpl_ver}
