@@ -41,8 +41,8 @@ if [ "$PDY2$cyc" = "$stormdate" ] ; then
     #
     # More than four GFDLs running, cancel the two small domain runs pr and hi but keep the guam.
     #
-    postmsg "$jlogfile" "${nstms} GFDL HURRICANE MODELS RUNNING."
-    postmsg "$jlogfile" "THE $cyc UTC ${NEST}${MODEL} HIRESW RUN IS CANCELED."
+    postmsg  "${nstms} GFDL HURRICANE MODELS RUNNING."
+    postmsg  "THE $cyc UTC ${NEST}${MODEL} HIRESW RUN IS CANCELED."
     echo "$nstms GFDL HURRICANE MODELS RUNNING." > /com/hiresw/${envir}/hiresw_status.${cyc}
     echo "The $cyc UTC ${NEST}${MODEL} HIRESW RUN IS CANCELED." >> /com/hiresw/${envir}/hiresw_status.${cyc}
    if [ "$SENDECF" = "YES" -a $MODEL = "arw" ] ; then
@@ -76,8 +76,8 @@ else
     # If there are four HURRICANE or more runs cancel the HIRESW for the two large domains, MODEL=ARW and MODEL=NMM
     #    but not small domain "guam".
     #
-    postmsg "$jlogfile" "${nstms} GFDL HURRICANE MODELS RUNNING."
-    postmsg "$jlogfile" "THE $cyc UTC ${NEST}${MODEL} HIRESW RUN IS CANCELED."
+    postmsg  "${nstms} GFDL HURRICANE MODELS RUNNING."
+    postmsg  "THE $cyc UTC ${NEST}${MODEL} HIRESW RUN IS CANCELED."
     echo "$nstms GFDL HURRICANE MODELS RUNNING." > /com/hiresw/${envir}/hiresw_status.${cyc}
     echo "THE $cyc UTC ${NEST}${MODEL} HIRESW RUN IS CANCELED." >> /com/hiresw/${envir}/hiresw_status.${cyc}
     if [ "$SENDECF" = "YES" -a $MODEL = "arw" ] ; then

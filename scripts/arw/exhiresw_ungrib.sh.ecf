@@ -30,7 +30,7 @@ LENGTH=48
 ### MODEL is arw or nmm or nmmb
 
 msg="JOB $job FOR WRF NEST=${NEST}${MODEL} HAS BEGUN"
-postmsg "$jlogfile" "$msg"
+postmsg  "$msg"
 
 RUNLOC=${NEST}${MODEL}
 
@@ -369,4 +369,4 @@ mv ${fl} $DATA/hiresw.t${cyc}z.${NEST}${MODEL}.${fl}
 done
 
 msg="JOB $job FOR WRF NEST=${NEST}${MODEL} HAS COMPLETED NORMALLY"
-postmsg "$jlogfile" "$msg"
+postmsg "$msg"

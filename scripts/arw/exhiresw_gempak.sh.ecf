@@ -10,7 +10,7 @@ cd $DATA
 
 set -xa
 msg="Begin job for $job"
-postmsg "$jlogfile" "$msg"
+postmsg  "$msg"
 
 #
 NAGRIB=nagrib2
@@ -141,6 +141,6 @@ set -x
 
 msg='Job completed normally.'
 echo $msg
-postmsg "$jlogfile" "$msg"
+postmsg  "$msg"
 
 ############################### END OF SCRIPT #######################

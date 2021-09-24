@@ -27,7 +27,7 @@
 
 set -xa
 msg="JOB $job HAS BEGUN"
-postmsg "$jlogfile" "$msg"
+postmsg  "$msg"
 
 cd $DATA
 

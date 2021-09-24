@@ -30,11 +30,11 @@ fi
 ####################################
 if [ ${MODEL} = 'arw' ]
 then
-export HOMEhiresw=${HOMEhiresw:-${NWROOT:?}/hiresw.${hiresw_ver:?}}
+export HOMEhiresw=${HOMEhiresw:-${PACKAGEROOT:?}/hiresw.${hiresw_ver:?}}
 export GEMPAKhiresw=${GEMPAKhiresw:-$HOMEhiresw/gempak}
 export fend=48
 else
-export HOMEfv3=${HOMEfv3:-${NWROOT:?}/hiresw.${hiresw_ver:?}}
+export HOMEfv3=${HOMEfv3:-${PACKAGEROOT:?}/hiresw.${hiresw_ver:?}}
 export GEMPAKhiresw=${GEMPAKhiresw:-$HOMEfv3/gempak}
 export fend=60
 fi

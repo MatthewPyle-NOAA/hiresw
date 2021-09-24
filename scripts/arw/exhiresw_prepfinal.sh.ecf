@@ -28,7 +28,7 @@ LENGTH=48
 ### MODEL is arw or nmm or nmmb
 
 msg="JOB $job FOR WRF NEST=${NEST}${MODEL} HAS BEGUN"
-postmsg "$jlogfile" "$msg"
+postmsg  "$msg"
 
 RUNLOC=${NEST}${MODEL}
 
@@ -177,4 +177,4 @@ fi
 cat $DATA/rsl.error.0000 $DATA/rsl.out.0000 >  $COMOUT/hiresw.t${cyc}z.${NEST}${MODEL}.real.log
 
 msg="JOB $job FOR WRF NEST=${NEST}${MODEL} HAS COMPLETED NORMALLY"
-postmsg "$jlogfile" "$msg"
+postmsg "$msg"

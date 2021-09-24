@@ -37,7 +37,7 @@ export day=`echo $CDATE | cut -c 7-8`
 ####################################
 # Specify Execution Areas
 ####################################
-export HOMEfv3=${HOMEfv3:-${NWROOT:?}/hiresw.${hiresw_ver:?}}
+export HOMEfv3=${HOMEfv3:-${PACKAGEROOT:?}/hiresw.${hiresw_ver:?}}
 export EXECfv3=${EXECfv3:-$HOMEfv3/exec/fv3}
 export FIXfv3=${FIXfv3:-$HOMEfv3/fix/fv3}
 export PARMfv3=${PARMfv3:-$HOMEfv3/parm/fv3}

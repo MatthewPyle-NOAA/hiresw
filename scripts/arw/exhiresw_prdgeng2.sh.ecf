@@ -301,7 +301,7 @@ rm $DATA/hiresw.t${cyc}z.${MODEL}_5km.f${fhr}.${NEST}.grib2_0
 fi
 
 echo "done executing prdgen" > $DATA/prdgendone${fhr}
-postmsg "$jlogfile" "HIRESW ${NEST}${MODEL} PRDGEN done for F${fhr}"
+postmsg  "HIRESW ${NEST}${MODEL} PRDGEN done for F${fhr}"
 
 if [ $fhr -eq 36 -a $SENDECF = YES ]; then
   ecflow_client --event prdgen36_ready

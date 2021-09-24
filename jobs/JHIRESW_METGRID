@@ -26,7 +26,7 @@ export SENDDBN=NO
 ####################################
 # Specify Execution Areas
 ####################################
-export HOMEhiresw=${HOMEhiresw:-${NWROOT:?}/hiresw.${hiresw_ver:?}}
+export HOMEhiresw=${HOMEhiresw:-${PACKAGEROOT:?}/hiresw.${hiresw_ver:?}}
 export EXEChiresw=${EXEChiresw:-$HOMEhiresw/exec/arw}
 export FIXhiresw=${FIXhiresw:-$HOMEhiresw/fix/arw}
 export PARMhiresw=${PARMhiresw:-$HOMEhiresw/parm/arw}
@@ -54,7 +54,7 @@ ${HOMEhiresw}/scripts/arw/exhiresw_metgrid.sh.ecf
 ########################################################
 
 msg="JOB $job FOR NEST=${NEST}${MODEL} HAS COMPLETED NORMALLY."
-postmsg "$jlogfile" "$msg"
+postmsg  "$msg"
 
 cd $DATAROOT
 export KEEPDATA=YES

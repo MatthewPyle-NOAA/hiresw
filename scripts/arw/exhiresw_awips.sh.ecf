@@ -18,7 +18,7 @@ set -x
 cd $DATA
 
 msg="Hiresw post-processing for AWIPS has begun on `hostname` at `date`"
-postmsg "$jlogfile" "$msg"
+postmsg  "$msg"
 startmsg
 
 RUNLOC=${NEST}${MODEL}
@@ -57,7 +57,7 @@ then
        $DBNROOT/bin/dbn_alert NTC_LOW ${DBN_ALERT_TYPE} $job $COMOUTwmo/grib2.t${cyc}z.awpreg_${RUNLOC}f${fhr}
     else
        msg="File $output_grb.$job not posted to db_net."
-       postmsg "$jlogfile" "$msg"
+       postmsg  "$msg"
     fi
 
 else
@@ -90,7 +90,7 @@ else
        $DBNROOT/bin/dbn_alert NTC_LOW ${DBN_ALERT_TYPE} $job $COMOUTwmo/grib2.t${cyc}z.awpreg_${RUNLOC}f${fhr}
     else
        msg="File $output_grb.$job not posted to db_net."
-       postmsg "$jlogfile" "$msg"
+       postmsg  "$msg"
     fi
 
 fi

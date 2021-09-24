@@ -282,7 +282,7 @@ then
 fi
 
 echo "done executing prdgen" > $DATA/prdgendone${fhr}
-postmsg "$jlogfile" "HIRESW ${NEST}${MODEL} PRDGEN done for F${fhr}"
+postmsg  "HIRESW ${NEST}${MODEL} PRDGEN done for F${fhr}"
 
 if [ $fhr -eq 60 -a $SENDECF = YES ]; then
   ecflow_client --event prdgen60_ready
