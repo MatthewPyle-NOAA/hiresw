@@ -18,11 +18,11 @@ export BNDYdir=$DATA
 # PDY, CDATE, and tmmark are passed in through Rocoto xml
 
 export cycle=${cycle:-t${cyc}z}
-if [ ${RUN_ENVIR} = 'nco' ]
-then
+# if [ ${RUN_ENVIR} = 'nco' ]
+# then
 setpdy.sh
 . ./PDY
-fi
+# fi
 
 export CDATE=${PDY}${cyc}
 export month=`echo $CDATE | cut -c 5-6`
@@ -56,12 +56,14 @@ export RUN=${RUN:-hiresw}
 #####################################
 # Define COM directories
 #####################################
-export COMINgdas=${COMINgdas:-$(compath.py gfs/prod)}
-export GBCOMINgfs=${GBCOMINgfs:-$(compath.py gfs/prod)}
-export COMINgfs=${COMINgfs:-$(compath.py gfs/prod)}
-export INIDIR=${COMINgfs}/gfs.$PDY/$cyc
 
-export COMOUT=${COMOUT:-${COMROOT:?}/${NET}/${envir}/${RUN}.${PDY}}
+export COMINgdas=${COMINgdas:-$(compath.py ${envir}/com/gfs/${gfs_ver}/gdas.$PDYm6h)}
+export GBCOMINgfs=${COMINgfs:-$(compath.py ${envir}/com/gfs/${gfs_ver}/gfs.$PDYm6h)}
+export COMINgfs=${COMINgfs:-$(compath.py ${envir}/com/gfs/${gfs_ver}/gfs.$PDYm6h)}
+export INIDIR=${COMINgfs}/$cyc
+
+
+export COMOUT=${COMOUT:-$(compath.py -o $NET/${hiresw_ver})/${RUN}.${PDY}}
 mkdir -p $COMOUT
 
 export pgmout="OUTPUT.$$"

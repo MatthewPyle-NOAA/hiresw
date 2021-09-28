@@ -20,6 +20,8 @@ elif [ $mac2 = tf ] ; then                       # For Theia
 elif [ $mac = z -o $mac = h -o $mac = f ] ; then # For ZEUS
  machine=zeus
  make_nowrf=${make_nowrf:-YES}                   # to compile with wrf stub instead of WRF lib
+elif [ $mac2 = cl -o $mac2 = dl ] ; then                       # WCOSS2
+ machine=wcoss2
 elif [ $mac = t -o $mac = e -o $mac = g ] ; then # For WCOSS
  machine=wcoss
 elif [ $mac = l -o $mac = s ] ; then             #    wcoss_c (i.e. luna and surge)
@@ -189,6 +191,17 @@ if [ $machine = wcoss_c ] ; then
  export FFLAGS="${OPTS} ${FREE} ${TRAPS} ${DEBUG} -I${XMLPARSE_INC} -I${G2_INC4} -I${G2TMPL_INC} -I${NEMSIO_INC} -I${SIGIO_INC4} -I${SFCIO_INC4} -I${GFSIO_INC4} -I${W3EMC_INC4} -I${CRTM_INC} -I${NETCDF_INCLUDE} -I${PNG_INC}"
 
  export LIBS="${WRF_LIB} ${XMLPARSE_LIB} ${G2_LIB4} ${G2TMPL_LIB} ${NEMSIO_LIB} ${GFSIO_LIB4} ${SIGIO_LIB4} ${SFCIO_LIB4} ${IP_LIB4} ${SP_LIB4} ${W3NCO_LIB4} ${W3EMC_LIB4} ${BACIO_LIB4} ${CRTM_LIB}  ${NETCDF_LIB} ${PNG_LIB} ${JASPER_LIB} ${Z_LIB}"
+ elif [ $machine = wcoss2 ] ; then
+
+ if [ $make_nowrf = YES ] ; then
+  WRF_INC=
+  WRF_LIB=
+ fi
+ NETCDF_LIB="${NETCDF}/lib/libnetcdf.a"
+ export FFLAGS="${OPTS} ${FREE} ${TRAPS} ${DEBUG} -I${XMLPARSE_INC} -I${G2_INC4} -I${G2TMPL_INC} -I${NEMSIO_INC} -I${SIGIO_INC4} -I${SFCIO_INC4} -I${GFSIO_INC4} -I${W3NCO_INC4} -I${CRTM_INC} -I${NETCDF_INC} -I${PNG_INC}"
+
+ export LIBS="${WRF_LIB} -L${XMLPARSE_LIB} -lxmlparse ${G2_LIB4} ${G2TMPL_LIB} ${NEMSIO_LIB} ${GFSIO_LIB4} ${SIGIO_LIB4} ${SFCIO_LIB4} ${IP_LIB4} ${SP_LIB4} ${W3NCO_LIB4} ${W3EMC_LIB4} ${BACIO_LIB4} ${CRTM_LIB}  ${NETCDF_LIB} ${PNG_LIB} ${JASPER_LIB} ${Z_LIB}"
+
 else
  SFCIO_INC="-I${NWPROD}/lib/incmod/sfcio_4"
  SFCIO_LIB="${NWPROD}/lib/libsfcio_4.a"

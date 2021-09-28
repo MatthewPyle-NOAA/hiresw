@@ -33,11 +33,13 @@ if [ $tmmark = tm00 ] ; then
    SFCDIR=yes
    while [ $ANLDIR != $SFCDIR -a $loop -lt $looplim ]
    do
-   python $UTILush/getbest_FV3GFS.py  -d $COMINgfs/gfs -v $CDATE -t 72 -o tmp.atm --exact=yes --gfs_nemsio=no --gfs_netcdf=yes --filetype=atm
+	   echo executing getbest_FV3GFS.py
+   python $UTILush/getbest_FV3GFS.py  -d $COMINgfs -v $CDATE -t 72 -o tmp.atm --exact=yes --gfs_nemsio=no --gfs_netcdf=yes --filetype=atm
+   	echo past getbest_FV3GFS.py 
    ANLDIR=`head -n1 tmp.atm`
    ATMFILE=`tail -n1 tmp.atm`
 
-   python $UTILush/getbest_FV3GFS.py  -d $COMINgfs/gfs -v $CDATE -t 72 -o tmp.sfc --exact=yes --gfs_nemsio=no --gfs_netcdf=yes --filetype=sfc
+   python $UTILush/getbest_FV3GFS.py  -d $COMINgfs -v $CDATE -t 72 -o tmp.sfc --exact=yes --gfs_nemsio=no --gfs_netcdf=yes --filetype=sfc
    SFCDIR=`head -n1 tmp.sfc`
    SFCFILE=`tail -n1 tmp.sfc`
 
@@ -83,7 +85,7 @@ cat <<EOF >fort.41
 /
 EOF
 
-time ${APRUNC} ./hireswfv3_chgres_cube
+mpiexec -n ${NTASK} -ppn ${PTILE} ./hireswfv3_chgres_cube
 err=$?; err_chk
 
 #
@@ -109,21 +111,21 @@ err_exit $msg
 fi
 
 
-mv out.atm.tile1.nc $COMOUT/hiresw.t${cyc}z.${NEST}${MODEL}.gfs_data.tile7.nc
+mv out.atm.tile7.nc $COMOUT/hiresw.t${cyc}z.${NEST}${MODEL}.gfs_data.tile7.nc
 err=$?
 
 if [ $err -ne 0 ]
 then
-msg="FATAL ERROR: problem in make_ic generating out.atm.tile1.nc"
+msg="FATAL ERROR: problem in make_ic generating out.atm.tile7.nc"
 err_exit $msg
 fi
 
-mv out.sfc.tile1.nc $COMOUT/hiresw.t${cyc}z.${NEST}${MODEL}.sfc_data.tile7.nc
+mv out.sfc.tile7.nc $COMOUT/hiresw.t${cyc}z.${NEST}${MODEL}.sfc_data.tile7.nc
 err=$?
 
 if [ $err -ne 0 ]
 then
-msg="FATAL ERROR: problem in make_ic generating out.sfc.tile1.nc"
+msg="FATAL ERROR: problem in make_ic generating out.sfc.tile7.nc"
 err_exit $msg
 fi
 

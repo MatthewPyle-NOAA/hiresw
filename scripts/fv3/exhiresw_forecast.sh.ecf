@@ -341,7 +341,9 @@ export pgm=hireswfv3_forecast
 
 startmsg
 
-export MKL_CBWR=AVX2
+# export MKL_CBWR=AVX2
+
+echo APRUNC is $APRUNC
 
 ${APRUNC} $EXECfv3/hireswfv3_forecast >$pgmout 2>err
 export err=$?;err_chk

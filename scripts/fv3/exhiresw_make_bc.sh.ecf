@@ -50,6 +50,10 @@ else
   hour_inc=1
 fi
 
+if [ -e ./poe.all.a ] ; then
+	rm  ./poe.all.a
+fi
+
 while (test "$hour" -le "$end_hour_a")
   do
 
@@ -87,11 +91,11 @@ cd ${hour_name}
 rm ./*
 
 export SDATE=`$NDATE ${hour_name} $CDATE`
-python $UTILush/getbest_FV3GFS.py  -d $COMINgfs/gfs -v $SDATE -t ${gfs_hour_t} -s ${gfs_hour} -o tmp.atm --exact=yes --gfs_nemsio=no --gfs_netcdf=yes  --filetype=atm
+python $UTILush/getbest_FV3GFS.py  -d $COMINgfs -v $SDATE -t ${gfs_hour_t} -s ${gfs_hour} -o tmp.atm --exact=yes --gfs_nemsio=no --gfs_netcdf=yes  --filetype=atm
 ATMDIR=`head -n1 tmp.atm`
 ATMFILE=`tail -n1 tmp.atm`
 
-python $UTILush/getbest_FV3GFS.py  -d $COMINgfs/gfs -v $CDATE -t 72 -o tmp.sfc --exact=yes --gfs_nemsio=no --gfs_netcdf=yes  --filetype=sfc
+python $UTILush/getbest_FV3GFS.py  -d $COMINgfs -v $CDATE -t 72 -o tmp.sfc --exact=yes --gfs_nemsio=no --gfs_netcdf=yes  --filetype=sfc
 SFCFILE=`tail -n1 tmp.sfc`
 
 echo "&config" > fort.41
@@ -134,15 +138,25 @@ mv fort.41.new fort.41
 cd ../
 
 echo "cd ${hour_name}" >  poe.${hour_name}
-
 echo "cp ../hireswfv3_chgres_cube ." >> poe.${hour_name}
-
-echo "${APRUNC} ./hireswfv3_chgres_cube" >> poe.${hour_name}
-
+echo "mpiexec -n ${NTASK} -ppn ${PTILE} ./hireswfv3_chgres_cube" >> poe.${hour_name}
 echo "cd ../" >> poe.${hour_name}
-
 chmod u+x poe.${hour_name}
-./poe.${hour_name} &
+
+echo "./poe.${hour_name}" >> poe.all.a
+
+hour=`expr $hour + $hour_inc`
+
+done
+
+chmod u+x poe.all.a
+
+./poe.all.a
+
+# pieces=`cat poe.all.a | wc -l`
+# let NTASK_ALL='pieces*NTASK'
+# echo NTASK_ALL is $NTASK_ALL
+# mpiexec -n ${NTASK_ALL} -ppn ${PTILE} --cpu-bind verbose,core cfp poe.all.a
 
 ## err checking?
 err=$?
@@ -152,12 +166,10 @@ msg="FATAL ERROR: problem generating BC file"
 err_exit $msg
 fi
 
-
-hour=`expr $hour + $hour_inc`
-
-done
-
-wait
+#     =======================================  second portion ==================
+if [ -e ./poe.all.b ] ; then
+	rm  ./poe.all.b
+fi
 
 while (test "$hour" -le "$end_hour_b")
   do
@@ -196,11 +208,11 @@ cd ${hour_name}
 rm ./*
 
 export SDATE=`$NDATE ${hour_name} $CDATE`
-python $UTILush/getbest_FV3GFS.py  -d $COMINgfs/gfs -v $SDATE -t ${gfs_hour_t} -s ${gfs_hour} -o tmp.atm --exact=yes --gfs_nemsio=no --gfs_netcdf=yes  --filetype=atm
+python $UTILush/getbest_FV3GFS.py  -d $COMINgfs -v $SDATE -t ${gfs_hour_t} -s ${gfs_hour} -o tmp.atm --exact=yes --gfs_nemsio=no --gfs_netcdf=yes  --filetype=atm
 ATMDIR=`head -n1 tmp.atm`
 ATMFILE=`tail -n1 tmp.atm`
 
-python $UTILush/getbest_FV3GFS.py  -d $COMINgfs/gfs -v $CDATE -t 72 -o tmp.sfc --exact=yes --gfs_nemsio=no --gfs_netcdf=yes  --filetype=sfc
+python $UTILush/getbest_FV3GFS.py  -d $COMINgfs -v $CDATE -t 72 -o tmp.sfc --exact=yes --gfs_nemsio=no --gfs_netcdf=yes  --filetype=sfc
 SFCFILE=`tail -n1 tmp.sfc`
 
 echo "&config" > fort.41
@@ -243,15 +255,23 @@ mv fort.41.new fort.41
 cd ../
 
 echo "cd ${hour_name}" >  poe.${hour_name}
-
 echo "cp ../hireswfv3_chgres_cube ." >> poe.${hour_name}
-
-echo "${APRUNC} ./hireswfv3_chgres_cube" >> poe.${hour_name}
-
+echo "mpiexec -n ${NTASK} -ppn ${PTILE} ./hireswfv3_chgres_cube" >> poe.${hour_name}
 echo "cd ../" >> poe.${hour_name}
-
 chmod u+x poe.${hour_name}
-./poe.${hour_name} &
+echo "./poe.${hour_name} " >> poe.all.b
+
+hour=`expr $hour + $hour_inc`
+
+done
+
+chmod u+x poe.all.b
+# pieces=`cat poe.all.b | wc -l`
+# let NTASK_ALL='pieces*NTASK'
+# echo NTASK_ALL is $NTASK_ALL
+# mpiexec -n ${NTASK_ALL} -ppn ${PTILE} --cpu-bind verbose,core cfp poe.all.b
+
+./poe.all.b
 
 ## err checking?
 err=$?
@@ -261,12 +281,6 @@ msg="FATAL ERROR: problem generating BC file"
 err_exit $msg
 fi
 
-
-hour=`expr $hour + $hour_inc`
-
-done
-
-wait
 
 hrlist="03 06 09 12 15 18 21 24 27 30 33 36 39 42 45 48 51 54 57 60"
 
