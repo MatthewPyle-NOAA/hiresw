@@ -24,34 +24,31 @@ module load craype/2.7.6
 module load cray-mpich/8.1.4
 
 # Loading nceplibs modules
-module load ip/3.3.3
-module load bacio/2.4.1
-module load w3nco/2.4.1
+module load ip/$::env(ip_ver)
+module load bacio/$::env(bacio_ver)
+module load w3nco/$::env(w3nco_ver)
+
 # module load w3emc/2.7.3
 
-module load g2/3.4.1
-module load g2tmpl/1.9.1
+module load g2/$::env(g2_ver)
+module load g2tmpl/$::env(g2tmpl_ver)
+module load jasper/$::env(jasper_ver)
+module load libpng/$::env(libpng_ver)
+module load zlib/$::env(zlib_ver)
 
-module load jasper/2.0.25
-module load libpng/1.6.37
-module load zlib/1.2.11
+module load nemsio/$::env(nemsio_ver) # 2.5.2
+module load bufr/$::env(bufr_ver) # 11.5.0 (was 11.4.0)
+module load sfcio/$::env(sfcio_ver) # 1.4.1
+module load sp/$::env(sp_ver) #2.3.3
+module load netcdf/$::env(netcdf_ver) # 4.7.4
+module load sigio/$::env(sigio_ver) # 2.3.2
+module load gfsio/$::env(gfsio_ver) # 1.4.1
+module load crtm/$::env(crtm_ver) # 2.3.0
+module load libxmlparse/$::env(libxmlparse_ver) # 2.0.0
 
-# still need to revise here downward
-module load nemsio/2.5.2
-module load bufr/11.4.0
-module load sfcio/1.4.1
-module load sp/2.3.3
-#probablynmmb module load landsfcutil-intel/2.0.0
-module load netcdf/4.7.4
-module load sigio/2.3.2
-module load gfsio/1.4.1
-#probablynmmb module load ESMF-intel-sandybridge/6_3_0rp1
 
-module load crtm/2.3.0
-#unknown module load xmlparse-intel-sandybridge/2.0.0
-# module load libxml2/2.9.10
-module load libxmlparse/2.0.0
-module load wrf_io/1.1.1
+module load wrf_io/$::env(wrf_io_ver) # 1.1.1
+
 
 
 setenv myFC ftn

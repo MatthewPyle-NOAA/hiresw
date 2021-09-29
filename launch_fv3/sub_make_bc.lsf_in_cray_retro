@@ -1,12 +1,12 @@
 #! /bin/sh
 
 #PBS -j oe 
-#PBS -o /lfs/h2/emc/lam/noscrub/Matthew.Pyle/hiresw.v8.0.5/launch_fv3/logs/test_make_bc.out__DOM__CORE__CYC_
-#PBS -e /lfs/h2/emc/lam/noscrub/Matthew.Pyle/hiresw.v8.0.5/launch_fv3/logs/test_make_bc.out__DOM__CORE__CYC_
-#PBS -l select=1:ncpus=16:mem=128GB
+#PBS -o /lfs/h2/emc/lam/noscrub/Matthew.Pyle/hiresw.v8.0.5/launch_fv3/logs/test_make_bc.out__DOM___CORE___CYC___HR_
+#PBS -e /lfs/h2/emc/lam/noscrub/Matthew.Pyle/hiresw.v8.0.5/launch_fv3/logs/test_make_bc.out__DOM___CORE___CYC___HR_
+#PBS -l select=1:ncpus=_NPROC_:mem=_MEM_GB
 #PBS -q dev
 #PBS -A HIRESW-DEV
-#PBS -l walltime=001:15:05
+#PBS -l walltime=000:15:05
 
 export HOMEhiresw=/lfs/h2/emc/lam/noscrub/Matthew.Pyle/hiresw.v8.0.5
 export HOMEfv3=/lfs/h2/emc/lam/noscrub/Matthew.Pyle/hiresw.v8.0.5
@@ -38,8 +38,8 @@ module load cfp/${cfp_ver}
 
 export tmmark=tm00
 
-export NTASK=16
-export PTILE=16
+export NTASK=_NPROC_
+export PTILE=_NPROC_
 
 export RUN_ENVIR=test
 export envir=test
@@ -85,7 +85,15 @@ echo will not delete $typ
 # rm -rf ${DATAROOT}/hiresw.${typ}_${NEST}_${MODEL}_${cyc}_${envir}_retro
 done
 
+# hours="03 06 09 12 15 18 21 24 27 30 33 36 39 42 45 48 51 54 57 60"
+
+# for hr in $hours
+# do
+
+export fhr=_HR_
+
 $HOMEhiresw/jobs/JHIRESW_MAKE_BC
 
+# done
 
 # qsub ${HOMEhiresw}/launch_info/sub_metgrid.lsf__DOM___CORE___CYC__retro

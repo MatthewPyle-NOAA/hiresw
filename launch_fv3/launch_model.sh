@@ -26,59 +26,61 @@ source ${HOMEhiresw}/versions/fv3/run.ver
 
 if [ $DOM == "conus" ]
 then
-        TOTAL_TASKS=2376
-        TASK_X=30
-        TASK_Y=72
-        NODES=19
+export TOTAL_TASKS=2376
+export TASK_X=30
+export TASK_Y=72
+export NODES=18
         # quilt stuff
-        WG=3
-        WTPG=72
+export WG=3
+export WTPG=24
 
 elif [ $DOM == "ak" ]
 then
-        TOTAL_TASKS=1248
-        TASK_X=24
-        TASK_Y=48
-        NODES=10
+export        TOTAL_TASKS=1248
+export        TASK_X=24
+export        TASK_Y=48
+export        NODES=10
         # quilt stuff
-        WG=2
-        WTPG=48
+export        WG=2
+export        WTPG=48
 
 elif [ $DOM == "hi" ]
 then
-        TOTAL_TASKS=162
-        TASK_X=8
-        TASK_Y=18
-        NODES=2
+export        TOTAL_TASKS=162
+export        TASK_X=8
+export        TASK_Y=18
+export        NODES=2
         # quilt stuff
-        WG=1
-        WTPG=18
+export        WG=1
+export        WTPG=18
+
 elif [ $DOM == "pr" ]
 then
-export 	TOTAL_TASKS=228
+export 	TOTAL_TASKS=234
 export 	TASK_X=12
 export	TASK_Y=18
 	NODES=2
 	# quilt stuff
 export  WG=1
-export 	WTPG=12
+export 	WTPG=18
 
 
 elif [ $DOM == "guam" ]
 then
-        TOTAL_TASKS=162
-        TASK_X=8
-        TASK_Y=18
-        NODES=2
+export        TOTAL_TASKS=162
+export        TASK_X=8
+export        TASK_Y=18
+export        NODES=2
         # quilt stuff
-        WG=1
-        WTPG=18
+export        WG=1
+export        WTPG=18
 fi
 
 
 cat sub_model.lsf_in_cray_retro | sed s:_DATE_:${DATE}:g | sed s:_DOM_:${DOM}:g | \
         sed s:_CORE_:${CORE}:g | sed s:_CYC_:${CYC}:g  | sed s:_NODES_:${NODES}:g | \
 	sed s:_TASK_X_:${TASK_X}:g | sed s:_TASK_Y_:${TASK_Y}:g  | \
+	sed s:_WTPG_:${WTPG}:g | sed s:_WG_:${WG}:g | \
 	sed s:_NPROC_:${TOTAL_TASKS}:g | sed s:_SPAN_:128:g > sub_model.lsf_${DOM}_${CORE}_${CYC}
 
 qsub  sub_model.lsf_${DOM}_${CORE}_${CYC}

@@ -26,12 +26,12 @@ source ${HOMEhiresw}/versions/fv3/run.ver
 
 if [ $DOM == "conus" ]
 then
-        TOTAL_TASKS=2376
+        TOTAL_TASKS=24
         NODES=1
 
 elif [ $DOM == "ak" ]
 then
-        TOTAL_TASKS=1248
+        TOTAL_TASKS=12
         NODES=1
 
 elif [ $DOM == "hi" ]
