@@ -26,7 +26,7 @@ source ${HOMEhiresw}/versions/fv3/run.ver
 
 if [ $DOM == "conus" ]
 then
-export TOTAL_TASKS=2376
+export TOTAL_TASKS=2232
 export TASK_X=30
 export TASK_Y=72
 export NODES=18
