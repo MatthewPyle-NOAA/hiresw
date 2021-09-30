@@ -212,7 +212,7 @@
    END INTERFACE
 !-----------------------------------------------------------------------------------------
         write(0,*) 'start program'
-        write(6,*) 'start program'
+        write(0,*) 'start program'
       LNEST=.FALSE.
       LCYCON=.FALSE.
       LHR12=.FALSE.
@@ -300,8 +300,10 @@
 
         write(0,*) 'to RDHDRS_g2 call'
 
-    CALL RDHDRS_g2(LUGB,LUGI,IGDNUM,GDIN,NUMVAL)
-    IM=GDIN%IMAX;JM=GDIN%JMAX;ITOT=NUMVAL
+       CALL RDHDRS_g2(LUGB,LUGI,IGDNUM,GDIN,NUMVAL)
+
+       IM=GDIN%IMAX;JM=GDIN%JMAX;ITOT=NUMVAL
+
 !!    GDIN%KMAX=50       ! HARDWIRE MAXLEVs
  !!   if (lnest) GDIN%KMAX=50
 
@@ -366,10 +368,10 @@
         endif
         
 
-!        write(6,*) 'veg after GETGRIB'
+!        write(0,*) 'veg after GETGRIB'
 !
 !        do J=JM,1,-JM/45
-!        write(6,237) (veg(I,J),I=1,IM,IM/30)
+!        write(0,237) (veg(I,J),I=1,IM,IM/30)
 !        enddo
 
   237   format(35(f3.0,1x))
@@ -480,6 +482,7 @@
        gfld%idrtmpl(1)=0
     
        
+        write(0,*) 'call set_scale for DOWNT'
        CALL set_scale(gfld, DEC)
         write(0,*) 'back from set_scale'
        CALL PUTGB2(51,GFLD,IRET) ! DOWNT
@@ -496,6 +499,7 @@
        GFLD%ipdtmpl(12)=2
        gfld%idrtmpl(2)=DEC
 
+        write(0,*) 'call set_scale for DOWNDEW'
        CALL set_scale(gfld, DEC)
        CALL PUTGB2(51,GFLD,IRET) ! DOWNDEW
 
@@ -545,6 +549,7 @@
        GFLD%ipdtmpl(10)=103
        GFLD%ipdtmpl(12)=10
 
+        write(0,*) 'call set_scale for DOWNU'
        CALL set_scale(gfld, DEC)
        CALL PUTGB2(51,GFLD,IRET) ! DOWNU
 
@@ -563,6 +568,7 @@
        GFLD%ipdtmpl(12)=10
         write(0,*) 'gfld%idrtmpl: ', gfld%idrtmpl
 
+        write(0,*) 'call set_scale for DOWNV'
        CALL set_scale(gfld, DEC)
        CALL PUTGB2(51,GFLD,IRET) ! DOWNV
 
@@ -577,6 +583,7 @@
        GFLD%ipdtmpl(2)=0
        GFLD%ipdtmpl(10)=1
        GFLD%ipdtmpl(12)=0
+        write(0,*) 'call set_scale for PSFC'
 
        CALL set_scale(gfld, DEC)
 !      if (TRIM(REGION).ne.'GUAM')then
@@ -596,6 +603,7 @@
        GFLD%ipdtmpl(10)=1
        GFLD%ipdtmpl(12)=0
 
+        write(0,*) 'call set_scale for TOPO'
        CALL set_scale(gfld, DEC)
        CALL PUTGB2(51,GFLD,IRET)  ! TOPO
 
@@ -640,6 +648,7 @@
        GFLD%ipdtmpl(10)=1
        GFLD%ipdtmpl(12)=0
 
+        write(0,*) 'call set_scale for WGUST'
        CALL set_scale(gfld, DEC)
        CALL PUTGB2(51,GFLD,IRET) ! WGUST
 
@@ -654,6 +663,7 @@
        GFLD%ipdtmpl(10)=1
        GFLD%ipdtmpl(12)=0
 
+       write(0,*) 'call set_scale for DOWNP'
        CALL set_scale(gfld, DEC)
        CALL PUTGB2(51,GFLD,IRET) ! DOWNP
 
@@ -769,6 +779,7 @@
        GFLD8%ipdtmpl(22)=1
        GFLD8%ipdtmpl(27)=3
 
+       write(0,*) 'call set_scale for POP3'
        CALL set_scale(gfld8, DEC)
        CALL PUTGB2(51,GFLD8,IRET) ! POP3
 
@@ -795,6 +806,7 @@
        GFLD8%ipdtmpl(27)=3
 
 
+       write(0,*) 'call set_scale for P03M'
        CALL set_scale(gfld8, DEC)
        CALL PUTGB2(51,GFLD8,IRET) ! P03M
 
@@ -822,6 +834,7 @@
        GFLD8%ipdtmpl(22)=1
        GFLD8%ipdtmpl(27)=6
 
+       write(0,*) 'call set_scale for POP6'
        CALL set_scale(gfld8, DEC)
        CALL PUTGB2(51,GFLD8,IRET) ! POP6
 
@@ -841,6 +854,7 @@
        GFLD8%ipdtmpl(22)=1
        GFLD8%ipdtmpl(27)=6
 
+       write(0,*) 'call set_scale for P06M'
        CALL set_scale(gfld8, DEC)
        CALL PUTGB2(51,GFLD8,IRET) ! P06M
        ENDIF
@@ -1712,7 +1726,7 @@
             WGUST=MAX(GUST,TEMP1)
           endwhere
           WGUST=MIN(WGUST,SPVAL)
-          print *, 'WGUST',minval(wgust),maxval(wgust)
+          write(0,*) 'WGUST',minval(wgust),maxval(wgust)
 
           CALL GRIBLIMITED(51,GDIN,core,gfld,im,jm)
 
@@ -1730,7 +1744,7 @@
 !       ENDIF
 !     ENDIF
 
-        write(6,*) 'to write of older T'
+        write(0,*) 'to write of older T'
 !  write older T/Td data for max/min to grib file
       ALLOCATE (TEMP1(IM,JM),TEMP2(IM,JM),STAT=kret)
 
@@ -1813,9 +1827,9 @@
 
 !mptest        ENDIF
       ENDIF
-        write(6,*) 'past write of older T'
+        write(0,*) 'past write of older T'
       DEALLOCATE (TEMP1,TEMP2,STAT=kret)
-        write(6,*) 'past dealloc of TEMP1, TEMP2'
+        write(0,*) 'past dealloc of TEMP1, TEMP2'
 
 !  compute max/min temps for 3,6,9,12.....
      ALLOCATE(TMAX3(IM,JM),RHMAX3(IM,JM),STAT=kret)
@@ -1880,6 +1894,7 @@
        GFLD8%ipdtmpl(24)=2
        GFLD8%ipdtmpl(27)=3
 
+       write(0,*) 'setting scale for TMAX3'
        CALL set_scale(gfld8, DEC)
        CALL PUTGB2(51,GFLD8,IRET) ! TMAX3
 
@@ -2064,10 +2079,12 @@
         if (LHR3) then  ! only on 3 hourly times
       ALLOCATE (HAINES(IM,JM),HLVL(IM,JM),STAT=kret)
 
-        print*, 'call HINDEX'
+        write(0,*) 'call HINDEX'
       CALL HINDEX(IM,JM,HAINES,HLVL,VALIDPT)
-        print*, 'return with min/max: ', minval(HAINES),maxval(HAINES)
+!        write(0,*) 'back w min/max: ', minval(HAINES),maxval(HAINES)
+
       DEC=3.0
+        write(0,*) 'call FILL_FLD for HAINES'
        CALL FILL_FLD(GFLD,NUMV,IM,JM,HAINES)
 
        GFLD%discipline=2
@@ -2078,6 +2095,7 @@
        GFLD%ipdtmpl(10)=1
        GFLD%ipdtmpl(12)=0
 
+        write(0,*) 'set_scale for HINDEX'
        CALL set_scale(gfld, DEC)
        CALL PUTGB2(51,GFLD,IRET) ! HINDEX
 
@@ -2305,19 +2323,19 @@
 !-------------------------------------------------------------------------------- 
       IM=GDIN%imax;JM=GDIN%jmax;IFHR=GDIN%FHR
 
-      print *,'Compute ',IAHR,' HR BUCKET    FHR=',IFHR 
+      write(0,*) 'Compute ',IAHR,' HR BUCKET    FHR=',IFHR 
 
-        if (IM .ge. 139 .and. JM .ge. 154) then
-        write(0,*) 'PBLMARK: ', PBLMARK(139,154)
-        write(0,*) 'RH: ', RH(139,154,1:6)
-        write(0,*) 'BLI: ', BLI(139,154)
-        write(0,*) 'QPF: ', QPF(139,154)
-        write(0,*) 'PCP01: ', PCP01(139,154)
-        write(0,*) 'PCP10: ', PCP10(139,154)
-        write(0,*) 'PXCP01: ', PXCP01(139,154)
-        write(0,*) 'PXCP10: ', PXCP10(139,154)
-        endif
-
+!        if (IM .ge. 139 .and. JM .ge. 154) then
+!        write(0,*) 'PBLMARK: ', PBLMARK(139,154)
+!        write(0,*) 'RH: ', RH(139,154,1:6)
+!        write(0,*) 'BLI: ', BLI(139,154)
+!        write(0,*) 'QPF: ', QPF(139,154)
+!        write(0,*) 'PCP01: ', PCP01(139,154)
+!        write(0,*) 'PCP10: ', PCP10(139,154)
+!        write(0,*) 'PXCP01: ', PXCP01(139,154)
+!        write(0,*) 'PXCP10: ', PXCP10(139,154)
+!        endif
+!
       IF (IAHR.EQ.3 .AND. IFHR .GT. 11) THEN
         ALLOCATE(TMPPCP(IM,JM))
         WHERE (validpt .and. PCP01 .GT. PXCP01)
@@ -2415,7 +2433,8 @@
 
     INCLUDE 'DEFGRIBINT.INC'   ! interface statements for gribit subroutines
 
-       print *,'OUTPUT LIMITED GRIB FILE at FHR ',GDIN%FHR,' for REGION ',GDIN%REGION
+       write(0,*) 'OUTPUT LIMITED GRIB FILE at FHR ',GDIN%FHR, &
+                ' for REGION ',GDIN%REGION
        RITEHD = .TRUE.
 
        NUMV=IM*JM
@@ -2439,7 +2458,7 @@
 
 
        CALL set_scale(gfld, DEC)
-        write(0,*) 'back from set_scale'
+       write(0,*) 'back from set_scale for DOWNT'
        CALL PUTGB2(IUNIT,GFLD,IRET) ! DOWNT
 
 
@@ -2458,6 +2477,7 @@
        CALL set_scale(gfld, DEC)
        CALL PUTGB2(IUNIT,GFLD,IRET) ! DOWNDEW
 
+       write(0,*) 'IRET for PUTGB2 for DOWNDEW: ', IRET
 
        DEC=6.0
        CALL FILL_FLD(GFLD,NUMV,IM,JM,DOWNQ)
@@ -2470,6 +2490,7 @@
         write(0,*) 'scale and write DOWNQ'
        CALL set_scale(gfld, DEC)
        CALL PUTGB2(IUNIT,GFLD,IRET)  ! DOWNQ
+       write(0,*) 'IRET for PUTGB2 for DOWNQ: ', IRET
 
 ! ----------------------------------------
 
@@ -2487,8 +2508,8 @@
 
        DEC=-2.0
 
-       print *, 'DOWNU',minval(downu),maxval(downu)
-       print *, 'DOWNV',minval(downv),maxval(downv)
+       write(0,*) 'DOWNU',minval(downu),maxval(downu)
+       write(0,*) 'DOWNV',minval(downv),maxval(downv)
 
        CALL FILL_FLD(GFLD,NUMV,IM,JM,DOWNV)
 
@@ -2505,7 +2526,10 @@
 ! Write model surface pressure to grib2
       DEC=6.0
 
+      write(0,*) 'maxval(PSFC),minval(PSFC): ', maxval(PSFC),minval(PSFC)
       CALL FILL_FLD(GFLD,NUMV,IM,JM,PSFC)
+      write(0,*) 'maxval(gfld%fld),minval(gfld%fld): ', &
+               maxval(gfld%fld),minval(gfld%fld)
 
       GFLD%ipdtmpl(1)=3
       GFLD%ipdtmpl(2)=0
@@ -2514,10 +2538,10 @@
       GFLD%idrtmpl(2)=DEC
 
       CALL set_scale(gfld,DEC)
+      write(0,*) 'putting PSFC to IUNIT: ', IUNIT
       CALL PUTGB2(IUNIT,GFLD,IRET)
       write(0,*) 'IRET for PSFC ', IRET
       write(0,*) 'maxval(PSFC),minval(PSFC): ', maxval(PSFC),minval(PSFC)
-      print*,'maxval(PSFC),minval(PSFC): ', maxval(PSFC),minval(PSFC)
       endif
 
 !      DEC=3.0
@@ -2550,6 +2574,7 @@
 
          DEC=1.0
 
+                write(0,*) 'in here filling for VEG_NDFD'
        CALL FILL_FLD(GFLD,NUMV,IM,JM,VEG_NDFD)
 
        GFLD%discipline=2
@@ -2951,12 +2976,16 @@
       LOGICAL, INTENT(IN)   :: VALIDPT(:,:)
       REAL, INTENT(INOUT)    :: HAINES(:,:),HLVL(:,:)
 
+       HAINES=0.
+
+        write(0,*) 'IM, JM in HINDEX: ', IM, JM
       DO J=1,JM
       DO I=1,IM
 
-        if (I .eq. 1 .and. J .eq. 1) then
+        if (I .eq. IM/2 .and. J .eq. JM/2) then
         write(0,*) 'TOPO, T950, RH850: ', &
          TOPO(I,J),T950(I,J),RH850(I,J)
+        write(0,*) 'validpt(i,j): ', validpt(i,j)
         endif
 
        if (validpt(i,j)) then
@@ -2991,29 +3020,30 @@
         HLVL(I,J)=3
        ENDIF
 
-!        if (RHMOIS .le. 0)  then
-!        write(0,*) 'bad RHMOIS: ', I,J,RHMOIS
-!        write(0,*) 'rh700(I,J),rh850(i,j): ', &
-!                    rh700(I,J),rh850(i,j)
-!        endif
+        if (RHMOIS .le. 0)  then
+        write(0,*) 'bad RHMOIS: ', I,J,RHMOIS
+        write(0,*) 'rh700(I,J),rh850(i,j): ', &
+                    rh700(I,J),rh850(i,j)
+        endif
 
         RHMOIS=AMAX1(RHMOIS,1.0)
 
        TERM=log10(RHMOIS) / 7.5 + (TMOIS / (TMOIS + 237.3))
 
-!        if (TERM .ne. TERM) then        
-!        write(0,*) 'TERM is garbage'
-!        write(0,*) 'RHMOIS, TMOIS: ', RHMOIS, TMOIS
-!        endif
-!
-!        if ( abs(1.0 - TERM) .le. 1.e-9) then
-!        write(0,*) 'heading for trouble with TERM: ', TERM
-!        write(0,*) 'I,J,RHMOIS,TMOIS: ', I,J,RHMOIS,TMOIS
-!        endif
-!
-!        if (abs(TERM) .gt. 1.e9) then
-!        write(0,*) 'large TERM: ', TERM
-!        endif
+        if (TERM .ne. TERM) then        
+        write(0,*) 'TERM is garbage'
+        write(0,*) 'RHMOIS, TMOIS: ', RHMOIS, TMOIS
+       endif
+
+        if ( abs(1.0 - TERM) .le. 1.e-9) then
+        write(0,*) 'heading for trouble with TERM: ', TERM
+        write(0,*) 'I,J,RHMOIS,TMOIS: ', I,J,RHMOIS,TMOIS
+        endif
+
+        if (abs(TERM) .gt. 1.e9) then
+        write(0,*) 'large TERM: ', TERM
+        endif
+
 
        DPMOIS=(TERM * 237.3) / (1.0 - TERM)
        HAINESM=TMOIS-DPMOIS
@@ -3025,9 +3055,12 @@
        HAINESM=(SLOPEM*DPMOIS)+INTM
        HAINES(I,J)=HAINEST+HAINESM
       endif
+
+
       ENDDO
       ENDDO
-      RETURN
+       write(0,*) 'past to double do loops'
+!      RETURN
       END SUBROUTINE HINDEX
 ! -------------------------
         SUBROUTINE FILL_FLD(GFLD,NUMV,IM,JM,ARRAY2D)
@@ -3157,6 +3190,9 @@
           GMIN = G(I1)
           DO I=I1+1,LEN
             IF(BMAP(I)) THEN
+                        if (G(I) .ne. G(I)) then
+             write(0,*) 'I, G(I): ', I, G(I)
+                        endif
               GMAX = MAX(GMAX,G(I))
               GMIN = MIN(GMIN,G(I))
             ENDIF

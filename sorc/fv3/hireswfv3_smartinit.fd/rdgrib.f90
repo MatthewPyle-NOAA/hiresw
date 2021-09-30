@@ -50,12 +50,12 @@ contains
         WRITE(0,100) JPDS(5),JPDS(6),JPDS(7),J,MINVAL(VARB),MAXVAL(VARB)
  100   FORMAT('VARB UNPACKED ', 4I7,2G12.4)
       ELSE
-       WRITE(6,*)'====================================================='
-       WRITE(6,*)'COULD NOT UNPACK VARB(setvar)',K,JPDS(3),JPDS(5),JPDS(6),IRET
-       WRITE(6,*)'USING J: ', J
-       WRITE(6,*)'UNIT', LUB,LUI,NUMV,KF
-       WRITE(6,*)'====================================================='
-       print *,'JPDS',jpds(1:25)
+       WRITE(0,*)'====================================================='
+       WRITE(0,*)'COULD NOT UNPACK VARB(setvar)',K,JPDS(3),JPDS(5),JPDS(6),IRET
+       WRITE(0,*)'USING J: ', J
+       WRITE(0,*)'UNIT', LUB,LUI,NUMV,KF
+       WRITE(0,*)'====================================================='
+       write(0,*) ,'JPDS',jpds(1:25)
        ISTAT = IRET
 ! 01-29-13 JTM : past hour 60 nam output onli to level 35
        if (JPDS(6).ne.109) then
@@ -275,7 +275,7 @@ contains
       KSKIP = 0
 
       WRITE(FNAME(6:7),FMT='(I2)')LUB
-        write(0,*) 'call baopen: ', lub
+        write(0,*) 'call baopen inside RDHDRS_g2: ', lub
       CALL BAOPEN(LUB,FNAME,IRETGB)
         if (IRETGB .ne. 0) then
         write(0,*) 'IRETGB on baopen, LUB: ', IRETGB, LUB
@@ -291,6 +291,7 @@ contains
         CALL GETIDX(LUB,LUI,CBUF,NLEN,NNUM,IRGI)
         write(0,*) 'NLEN, NNUM from GETIDX: ', NLEN, NNUM
       IF(IRGI .NE. 0) THEN
+        write(0,*) 'IRGI from failed GETIDX call: ', IRGI
         WRITE(6,*)' PROBLEMS READING GRIB INDEX FILE SO ABORT'
         ISTAT = IRGI
         STOP 'ABORT RDHDRS: GRIB INDEX FILE READ ERROR '
@@ -298,6 +299,7 @@ contains
 
 !!! why retrieve for all records???
         NNUM=1
+        J=0
 
       DO K = 1, NNUM
         JR = K - 1
@@ -314,11 +316,13 @@ contains
         JGDT=-9999
 
         write(0,*) 'to GETGB2S call: '
+        write(0,*) 'NLEN, NNUM, J, JDISC, JIDS(1), JPDTN: ', NLEN, NNUM, J, &
+                              JDISC, JIDS(1), JPDTN
         call GETGB2S(CBUF,NLEN,NNUM,J,JDISC,JIDS,JPDTN,JPDT,JGDTN, &
                         JGDT,K,GFLD,LPOS,IRGS)
         IF(IRGS .NE. 0) THEN
-          WRITE(6,*)' PROBLEMS ON 1ST READ OF GRIB FILE SO ABORT'
-          WRITE(6,*) 'IRGS: ', IRGS
+          WRITE(0,*)' PROBLEMS ON 1ST READ OF GRIB FILE SO ABORT'
+          WRITE(0,*) 'IRGS: ', IRGS
         ENDIF
 
 !        if (K .eq. 1) then
@@ -328,33 +332,46 @@ contains
 !        endif
 
         write(0,*) 'gfld%igdtnum: ', gfld%igdtnum
+        write(0,*) 'gfld%igdtmpl(8): ', gfld%igdtmpl(8)
+        write(0,*) 'gfld%igdtmpl(9): ', gfld%igdtmpl(9)
 
-          selectcase( gfld%igdtnum )     !  Template number
-           case (0:3)   ! Lat/Lon
+            
+!          selectcase( gfld%igdtnum )     !  Template number
+
+          if (gfld%igdtnum .ge. 0 .and. gfld%igdtnum .le. 3) then
+! Lat/Lon
               GDIN%IMAX=gfld%igdtmpl(8)
               GDIN%JMAX=gfld%igdtmpl(9)
-           case (10)   ! Mercator
+          elseif (gfld%igdtnum .eq. 10) then   
+! Mercator
               GDIN%IMAX=gfld%igdtmpl(8)
               GDIN%JMAX=gfld%igdtmpl(9)
-           case (20)   ! Polar Stereographic
+          elseif (gfld%igdtnum .eq. 20) then   
+! Polar Stereographic
               GDIN%IMAX=gfld%igdtmpl(8)
               GDIN%JMAX=gfld%igdtmpl(9)
-           case (30)   ! Lambert Conformal
+          elseif (gfld%igdtnum .eq. 30) then   
+! Lambert Conformal
               GDIN%IMAX=gfld%igdtmpl(8)
               GDIN%JMAX=gfld%igdtmpl(9)
-           case (40:43)   ! Gaussian
+          elseif (gfld%igdtnum .ge. 40 .and. gfld%igdtnum .le. 43) then   
+! Gaussian
               GDIN%IMAX=gfld%igdtmpl(8)
               GDIN%JMAX=gfld%igdtmpl(9)
-           case (90)   ! Space View/Orthographic
+          elseif (gfld%igdtnum .eq. 90) then   
+! Space View/Orthographic
               GDIN%IMAX=gfld%igdtmpl(8)
               GDIN%JMAX=gfld%igdtmpl(9)
-           case (110)   ! Equatorial Azimuthal
+          elseif (gfld%igdtnum .eq. 110) then   
+! Equatorial Azimuthal
               GDIN%IMAX=gfld%igdtmpl(8)
               GDIN%JMAX=gfld%igdtmpl(9)
-           case default
+          else
+! Default
               GDIN%IMAX=0
               GDIN%JMAX=0
-         end select
+          endif
+!         end select
 
 !JTM    write(6,*)' IRET FROM GETGB1S ',IRGS,JR
         IF(IRGS .NE. 0) THEN

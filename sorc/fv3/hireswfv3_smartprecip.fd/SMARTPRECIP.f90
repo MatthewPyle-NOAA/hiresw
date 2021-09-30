@@ -245,7 +245,7 @@
 
       ALLOCATE (APCP2(NUMVAL),SNOW2(NUMVAL),STAT=kret)
       IF(kret.ne.0)THEN
-       WRITE(*,*)'ERROR allocation source location: ',numval
+       WRITE(0,*)'ERROR allocation source location: ',numval
        STOP
       END IF
 
@@ -312,7 +312,7 @@
 
       ALLOCATE (APCP3(NUMVAL),SNOW3(NUMVAL),STAT=kret)
       IF(kret.ne.0)THEN
-       WRITE(*,*)'ERROR allocation source location: ',numval
+       WRITE(0,*)'ERROR allocation source location: ',numval
        STOP
       END IF
 
@@ -370,7 +370,7 @@
 
       ALLOCATE (APCP4(NUMVAL),SNOW4(NUMVAL),STAT=kret)
       IF(kret.ne.0)THEN
-       WRITE(*,*)'ERROR allocation source location: ',numval
+       WRITE(0,*)'ERROR allocation source location: ',numval
        STOP
       END IF
 
@@ -524,15 +524,15 @@
       ENDIF
 
       KPDS(5)=61
-      print *, 'min/maxval(gfld%fld): ', minval(gfld%fld),maxval(gfld%fld)
+      write(0,*) 'min/maxval(gfld%fld): ', minval(gfld%fld),maxval(gfld%fld)
       WRITE(FNAME(6:7),FMT='(I2)')LUGB5
 
       CALL BAOPEN(LUGB5,FNAME,IRETGB)
-	write(6,*) 'writing to lugb5 and fname: ', lugb5, trim(fname)
+	write(0,*) 'writing to lugb5 and fname: ', lugb5, trim(fname)
 
 !      CALL PUTGB(LUGB5,NUMVAL,KPDS,KGDS,MASK,APCPOUT,IRET)
       call putgb2(LUGB5,GFLD,IRET)
-      print *,'putgb2 return code:',iret
+      write(0,*) 'putgb2 return code:',iret
       CALL BACLOSE(LUGB5,IRET)
 
       gfld%ipdtmpl(2)=13
@@ -619,12 +619,18 @@
 
 
       KPDS(5)=65
-      print *, 'writing SNOW', KPDS(5),KPDS(14),KPDS(15),LUGB7, MAXVAL(SNOWOUT)
+!      print *, 'writing SNOW', KPDS(5),KPDS(14),KPDS(15),LUGB7, MAXVAL(SNOWOUT)
+      write(0,*) 'writing SNOW', KPDS(5),KPDS(14),KPDS(15), &
+                          LUGB7, MAXVAL(SNOWOUT)
+
       WRITE(FNAME(6:7),FMT='(I2)')LUGB7
       CALL BAOPEN(LUGB7,FNAME,IRET)
       call putgb2(LUGB7,GFLD,IRET)
-      print *,'putgb2 return code:',iret
+!      print *,'putgb2 return code:',iret
+      write(0,*) 'putgb2 return code for SNOW:',iret
+
       CALL BACLOSE(LUGB7,IRET)
+       write(0,*) 'past BACLOSE for LUGB7 with IRET: ', IRET
 
       STOP
       END

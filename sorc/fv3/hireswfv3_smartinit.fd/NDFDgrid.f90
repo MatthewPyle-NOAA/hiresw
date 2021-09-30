@@ -587,7 +587,7 @@
                  vnew(i,j) = vtmp(iw,jw)
                  tnew(i,j) = ttmp(iw,jw)
                  dewnew(i,j) = dtmp(iw,jw)
-                 m_rough_yes = m_rough_yes+1
+                 n_rough_yes = n_rough_yes+1
                  goto 783 !check if leasve all 3 loops (not,i,)
                 endif
               end if

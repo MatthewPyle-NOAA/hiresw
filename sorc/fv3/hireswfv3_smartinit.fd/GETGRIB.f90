@@ -342,6 +342,14 @@
 
 !  get sfc height 
 !tst      ALLOCATE (GRID(ITOT),MASK(ITOT),STAT=kret)
+        if (.not.(allocated(MASK))) then
+         write(0,*) 'allocating MASK'
+         ALLOCATE(MASK(ITOT))
+        endif
+        if (.not.(allocated(GRID))) then
+         write(0,*) 'allocating GRID'
+         ALLOCATE(GRID(ITOT))
+        endif
 !tst      print *,'GRID ALLOCATED',ITOT,' kret',kret
 
         JIDS=-9999
@@ -357,6 +365,7 @@
 
         write(0,*) 'call SETVAR_g2 for ZSFC'
         write(0,*) 'NUMVAL into SETVAR_g2: ', NUMVAL
+        write(0,*) 'is allocated mask? ', allocated(mask)
 
 ! is it SREF data?
         ISSREF=0
