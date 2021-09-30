@@ -39,7 +39,7 @@ export tmmark=tm00
 # while [ $fhr -le $fhrend ]
 # do
 
-if [ -e prdgendone${fhr} ]
+if [ -e ./prdgendone${fhr} ]
 then
 echo "f${fhr} of prdgen appears to have already run"
 ls -l ./prdgendone${fhr}
