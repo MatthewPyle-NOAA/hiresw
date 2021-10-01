@@ -3,7 +3,7 @@
 #PBS -j oe 
 #PBS -o /lfs/h2/emc/lam/noscrub/Matthew.Pyle/hiresw.v8.0.5/launch_fv3/logs/test_make_bc.out__DOM___CORE___CYC___HR_
 #PBS -e /lfs/h2/emc/lam/noscrub/Matthew.Pyle/hiresw.v8.0.5/launch_fv3/logs/test_make_bc.out__DOM___CORE___CYC___HR_
-#PBS -l select=1:ncpus=_NPROC_:mem=_MEM_GB
+#PBS -l select=1:ncpus=_NPROC_:mem=_MEM_GB,debug=true
 #PBS -q dev
 #PBS -A HIRESW-DEV
 #PBS -l walltime=000:15:05

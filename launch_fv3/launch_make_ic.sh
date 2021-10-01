@@ -5,6 +5,14 @@ CORE=${2}
 CYC=${3}
 DATE=${4}
 
+if [ $CORE != 'fv3' ]
+then
+        echo BAD CORE for this job
+        echo CORE was $CORE
+        echo needed to be fv3
+	exit
+fi
+
 cd /u/$USER    # cron does this for us - this is here just to be safe
 . /etc/profile
 

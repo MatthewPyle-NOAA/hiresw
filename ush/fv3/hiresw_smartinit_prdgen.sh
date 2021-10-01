@@ -502,29 +502,29 @@ chmod 775 ./m.poe
 chmod 775 ./n.poe
 chmod 775 ./o.poe
 
-echo "#!/bin/ksh" > ./wgrib2.poe
-echo "./a.poe &" >> ./wgrib2.poe
-echo "./b.poe &" >> ./wgrib2.poe
-echo "./c.poe &" >> ./wgrib2.poe
-echo "./d.poe &" >> ./wgrib2.poe
-echo "./e.poe &" >> ./wgrib2.poe
-echo "./f.poe &" >> ./wgrib2.poe
-echo "./g.poe &" >> ./wgrib2.poe
-echo "./h.poe &" >> ./wgrib2.poe
-echo "./i.poe &" >> ./wgrib2.poe
-echo "./j.poe &" >> ./wgrib2.poe
-echo "./k.poe &" >> ./wgrib2.poe
-echo "./l.poe &" >> ./wgrib2.poe
-echo "./m.poe &" >> ./wgrib2.poe
-echo "./n.poe &" >> ./wgrib2.poe
-echo "./o.poe &" >> ./wgrib2.poe
-echo "wait" >> ./wgrib2.poe
+echo "./a.poe" >> ./wgrib2.poe
+echo "./b.poe" >> ./wgrib2.poe
+echo "./c.poe" >> ./wgrib2.poe
+echo "./d.poe" >> ./wgrib2.poe
+echo "./e.poe" >> ./wgrib2.poe
+echo "./f.poe" >> ./wgrib2.poe
+echo "./g.poe" >> ./wgrib2.poe
+echo "./h.poe" >> ./wgrib2.poe
+echo "./i.poe" >> ./wgrib2.poe
+echo "./j.poe" >> ./wgrib2.poe
+echo "./k.poe" >> ./wgrib2.poe
+echo "./l.poe" >> ./wgrib2.poe
+echo "./m.poe" >> ./wgrib2.poe
+echo "./n.poe" >> ./wgrib2.poe
+echo "./o.poe" >> ./wgrib2.poe
 
 chmod 775 ./wgrib2.poe
-export MP_PGMMODEL=mpmd
-export MP_CMDFILE=wgrib2.poe
+# export MP_PGMMODEL=mpmd
+# export MP_CMDFILE=wgrib2.poe
 #time mpirun.lsf
-time aprun -n 1 -N 1 -d $NTASK ./wgrib2.poe
+# time aprun -n 1 -N 1 -d $NTASK ./wgrib2.poe
+mpiexec -cpu-bind core --configfile ./wgrib2.poe
+
 export err=$?;  err_chk
 
 # sleep 60
@@ -875,7 +875,10 @@ cp ${freq}snow ${freq}snow.${fhr}_interp
   mv WRFPRS${fhr}i.tm00.temp WRFPRS${fhr}i.tm00
 	fi
 
-  cpfs ${COMROOThps}/date/t${cyc}z DATE
+#  cpfs ${COMROOThps}/date/t${cyc}z DATE
+echo "DATE__${PDY}${cyc}xx" > DATE
+
+
 
   if [ -s $prdgfl ];then  
     mv ${prdgfl} meso${rg}.NDFDf${fhr}  

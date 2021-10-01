@@ -111,7 +111,7 @@ err_exit $msg
 fi
 
 
-mv out.atm.tile7.nc $COMOUT/hiresw.t${cyc}z.${NEST}${MODEL}.gfs_data.tile7.nc
+mv out.atm.tile1.nc $COMOUT/hiresw.t${cyc}z.${NEST}${MODEL}.gfs_data.tile7.nc
 err=$?
 
 if [ $err -ne 0 ]
@@ -120,7 +120,7 @@ msg="FATAL ERROR: problem in make_ic generating out.atm.tile7.nc"
 err_exit $msg
 fi
 
-mv out.sfc.tile7.nc $COMOUT/hiresw.t${cyc}z.${NEST}${MODEL}.sfc_data.tile7.nc
+mv out.sfc.tile1.nc $COMOUT/hiresw.t${cyc}z.${NEST}${MODEL}.sfc_data.tile7.nc
 err=$?
 
 if [ $err -ne 0 ]

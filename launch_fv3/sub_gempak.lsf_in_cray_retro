@@ -1,6 +1,6 @@
 #PBS -j oe
-#PBS -o /lfs/h2/emc/lam/noscrub/Matthew.Pyle/hiresw.v8.0.5/launch_info/logs/test_gempak.out__DOM__CORE__CYC_
-#PBS -e /lfs/h2/emc/lam/noscrub/Matthew.Pyle/hiresw.v8.0.5/launch_info/logs/test_gempak.err__DOM__CORE__CYC_
+#PBS -o /lfs/h2/emc/lam/noscrub/Matthew.Pyle/hiresw.v8.0.5/launch_fv3/logs/test_gempak.out__DOM__CORE__CYC_
+#PBS -e /lfs/h2/emc/lam/noscrub/Matthew.Pyle/hiresw.v8.0.5/launch_fv3/logs/test_gempak.err__DOM__CORE__CYC_
 #PBS -l select=1:ncpus=1:mem=128GB
 #PBS -q dev
 #PBS -A HIRESW-DEV
@@ -8,7 +8,8 @@
 
 # export MP_EUILIB=us
 export HOMEhiresw=/lfs/h2/emc/lam/noscrub/Matthew.Pyle/hiresw.v8.0.5
-source ${HOMEhiresw}/versions/arw/run.ver
+export HOMEfv3=/lfs/h2/emc/lam/noscrub/Matthew.Pyle/hiresw.v8.0.5
+source ${HOMEhiresw}/versions/fv3/run.ver
 
 module purge
 module load envvar/1.0
@@ -38,18 +39,11 @@ export envir=test
 export NET=hiresw
 export RUN=hiresw
 
-# export IOBUF_PARAMS='hiresw_*:size=1048576:count=4:vbuffer_count=4096:prefetch=1:verbose'
-# export DVS_DATASYNC=off
-# export DVS_CLOSESYNC=off
-
 export NEST=_DOM_
 export cyc=_CYC_
 export MODEL=_CORE_
 export DATE=_DATE_
 export PDY=${DATE}
-
-# export DATEroot=/gpfs/hps/nco/ops/com/date
-# DATE=`cat $DATEroot/t${cyc}z | cut -c7-14`
 
 export SENDDBN=NO
 export SENDDBN_GB2=NO

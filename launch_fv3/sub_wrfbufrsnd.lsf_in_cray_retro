@@ -1,7 +1,7 @@
 #PBS -j oe
 #PBS -o /lfs/h2/emc/lam/noscrub/Matthew.Pyle/hiresw.v8.0.5/launch_fv3/logs/bufr__DOM__CYC_.log
 #PBS -e /lfs/h2/emc/lam/noscrub/Matthew.Pyle/hiresw.v8.0.5/launch_fv3/logs/bufr__DOM__CYC_.log
-#PBS -l place=vscatter,select=1:ncpus=_NPROCBUFR_:mem=128GB
+#PBS -l place=vscatter,select=1:ncpus=_NPROCBUFR_:mem=128GB,debug=true
 #PBS -A HIRESW-DEV
 #PBS -q dev
 #PBS -l walltime=001:47:05

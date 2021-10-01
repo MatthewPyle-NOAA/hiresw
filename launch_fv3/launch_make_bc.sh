@@ -5,6 +5,15 @@ CORE=${2}
 CYC=${3}
 DATE=${4}
 
+
+if [ $CORE != 'fv3' ]
+then
+	echo BAD CORE for this job
+	echo CORE was $CORE
+	echo needed to be fv3
+fi
+
+
 cd /u/$USER    # cron does this for us - this is here just to be safe
 . /etc/profile
 
@@ -31,19 +40,19 @@ echo NDATE is $NDATE
 if [ $DOM$CORE == "conusfv3" ] 
 then
 NPROC=16
-MEM=150
+MEM=130
 elif [ $DOM$CORE == "prfv3" ]
 then
 NPROC=8
-MEM=80
+MEM=75
 elif [ $DOM$CORE == "hifv3" ]
 then
 NPROC=8
-MEM=80
+MEM=70
 elif [ $DOM$CORE == "guamfv3" ]
 then
 NPROC=8
-MEM=80
+MEM=70
 elif [ $DOM$CORE == "akfv3" ]
 then
 NPROC=16

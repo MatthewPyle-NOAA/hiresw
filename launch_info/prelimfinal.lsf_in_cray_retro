@@ -58,6 +58,7 @@ $HOMEhiresw/jobs/JHIRESW_PREPFINAL
 
 echo past J-job
 
+sleep 120
 qsub ${HOMEhiresw}/launch_info/sub_model.lsf__DOM___CORE___CYC__retro
 sleep 120
 qsub ${HOMEhiresw}/launch_info/sub_post.lsf__DOM___CORE___CYC__retro
@@ -66,3 +67,6 @@ qsub ${HOMEhiresw}/launch_info/sub_wrfbufrsnd.lsf__DOM___CORE___CYC__retro
 sleep 90
 qsub ${HOMEhiresw}/launch_info/sub_awips.lsf__DOM___CORE___CYC__retro
 qsub ${HOMEhiresw}/launch_info/sub_gempak.lsf__DOM___CORE___CYC__retro
+sleep 90
+qsub ${HOMEhiresw}/launch_info/sub_smartinit.lsf__DOM___CORE___CYC__retro
+qsub ${HOMEhiresw}/launch_info/sub_smartinitb.lsf__DOM___CORE___CYC__retro

@@ -594,7 +594,7 @@ fi
 
 echo execute with $NLEV levels
 
-aprun -n 1 -N 1 -d 1 $EXECfv3/hireswfv3_smartinit $cyc $fhr $ogrd $RGIN $inest $MODEL $NLEV > smartinit.out${fhr} 2>&1
+mpiexec -n 1 -ppn 1 $EXECfv3/hireswfv3_smartinit $cyc $fhr $ogrd $RGIN $inest $MODEL $NLEV > smartinit.out${fhr} 2>&1
 export err=$?; err_chk
 
 

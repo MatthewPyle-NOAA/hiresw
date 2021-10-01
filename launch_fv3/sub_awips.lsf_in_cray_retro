@@ -1,7 +1,7 @@
 #PBS -j oe
-#PBS -o /lfs/h2/emc/lam/noscrub/Matthew.Pyle/hiresw.v8.0.5/launch_info/logs/test_awips.out__DOM__CORE__CYC_
-#PBS -e /lfs/h2/emc/lam/noscrub/Matthew.Pyle/hiresw.v8.0.5/launch_info/logs/test_awips.err__DOM__CORE__CYC_
-#PBS -l select=1:ncpus=1:mem=128GB
+#PBS -o /lfs/h2/emc/lam/noscrub/Matthew.Pyle/hiresw.v8.0.5/launch_fv3/logs/test_awips.out__DOM__CORE__CYC_
+#PBS -e /lfs/h2/emc/lam/noscrub/Matthew.Pyle/hiresw.v8.0.5/launch_fv3/logs/test_awips.err__DOM__CORE__CYC_
+#PBS -l select=1:ncpus=1:mem=24GB
 #PBS -A HIRESW-DEV
 #PBS -q dev
 #PBS -l walltime=001:27:00
@@ -12,7 +12,8 @@
 export SENDCOM=YES
 
 export HOMEhiresw=/lfs/h2/emc/lam/noscrub/Matthew.Pyle/hiresw.v8.0.5
-source ${HOMEhiresw}/versions/arw/run.ver
+export HOMEfv3=/lfs/h2/emc/lam/noscrub/Matthew.Pyle/hiresw.v8.0.5
+source ${HOMEhiresw}/versions/fv3/run.ver
 
 module purge
 module load envvar/1.0
