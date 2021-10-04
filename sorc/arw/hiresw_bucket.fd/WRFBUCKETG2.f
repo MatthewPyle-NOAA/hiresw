@@ -302,7 +302,7 @@ C    &                  UNPACK,K,GFLD,IRET)
         
 
 
-        gfld%ipdtmpl=PDS_RAIN_HOLD_EARLY
+        gfld%ipdtmpl(1:gfld%ipdtlen)=PDS_RAIN_HOLD_EARLY(1:gfld%ipdtlen)
         gfld%ipdtmpl(9)=ihrs1
         do J=16,21
         gfld%ipdtmpl(J)=PDS_RAIN_HOLD(J)
@@ -326,7 +326,7 @@ C    &                  UNPACK,K,GFLD,IRET)
 
 ! -------------------------------------------
 
-        gfld%ipdtmpl=PDS_SNOW_HOLD_EARLY
+        gfld%ipdtmpl(1:gfld%ipdtlen)=PDS_SNOW_HOLD_EARLY(1:gfld%ipdtlen)
         gfld%ipdtmpl(9)=ihrs1
         do J=16,21
         gfld%ipdtmpl(J)=PDS_RAIN_HOLD(J)
