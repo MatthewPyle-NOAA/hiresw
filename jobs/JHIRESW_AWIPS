@@ -73,9 +73,9 @@ export pgmout="OUTPUT.$$"
 #
 if [ $MODEL = 'arw' ] 
 then
-$HOMEhiresw/scripts/arw/exhiresw_awips.sh.ecf
+$HOMEhiresw/scripts/arw/exhiresw_awips.sh
 else
-$HOMEfv3/scripts/fv3/exhiresw_awips.sh.ecf
+$HOMEfv3/scripts/fv3/exhiresw_awips.sh
 fi
 #
 ########################################################

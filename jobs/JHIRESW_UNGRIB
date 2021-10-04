@@ -59,7 +59,7 @@ export pgmout="OUTPUT.$$"
 
 ########################################################
 # Execute the script.
-${HOMEhiresw}/scripts/arw/exhiresw_ungrib.sh.ecf
+${HOMEhiresw}/scripts/arw/exhiresw_ungrib.sh
 ########################################################
 
 cd $DATAROOT

@@ -90,9 +90,9 @@ export tmmark=tm00
 
 if [ $MODEL = 'fv3' ]
 then
-${HOMEfv3}/scripts/fv3/exhiresw_post.sh.ecf
+${HOMEfv3}/scripts/fv3/exhiresw_post.sh
 else
-${HOMEhiresw}/scripts/arw/exhiresw_postg2.sh.ecf
+${HOMEhiresw}/scripts/arw/exhiresw_postg2.sh
 fi
 
 export err=$?

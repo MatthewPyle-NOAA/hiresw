@@ -89,9 +89,9 @@ env
 
 if [ $MODEL = 'fv3' ]
 then
-${HOMEfv3}/scripts/fv3/exhiresw_bufr.sh.ecf
+${HOMEfv3}/scripts/fv3/exhiresw_bufr.sh
 else
-${HOMEhiresw}/scripts/arw/exhiresw_wrfbufr.sh.ecf
+${HOMEhiresw}/scripts/arw/exhiresw_wrfbufr.sh
 fi
 
 export err=$?

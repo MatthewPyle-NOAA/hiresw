@@ -93,7 +93,7 @@ env
 # Generate the ICs and BC hour 0
 #####################################
 # Execute the script.
-${HOMEfv3}/scripts/fv3/exhiresw_make_ic.sh.ecf
+${HOMEfv3}/scripts/fv3/exhiresw_make_ic.sh
 export err=$?
 #####################################
 

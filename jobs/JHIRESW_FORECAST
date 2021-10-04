@@ -94,9 +94,9 @@ env
 
 if [ ${MODEL} = "fv3" ]
 then
-${HOMEfv3}/scripts/fv3/exhiresw_forecast.sh.ecf
+${HOMEfv3}/scripts/fv3/exhiresw_forecast.sh
 else
-${HOMEhiresw}/scripts/arw/exhiresw_fcst.sh.ecf
+${HOMEhiresw}/scripts/arw/exhiresw_fcst.sh
 fi
 export err=$?
 #####################################

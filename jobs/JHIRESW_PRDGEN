@@ -84,9 +84,9 @@ env
 
 if [ $MODEL = 'fv3' ]
 then
-${HOMEfv3}/scripts/fv3/exhiresw_prdgen.sh.ecf
+${HOMEfv3}/scripts/fv3/exhiresw_prdgen.sh
 else
-${HOMEhiresw}/scripts/arw/exhiresw_prdgeng2.sh.ecf
+${HOMEhiresw}/scripts/arw/exhiresw_prdgeng2.sh
 fi
 
 export err=$?

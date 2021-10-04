@@ -41,7 +41,7 @@ export pgmout="OUTPUT.$$"
 # Run the ex-script
 #
 
-${HOMEhiresw}/scripts/${MODEL}/exhiresw_pmgr.sh.ecf
+${HOMEhiresw}/scripts/${MODEL}/exhiresw_pmgr.sh
 
 export err=$?
 

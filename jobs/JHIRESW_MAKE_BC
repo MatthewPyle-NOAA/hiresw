@@ -94,7 +94,7 @@ env
 # Generate the BCs
 #####################################
 # Execute the script
-$HOMEfv3/scripts/fv3/exhiresw_make_bc.sh.ecf
+$HOMEfv3/scripts/fv3/exhiresw_make_bc.sh
 export err=$?
 #####################################
 

@@ -60,7 +60,7 @@ export pgmout="OUTPUT.$$"
 
 ########################################################
 # Execute the script.
-${HOMEhiresw}/scripts/arw/exhiresw_prelim_rap.sh.ecf
+${HOMEhiresw}/scripts/arw/exhiresw_prelim_rap.sh
 ########################################################
 
 cd $DATAROOT

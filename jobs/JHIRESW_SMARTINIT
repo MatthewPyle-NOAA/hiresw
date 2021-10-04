@@ -105,9 +105,9 @@ export pgmout="OUTPUT.$$"
 
 if [ $MODEL = 'fv3' ]
 then
-$HOMEfv3/scripts/fv3/exhiresw_smartinit.sh.ecf
+$HOMEfv3/scripts/fv3/exhiresw_smartinit.sh
 else
-$HOMEhiresw/scripts/arw/exhiresw_smartinit.sh.ecf
+$HOMEhiresw/scripts/arw/exhiresw_smartinit.sh
 fi
 
 export err=$?
