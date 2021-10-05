@@ -9,6 +9,8 @@ module purge >& /dev/null
 
 # source /apps/prod/lmodules/startLmod
 
+source ../../versions/fv3/build.ver
+
 module use -a ../modulefiles_fv3/
 module load build_v8.0.0-cray-intel
 
@@ -21,6 +23,7 @@ cd ./hireswfv3_fv3snowbucket.fd
 make clean
 
 make hireswfv3_fv3bucket
+# make debug
 
 cd ../
 

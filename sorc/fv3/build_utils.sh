@@ -19,6 +19,8 @@ fi
 #------------------------------------
 
 . ./partial_build.sh
+# cd hireswfv3_utils_test.fd
+# cd hireswfv3_utils_test_v3.1.fd
 cd hireswfv3_utils.fd
 
 #------------------------------------

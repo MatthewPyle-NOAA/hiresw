@@ -339,7 +339,7 @@ EOF
 
   startmsg
 #  $EXEChiresw/hiresw_stnmlist < stnmlist_input >> $pgmout 2>errfile
-aprun  $EXEChiresw/hiresw_stnmlist < stnmlist_input >> $pgmout 2>errfile
+mpiexec -n 1  $EXEChiresw/hiresw_stnmlist < stnmlist_input >> $pgmout 2>errfile
   export err=$?;err_chk
 
   echo ${COMOUT}/bufr.${NEST}${MODEL}${cyc} > ${COMOUT}/bufr.${NEST}${MODEL}${cyc}/bufrloc

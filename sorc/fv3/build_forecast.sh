@@ -6,6 +6,8 @@ if [ ! -d "../exec" ]; then
   mkdir ../exec
 fi
 
+source ../../versions/fv3/build.ver
+
 
 ## how modify this for wcoss2??
 

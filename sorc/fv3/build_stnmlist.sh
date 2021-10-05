@@ -10,6 +10,8 @@ module purge >& /dev/null
 # source /apps/prod/lmodules/startLmod
 
 
+source ../../versions/fv3/build.ver
+
 module use -a ../modulefiles_fv3
 module load build_v8.0.0-cray-intel
 
@@ -19,7 +21,7 @@ module list
 cd ./hireswfv3_stnmlist.fd
 
 make clean
-make
+make 
 
 make clean
 
