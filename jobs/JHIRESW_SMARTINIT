@@ -49,21 +49,13 @@ fi
 
 for hr in $hrs
 do
-
   mkdir -p $DATA/smartinit_${hr}
   cd $DATA/smartinit_${hr}
 
   # Run setpdy and initialize PDY variables
-  if [ $RUN_ENVIR = 'nco' ]
-  then
-    export cycle=${cycle:-t${cyc}z}
-    setpdy.sh
-    . ./PDY
-  else
-
-# define PDYm1 for rocoto FV3 case
-    export PDYm1=`$NDATE -24 ${PDY}00 | cut -c1-8`
-  fi
+  export cycle=${cycle:-t${cyc}z}
+  setpdy.sh
+  . ./PDY
 done
 
 ###############################

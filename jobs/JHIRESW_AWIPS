@@ -19,11 +19,8 @@ cd $DATA
 # Run setpdy and initialize PDY variables
 ###################################
 export cycle=${cycle:-t${cyc:?}z}
-if [ $RUN_ENVIR = 'nco' ]
-then
 setpdy.sh
 . ./PDY
-fi
 
 export SENDCOM=${SENDCOM:-YES}
 export SENDDBN_NTC=${SENDDBN_NTC:-NO}

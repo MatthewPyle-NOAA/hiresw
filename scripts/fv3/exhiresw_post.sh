@@ -24,21 +24,12 @@ MODEL=fv3
 # see if any postdone files exist, and if so, which is last hour completed
 
 
-# while [ $fhr -le $fhrend ]
-# do
-
-# incr=2 
-
 if [ -e ../postdone${fhr} ]
 then
  echo "The FV3 Post appears to have already run for fhr $fhr"
  ls -l ../postdone${fhr}
  exit 0
 fi
-
-# done
-
-# fhr=${fhrsave}
 
 echo STARTING POST with fhr $fhr
 

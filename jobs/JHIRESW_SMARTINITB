@@ -19,15 +19,9 @@ cd $DATA
 
 # Run setpdy and initialize PDY variables
 export cycle=${cycle:-t${cyc}z}
-if [ $RUN_ENVIR = 'nco' ]
-then
-  setpdy.sh
-  . ./PDY
 
-else
-# define PDYm1 for rocoto FV3 case
-  export PDYm1=`$NDATE -24 ${PDY}00 | cut -c1-8`
-fi
+setpdy.sh
+. ./PDY
 
 export SENDCOM=${SENDCOM:-YES}
 

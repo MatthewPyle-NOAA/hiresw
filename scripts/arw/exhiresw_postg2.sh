@@ -64,10 +64,10 @@ cp hiresw_micro_lookup.dat eta_micro_lookup.dat
 # while [ $fhr -le $fhrend ]
 # do
 
-if [ -e postdone${fhr} ]
+if [ -e ../postdone${fhr} ]
 then
 echo "It looks like this ARW post hour was run already"
-ls -l ./postdone${fhr}
+ls -l ../postdone${fhr}
 exit 0
 fi
 

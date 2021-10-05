@@ -15,11 +15,8 @@ cd $DATA
 
 # Run setpdy and initialize PDY variables
 export cycle=t${cyc}z
-if [  $RUN_ENVIR = 'nco' ]
-then
 setpdy.sh
 . ./PDY
-fi
 
 ###############################
 # Specify NET and RUN name

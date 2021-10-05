@@ -18,14 +18,10 @@ export INPUT_DATA=${INPUT_DATA:-${DATAROOT:?}/hiresw.forecast_${NEST}_${MODEL}_$
 ####################################
 # Run setpdy and initialize PDY variables
 ####################################
-# PDY and CDATE are passed in through Rocoto xml
 
-if [ $RUN_ENVIR = 'nco'  ]
-then
 export cycle=${cycle:-t${cyc}z}
 setpdy.sh
 . ./PDY
-fi
 
 export HOMEhiresw=${HOMEhiresw:-${PACKAGEROOT:?}/hiresw.${hiresw_ver:?}}
 
