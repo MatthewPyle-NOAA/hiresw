@@ -4,7 +4,7 @@
 #PBS -l select=1:ncpus=1:mem=128GB
 #PBS -q dev
 #PBS -A HIRESW-DEV
-#PBS -l walltime=001:27:05
+#PBS -l walltime=001:37:05
 
 # export MP_EUILIB=us
 export HOMEhiresw=/lfs/h2/emc/lam/noscrub/Matthew.Pyle/hiresw.v8.0.5

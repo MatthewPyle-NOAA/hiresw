@@ -54,6 +54,6 @@ export OMP_NUM_THREADS=1
 
 cat sub_prdgen.lsf_in_cray_retro | sed s:_DATE_:${DATE}:g | sed s:_DOM_:${DOM}:g | \
         sed s:_CORE_:${CORE}:g | sed s:_CYC_:${CYC}:g  | sed s:_NODES_:${NODES}:g | \
-	sed s:_NPROC_:${TOTAL_TASKS}:g | sed s:_POSTSPAN_:${TOTAL_TASKS}:g > sub_prdgen.lsf_${DOM}_${CORE}_${CYC}
+	sed s:_NPROC_:${TOTAL_TASKS}:g | sed s:_SPAN_:${TOTAL_TASKS}:g > sub_prdgen.lsf_${DOM}_${CORE}_${CYC}
 
 qsub  sub_prdgen.lsf_${DOM}_${CORE}_${CYC}

@@ -10,6 +10,8 @@ OBJS=	WRFBUCKETG2.o
 # CMD		Name of the executable
 #
 CMD = hiresw_bucket
+# DEBUG = -g -traceback -ftrapuv -check all
+DEBUG = -g -traceback
 
 LIBS =   ${G2TMPL_LIB} ${G2_LIB4} ${JASPER_LIB} ${PNG_LIB} ${Z_LIB} ${W3NCO_LIB4} ${W3EMC_LIB4} ${BACIO_LIB4} 
 INC =  -I${G2_INC4} -I${G2TMPL_INC}

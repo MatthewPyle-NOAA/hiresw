@@ -89,7 +89,6 @@ then
 
 # put USH calls in here
 
-echo "#!/bin/bash" > $DATA/poescript_${fhr}
 echo "$USHfv3/hiresw_prdgen_big_grid_g2.sh $fhr $NEST $cyc $MODEL 1 &" >> $DATA/poescript_${fhr}
 echo "$USHfv3/hiresw_prdgen_big_grid_g2.sh $fhr $NEST $cyc $MODEL 2 &" >> $DATA/poescript_${fhr}
 echo "$USHfv3/hiresw_prdgen_big_grid_g2.sh $fhr $NEST $cyc $MODEL 3 &" >> $DATA/poescript_${fhr}
@@ -102,11 +101,11 @@ echo "$USHfv3/hiresw_prdgen_5km_grid_g2.sh     $fhr $NEST $cyc $MODEL 6 &" >> $D
 echo "$USHfv3/hiresw_prdgen_oldgrid_g2.sh_5km $fhr $NEST $cyc $MODEL 1 conus &" >> $DATA/poescript_${fhr}
 echo "$USHfv3/hiresw_prdgen_oldgrid_g2.sh_5km $fhr $NEST $cyc $MODEL 2 conus &" >> $DATA/poescript_${fhr}
 echo "$USHfv3/hiresw_prdgen_3km_grid_g2.sh     $fhr $NEST $cyc $MODEL 1 &" >> $DATA/poescript_${fhr}
-echo "wait" >> $DATA/poescript_${fhr}
 chmod 775 $DATA/poescript_${fhr}
-command="aprun -n 1 -N 1 -d 12 $DATA/poescript_${fhr} "
+command="$DATA/poescript_${fhr} "
 
-time $command
+
+mpiexec -cpu-bind core --configfile ${command}
 export err=$?; err_chk
 
 # reassemble the large 5 km output grid
@@ -188,15 +187,13 @@ elif [ $NEST = "ak" ]
 then
 ################################################
 
-echo "#!/bin/bash" > $DATA/poescript_${fhr}
 echo "$USHfv3/hiresw_prdgen_big_grid_g2.sh $fhr $NEST $cyc $MODEL 0 &" >> $DATA/poescript_${fhr}
 echo "$USHfv3/hiresw_prdgen_oldgrid_g2.sh $fhr $NEST $cyc $MODEL 1 &" >> $DATA/poescript_${fhr}
 echo "$USHfv3/hiresw_prdgen_oldgrid_g2.sh $fhr $NEST $cyc $MODEL 2 &" >> $DATA/poescript_${fhr}
 echo "$USHfv3/hiresw_prdgen_oldgrid_g2.sh $fhr $NEST $cyc $MODEL 3 &" >> $DATA/poescript_${fhr}
 echo "$USHfv3/hiresw_prdgen_oldgrid_g2.sh $fhr $NEST $cyc $MODEL 4 &" >> $DATA/poescript_${fhr}
-echo "wait" >> $DATA/poescript_${fhr}
 chmod 775 $DATA/poescript_${fhr}
-command="aprun -n 1 -N 1 -d 5 $DATA/poescript_${fhr} "
+command="$DATA/poescript_${fhr} "
 
 time $command
 export err=$?; err_chk
@@ -237,14 +234,14 @@ $WGRIB2 $COMOUT/${RUN}.t${cyc}z.${MODEL}_5km.f${fhr}.${NEST}.subset.grib2 -s > $
 else
 ################################################
 
-echo "#!/bin/bash" > $DATA/poescript_${fhr}
 echo "$USHfv3/hiresw_prdgen_big_grid_g2.sh $fhr $NEST $cyc $MODEL 0 &" >> $DATA/poescript_${fhr}
 echo "$USHfv3/hiresw_prdgen_oldgrid_g2.sh $fhr $NEST $cyc $MODEL 0 &" >> $DATA/poescript_${fhr}
-echo "wait" >> $DATA/poescript_${fhr}
 chmod 775 $DATA/poescript_${fhr}
-command="aprun -n 1 -N 1 -d 2 $DATA/poescript_${fhr} "
+command="$DATA/poescript_${fhr} "
 
-time $command
+# time $command
+mpiexec -cpu-bind core --configfile ${command}
+
 export err=$?; err_chk
 
 

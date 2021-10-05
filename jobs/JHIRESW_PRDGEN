@@ -47,7 +47,7 @@ export EXECfv3=${EXECfv3:-$HOMEfv3/exec/fv3}
 export FIXfv3=${FIXfv3:-$HOMEfv3/fix/fv3}
 export PARMfv3=${PARMfv3:-$HOMEfv3/parm/fv3}
 export USHfv3=${USHfv3:-$HOMEfv3/ush/fv3}
-. $PARMfv3/run_commands_forecast.config
+# . $PARMfv3/run_commands_forecast.config
 fi
 
 export DBN_NEST=`echo ${NEST}_${MODEL} | sed -e s/mem2//g | tr '[a-z]' '[A-Z]'`

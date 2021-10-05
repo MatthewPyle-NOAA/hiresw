@@ -56,7 +56,7 @@ LDFLAGS  =
 LIBS     = $(WRFLIB) \
            $(NEMSIO_LIB) \
            $(W3EMC_LIB4) $(W3NCO_LIB4) $(BACIO_LIB4) \
-           $(NETCDF_LIB)/libnetcdf.so  $(NETCDF_LIB)/libnetcdff.so
+           $(NETCDF)/lib/libnetcdf.so  $(NETCDF)/lib/libnetcdff.so
 #
 #
 # free-format object files
