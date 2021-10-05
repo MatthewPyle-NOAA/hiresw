@@ -10,6 +10,11 @@ OBJS=	BFRHDR.o BFRIZE.o CALHEL.o CALWXT.o SMIX.o SNDPST.o \
         WETBLB.o CALVIS.o CALWXT_RAMER.o CALWXT_EXPLICIT.o \
         CALWXT_REVISED.o CALWXT_BOURG.o CALWXT_DOMINANT.o
 
+OBJS_DEBUG=	BFRHDR.o BFRIZE.o CALHEL.o CALWXT.o SMIX.o SNDPST.o \
+        SNDPST_FV3S.o VAP.o \
+        WETBLB.o CALVIS.o CALWXT_RAMER.o CALWXT_EXPLICIT.o \
+        CALWXT_REVISED.o CALWXT_BOURG.o CALWXT_DOMINANT.o
+
 # Tunable parameters
 #
 # FC		Name of the fortran compiling system to use
@@ -19,20 +24,28 @@ OBJS=	BFRHDR.o BFRIZE.o CALHEL.o CALWXT.o SMIX.o SNDPST.o \
 # PROFLIB	Library needed for profiling
 #
 #FC =		${COMP} -convert big_endian
+
 FC =		${COMPILER} -convert big_endian
+DEBUG = -g -traceback -ftrapuv  -check all  -fp-stack-check
 LDFLAGS = 
 CMD = hireswfv3_sndp.x
 LIBS = ${BUFR_LIB4}
 
-FFLAGS = -O   
-
 # Lines from here on down should not need to be changed.  They are the
 # actual rules which make uses to build a.out.
 #
-all:	 $(CMD) delete
+all:	 $(CMD) clean
 
-$(CMD):		$(OBJS)
+$(CMD)::		$(OBJS)
 	$(FC) $(LDFLAGS) -o $(@) $(OBJS) $(LIBS)
 
-delete:
+debug::		$(OBJS_DEBUG)
+	$(FC) $(DEBUG) $(LDFLAGS) -o hireswfv3_sndp.x $(OBJS_DEBUG) $(LIBS)
+
+OBJS_DEBUG:: 
+	$(FC) ${INC} -c $(DEBUG) $(@:.o=.f)
+OBJS:: 
+	$(FC) ${INC} -c $(@:.o=.f)
+
+clean:
 	@rm  *.o

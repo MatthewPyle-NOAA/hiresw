@@ -21,7 +21,6 @@
 #
 # Define the name of the executable
 #
-CMD = ../../exec/hiresw_wrfbufr
 CMD = hireswfv3_bufr.x
 #
 # CPP, Compiler, and Linker Options
@@ -35,11 +34,11 @@ CPPFLAGS =
 OPTS     = -O -fp-model precise  -convert big_endian -assume noold_ldout_format
 FREE     = -FR
 TRAPS    = 
-DEBUG    = -g -traceback #  -fpe0 -ftrapuv  -check all 
+DEBUG    = -g -traceback  -fpe0 -ftrapuv  -check all 
 
- WRFLIB    = ./wrflibs/libwrflib.a  \
-             ./wrflibs/pack_utils.o  \
-             ./wrflibs/libfftpack.a \
+WRFLIB    = ./wrflibs/libwrflib.a  \
+            ./wrflibs/pack_utils.o  \
+            ./wrflibs/libfftpack.a \
             ./wrflibs/libio_grib1.a \
             ./wrflibs/libio_grib_share.a \
             ./wrflibs/libwrfio_int.a \
@@ -47,37 +46,45 @@ DEBUG    = -g -traceback #  -fpe0 -ftrapuv  -check all
             ./wrflibs/libesmf_time.a \
             ./wrflibs/librsl_lite.a
 
-
 #
 # Assemble Options
 #
-FFLAGS   = $(OPTS) $(TRAPS) $(DEBUG) $(WRFFLAGS) -I$(NEMSIO_INC) -I$(NETCDF_INC)
-FFLAGST  = $(OPTS) $(FREE) $(TRAPS) $(DEBUG) $(WRFFLAGS) -I$(NEMSIO_INC) -I$(NETCDF_INC)
+FFLAGS   = $(OPTS) $(TRAPS) $(WRFFLAGS) -I$(NEMSIO_INC) -I$(NETCDF_INCLUDES)
+FFLAGST  = $(OPTS) $(FREE) $(TRAPS) $(WRFFLAGS) -I$(NEMSIO_INC) -I$(NETCDF_INCLUDES)
+
+FFLAGS_DEBUG   = $(OPTS) $(TRAPS) $(DEBUG) $(WRFFLAGS) -I$(NEMSIO_INC) -I$(NETCDF_INCLUDES)
+FFLAGST_DEBUG  = $(OPTS) $(FREE) $(TRAPS) $(DEBUG) $(WRFFLAGS) -I$(NEMSIO_INC) -I$(NETCDF_INCLUDES)
+
 LDFLAGS  =
 LIBS     = $(WRFLIB) \
            $(NEMSIO_LIB) \
            $(W3EMC_LIB4) $(W3NCO_LIB4) $(BACIO_LIB4) \
-           -L$(NETCDF_LIB) -lnetcdf -lnetcdff
+           -L$(NETCDF_LIBRARIES) -lnetcdf -lnetcdff
 #
 #
 # free-format object files
 #
 OBJST= module_internal_header_util.o getIVariableB.o getIVariable.o getVariableB.o getVariable.o \
-        kinds_mod.o \
-        count_recs_wrf_binary_file.o inventory_wrf_binary_file.o \
+        kinds_mod.o count_recs_wrf_binary_file.o inventory_wrf_binary_file.o \
         next_buf.o retrieve_index.o GETNEMSANDPLACE.o PARA_RANGE.o
 
-
+OBJST_DEBUG= module_internal_header_util.o getIVariableB.o getIVariable.o getVariableB.o getVariable.o \
+        kinds_mod.o count_recs_wrf_binary_file.o inventory_wrf_binary_file.o \
+        next_buf.o retrieve_index.o GETNEMSANDPLACE.o PARA_RANGE.o
 #
 # fixed-format object files
 #
-OBJS=	VRBLS2D_mod.o VRBLS3D_mod.o MASKS_mod.o SOIL_mod.o \
- WRFBUFR.o PROF_EM.o PROF_NMM.o  PROF_NMM_NET.o PROF_EM_NET.o PROF_NMMB_SERIAL.o \
-PROF_FV3SAR_NET.o \
-iw3jdn.o w3fs26.o w3movdat.o w3reddat.o gdswiz.o gdswiz01.o \
-gdswiz03.o gdswiz05.o
 #
-SRCS=	PROF_EM.f PROF_NMMB_SERIAL.f WRFBUFR.f
+OBJS= VRBLS2D_mod.o VRBLS3D_mod.o MASKS_mod.o SOIL_mod.o \
+WRFBUFR.o PROF_EM.o PROF_NMM.o  PROF_NMM_NET.o PROF_EM_NET.o PROF_NMMB_SERIAL.o \
+PROF_FV3SAR_NET.o iw3jdn.o w3fs26.o w3movdat.o w3reddat.o gdswiz.o gdswiz01.o \
+gdswiz03.o gdswiz05.o
+
+OBJS_DEBUG= VRBLS2D_mod.o VRBLS3D_mod.o MASKS_mod.o SOIL_mod.o \
+WRFBUFR.o PROF_EM.o PROF_NMM.o  PROF_NMM_NET.o PROF_EM_NET.o PROF_NMMB_SERIAL.o \
+PROF_FV3SAR_NET.o iw3jdn.o w3fs26.o w3movdat.o w3reddat.o gdswiz.o gdswiz01.o \
+gdswiz03.o gdswiz05.o
+
 #
 # Includes
 #
@@ -94,12 +101,20 @@ DEPS= $(INCLUDES)
 $(CMD):	$(OBJST) $(OBJS)
 	$(FC) $(LDFLAGS) -o $@ $(OBJST) $(OBJS) $(LIBS) 
 
-$(OBJS):	$(DEPS)
+debug:	$(OBJST_DEBUG) $(OBJS_DEBUG)
+	$(FC) $(LDFLAGS) -o hireswfv3_bufr.x $(OBJST_DEBUG) $(OBJS_DEBUG) $(LIBS) 
+
+$(OBJS)::	$(DEPS)
 	$(FC) -c $(FFLAGS) $(@:.o=.f)
 
-$(OBJST):	$(DEPS)
+$(OBJS_DEBUG)::	$(DEPS)
+	$(FC) -c $(FFLAGS_DEBUG) $(@:.o=.f)
+
+$(OBJST)::	$(DEPS)
 	$(FC) -c $(FFLAGST) $(@:.o=.f90)
+
+$(OBJST_DEBUG)::	$(DEPS)
+	$(FC) -c $(FFLAGST_DEBUG) $(@:.o=.f90)
 
 clean:	
 	/bin/rm -f  *.lst *.o *.mod
-#

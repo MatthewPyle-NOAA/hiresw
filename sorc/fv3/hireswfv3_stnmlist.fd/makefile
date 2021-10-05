@@ -24,6 +24,7 @@ SHELL=/bin/sh
 SRCS=	stnmlist.f  
 
 OBJS=	stnmlist.o 
+OBJS_DEBUG=	stnmlist.o 
 
 # Tunable parameters
 #
@@ -35,25 +36,26 @@ OBJS=	stnmlist.o
 #
 #FC =		${COMP}
 FC =		${COMPILER}
+FC_DEBUG =	${COMPILER}  -g -traceback  -ftrapuv  -check all  -fp-stack-check
 LDFLAGS =	
 LIBS = ${W3NCO_LIB4} ${W3EMC_LIB4} ${BUFR_LIB4}
 
 CMD =	        hireswfv3_stnmlist.x
 PROFLIB =
 
-# To perform the default compilation, use the first line
-# To compile with flowtracing turned on, use the second line
-# To compile giving profile additonal information, use the third line
-# WARNING:  SIMULTANEOUSLY PROFILING AND FLOWTRACING IS NOT RECOMMENDED 
-FFLAGS =        -O
 
 # Lines from here on down should not need to be changed.  They are the
 # actual rules which make uses to build a.out.
 #
 all:		$(CMD)
 
-$(CMD):		$(OBJS)
+$(CMD)::		$(OBJS)
 	$(FC) $(LDFLAGS) -o $(@) $(OBJS) $(LIBS)
+debug::		$(OBJS_DEBUG)
+	$(FC_DEBUG) $(LDFLAGS) -o hireswfv3_stnmlist.x $(OBJS) $(LIBS)
+$(OBJS_DEBUG):
+	$(FC_DEBUG)  -c  $(@:.o=.f)
+
 
 clean:
 	-rm -f $(OBJS)

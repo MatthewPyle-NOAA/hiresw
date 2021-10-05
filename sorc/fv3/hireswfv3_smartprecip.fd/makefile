@@ -4,6 +4,7 @@ OBJS=SMARTPRECIP.o
 
 #FC =   ${COMP} -convert big_endian -g -traceback -assume noold_ldout_format
 FC =   ${COMPILER} -convert big_endian -g -traceback -assume noold_ldout_format
+FC_DEBUG =   ${COMPILER} -convert big_endian -g -traceback -assume noold_ldout_format -ftrapuv -check all
 
 LIBS = ${G2TMPL_LIB} ${G2_LIB4} ${JASPER_LIB} ${PNG_LIB} ${Z_LIB} \
        ${IP_LIB4} ${W3NCO_LIB4} ${W3EMC_LIB4} ${BACIO_LIB4}

@@ -3,6 +3,7 @@ SHELL=/bin/sh
 SRCS=	WRFBUCKETG2.f
 
 OBJS=	WRFBUCKETG2.o 
+OBJS_DEBUG=	WRFBUCKETG2.o 
 
 # Tunable parameters
 #
@@ -16,15 +17,25 @@ INC =  -I${G2_INC4} -I${G2TMPL_INC}
 
 FFLAGS = -O   
 
+FFLAGS_DEBUG = -O    -g -traceback -ftrapuv  -check all  -fp-stack-check
+
 # Lines from here on down should not need to be changed.  They are the
 # actual rules which make uses to build a.out.
 #
-all:	 $(CMD) delete
+all:	 $(CMD) clean
 
 $(CMD):		$(OBJS)
 	$(COMPILER) ${INC} -o $(@) $(OBJS) $(LIBS)
 
+debug:		$(OBJS_DEBUG)
+	$(COMPILER) ${INC} -o hireswfv3_bucket $(OBJS_DEBUG) $(LIBS)
+
 $(OBJS):       
 	$(COMPILER) ${INC} -c $(FFLAGS) $(@:.o=.f)
-delete:
-	@rm  *.o
+
+$(OBJS_DEBUG):       
+	$(COMPILER) ${INC} -c $(FFLAGS_DEBUG) $(@:.o=.f)
+clean:
+	@rm  *.o ${CMD}
+install:
+	/bin/cp ${CMD} ../../../exec/fv3/

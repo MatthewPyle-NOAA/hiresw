@@ -42,7 +42,7 @@ FFLAGS   = $(OPTS) $(FREE) $(DEBUG) \
 	   -I$(IP_INC4) \
 	   -I$(SP_INC4) \
 	   -I$(WRF_IO_INC) \
-           -I$(NETCDF_INC)
+           -I$(NETCDF_INCLUDES)
 
 
 LIBS     = $(WRF_IO_LIB) \
