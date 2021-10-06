@@ -34,7 +34,7 @@ LIBS = ${BUFR_LIB4}
 # Lines from here on down should not need to be changed.  They are the
 # actual rules which make uses to build a.out.
 #
-all:	 $(CMD) clean
+all:	 $(CMD)
 
 $(CMD)::		$(OBJS)
 	$(FC) $(LDFLAGS) -o $(@) $(OBJS) $(LIBS)

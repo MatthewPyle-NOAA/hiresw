@@ -89,18 +89,18 @@ then
 
 # put USH calls in here
 
-echo "$USHfv3/hiresw_prdgen_big_grid_g2.sh $fhr $NEST $cyc $MODEL 1 &" >> $DATA/poescript_${fhr}
-echo "$USHfv3/hiresw_prdgen_big_grid_g2.sh $fhr $NEST $cyc $MODEL 2 &" >> $DATA/poescript_${fhr}
-echo "$USHfv3/hiresw_prdgen_big_grid_g2.sh $fhr $NEST $cyc $MODEL 3 &" >> $DATA/poescript_${fhr}
-echo "$USHfv3/hiresw_prdgen_5km_grid_g2.sh     $fhr $NEST $cyc $MODEL 1 &" >> $DATA/poescript_${fhr}
-echo "$USHfv3/hiresw_prdgen_5km_grid_g2.sh     $fhr $NEST $cyc $MODEL 2 &" >> $DATA/poescript_${fhr}
-echo "$USHfv3/hiresw_prdgen_5km_grid_g2.sh     $fhr $NEST $cyc $MODEL 3 &" >> $DATA/poescript_${fhr}
-echo "$USHfv3/hiresw_prdgen_5km_grid_g2.sh     $fhr $NEST $cyc $MODEL 4 &" >> $DATA/poescript_${fhr}
-echo "$USHfv3/hiresw_prdgen_5km_grid_g2.sh     $fhr $NEST $cyc $MODEL 5 &" >> $DATA/poescript_${fhr}
-echo "$USHfv3/hiresw_prdgen_5km_grid_g2.sh     $fhr $NEST $cyc $MODEL 6 &" >> $DATA/poescript_${fhr}
-echo "$USHfv3/hiresw_prdgen_oldgrid_g2.sh_5km $fhr $NEST $cyc $MODEL 1 conus &" >> $DATA/poescript_${fhr}
-echo "$USHfv3/hiresw_prdgen_oldgrid_g2.sh_5km $fhr $NEST $cyc $MODEL 2 conus &" >> $DATA/poescript_${fhr}
-echo "$USHfv3/hiresw_prdgen_3km_grid_g2.sh     $fhr $NEST $cyc $MODEL 1 &" >> $DATA/poescript_${fhr}
+echo "$USHfv3/hiresw_prdgen_big_grid_g2.sh $fhr $NEST $cyc $MODEL 1" >> $DATA/poescript_${fhr}
+echo "$USHfv3/hiresw_prdgen_big_grid_g2.sh $fhr $NEST $cyc $MODEL 2" >> $DATA/poescript_${fhr}
+echo "$USHfv3/hiresw_prdgen_big_grid_g2.sh $fhr $NEST $cyc $MODEL 3" >> $DATA/poescript_${fhr}
+echo "$USHfv3/hiresw_prdgen_5km_grid_g2.sh     $fhr $NEST $cyc $MODEL 1" >> $DATA/poescript_${fhr}
+echo "$USHfv3/hiresw_prdgen_5km_grid_g2.sh     $fhr $NEST $cyc $MODEL 2" >> $DATA/poescript_${fhr}
+echo "$USHfv3/hiresw_prdgen_5km_grid_g2.sh     $fhr $NEST $cyc $MODEL 3" >> $DATA/poescript_${fhr}
+echo "$USHfv3/hiresw_prdgen_5km_grid_g2.sh     $fhr $NEST $cyc $MODEL 4" >> $DATA/poescript_${fhr}
+echo "$USHfv3/hiresw_prdgen_5km_grid_g2.sh     $fhr $NEST $cyc $MODEL 5" >> $DATA/poescript_${fhr}
+echo "$USHfv3/hiresw_prdgen_5km_grid_g2.sh     $fhr $NEST $cyc $MODEL 6" >> $DATA/poescript_${fhr}
+echo "$USHfv3/hiresw_prdgen_oldgrid_g2.sh_5km $fhr $NEST $cyc $MODEL 1 conus" >> $DATA/poescript_${fhr}
+echo "$USHfv3/hiresw_prdgen_oldgrid_g2.sh_5km $fhr $NEST $cyc $MODEL 2 conus" >> $DATA/poescript_${fhr}
+echo "$USHfv3/hiresw_prdgen_3km_grid_g2.sh     $fhr $NEST $cyc $MODEL 1" >> $DATA/poescript_${fhr}
 chmod 775 $DATA/poescript_${fhr}
 command="$DATA/poescript_${fhr} "
 
@@ -187,15 +187,15 @@ elif [ $NEST = "ak" ]
 then
 ################################################
 
-echo "$USHfv3/hiresw_prdgen_big_grid_g2.sh $fhr $NEST $cyc $MODEL 0 &" >> $DATA/poescript_${fhr}
-echo "$USHfv3/hiresw_prdgen_oldgrid_g2.sh $fhr $NEST $cyc $MODEL 1 &" >> $DATA/poescript_${fhr}
-echo "$USHfv3/hiresw_prdgen_oldgrid_g2.sh $fhr $NEST $cyc $MODEL 2 &" >> $DATA/poescript_${fhr}
-echo "$USHfv3/hiresw_prdgen_oldgrid_g2.sh $fhr $NEST $cyc $MODEL 3 &" >> $DATA/poescript_${fhr}
-echo "$USHfv3/hiresw_prdgen_oldgrid_g2.sh $fhr $NEST $cyc $MODEL 4 &" >> $DATA/poescript_${fhr}
+echo "$USHfv3/hiresw_prdgen_big_grid_g2.sh $fhr $NEST $cyc $MODEL 0" >> $DATA/poescript_${fhr}
+echo "$USHfv3/hiresw_prdgen_oldgrid_g2.sh $fhr $NEST $cyc $MODEL 1" >> $DATA/poescript_${fhr}
+echo "$USHfv3/hiresw_prdgen_oldgrid_g2.sh $fhr $NEST $cyc $MODEL 2" >> $DATA/poescript_${fhr}
+echo "$USHfv3/hiresw_prdgen_oldgrid_g2.sh $fhr $NEST $cyc $MODEL 3" >> $DATA/poescript_${fhr}
+echo "$USHfv3/hiresw_prdgen_oldgrid_g2.sh $fhr $NEST $cyc $MODEL 4" >> $DATA/poescript_${fhr}
 chmod 775 $DATA/poescript_${fhr}
 command="$DATA/poescript_${fhr} "
 
-time $command
+mpiexec -cpu-bind core --configfile ${command}
 export err=$?; err_chk
 
 

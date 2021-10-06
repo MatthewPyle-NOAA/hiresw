@@ -14,7 +14,7 @@ FFLAGS_DEBUG = -O0 -g -traceback -assume noold_ldout_format  -ftrapuv  -check al
 # Lines from here on down should not need to be changed.  They are the
 # actual rules which make uses to build a.out.
 #
-all:	 clean hireswfv3_fv3bucket
+all:	 hireswfv3_fv3bucket
 
 $(OBJS)::       
 	$(COMPILER) ${INC} -c $(FFLAGS) $(@:.o=.f)

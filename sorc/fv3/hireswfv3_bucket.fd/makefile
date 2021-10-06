@@ -22,7 +22,7 @@ FFLAGS_DEBUG = -O    -g -traceback -ftrapuv  -check all  -fp-stack-check
 # Lines from here on down should not need to be changed.  They are the
 # actual rules which make uses to build a.out.
 #
-all:	 $(CMD) clean
+all:	 $(CMD)
 
 $(CMD):		$(OBJS)
 	$(COMPILER) ${INC} -o $(@) $(OBJS) $(LIBS)
