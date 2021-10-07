@@ -908,6 +908,9 @@ C  SET ARGUMENTS
          call gbyte(cgrib,discipline,iofst,8)     ! Discipline
          iofst=iofst+8
          call gbyte(cgrib,grib_edition,iofst,8)   ! GRIB edition number
+         ! try hardwire
+         grib_edition=2
+         ! end try hardwire
 
 !        print *, 'ungrib - grib edition num',  grib_edition
          CALL BACLOSE(junit,IOS)
