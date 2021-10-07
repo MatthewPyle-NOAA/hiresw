@@ -1,13 +1,13 @@
 #PBS -j oe
-#PBS -o /lfs/h2/emc/lam/noscrub/Matthew.Pyle/hiresw.v8.0.5/launch_info/logs/test_gempak.out__DOM__CORE__CYC_
-#PBS -e /lfs/h2/emc/lam/noscrub/Matthew.Pyle/hiresw.v8.0.5/launch_info/logs/test_gempak.err__DOM__CORE__CYC_
+#PBS -o /lfs/h2/emc/lam/noscrub/Matthew.Pyle/hiresw.v8.1.0/launch_info/logs/test_gempak.out__DOM__CORE__CYC_
+#PBS -e /lfs/h2/emc/lam/noscrub/Matthew.Pyle/hiresw.v8.1.0/launch_info/logs/test_gempak.err__DOM__CORE__CYC_
 #PBS -l select=1:ncpus=1:mem=128GB
 #PBS -q dev
 #PBS -A HIRESW-DEV
 #PBS -l walltime=001:27:05
 
 # export MP_EUILIB=us
-export HOMEhiresw=/lfs/h2/emc/lam/noscrub/Matthew.Pyle/hiresw.v8.0.5
+export HOMEhiresw=/lfs/h2/emc/lam/noscrub/Matthew.Pyle/hiresw.v8.1.0
 source ${HOMEhiresw}/versions/arw/run.ver
 
 module purge
@@ -31,7 +31,7 @@ module load zlib/${zlib_ver}
 
 module load gempak/${gempak_ver}
 
-export HOMEhiresw=/lfs/h2/emc/lam/noscrub/Matthew.Pyle/hiresw.v8.0.5
+export HOMEhiresw=/lfs/h2/emc/lam/noscrub/Matthew.Pyle/hiresw.v8.1.0
 
 export RUN_ENVIR=test
 export envir=test

@@ -1,13 +1,13 @@
 #PBS -j oe
-#PBS -o /lfs/h2/emc/lam/noscrub/Matthew.Pyle/hiresw.v8.0.5/launch_info/logs/metgrid__DOM__CYC_.log
-#PBS -e /lfs/h2/emc/lam/noscrub/Matthew.Pyle/hiresw.v8.0.5/launch_info/logs/metgrid__DOM__CYC_.log
+#PBS -o /lfs/h2/emc/lam/noscrub/Matthew.Pyle/hiresw.v8.1.0/launch_info/logs/metgrid__DOM__CYC_.log
+#PBS -e /lfs/h2/emc/lam/noscrub/Matthew.Pyle/hiresw.v8.1.0/launch_info/logs/metgrid__DOM__CYC_.log
 #PBS -l select=1:ncpus=9:mem=80GB
 #PBS -A HIRESW-DEV
 #PBS -q dev
 #PBS -l walltime=000:15:05
 
 
-export HOMEhiresw=/lfs/h2/emc/lam/noscrub/Matthew.Pyle/hiresw.v8.0.5
+export HOMEhiresw=/lfs/h2/emc/lam/noscrub/Matthew.Pyle/hiresw.v8.1.0
 source ${HOMEhiresw}/versions/arw/run.ver
 
 module purge

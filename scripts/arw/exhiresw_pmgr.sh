@@ -1,4 +1,4 @@
-#! /bin/ksh
+#!/bin/ksh
 #
 # Script name:         exhiresw_pmgr.sh.sms
 #

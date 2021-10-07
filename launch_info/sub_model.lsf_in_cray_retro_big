@@ -1,14 +1,14 @@
 
 
 #PBS -j oe
-#PBS -o /lfs/h2/emc/lam/noscrub/Matthew.Pyle/hiresw.v8.0.5/launch_info/logs/test_fore.out__DOM__CORE__CYC_
-#PBS -e /lfs/h2/emc/lam/noscrub/Matthew.Pyle/hiresw.v8.0.5/launch_info/logs/test_fore.err__DOM__CORE__CYC_
+#PBS -o /lfs/h2/emc/lam/noscrub/Matthew.Pyle/hiresw.v8.1.0/launch_info/logs/test_fore.out__DOM__CORE__CYC_
+#PBS -e /lfs/h2/emc/lam/noscrub/Matthew.Pyle/hiresw.v8.1.0/launch_info/logs/test_fore.err__DOM__CORE__CYC_
 #PBS -A HIRESW-DEV
 #PBS -l place=vscatter,select=_NODES_:ncpus=_NCPUSMOD_+1:ncpus=_NCPUSQUILT_
 #PBS -q dev
 #PBS -l walltime=001:17:05
 
-export HOMEhiresw=/lfs/h2/emc/lam/noscrub/Matthew.Pyle/hiresw.v8.0.5
+export HOMEhiresw=/lfs/h2/emc/lam/noscrub/Matthew.Pyle/hiresw.v8.1.0
 source ${HOMEhiresw}/versions/arw/run.ver
 export OMP_NUM_THREADS=1
 
