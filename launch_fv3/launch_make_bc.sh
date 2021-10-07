@@ -30,7 +30,7 @@ fi
 module load prod_envir
 module load prod_util
 
-cd /lfs/h2/emc/lam/noscrub/Matthew.Pyle/hiresw.v8.0.5/launch_fv3/
+cd /lfs/h2/emc/lam/noscrub/Matthew.Pyle/hiresw.v8.1.0/launch_fv3/
 
 
 echo NDATE is $NDATE
