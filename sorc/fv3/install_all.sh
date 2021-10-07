@@ -27,7 +27,7 @@ fi
 #------------------------------------
 # install post
 #------------------------------------
-#  ${CP} hireswfv3_post.fd/exec/ncep_post                 $EXEdir/hireswfv3_post
+ ${CP} hireswfv3_post.fd/exec/ncep_post                 $EXEdir/hireswfv3_post
 
 #------------------------------------
 # install bufrpost
@@ -67,7 +67,7 @@ fi
 #------------------------------------
 # install chgres_cube
 #------------------------------------
-# ${CP} hireswfv3_utils.fd/exec/chgres_cube          $EXEdir/hireswfv3_chgres_cube
+${CP} hireswfv3_utils.fd/exec/chgres_cube          $EXEdir/hireswfv3_chgres_cube
 
 
 echo;echo " .... Install system finished .... "
