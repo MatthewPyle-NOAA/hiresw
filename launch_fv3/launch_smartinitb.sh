@@ -34,3 +34,4 @@ cat sub_smartinitb.lsf_in_cray_retro | sed s:_DATE_:${DATE}:g | sed s:_DOM_:${DO
 	sed s:_NPROC_:${TOTAL_TASKS}:g | sed s:_POSTSPAN_:${TOTAL_TASKS}:g > sub_smartinitb.lsf_${DOM}_${CORE}_${CYC}
 
 qsub  sub_smartinitb.lsf_${DOM}_${CORE}_${CYC}
+rm sub_smartinitb.lsf_${DOM}_${CORE}_${CYC}

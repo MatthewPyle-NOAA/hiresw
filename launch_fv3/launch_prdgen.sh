@@ -57,3 +57,5 @@ cat sub_prdgen.lsf_in_cray_retro | sed s:_DATE_:${DATE}:g | sed s:_DOM_:${DOM}:g
 	sed s:_NPROC_:${TOTAL_TASKS}:g | sed s:_SPAN_:${TOTAL_TASKS}:g > sub_prdgen.lsf_${DOM}_${CORE}_${CYC}
 
 qsub  sub_prdgen.lsf_${DOM}_${CORE}_${CYC}
+
+rm sub_prdgen.lsf_${DOM}_${CORE}_${CYC}

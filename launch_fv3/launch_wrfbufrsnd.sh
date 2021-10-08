@@ -45,3 +45,5 @@ cat sub_wrfbufrsnd.lsf_in_cray_retro | sed s:_DATE_:${DATE}:g | sed s:_DOM_:${DO
 	sed s:_NPROCBUFR_:${TOTAL_TASKS}:g  > sub_wrfbufrsnd.lsf_${DOM}_${CORE}_${CYC}
 
 qsub  sub_wrfbufrsnd.lsf_${DOM}_${CORE}_${CYC}
+rm sub_wrfbufrsnd.lsf_${DOM}_${CORE}_${CYC}
+

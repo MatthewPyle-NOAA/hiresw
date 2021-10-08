@@ -35,3 +35,4 @@ cat sub_gempak.lsf_in_cray_retro | sed s:_DATE_:${DATE}:g | sed s:_DOM_:${DOM}:g
 
 qsub  sub_gempak.lsf_${DOM}_${CORE}_${CYC}
 rm sub_gempak.lsf_${DOM}_${CORE}_${CYC}
+

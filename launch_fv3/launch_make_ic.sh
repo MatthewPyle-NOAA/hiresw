@@ -152,4 +152,4 @@ cat sub_make_ic.lsf_in_cray_retro  | sed s:_DATE_:${DATE}:g | sed s:_DOM_:${DOM}
 	sed s:_CORE_:${CORE}:g | sed s:_CYC_:${CYC}:g > sub_make_ic.lsf_${DOM}_${CORE}_${CYC}_retro
 
 qsub sub_make_ic.lsf_${DOM}_${CORE}_${CYC}_retro
-
+rm sub_make_ic.lsf_${DOM}_${CORE}_${CYC}_retro

@@ -67,8 +67,8 @@ fi
 echo gfs_hour $gfs_hour
 echo hour_name $hour_name
 
-mkdir -p ${hour_name}
-cd ${hour_name}
+# mkdir -p ${hour_name}
+# cd ${hour_name}
 
 rm ./*
 

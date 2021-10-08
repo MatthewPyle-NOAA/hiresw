@@ -84,3 +84,5 @@ cat sub_model.lsf_in_cray_retro | sed s:_DATE_:${DATE}:g | sed s:_DOM_:${DOM}:g 
 	sed s:_NPROC_:${TOTAL_TASKS}:g | sed s:_SPAN_:128:g > sub_model.lsf_${DOM}_${CORE}_${CYC}
 
 qsub  sub_model.lsf_${DOM}_${CORE}_${CYC}
+
+rm sub_model.lsf_${DOM}_${CORE}_${CYC}

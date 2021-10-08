@@ -76,24 +76,18 @@ export COMOUT=${COMOUT:-$(compath.py -o $NET/${hiresw_ver})/$RUN.${PDY}}
 
 echo set COMOUT as $COMOUT
 
-export DATA=${DATAROOT}/hiresw.make_bc_${NEST}_${MODEL}_${cyc}_${envir}_retro
+# export DATA=${DATAROOT}/hiresw.make_bc_${NEST}_${MODEL}_${cyc}_${envir}_retro
 
-types="metgrid bufrpost forecast post prdgen smartinit smartinitb"
+types="bufrpost forecast post prdgen smartinit smartinitb"
 for typ in $types
 do
 echo will not delete $typ
 # rm -rf ${DATAROOT}/hiresw.${typ}_${NEST}_${MODEL}_${cyc}_${envir}_retro
 done
 
-# hours="03 06 09 12 15 18 21 24 27 30 33 36 39 42 45 48 51 54 57 60"
+export fhr=0_HR_
 
-# for hr in $hours
-# do
-
-export fhr=_HR_
+export DATA=${DATAROOT}/hiresw.make_bc_${NEST}_${MODEL}_${cyc}_${envir}_retro/${fhr}
 
 $HOMEhiresw/jobs/JHIRESW_MAKE_BC
 
-# done
-
-# qsub ${HOMEhiresw}/launch_info/sub_metgrid.lsf__DOM___CORE___CYC__retro
