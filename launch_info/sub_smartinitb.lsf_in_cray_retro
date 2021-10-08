@@ -9,7 +9,7 @@
 #
 
 export HOMEhiresw=/lfs/h2/emc/lam/noscrub/Matthew.Pyle/hiresw.v8.1.0
-source ${HOMEhiresw}/versions/arw/run.ver
+source ${HOMEhiresw}/versions/run.ver
 
 export SENDCOM=YES
 
@@ -23,7 +23,7 @@ module load cray-mpich/8.1.4
 module load cray-pals/1.0.12
 
 module load prod_util/${prod_util_ver}
-module load wgrib2/${wgrib2_ver}
+module load wgrib2/${wgrib2arw_ver}
 module load libjpeg/${libjpeg_ver}
 module load grib_util/${grib_util_ver}
 

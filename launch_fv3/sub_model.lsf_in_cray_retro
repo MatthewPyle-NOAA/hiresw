@@ -9,7 +9,7 @@
 
 export HOMEhiresw=/lfs/h2/emc/lam/noscrub/Matthew.Pyle/hiresw.v8.1.0
 export HOMEfv3=/lfs/h2/emc/lam/noscrub/Matthew.Pyle/hiresw.v8.1.0
-source ${HOMEhiresw}/versions/fv3/run.ver
+source ${HOMEhiresw}/versions/run.ver
 
 module purge
 module load envvar/1.0

@@ -8,7 +8,7 @@
 #PBS -l walltime=01:17:05
 
 export HOMEhiresw=/lfs/h2/emc/lam/noscrub/Matthew.Pyle/hiresw.v8.1.0
-source ${HOMEhiresw}/versions/arw/run.ver
+source ${HOMEhiresw}/versions/run.ver
 
 module purge
 module load envvar/1.0

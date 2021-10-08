@@ -1,0 +1,29 @@
+#! /bin/bash
+
+export hiresw_ver=v8.1.0
+export gfs_ver=v16.2
+export nam_ver=v4.2
+export rap_ver=v5.1
+export sref_ver=v7.1
+
+export ip_ver=3.3.3
+export bacio_ver=2.4.1
+export w3nco_ver=2.4.1
+export g2_ver=3.4.5
+export g2tmpl_ver=1.9.1
+export jasper_ver=2.0.25
+export libpng_ver=1.6.37
+export zlib_ver=1.2.11
+export python_ver=3.8.6
+
+export gempak_ver=7.14.0
+export cfp_ver=2.0.4
+export prod_util_ver=2.0.9
+export prod_envir_ver=2.0.5
+export wgrib2fv3_ver=2.0.8_wmo
+export wgrib2arw_ver=2.0.8_wmo
+export hdf5_ver=1.10.6
+export netcdf_ver=4.7.4
+export libjpeg_ver=9c
+
+export bufr_cword_ver=v1.0.1

@@ -25,16 +25,16 @@ if [ -a .bashrc ]; then
    . ./.bashrc
 fi
 
+export HOMEhiresw=/lfs/h2/emc/lam/noscrub/Matthew.Pyle/hiresw.v8.1.0
+export HOMEfv3=/lfs/h2/emc/lam/noscrub/Matthew.Pyle/hiresw.v8.1.0
+
+cd ${HOMEhiresw}/launch_fv3/
+
+source ${HOMEhiresw}/versions/run.ver
 
 
-module load prod_envir
-module load prod_util
-
-cd /lfs/h2/emc/lam/noscrub/Matthew.Pyle/hiresw.v8.1.0/launch_fv3/
-
-
-echo NDATE is $NDATE
-
+module load prod_envir/${prod_envir_ver}
+module load prod_util/${prod_util_ver}
 
 
 if [ $DOM$CORE == "conusfv3" ] 

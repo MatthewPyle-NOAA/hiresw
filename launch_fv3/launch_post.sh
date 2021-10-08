@@ -22,7 +22,7 @@ export HOMEfv3=/lfs/h2/emc/lam/noscrub/Matthew.Pyle/hiresw.v8.1.0
 
 cd ${HOMEhiresw}/launch_fv3/
 
-source ${HOMEhiresw}/versions/fv3/run.ver
+source ${HOMEhiresw}/versions/run.ver
 
 if [ $DOM == "conus" ]
 then

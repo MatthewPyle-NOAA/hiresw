@@ -8,7 +8,7 @@
 
 export HOMEhiresw=/lfs/h2/emc/lam/noscrub/Matthew.Pyle/hiresw.v8.1.0
 export HOMEfv3=$HOMEhiresw
-source ${HOMEhiresw}/versions/fv3/run.ver
+source ${HOMEhiresw}/versions/run.ver
 
 export numprocs=_NPROCBUFR_
 export spanprocs=_NPROCBUFR_
@@ -69,6 +69,14 @@ hrs="00 01 02 03 04 05 06 07 08 09 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 
 
 for hr in $hrs
 do
+
+if [ $hr -eq 60 ] 
+then
+export KEEPDATA=NO
+else
+export KEEPDATA=YES
+fi
+
 export fhr=${hr}
 $HOMEhiresw/jobs/JHIRESW_WRFBUFRSND
 done

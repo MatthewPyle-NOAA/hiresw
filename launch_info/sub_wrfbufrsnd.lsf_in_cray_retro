@@ -7,7 +7,7 @@
 #PBS -l walltime=001:27:05
 
 export HOMEhiresw=/lfs/h2/emc/lam/noscrub/Matthew.Pyle/hiresw.v8.1.0
-source ${HOMEhiresw}/versions/arw/run.ver
+source ${HOMEhiresw}/versions/run.ver
 
 export numprocs=_NPROCBUFR_
 export spanprocs=_NPROCBUFR_

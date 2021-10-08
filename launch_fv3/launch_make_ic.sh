@@ -29,7 +29,7 @@ export HOMEfv3=/lfs/h2/emc/lam/noscrub/Matthew.Pyle/hiresw.v8.1.0
 
 cd ${HOMEhiresw}/launch_fv3/
 
-source ${HOMEhiresw}/versions/fv3/run.ver
+source ${HOMEhiresw}/versions/run.ver
 
 module load prod_envir/${prod_envir_ver}
 module load prod_util/${prod_util_ver}
