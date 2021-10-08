@@ -36,44 +36,44 @@ export WTPG=24
 
 elif [ $DOM == "ak" ]
 then
-export        TOTAL_TASKS=1248
+export        TOTAL_TASKS=1200
 export        TASK_X=24
 export        TASK_Y=48
 export        NODES=10
         # quilt stuff
 export        WG=2
-export        WTPG=48
+export        WTPG=24
 
 elif [ $DOM == "hi" ]
 then
-export        TOTAL_TASKS=162
+export        TOTAL_TASKS=156
 export        TASK_X=8
 export        TASK_Y=18
 export        NODES=2
         # quilt stuff
 export        WG=1
-export        WTPG=18
+export        WTPG=12
 
 elif [ $DOM == "pr" ]
 then
-export 	TOTAL_TASKS=234
+export 	TOTAL_TASKS=228
 export 	TASK_X=12
 export	TASK_Y=18
 	NODES=2
 	# quilt stuff
 export  WG=1
-export 	WTPG=18
+export 	WTPG=12
 
 
 elif [ $DOM == "guam" ]
 then
-export        TOTAL_TASKS=162
+export        TOTAL_TASKS=156
 export        TASK_X=8
 export        TASK_Y=18
 export        NODES=2
         # quilt stuff
 export        WG=1
-export        WTPG=18
+export        WTPG=12
 fi
 
 

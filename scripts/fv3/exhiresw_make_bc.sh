@@ -55,13 +55,13 @@ if [ $gfs_hour_t -lt 10 ]; then
   gfs_hour_t='0'$gfs_hour_t
 fi
 
-if [ $hour -lt 10 ]; then
-  hour_name='0'$hour
-elif [ $hour -lt 100 ]; then
-  hour_name='0'$hour
-else
+# if [ $hour -lt 10 ]; then
+#   hour_name='0'$hour
+# elif [ $hour -lt 100 ]; then
+#   hour_name='0'$hour
+# else
   hour_name=$hour
-fi
+# fi
 
 
 echo gfs_hour $gfs_hour
