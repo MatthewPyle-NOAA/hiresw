@@ -36,15 +36,14 @@ def usage():
     print ("Usage: python %s -d [COM_EnKF] -v [valid time in YYYYMMDDHH] -t [hours] -r [resolution] \n" 
            "\t\t\t\t-o [output file] -m [ens mean?] -s [starting fhr] --retro=yes/no --exact=yes/no \n"
            "\t\t\t\t--minsize=x --o3fname=filename --filetype=atm/sfc --4d=[start,stop,inchrs] -h") % (sys.argv[0])
-    print
-    print " -d [COM_EnKF] = Directory where EnKF output resides, e.g. /com/gfs/prod/enkf (omit the .YYYYMMDDHH)"
-    print " -v [vtime] = valid time in YYYYMMDDHH (i.e. GSI analysis time)"
-    print " -t [hours] = Look back time, in hours from vtime, to start search for best set of EnKF members"
-    print " -o [output file] = Name of the outputfile"
-    print " --exact=yes/no: whether the retrieved EnKF members must be valid exactly at vtime (default is NO)"
-    print " --gfs_nemsio=yes/no : Whether to look for input EnKF files from the GFS in nemsio format (Default is NO)."
-    print " --gfs_netcdf=yes/no : Whether to look for input EnKF files from the GFS in netcdf format (Default is NO)."
-    print " -h = Prints this output"
+    print(" -d [COM_EnKF] = Directory where EnKF output resides, e.g. /com/gfs/prod/enkf (omit the .YYYYMMDDHH)")
+    print(" -v [vtime] = valid time in YYYYMMDDHH (i.e. GSI analysis time)")
+    print(" -t [hours] = Look back time, in hours from vtime, to start search for best set of EnKF members")
+    print(" -o [output file] = Name of the outputfile")
+    print(" --exact=yes/no: whether the retrieved EnKF members must be valid exactly at vtime (default is NO)")
+    print(" --gfs_nemsio=yes/no : Whether to look for input EnKF files from the GFS in nemsio format (Default is NO).")
+    print(" --gfs_netcdf=yes/no : Whether to look for input EnKF files from the GFS in netcdf format (Default is NO).")
+    print(" -h = Prints this output")
 
 def is_non_zero_file(fpath):
     return True if os.path.isfile(fpath) and os.path.getsize(fpath) > 0 else False
@@ -52,7 +51,7 @@ def is_non_zero_file(fpath):
 def force_symlink(f1,f2):
     try:
         os.symlink(f1,f2)
-    except OSError, e:
+    except OSError as e:
         if e.errno == errno.EEXIST:
             os.remove(f2)
             os.symlink(f1,f2)
@@ -69,7 +68,7 @@ def write_filelist(fname,comgfs,fsave,svdate,retro,path,suf,o3fname,filetype,get
                      "Therefore cannot find where EnKF members reside for Retro. Exit.")
     else:
         path=comgfs+'.'+svPDY+'/'+svCYC+'/atmos'
-        print 'set path here to : ', path
+        print ('set path here to : ', path)
     f=open(fname,'w')
     havefile=True   
     n=0
@@ -85,7 +84,7 @@ def write_filelist(fname,comgfs,fsave,svdate,retro,path,suf,o3fname,filetype,get
         if is_non_zero_file(en):
             f.write(path+'\n')
             f.write(justfile+'\n')
-            print 'Will copy file %s from GFS ' %(en)
+            print('Will copy file %s from GFS ' %(en))
         else:
             havefile=False
         havefile=False
@@ -137,7 +136,7 @@ def main():
         opts, args = getopt.getopt(sys.argv[1:], "d:v:t:r:o:m:s:h",["retro=","exact=","minsize=","o3fname=","filetype=","4d=","gfs_nemsio=","gfs_netcdf="])
     except getopt.GetoptError as err:
         # print help information and exit:
-        print str(err) # will print something like "option -a not recognized"
+        print(str(err)) # will print something like "option -a not recognized"
         usage()
         sys.exit()
 
@@ -249,7 +248,7 @@ def main():
 #        tmlist=range(tm,-6,-6)
         tmlist=range(tm,0,-6)
         tmlist=[x for x in tmlist if x >= 0] #make sure we only keep the positive elements
-        print 'tmlist is: ', tmlist
+        print( 'tmlist is: ', tmlist)
         dateobjs=[indate+timedelta(hours=-tm) for tm in tmlist]
         hdiff=999
         fsave=999
@@ -269,13 +268,13 @@ def main():
 
                 if gfs_nemsio:
                     en=path+'/gfs.t'+CYC+'z.'+filetype+'f'+str(f).zfill(3)+'.nemsio'
-#                    print 'set en to: ', en
+#                    print('set en to: ', en)
                 elif gfs_netcdf:
                     en=path+'/gfs.t'+CYC+'z.'+filetype+'f'+str(f).zfill(3)+'.nc'
-#                    print 'set en to: ', en
+#                    print('set en to: ', en)
                 else:
                     en=path+'/sfg_'+cdate+'_fhr'+str(f).zfill(2)+'_ensmean'+suf
-#                print 'Checking in %s for forecast hour %s' % (path,str(f).zfill(2))
+#                print('Checking in %s for forecast hour %s' % (path,str(f).zfill(2)))
                 if is_non_zero_file(en):
                     age=(time.time()-os.stat(en).st_mtime)/60. #get difference in seconds and convert to minutes
                     if age > 5.:
@@ -300,7 +299,7 @@ def main():
                                     fsave=f
 
         if svdate is None: 
-            print 'Unable to find matching EnKF members.'
+            print( 'Unable to find matching EnKF members.')
             sys.exit()
         write_filelist(fname,comgfs,fsave,svdate,retro,path,suf,o3fname,filetype,getmean,gfs_nemsio,gfs_netcdf)
 
