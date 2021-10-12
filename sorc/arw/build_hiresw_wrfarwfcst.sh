@@ -26,12 +26,8 @@ cd ${BASE}/hiresw_wrfarwfcst.fd
 # cp configure.wrf_wcoss configure.wrf
 cp configure.wrf_acorn configure.wrf
 
-# build model
+# build model & real
 ./compile  em_real 
-
-# build real
-./compile  em_real 
-
 
 # switch this to install script
 # cp ./main/real.exe $TARGDIR/hiresw_wrfarwfcst_init
