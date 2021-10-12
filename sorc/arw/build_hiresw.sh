@@ -9,6 +9,8 @@ module purge
 
 # source /apps/prod/lmodules/startLmod
 
+source ../../versions/build.ver
+
 module use -a ../modulefiles_arw/HIRESW
 module load v8.0.0
 module list
@@ -26,7 +28,7 @@ BUILD_hiresw_wrfarwfcst=1
 BUILD_hiresw_bucket=1
 BUILD_hiresw_wrfbufr=1
 BUILD_hiresw_wps=1
-BUILD_hiresw_post=0
+BUILD_hiresw_post=1
 BUILD_hiresw_smartinitg2=1
 BUILD_hiresw_smartprecipg2=1
 BUILD_hiresw_sndp=1
