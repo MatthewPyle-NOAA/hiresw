@@ -11,7 +11,7 @@ module purge
 
 # source /apps/prod/lmodules/startLmod
 
-source ../../versions/fv3/build.ver
+source ../../versions/build.ver
 
 
 

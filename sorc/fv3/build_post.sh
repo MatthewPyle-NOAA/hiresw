@@ -4,7 +4,7 @@ set -eux
 source ./machine-setup.sh > /dev/null 2>&1
 cwd=`pwd`
 
-source ../../versions/fv3/build.ver
+source ../../versions/build.ver
 
 
 USE_PREINST_LIBS=${USE_PREINST_LIBS:-"true"}

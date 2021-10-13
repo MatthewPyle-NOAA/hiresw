@@ -160,18 +160,18 @@
 
 !
 !  SNOWFALL 
-      J = 0;JPDS = -1;JPDS(3) = IGDNUM
-      JPDS(5) = 065;JPDS(6) = 001
+!      J = 0;JPDS = -1;JPDS(3) = IGDNUM
+!      JPDS(5) = 065;JPDS(6) = 001
 
-        if (IARW .eq. 0) then
+!        if (IARW .eq. 0) then
 
-      JPDS(14) = FHR3
-      JPDS(15) = FHR1
-        write(0,*) 'FHR0: ', FHR0
-      if (fhr4.gt.0) JPDS(14)=FHR0
-        write(0,*) 'JPDS(14) for snow now: ', JPDS(14)
-
-        endif
+!      JPDS(14) = FHR3
+!      JPDS(15) = FHR1
+!        write(0,*) 'FHR0: ', FHR0
+!      if (fhr4.gt.0) JPDS(14)=FHR0
+!        write(0,*) 'JPDS(14) for snow now: ', JPDS(14)
+!
+!        endif
 
         JIDS=-9999
         JPDTN=0
@@ -251,14 +251,14 @@
 
 !
 !     SNOWFALL
-      J = 0;JPDS = -1;JPDS(3) = IGDNUM
-      JPDS(5) = 065;JPDS(6) = 001
-        if (IARW .eq. 0) then
-      JPDS(14) = FHR1
-      JPDS(15) = FHR2
-      IF (LSUB) JPDS(14)=FHR3
-        endif
-
+!      J = 0;JPDS = -1;JPDS(3) = IGDNUM
+!      JPDS(5) = 065;JPDS(6) = 001
+!        if (IARW .eq. 0) then
+!      JPDS(14) = FHR1
+!      JPDS(15) = FHR2
+!      IF (LSUB) JPDS(14)=FHR3
+!        endif
+!
         JIDS=-9999
         JPDTN=0
         JPDT=-9999
@@ -318,12 +318,12 @@
 
 
 !     SNOWFALL
-      J = 0 ;JPDS = -1;JPDS(3) = IGDNUM
-      JPDS(5) = 065;JPDS(6) = 001
-        if (IARW .eq. 0) then
-        JPDS(14) = FHR2
-        JPDS(15) = FHR3
-        endif
+!      J = 0 ;JPDS = -1;JPDS(3) = IGDNUM
+!      JPDS(5) = 065;JPDS(6) = 001
+!        if (IARW .eq. 0) then
+!        JPDS(14) = FHR2
+!        JPDS(15) = FHR3
+!        endif
 
         JIDS=-9999
         JPDTN=0
@@ -374,22 +374,14 @@
        STOP
       END IF
 
-!     SNOWFALL
-      J = 0 ;JPDS = -1;JPDS(3) = IGDNUM
-      JPDS(5) = 065;JPDS(6) = 001
-        if (IARW .eq. 0) then
-        JPDS(14) = FHR2
-        JPDS(15) = FHR3
-        endif
-
 
 !     SNOWFALL
-      J = 0 ;JPDS = -1;JPDS(3) = IGDNUM
-      JPDS(5) = 065;JPDS(6) = 001
-        if (IARW .eq. 0) then
-        JPDS(14) = FHR3
-        JPDS(15) = FHR4
-        endif
+!      J = 0 ;JPDS = -1;JPDS(3) = IGDNUM
+!      JPDS(5) = 065;JPDS(6) = 001
+!        if (IARW .eq. 0) then
+!        JPDS(14) = FHR3
+!        JPDS(15) = FHR4
+!        endif
 
 
         JIDS=-9999
@@ -408,9 +400,9 @@
 !        enddo
 
 !     ACCUMULATED PRECIP 
-      J = 0;JPDS = -1;JPDS(3) = IGDNUM
-      JPDS(5) = 061;JPDS(6) = 001
-      JPDS(13) = 1
+!      J = 0;JPDS = -1;JPDS(3) = IGDNUM
+!      JPDS(5) = 061;JPDS(6) = 001
+!      JPDS(13) = 1
 
         JIDS=-9999
         JPDTN=8
@@ -472,13 +464,16 @@
 !      KPDS(14)=FHR3
 !      KPDS(15)=FHR2
         
+!        do K=1,gfld%ipdtlen
         if (IRET_EARLY .ne. 0) then
-          gfld%ipdtmpl=PDS_RAIN_HOLD
+          gfld%ipdtmpl(1:gfld%ipdtlen)= &
+              PDS_RAIN_HOLD(1:gfld%ipdtlen)
         else
-          gfld%ipdtmpl=PDS_RAIN_HOLD_EARLY
+          gfld%ipdtmpl(1:gfld%ipdtlen)= &
+              PDS_RAIN_HOLD_EARLY(1:gfld%ipdtlen)
         endif
 
-        gfld%ipdtmpl(9)=ihrs1
+        gfld%ipdtmpl(9)=FHR1
 
         do J=16,21
         gfld%ipdtmpl(J)=PDS_RAIN_HOLD(J)
@@ -569,7 +564,7 @@
        gfld%ipdtmpl(6)=0 ! hours cutoff
        gfld%ipdtmpl(7)=0 ! minutes cutoff
        gfld%ipdtmpl(8)=1 ! units of hours
-       gfld%ipdtmpl(9)=ihrs1 ! earlier forecast time of period?
+       gfld%ipdtmpl(9)=FHR1 ! earlier forecast time of period?
        gfld%ipdtmpl(10)=1 ! sfc
        gfld%ipdtmpl(11)=1 ! sfc
        gfld%ipdtmpl(12)=1 ! sfc
@@ -580,7 +575,7 @@
 !!! need to figure out how to do this end of period date stuff right
 
        rinc=0.
-       rinc(2)=float(ihrs1+interv)
+       rinc(2)=float(FHR1+interv)
 
        write(0,*) 'rinc: ', rinc
        idat=0
