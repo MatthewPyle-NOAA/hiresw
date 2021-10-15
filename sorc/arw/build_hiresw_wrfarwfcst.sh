@@ -24,7 +24,7 @@ cd ${BASE}/hiresw_wrfarwfcst.fd
 
 ./clean -a
 # cp configure.wrf_wcoss configure.wrf
-cp configure.wrf_acorn configure.wrf
+cp configure.wrf_wcoss2 configure.wrf
 
 # build model & real
 ./compile  em_real 
