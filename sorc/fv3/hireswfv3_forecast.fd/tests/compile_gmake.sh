@@ -30,7 +30,7 @@ echo "Compiling ${MAKE_OPT} into $BUILD_NAME.exe on $BUILD_TARGET"
 # ----------------------------------------------------------------------
 # Make sure we have a "make" and reasonable threads.
 
-source ../../../../versions/fv3/build.ver
+source ../../../../versions/build.ver
 
 
 gnu_make=gmake
