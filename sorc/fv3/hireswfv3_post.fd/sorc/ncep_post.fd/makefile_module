@@ -40,6 +40,7 @@ FFLAGS   = $(OPTS) $(FREE) $(DEBUG) \
            -I$(GFSIO_INC) \
            -I$(CRTM_INC) \
 	   -I$(IP_INC4) \
+	   -I$(W3EMC_INC4) \
 	   -I$(SP_INC4) \
 	   -I$(WRF_IO_INC) \
            -I$(NETCDF_INCLUDES)
@@ -58,6 +59,7 @@ LIBS     = $(WRF_IO_LIB) \
            $(IP_LIB4) \
            $(SP_LIB4) \
            $(W3NCO_LIB4) \
+           $(W3EMC_LIB4) \
            $(BACIO_LIB4) \
            $(CRTM_LIB) \
            $(NETCDF_LDFLAGS)
