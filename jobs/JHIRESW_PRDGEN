@@ -65,8 +65,8 @@ export RUN=${RUN:-hiresw}
 #####################################
 # Define COM directories
 #####################################
-export COMIN=${COMOUT:-$(compath.py -o $NET/${hiresw_ver})/${RUN}.${PDY}/}
-export COMOUT=${COMOUT:-$(compath.py -o $NET/${hiresw_ver})/${RUN}.${PDY}/}
+export COMIN=${COMIN:-$(compath.py -o $NET/${hiresw_ver})/${RUN}.${PDY}}
+export COMOUT=${COMOUT:-$(compath.py -o $NET/${hiresw_ver})/${RUN}.${PDY}}
 mkdir -p $COMOUT
 
 export pgmout="OUTPUT.$$"

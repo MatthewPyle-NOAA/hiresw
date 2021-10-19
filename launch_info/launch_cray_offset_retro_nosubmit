@@ -88,7 +88,7 @@ NPROCBUFR=1
 elif [ $DOM$CORE == "conusarw" ]
 then
 MODPROCS=1632
-MODNODES=12
+MODNODES=13
 NCPUSMOD=128
 NCPUSQUILT=96
 MODSPAN=128
@@ -101,7 +101,7 @@ BUFRSPAN=1
 elif [ $DOM$CORE == "conusmem2arw" ]
 then
 MODPROCS=1376
-MODNODES=10
+MODNODES=11
 NCPUSMOD=128
 NCPUSQUILT=96
 MODSPAN=128
@@ -114,7 +114,7 @@ BUFRSPAN=1
 elif [ $DOM$CORE == "akarw" ]
 then
 MODPROCS=1340
-MODNODES=10
+MODNODES=11
 MODSPAN=128
 NCPUSMOD=128
 NCPUSQUILT=60
@@ -128,9 +128,9 @@ elif [ $DOM$CORE == "akmem2arw" ]
 then
 MODPROCS=944
 NCPUSMOD=128
-MODNODES=7
+MODNODES=8
 NCPUSQUILT=48
-MODSPAN=24
+MODSPAN=128
 POSTPROCS=16
 POSTSPAN=8
 PRDGENPROCS=5
@@ -139,7 +139,7 @@ NPROCBUFR=1
 BUFRSPAN=1
 fi
 
-cat ungrib.lsf_in_cray_offset_retro | sed s:_DATE_:${DATE}:g | sed s:_DOM_:${DOM}:g | sed s:_CORE_:${CORE}:g | sed s:_CYC_:${CYC}:g > \
+cat sub_ungrib.lsf_in_cray_offset_retro | sed s:_DATE_:${DATE}:g | sed s:_DOM_:${DOM}:g | sed s:_CORE_:${CORE}:g | sed s:_CYC_:${CYC}:g > \
 sub_ungrib.lsf_${DOM}_${CORE}_${CYC}_retro
 
 cat metgrid.lsf_in_cray_retro |  sed s:_DATE_:${DATE}:g | sed s:_DOM_:${DOM}:g | sed s:_CORE_:${CORE}:g | sed s:_CYC_:${CYC}:g > \
@@ -174,28 +174,23 @@ sed s:_DATE_:${DATE}:g | sed s:_CYC_:${CYC}:g > sub_preprap.lsf_${DOM}_${CORE}_$
 
 fi
 
-if [ $DOM == "conus" -o $DOM == "ak" -o $DOM == "conusmem2" -o $DOM == "akmem2" ]
-then
-cat sub_model.lsf_in_cray_retro_big | sed s:_DOM_:${DOM}:g | sed s:_CORE_:${CORE}:g | sed s:_CYC_:${CYC}:g | \
-sed s:_DATE_:${DATE}:g |  sed s:_SPAN_:${MODSPAN}:g | sed s:_NODES_:${MODNODES}:g | sed s:_NPROC_:${MODPROCS}:g | \
-sed s:_NCPUSMOD_:${NCPUSMOD}:g | sed s:_NCPUSQUILT_:${NCPUSQUILT}:g > sub_model.lsf_${DOM}_${CORE}_${CYC}_retro
+# if [ $DOM == "conus" -o $DOM == "ak" -o $DOM == "conusmem2" -o $DOM == "akmem2" ]
+# then
+# cat sub_model.lsf_in_cray_retro_big | sed s:_DOM_:${DOM}:g | sed s:_CORE_:${CORE}:g | sed s:_CYC_:${CYC}:g | \
+# sed s:_DATE_:${DATE}:g |  sed s:_SPAN_:${MODSPAN}:g | sed s:_NODES_:${MODNODES}:g | sed s:_NPROC_:${MODPROCS}:g | \
+# sed s:_NCPUSMOD_:${NCPUSMOD}:g | sed s:_NCPUSQUILT_:${NCPUSQUILT}:g > sub_model.lsf_${DOM}_${CORE}_${CYC}_retro
 
 
-else
+# else
 
 cat sub_model.lsf_in_cray_retro | sed s:_DOM_:${DOM}:g | sed s:_CORE_:${CORE}:g | sed s:_CYC_:${CYC}:g | \
 sed s:_DATE_:${DATE}:g |  sed s:_SPAN_:${MODSPAN}:g | sed s:_NODES_:${MODNODES}:g | sed s:_NPROC_:${MODPROCS}:g  > sub_model.lsf_${DOM}_${CORE}_${CYC}_retro
 
-fi
+# fi
 
 cat sub_post.lsf_in_cray_retro | sed s:_DOM_:${DOM}:g | sed s:_CORE_:${CORE}:g | sed s:_CYC_:${CYC}:g | \
 sed s:_DATE_:${DATE}:g |  sed s:_POSTSPAN_:${POSTSPAN}:g |  sed s:_NPROC_:${POSTPROCS}:g  > sub_post.lsf_${DOM}_${CORE}_${CYC}_retro
 
-cat sub_postodd.lsf_in_cray_retro | sed s:_DOM_:${DOM}:g | sed s:_CORE_:${CORE}:g | sed s:_CYC_:${CYC}:g | \
-sed s:_DATE_:${DATE}:g |  sed s:_POSTSPAN_:${POSTSPAN}:g |  sed s:_NPROC_:${POSTPROCS}:g  > sub_postodd.lsf_${DOM}_${CORE}_${CYC}_retro
-
-cat sub_posteven.lsf_in_cray_retro | sed s:_DOM_:${DOM}:g | sed s:_CORE_:${CORE}:g | sed s:_CYC_:${CYC}:g | \
-sed s:_DATE_:${DATE}:g |  sed s:_POSTSPAN_:${POSTSPAN}:g |  sed s:_NPROC_:${POSTPROCS}:g  > sub_posteven.lsf_${DOM}_${CORE}_${CYC}_retro
 
 cat sub_prdgen.lsf_in_cray_retro | sed s:_DOM_:${DOM}:g | sed s:_CORE_:${CORE}:g | sed s:_CYC_:${CYC}:g | \
 sed s:_DATE_:${DATE}:g |  sed s:_SPAN_:${PRDGENSPAN}:g |  sed s:_NPROC_:${PRDGENPROCS}:g  > sub_prdgen.lsf_${DOM}_${CORE}_${CYC}_retro
@@ -210,17 +205,15 @@ cat sub_smartinitb.lsf_in_cray_retro | sed s:_DOM_:${DOM}:g | sed s:_CORE_:${COR
 sed s:_DATE_:${DATE}:g > sub_smartinitb.lsf_${DOM}_${CORE}_${CYC}_retro
 
 cat sub_awips.lsf_in_cray_retro | sed s:_DOM_:${DOM}:g | sed s:_CORE_:${CORE}:g | sed s:_CYC_:${CYC}:g | \
-      sed s:_DATE_:${DATE}:g > sub_awips.lsf_${DOM}_${CORE}_${CYC}_retro
+	sed s:_DATE_:${DATE}:g > sub_awips.lsf_${DOM}_${CORE}_${CYC}_retro
 
 cat sub_gempak.lsf_in_cray_retro | sed s:_DOM_:${DOM}:g | sed s:_CORE_:${CORE}:g | sed s:_CYC_:${CYC}:g | \
-      sed s:_DATE_:${DATE}:g > sub_gempak.lsf_${DOM}_${CORE}_${CYC}_retro
-
-
+	sed s:_DATE_:${DATE}:g > sub_gempak.lsf_${DOM}_${CORE}_${CYC}_retro
 
 # qsub sub_ungrib.lsf_${DOM}_${CORE}_${CYC}_retro
 
 if [ $DOM == "conus" -o $DOM == "pr" ]
 then
 # qsub sub_preprap.lsf_${DOM}_${CORE}_${CYC}_retro
-echo nosubmit
+echo no submit script
 fi

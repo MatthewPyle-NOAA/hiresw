@@ -1777,8 +1777,8 @@
          DO J=JS,JE
           FACT=(ALOG(PMID(I,J,L))-ALPINT(I,J,L))/ &
                max(1.e-6,(ALPINT(I,J,L+1)-ALPINT(I,J,L)))
-          ZMID(I,J,L)=ZINT(I,J,L)+(ZINT(I,J,L+1)-ZINT(I,J,L))*FACT
-          dummy(i,j)=ZMID(I,J,L)
+!          ZMID(I,J,L)=ZINT(I,J,L)+(ZINT(I,J,L+1)-ZINT(I,J,L))*FACT
+!          dummy(i,j)=ZMID(I,J,L)
          if((ALPINT(I,J,L+1)-ALPINT(I,J,L)) .lt. 1.e-6) print*, &
                  'P(K+1) and P(K) are too close, i,j,L,', &
                  'ALPINT(I,J,L+1),ALPINT(I,J,L),ZMID = ', &
@@ -1789,12 +1789,12 @@
 !       print*,'max/min ZMID= ',l,maxval(dummy),minval(dummy)
        ENDDO
 
-        DO I=1,IM
-         DO J=JS,JE
-          ZMID(I,J,LM)=(ZINT(I,J,LM+1)+ZINT(I,J,LM))*0.5 ! ave of z
-          dummy(i,j)=ZMID(I,J,LM)
-         ENDDO
-        ENDDO
+!        DO I=1,IM
+!         DO J=JS,JE
+!          ZMID(I,J,LM)=(ZINT(I,J,LM+1)+ZINT(I,J,LM))*0.5 ! ave of z
+!          dummy(i,j)=ZMID(I,J,LM)
+!         ENDDO
+!        ENDDO
 !       print*,'max/min ZMID= ',lm,maxval(dummy),minval(dummy)
 
 !!! end RAP thing

@@ -57,9 +57,9 @@ export RUN=${RUN:-hiresw}
 #####################################
 # Define COM directories
 #####################################
-export COMIN=${COMIN:-${COMROOT:?}/${NET}/${envir}/${RUN}.${PDY}}
-export COMOUT=${COMOUT:-${COMROOT:?}/${NET}/${envir}/${RUN}.${PDY}}
-export COMsref=${COMsref:-$(compath.py sref/prod)}
+export COMIN=${COMIN:-$(compath.py -o $NET/${hiresw_ver})/${RUN}.${PDY}}
+export COMOUT=${COMOUT:-$(compath.py -o $NET/${hiresw_ver})/${RUN}.${PDY}}
+export COMsref=${COMsref:-$(compath.py -o $NET/${sref_ver})}
 
 mkdir -p $COMOUT
 

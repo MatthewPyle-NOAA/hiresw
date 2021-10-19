@@ -58,7 +58,7 @@ export DATAROOT=/lfs/h2/emc/stmp/Matthew.Pyle/tmp
 
 export COMROOT=/lfs/h2/emc/ptmp/Matthew.Pyle/${envir}/com
 export COMOUT=${COMOUT:-$(compath.py -o $NET/${hiresw_ver})/$RUN.${PDY}}
-export COMIN=${COMOUT:-$(compath.py -o $NET/${hiresw_ver})/$RUN.${PDY}}
+export COMIN=${COMIN:-$(compath.py -o $NET/${hiresw_ver})/$RUN.${PDY}}
 
 echo COMOUT from compath is $COMOUT
 
