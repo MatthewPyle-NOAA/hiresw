@@ -332,10 +332,7 @@ startmsg
 export MP_PGMMODEL=spmd
 unset MP_CMDFILE
 
-#mpirun.lsf $EXEChiresw/hiresw_${MODEL}_real > $pgmout 2>&1
-# aprun -n $NTASK -N $PTILE $EXEChiresw/hiresw_${MODEL}_real > $pgmout 2>&1
 mpiexec  -n $NTASK -ppn $PTILE $EXEChiresw/hiresw_wrfarwfcst_init > $pgmout 2>&1
-
 export err=$?
 err_chk
 

@@ -337,13 +337,7 @@ fi
 # define default runline option, which will be overridden
 # for certain large domain runs
 
-# if [ $MODEL = "nmmb" ]; then
-#     cp $EXEChiresw/hiresw_nmmbfcst ./hiresw_nmmbfcst
-#     runline="aprun -n $NTASK -N $PTILE ./hiresw_nmmbfcst"
-# else
-
     cp $EXEChiresw/hiresw_wrfarwfcst .
-
 
 # default runline for small domains
     runline="mpiexec -n $NTASK -ppn $PTILE ./hiresw_wrfarwfcst"

@@ -18,11 +18,8 @@ export BNDYdir=$DATA
 # PDY, CDATE, and tmmark are passed in through Rocoto xml
 
 export cycle=${cycle:-t${cyc}z}
-# if [ ${RUN_ENVIR} = 'nco' ]
-# then
 setpdy.sh
 . ./PDY
-# fi
 
 export CDATE=${PDY}${cyc}
 export month=`echo $CDATE | cut -c 5-6`

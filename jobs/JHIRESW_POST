@@ -26,14 +26,9 @@ cd $DATA/${fhr}
 ####################################
 # PDY and CDATE are passed in through Rocoto xml
 
-# if [ $RUN_ENVIR = 'nco'  ]
-# then
-
 export cycle=${cycle:-t${cyc}z}
 setpdy.sh
 . ./PDY
-
-# fi
 
 export CDATE=${PDY}${cyc}
 

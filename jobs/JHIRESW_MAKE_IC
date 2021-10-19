@@ -23,13 +23,10 @@ echo envir is $envir
 # Run setpdy and initialize PDY variables
 ####################################
 export cycle=${cycle:-t${cyc}z}
-# if [ ${RUN_ENVIR} = 'nco' ]
-# then
 setpdy.sh
 . ./PDY
 
 export CDATE=${PDY}${cyc}
-# fi
 
 export month=`echo $CDATE | cut -c 5-6`
 export day=`echo $CDATE | cut -c 7-8`

@@ -78,7 +78,6 @@ echo "$USHhiresw/hiresw_prdgen_oldgrid_g2.sh_5km  $fhr $NEST $cyc $MODEL 1 conus
 echo "$USHhiresw/hiresw_prdgen_oldgrid_g2.sh_5km  $fhr $NEST $cyc $MODEL 2 conus " >> $DATA/poescript_${fhr}
 echo "$USHhiresw/hiresw_prdgen_3km_grid_g2.sh     $fhr $NEST $cyc $MODEL 1 " >> $DATA/poescript_${fhr}
 chmod 775 $DATA/poescript_${fhr}
-#command="aprun -n 1 -N 1 -d 5 $DATA/poescript_${fhr}_1 : -n 1 -N 1 -d 5 $DATA/poescript_${fhr}_2 : -n 1 -N 1 -d 3 $DATA/poescript_${fhr}_3 "
 command="$DATA/poescript_${fhr} "
 
 elif [ $NEST = "ak" -o $NEST = "akmem2" ]
@@ -90,7 +89,6 @@ echo "$USHhiresw/hiresw_prdgen_oldgrid_g2.sh $fhr $NEST $cyc $MODEL 2" >> $DATA/
 echo "$USHhiresw/hiresw_prdgen_oldgrid_g2.sh $fhr $NEST $cyc $MODEL 3" >> $DATA/poescript_${fhr}
 echo "$USHhiresw/hiresw_prdgen_oldgrid_g2.sh $fhr $NEST $cyc $MODEL 4" >> $DATA/poescript_${fhr}
 chmod 775 $DATA/poescript_${fhr}
-# command="aprun -n 1 -N 1 -d 5 $DATA/poescript_${fhr} "
 command="$DATA/poescript_${fhr} "
 
 else
