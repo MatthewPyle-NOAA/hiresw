@@ -5,7 +5,7 @@
 #PBS -l place=vscatter:excl,select=_NODES_:ncpus=128
 #PBS -q dev
 #PBS -A HIRESW-DEV
-#PBS -l walltime=01:17:05
+#PBS -l walltime=01:37:05
 
 export HOMEhiresw=/lfs/h2/emc/lam/noscrub/Matthew.Pyle/hiresw.v8.1.0
 source ${HOMEhiresw}/versions/run.ver

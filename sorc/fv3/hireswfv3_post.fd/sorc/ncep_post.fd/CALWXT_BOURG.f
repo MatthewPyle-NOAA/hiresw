@@ -103,7 +103,7 @@
       call random_number(rn)
 !     call random_number(rn,iseed)
 !   set to a rain-favoring value to check bit-reproduceability
-      rn(1:2*im*jm)=0.501
+!      rn(1:2*im*jm)=0.501
 
 !
 !!$omp  parallel do                                                   &

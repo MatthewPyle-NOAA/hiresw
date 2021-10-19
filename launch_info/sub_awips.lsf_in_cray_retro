@@ -4,7 +4,7 @@
 #PBS -l select=1:ncpus=1:mem=128GB
 #PBS -A HIRESW-DEV
 #PBS -q dev
-#PBS -l walltime=001:27:00
+#PBS -l walltime=001:37:00
 
 # export MP_EUILIB=us
 # export OMP_NUM_THREADS=1
