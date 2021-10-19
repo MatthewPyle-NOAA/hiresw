@@ -14,7 +14,7 @@ elif [ ${target} == "hera" ]; then
 elif [ ${target} == "jet" ]; then
     FIX_DIR="/scratch4/NCEPDEV/global/save/glopara/git/fv3gfs/fix"
 elif [ ${target} == "wcoss2" ]; then
-    FIX_DIR="/lfs/h1/emc/eib/noscrub/Matthew.Pyle/fix_hrefv3_fv3cam"
+    FIX_DIR="/lfs/h2/emc/lam/noscrub/Matthew.Pyle/fix_hrefv3_fv3cam"
 else
     echo "Unknown site " ${target}
     exit 1
@@ -63,6 +63,5 @@ done
 cd ../
 
 ${LINK} $FIX_DIR/wrflibs  ${pwd}/hireswfv3_bufr.fd/
-# ${LINK} $FIX_DIR/wgrib2 ${pwd}/hireswfv3_utils.fd/
 
 exit

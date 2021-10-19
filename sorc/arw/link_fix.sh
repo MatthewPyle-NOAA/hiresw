@@ -5,7 +5,8 @@ LINK="cp -rp"
 pwd=$(pwd -P)
 
 # FIX_DIR="/gpfs/dell2/emc/modeling/noscrub/emc.campara/fix_hrefv3_fv3cam"
-FIX_DIR="/lfs/h2/emc/eib/noscrub/Matthew.Pyle/fix_hrefv3_fv3cam"
+# FIX_DIR="/lfs/h2/emc/eib/noscrub/Matthew.Pyle/fix_hrefv3_fv3cam"
+FIX_DIR="/lfs/h2/emc/lam/noscrub/Matthew.Pyle/fix_hrefv3_fv3cam"
 
 mkdir -p ${pwd}/../../fix/arw
 cd ${pwd}/../../fix/arw                || exit 8
