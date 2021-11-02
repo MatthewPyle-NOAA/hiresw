@@ -28,7 +28,10 @@ cd $DATA
 # PDY and CDATE are passed in through Rocoto xml
 
 export cycle=${cycle:-t${cyc}z}
-setpdy.sh
+
+if [ ! -f ./PDY ];then
+  setpdy.sh
+fi
 . ./PDY
 
 ####################################

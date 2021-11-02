@@ -65,7 +65,10 @@ qsub ${HOMEhiresw}/launch_info/sub_post.lsf__DOM___CORE___CYC__retro
 qsub ${HOMEhiresw}/launch_info/sub_prdgen.lsf__DOM___CORE___CYC__retro
 qsub ${HOMEhiresw}/launch_info/sub_wrfbufrsnd.lsf__DOM___CORE___CYC__retro
 sleep 90
+if [ _DOM_ = "hi" -o _DOM_ = "conus"  -o _DOM_ = "ak" -o _DOM_ = "pr" -o _DOM_ = "guam" ]
+then
 qsub ${HOMEhiresw}/launch_info/sub_awips.lsf__DOM___CORE___CYC__retro
+fi
 qsub ${HOMEhiresw}/launch_info/sub_gempak.lsf__DOM___CORE___CYC__retro
 sleep 90
 qsub ${HOMEhiresw}/launch_info/sub_smartinit.lsf__DOM___CORE___CYC__retro

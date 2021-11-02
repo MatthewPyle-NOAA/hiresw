@@ -27,3 +27,4 @@ export libjpeg_ver=9c
 
 #eventually export obsproc_shared_bufr_cword_ver=v1.1.0
 export obsproc_shared_bufr_cword_ver=v1.0.1
+export bufr_tranjb_ver=1.0.0

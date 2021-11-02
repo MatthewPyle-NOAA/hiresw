@@ -88,7 +88,7 @@ let srefcyc2=$srefcyc
 
 if [ $srefcyc2 -lt 10 ];then srefcyc2="0"${srefcyc2};fi
 
-export COMINsref=${COMINsref:-$COMsref/sref.${SREF_PDY}/${srefcyc2}/ensprod}
+export COMINsref=${COMINsref:-$(compath.py ${envir}/sref/${sref_ver})/sref.${SREF_PDY}/${srefcyc2}/ensprod}
 
 export pgmout="OUTPUT.$$"
 

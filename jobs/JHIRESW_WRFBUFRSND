@@ -22,7 +22,10 @@ cd $DATA
 ####################################
 
 export cycle=${cycle:-t${cyc}z}
-setpdy.sh
+
+if [ ! -f ./PDY ];then
+  setpdy.sh
+fi
 . ./PDY
 
 ####################################

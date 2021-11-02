@@ -72,11 +72,12 @@ echo set COMOUT as $COMOUT
 
 export DATA=${DATAROOT}/hiresw.make_ic_${NEST}_${MODEL}_${cyc}_${envir}_retro
 
-types="metgrid bufrpost forecast post prdgen smartinit smartinitb"
+types="metgrid bufrpost forecast post prdgen smartinit smartinitb awips gempak"
 for typ in $types
 do
 echo delete $typ
 rm -rf ${DATAROOT}/hiresw.${typ}_${NEST}_${MODEL}_${cyc}_${envir}_retro
+rm -rf ${DATAROOT}/hiresw.${typ}_${NEST}_${MODEL}_${cyc}_${envir}
 done
 
 export KEEPDATA=NO
