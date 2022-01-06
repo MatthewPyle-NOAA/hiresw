@@ -357,10 +357,12 @@ then
  runline="aprun -n 880 -N 24 ./hiresw_nmmbfcst : -n 40 -N 10 ./hiresw_nmmbfcst"
 elif [ $RUNLOC = "akarw" ]
 then
- runline="aprun -n 1140 -N 24 ./hiresw_wrfarwfcst : -n 60 -N 10 ./hiresw_wrfarwfcst"
+# runline="aprun -n 1140 -N 24 ./hiresw_wrfarwfcst : -n 60 -N 10 ./hiresw_wrfarwfcst"
+ runline="aprun -n 1200 -N 24 ./hiresw_wrfarwfcst : -n 60 -N 10 ./hiresw_wrfarwfcst"
 elif [ $RUNLOC = "akmem2arw" ]
 then
- runline="aprun -n 768 -N 24 ./hiresw_wrfarwfcst : -n 24 -N 12 ./hiresw_wrfarwfcst : -n 24 -N 8 ./hiresw_wrfarwfcst" 
+# runline="aprun -n 768 -N 24 ./hiresw_wrfarwfcst : -n 24 -N 12 ./hiresw_wrfarwfcst : -n 24 -N 8 ./hiresw_wrfarwfcst" 
+ runline="aprun -n 816 -N 24 ./hiresw_wrfarwfcst : -n 24 -N 12 ./hiresw_wrfarwfcst : -n 24 -N 8 ./hiresw_wrfarwfcst" 
 fi
 
 startmsg
