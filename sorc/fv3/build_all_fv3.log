@@ -1,0 +1,902 @@
++ export USE_PREINST_LIBS=true
++ USE_PREINST_LIBS=true
+++ pwd
++ export build_dir=/gpfs/hps/nco/ops/nwpara/hiresw.v8.0.1/sorc/fv3
++ build_dir=/gpfs/hps/nco/ops/nwpara/hiresw.v8.0.1/sorc/fv3
++ logs_dir=/gpfs/hps/nco/ops/nwpara/hiresw.v8.0.1/sorc/fv3/logs
++ '[' '!' -d /gpfs/hps/nco/ops/nwpara/hiresw.v8.0.1/sorc/fv3/logs ']'
++ echo 'Creating logs folder'
+Creating logs folder
++ mkdir /gpfs/hps/nco/ops/nwpara/hiresw.v8.0.1/sorc/fv3/logs
++ EXEdir=../../exec/fv3
++ '[' '!' -d ../../exec/fv3 ']'
++ echo 'Creating ../../exec/fv3 folder'
+Creating ../../exec/fv3 folder
++ mkdir ../../exec/fv3
++ . ./partial_build.sh
+++ Build_prg=("Build_libs" "Build_forecast" "Build_gsi" "Build_post" "Build_bufr" "Build_fv3snowbucket" "Build_bucket" "Build_sndp" "Build_stnmlist" "Build_utils" "Build_chgres" "Build_chgres_cube" "Build_smartinit" "Build_smartprecip" "Build_orog" "Build_sfc_climo_gen" "Build_regional_grid" "Build_nctools")
+++ declare -a Build_prg
+++ verbose=false
+++ num_arg=0
+++ ((  num_arg > 1  ))
+++ ((  num_arg == 1  ))
+++ ((  num_arg == 0  ))
+++ parse_cfg 1 config=regional_build.cfg Build_libs Build_forecast Build_gsi Build_post Build_bufr Build_fv3snowbucket Build_bucket Build_sndp Build_stnmlist Build_utils Build_chgres Build_chgres_cube Build_smartinit Build_smartprecip Build_orog Build_sfc_climo_gen Build_regional_grid Build_nctools
+++ declare -i n
+++ declare -i num_args
+++ declare -i total_args
+++ declare -a all_prg
+++ total_args=20
+++ num_args=1
+++ ((  num_args == 0  ))
+++ config=config=regional_build.cfg
+++ [[ config=regional_build.cfg == \-\-\v\e\r\b\o\s\e ]]
+++ all_prg=()
+++ (( n = num_args + 2 ))
+++ (( n <= total_args ))
+++ all_prg+=(${!n})
+++ (( n++  ))
+++ (( n <= total_args ))
+++ all_prg+=(${!n})
+++ (( n++  ))
+++ (( n <= total_args ))
+++ all_prg+=(${!n})
+++ (( n++  ))
+++ (( n <= total_args ))
+++ all_prg+=(${!n})
+++ (( n++  ))
+++ (( n <= total_args ))
+++ all_prg+=(${!n})
+++ (( n++  ))
+++ (( n <= total_args ))
+++ all_prg+=(${!n})
+++ (( n++  ))
+++ (( n <= total_args ))
+++ all_prg+=(${!n})
+++ (( n++  ))
+++ (( n <= total_args ))
+++ all_prg+=(${!n})
+++ (( n++  ))
+++ (( n <= total_args ))
+++ all_prg+=(${!n})
+++ (( n++  ))
+++ (( n <= total_args ))
+++ all_prg+=(${!n})
+++ (( n++  ))
+++ (( n <= total_args ))
+++ all_prg+=(${!n})
+++ (( n++  ))
+++ (( n <= total_args ))
+++ all_prg+=(${!n})
+++ (( n++  ))
+++ (( n <= total_args ))
+++ all_prg+=(${!n})
+++ (( n++  ))
+++ (( n <= total_args ))
+++ all_prg+=(${!n})
+++ (( n++  ))
+++ (( n <= total_args ))
+++ all_prg+=(${!n})
+++ (( n++  ))
+++ (( n <= total_args ))
+++ all_prg+=(${!n})
+++ (( n++  ))
+++ (( n <= total_args ))
+++ all_prg+=(${!n})
+++ (( n++  ))
+++ (( n <= total_args ))
+++ all_prg+=(${!n})
+++ (( n++  ))
+++ (( n <= total_args ))
+++ [[ CONFIG=REGIONAL_BUILD.CFG == ALL ]]
+++ [[ config=regional_build.cfg == config=* ]]
+++ cfg_file=regional_build.cfg
+++ false
+++ read cline
+++ clean_line='#'
+++ [[ -z # ]]
+++ [[ # == \# ]]
+++ read cline
+++ clean_line='# ***** configuration of regional build *****'
+++ [[ -z # ***** configuration of regional build ***** ]]
+++ [[ # == \# ]]
+++ read cline
+++ clean_line=
+++ [[ -z '' ]]
+++ read cline
+++ clean_line='Building libraries (libs) ............................. no'
+++ [[ -z Building libraries (libs) ............................. no ]]
+++ [[ B == \# ]]
+++ false
+++ first9='Building '
+++ [[ building  == \b\u\i\l\d\i\n\g\  ]]
++++ sed -e 's/.*(\(.*\)).*/\1/'
+++ short_prg=libs
+++ clean_line='Building libraries (libs) ............................. no'
+++ build_action=true
+++ last5='.. no'
+++ [[ .. no == \.\ \y\e\s ]]
+++ last4='. no'
+++ [[ . no == \.\ \n\o ]]
+++ build_action=false
+++ found=false
+++ for prg in '${all_prg[@]}'
+++ [[ Build_libs == \B\u\i\l\d\_libs ]]
+++ found=true
+++ eval Build_libs=false
++++ Build_libs=false
+++ break
+++ true
+++ read cline
+++ clean_line='Building forecast (forecast) .......................... yes'
+++ [[ -z Building forecast (forecast) .......................... yes ]]
+++ [[ B == \# ]]
+++ false
+++ first9='Building '
+++ [[ building  == \b\u\i\l\d\i\n\g\  ]]
++++ sed -e 's/.*(\(.*\)).*/\1/'
+++ short_prg=forecast
+++ clean_line='Building forecast (forecast) .......................... yes'
+++ build_action=true
+++ last5='. yes'
+++ [[ . yes == \.\ \y\e\s ]]
+++ build_action=true
+++ last4=' yes'
+++ [[  yes == \.\ \n\o ]]
+++ found=false
+++ for prg in '${all_prg[@]}'
+++ [[ Build_libs == \B\u\i\l\d\_forecast ]]
+++ for prg in '${all_prg[@]}'
+++ [[ Build_forecast == \B\u\i\l\d\_forecast ]]
+++ found=true
+++ eval Build_forecast=true
++++ Build_forecast=true
+++ break
+++ true
+++ read cline
+++ clean_line='Building gsi (gsi) .................................... no'
+++ [[ -z Building gsi (gsi) .................................... no ]]
+++ [[ B == \# ]]
+++ false
+++ first9='Building '
+++ [[ building  == \b\u\i\l\d\i\n\g\  ]]
++++ sed -e 's/.*(\(.*\)).*/\1/'
+++ short_prg=gsi
+++ clean_line='Building gsi (gsi) .................................... no'
+++ build_action=true
+++ last5='.. no'
+++ [[ .. no == \.\ \y\e\s ]]
+++ last4='. no'
+++ [[ . no == \.\ \n\o ]]
+++ build_action=false
+++ found=false
+++ for prg in '${all_prg[@]}'
+++ [[ Build_libs == \B\u\i\l\d\_gsi ]]
+++ for prg in '${all_prg[@]}'
+++ [[ Build_forecast == \B\u\i\l\d\_gsi ]]
+++ for prg in '${all_prg[@]}'
+++ [[ Build_gsi == \B\u\i\l\d\_gsi ]]
+++ found=true
+++ eval Build_gsi=false
++++ Build_gsi=false
+++ break
+++ true
+++ read cline
+++ clean_line='Building post (post) .................................. yes'
+++ [[ -z Building post (post) .................................. yes ]]
+++ [[ B == \# ]]
+++ false
+++ first9='Building '
+++ [[ building  == \b\u\i\l\d\i\n\g\  ]]
++++ sed -e 's/.*(\(.*\)).*/\1/'
+++ short_prg=post
+++ clean_line='Building post (post) .................................. yes'
+++ build_action=true
+++ last5='. yes'
+++ [[ . yes == \.\ \y\e\s ]]
+++ build_action=true
+++ last4=' yes'
+++ [[  yes == \.\ \n\o ]]
+++ found=false
+++ for prg in '${all_prg[@]}'
+++ [[ Build_libs == \B\u\i\l\d\_post ]]
+++ for prg in '${all_prg[@]}'
+++ [[ Build_forecast == \B\u\i\l\d\_post ]]
+++ for prg in '${all_prg[@]}'
+++ [[ Build_gsi == \B\u\i\l\d\_post ]]
+++ for prg in '${all_prg[@]}'
+++ [[ Build_post == \B\u\i\l\d\_post ]]
+++ found=true
+++ eval Build_post=true
++++ Build_post=true
+++ break
+++ true
+++ read cline
+++ clean_line='Building bufr (bufr) .................................. yes'
+++ [[ -z Building bufr (bufr) .................................. yes ]]
+++ [[ B == \# ]]
+++ false
+++ first9='Building '
+++ [[ building  == \b\u\i\l\d\i\n\g\  ]]
++++ sed -e 's/.*(\(.*\)).*/\1/'
+++ short_prg=bufr
+++ clean_line='Building bufr (bufr) .................................. yes'
+++ build_action=true
+++ last5='. yes'
+++ [[ . yes == \.\ \y\e\s ]]
+++ build_action=true
+++ last4=' yes'
+++ [[  yes == \.\ \n\o ]]
+++ found=false
+++ for prg in '${all_prg[@]}'
+++ [[ Build_libs == \B\u\i\l\d\_bufr ]]
+++ for prg in '${all_prg[@]}'
+++ [[ Build_forecast == \B\u\i\l\d\_bufr ]]
+++ for prg in '${all_prg[@]}'
+++ [[ Build_gsi == \B\u\i\l\d\_bufr ]]
+++ for prg in '${all_prg[@]}'
+++ [[ Build_post == \B\u\i\l\d\_bufr ]]
+++ for prg in '${all_prg[@]}'
+++ [[ Build_bufr == \B\u\i\l\d\_bufr ]]
+++ found=true
+++ eval Build_bufr=true
++++ Build_bufr=true
+++ break
+++ true
+++ read cline
+++ clean_line='Building sndp (sndp) .................................. yes'
+++ [[ -z Building sndp (sndp) .................................. yes ]]
+++ [[ B == \# ]]
+++ false
+++ first9='Building '
+++ [[ building  == \b\u\i\l\d\i\n\g\  ]]
++++ sed -e 's/.*(\(.*\)).*/\1/'
+++ short_prg=sndp
+++ clean_line='Building sndp (sndp) .................................. yes'
+++ build_action=true
+++ last5='. yes'
+++ [[ . yes == \.\ \y\e\s ]]
+++ build_action=true
+++ last4=' yes'
+++ [[  yes == \.\ \n\o ]]
+++ found=false
+++ for prg in '${all_prg[@]}'
+++ [[ Build_libs == \B\u\i\l\d\_sndp ]]
+++ for prg in '${all_prg[@]}'
+++ [[ Build_forecast == \B\u\i\l\d\_sndp ]]
+++ for prg in '${all_prg[@]}'
+++ [[ Build_gsi == \B\u\i\l\d\_sndp ]]
+++ for prg in '${all_prg[@]}'
+++ [[ Build_post == \B\u\i\l\d\_sndp ]]
+++ for prg in '${all_prg[@]}'
+++ [[ Build_bufr == \B\u\i\l\d\_sndp ]]
+++ for prg in '${all_prg[@]}'
+++ [[ Build_fv3snowbucket == \B\u\i\l\d\_sndp ]]
+++ for prg in '${all_prg[@]}'
+++ [[ Build_bucket == \B\u\i\l\d\_sndp ]]
+++ for prg in '${all_prg[@]}'
+++ [[ Build_sndp == \B\u\i\l\d\_sndp ]]
+++ found=true
+++ eval Build_sndp=true
++++ Build_sndp=true
+++ break
+++ true
+++ read cline
+++ clean_line='Building stnmlist (stnmlist) .......................... yes'
+++ [[ -z Building stnmlist (stnmlist) .......................... yes ]]
+++ [[ B == \# ]]
+++ false
+++ first9='Building '
+++ [[ building  == \b\u\i\l\d\i\n\g\  ]]
++++ sed -e 's/.*(\(.*\)).*/\1/'
+++ short_prg=stnmlist
+++ clean_line='Building stnmlist (stnmlist) .......................... yes'
+++ build_action=true
+++ last5='. yes'
+++ [[ . yes == \.\ \y\e\s ]]
+++ build_action=true
+++ last4=' yes'
+++ [[  yes == \.\ \n\o ]]
+++ found=false
+++ for prg in '${all_prg[@]}'
+++ [[ Build_libs == \B\u\i\l\d\_stnmlist ]]
+++ for prg in '${all_prg[@]}'
+++ [[ Build_forecast == \B\u\i\l\d\_stnmlist ]]
+++ for prg in '${all_prg[@]}'
+++ [[ Build_gsi == \B\u\i\l\d\_stnmlist ]]
+++ for prg in '${all_prg[@]}'
+++ [[ Build_post == \B\u\i\l\d\_stnmlist ]]
+++ for prg in '${all_prg[@]}'
+++ [[ Build_bufr == \B\u\i\l\d\_stnmlist ]]
+++ for prg in '${all_prg[@]}'
+++ [[ Build_fv3snowbucket == \B\u\i\l\d\_stnmlist ]]
+++ for prg in '${all_prg[@]}'
+++ [[ Build_bucket == \B\u\i\l\d\_stnmlist ]]
+++ for prg in '${all_prg[@]}'
+++ [[ Build_sndp == \B\u\i\l\d\_stnmlist ]]
+++ for prg in '${all_prg[@]}'
+++ [[ Build_stnmlist == \B\u\i\l\d\_stnmlist ]]
+++ found=true
+++ eval Build_stnmlist=true
++++ Build_stnmlist=true
+++ break
+++ true
+++ read cline
+++ clean_line='Building smartinit (smartinit) ........................ yes'
+++ [[ -z Building smartinit (smartinit) ........................ yes ]]
+++ [[ B == \# ]]
+++ false
+++ first9='Building '
+++ [[ building  == \b\u\i\l\d\i\n\g\  ]]
++++ sed -e 's/.*(\(.*\)).*/\1/'
+++ short_prg=smartinit
+++ clean_line='Building smartinit (smartinit) ........................ yes'
+++ build_action=true
+++ last5='. yes'
+++ [[ . yes == \.\ \y\e\s ]]
+++ build_action=true
+++ last4=' yes'
+++ [[  yes == \.\ \n\o ]]
+++ found=false
+++ for prg in '${all_prg[@]}'
+++ [[ Build_libs == \B\u\i\l\d\_smartinit ]]
+++ for prg in '${all_prg[@]}'
+++ [[ Build_forecast == \B\u\i\l\d\_smartinit ]]
+++ for prg in '${all_prg[@]}'
+++ [[ Build_gsi == \B\u\i\l\d\_smartinit ]]
+++ for prg in '${all_prg[@]}'
+++ [[ Build_post == \B\u\i\l\d\_smartinit ]]
+++ for prg in '${all_prg[@]}'
+++ [[ Build_bufr == \B\u\i\l\d\_smartinit ]]
+++ for prg in '${all_prg[@]}'
+++ [[ Build_fv3snowbucket == \B\u\i\l\d\_smartinit ]]
+++ for prg in '${all_prg[@]}'
+++ [[ Build_bucket == \B\u\i\l\d\_smartinit ]]
+++ for prg in '${all_prg[@]}'
+++ [[ Build_sndp == \B\u\i\l\d\_smartinit ]]
+++ for prg in '${all_prg[@]}'
+++ [[ Build_stnmlist == \B\u\i\l\d\_smartinit ]]
+++ for prg in '${all_prg[@]}'
+++ [[ Build_utils == \B\u\i\l\d\_smartinit ]]
+++ for prg in '${all_prg[@]}'
+++ [[ Build_chgres == \B\u\i\l\d\_smartinit ]]
+++ for prg in '${all_prg[@]}'
+++ [[ Build_chgres_cube == \B\u\i\l\d\_smartinit ]]
+++ for prg in '${all_prg[@]}'
+++ [[ Build_smartinit == \B\u\i\l\d\_smartinit ]]
+++ found=true
+++ eval Build_smartinit=true
++++ Build_smartinit=true
+++ break
+++ true
+++ read cline
+++ clean_line='Building smartprecip (smartprecip) .................... yes'
+++ [[ -z Building smartprecip (smartprecip) .................... yes ]]
+++ [[ B == \# ]]
+++ false
+++ first9='Building '
+++ [[ building  == \b\u\i\l\d\i\n\g\  ]]
++++ sed -e 's/.*(\(.*\)).*/\1/'
+++ short_prg=smartprecip
+++ clean_line='Building smartprecip (smartprecip) .................... yes'
+++ build_action=true
+++ last5='. yes'
+++ [[ . yes == \.\ \y\e\s ]]
+++ build_action=true
+++ last4=' yes'
+++ [[  yes == \.\ \n\o ]]
+++ found=false
+++ for prg in '${all_prg[@]}'
+++ [[ Build_libs == \B\u\i\l\d\_smartprecip ]]
+++ for prg in '${all_prg[@]}'
+++ [[ Build_forecast == \B\u\i\l\d\_smartprecip ]]
+++ for prg in '${all_prg[@]}'
+++ [[ Build_gsi == \B\u\i\l\d\_smartprecip ]]
+++ for prg in '${all_prg[@]}'
+++ [[ Build_post == \B\u\i\l\d\_smartprecip ]]
+++ for prg in '${all_prg[@]}'
+++ [[ Build_bufr == \B\u\i\l\d\_smartprecip ]]
+++ for prg in '${all_prg[@]}'
+++ [[ Build_fv3snowbucket == \B\u\i\l\d\_smartprecip ]]
+++ for prg in '${all_prg[@]}'
+++ [[ Build_bucket == \B\u\i\l\d\_smartprecip ]]
+++ for prg in '${all_prg[@]}'
+++ [[ Build_sndp == \B\u\i\l\d\_smartprecip ]]
+++ for prg in '${all_prg[@]}'
+++ [[ Build_stnmlist == \B\u\i\l\d\_smartprecip ]]
+++ for prg in '${all_prg[@]}'
+++ [[ Build_utils == \B\u\i\l\d\_smartprecip ]]
+++ for prg in '${all_prg[@]}'
+++ [[ Build_chgres == \B\u\i\l\d\_smartprecip ]]
+++ for prg in '${all_prg[@]}'
+++ [[ Build_chgres_cube == \B\u\i\l\d\_smartprecip ]]
+++ for prg in '${all_prg[@]}'
+++ [[ Build_smartinit == \B\u\i\l\d\_smartprecip ]]
+++ for prg in '${all_prg[@]}'
+++ [[ Build_smartprecip == \B\u\i\l\d\_smartprecip ]]
+++ found=true
+++ eval Build_smartprecip=true
++++ Build_smartprecip=true
+++ break
+++ true
+++ read cline
+++ clean_line='Building fv3snowbucket (fv3snowbucket) ................ yes'
+++ [[ -z Building fv3snowbucket (fv3snowbucket) ................ yes ]]
+++ [[ B == \# ]]
+++ false
+++ first9='Building '
+++ [[ building  == \b\u\i\l\d\i\n\g\  ]]
++++ sed -e 's/.*(\(.*\)).*/\1/'
+++ short_prg=fv3snowbucket
+++ clean_line='Building fv3snowbucket (fv3snowbucket) ................ yes'
+++ build_action=true
+++ last5='. yes'
+++ [[ . yes == \.\ \y\e\s ]]
+++ build_action=true
+++ last4=' yes'
+++ [[  yes == \.\ \n\o ]]
+++ found=false
+++ for prg in '${all_prg[@]}'
+++ [[ Build_libs == \B\u\i\l\d\_fv3snowbucket ]]
+++ for prg in '${all_prg[@]}'
+++ [[ Build_forecast == \B\u\i\l\d\_fv3snowbucket ]]
+++ for prg in '${all_prg[@]}'
+++ [[ Build_gsi == \B\u\i\l\d\_fv3snowbucket ]]
+++ for prg in '${all_prg[@]}'
+++ [[ Build_post == \B\u\i\l\d\_fv3snowbucket ]]
+++ for prg in '${all_prg[@]}'
+++ [[ Build_bufr == \B\u\i\l\d\_fv3snowbucket ]]
+++ for prg in '${all_prg[@]}'
+++ [[ Build_fv3snowbucket == \B\u\i\l\d\_fv3snowbucket ]]
+++ found=true
+++ eval Build_fv3snowbucket=true
++++ Build_fv3snowbucket=true
+++ break
+++ true
+++ read cline
+++ clean_line='Building bucket (bucket) .............................. yes'
+++ [[ -z Building bucket (bucket) .............................. yes ]]
+++ [[ B == \# ]]
+++ false
+++ first9='Building '
+++ [[ building  == \b\u\i\l\d\i\n\g\  ]]
++++ sed -e 's/.*(\(.*\)).*/\1/'
+++ short_prg=bucket
+++ clean_line='Building bucket (bucket) .............................. yes'
+++ build_action=true
+++ last5='. yes'
+++ [[ . yes == \.\ \y\e\s ]]
+++ build_action=true
+++ last4=' yes'
+++ [[  yes == \.\ \n\o ]]
+++ found=false
+++ for prg in '${all_prg[@]}'
+++ [[ Build_libs == \B\u\i\l\d\_bucket ]]
+++ for prg in '${all_prg[@]}'
+++ [[ Build_forecast == \B\u\i\l\d\_bucket ]]
+++ for prg in '${all_prg[@]}'
+++ [[ Build_gsi == \B\u\i\l\d\_bucket ]]
+++ for prg in '${all_prg[@]}'
+++ [[ Build_post == \B\u\i\l\d\_bucket ]]
+++ for prg in '${all_prg[@]}'
+++ [[ Build_bufr == \B\u\i\l\d\_bucket ]]
+++ for prg in '${all_prg[@]}'
+++ [[ Build_fv3snowbucket == \B\u\i\l\d\_bucket ]]
+++ for prg in '${all_prg[@]}'
+++ [[ Build_bucket == \B\u\i\l\d\_bucket ]]
+++ found=true
+++ eval Build_bucket=true
++++ Build_bucket=true
+++ break
+++ true
+++ read cline
+++ clean_line='Building utils (utils) ................................ yes'
+++ [[ -z Building utils (utils) ................................ yes ]]
+++ [[ B == \# ]]
+++ false
+++ first9='Building '
+++ [[ building  == \b\u\i\l\d\i\n\g\  ]]
++++ sed -e 's/.*(\(.*\)).*/\1/'
+++ short_prg=utils
+++ clean_line='Building utils (utils) ................................ yes'
+++ build_action=true
+++ last5='. yes'
+++ [[ . yes == \.\ \y\e\s ]]
+++ build_action=true
+++ last4=' yes'
+++ [[  yes == \.\ \n\o ]]
+++ found=false
+++ for prg in '${all_prg[@]}'
+++ [[ Build_libs == \B\u\i\l\d\_utils ]]
+++ for prg in '${all_prg[@]}'
+++ [[ Build_forecast == \B\u\i\l\d\_utils ]]
+++ for prg in '${all_prg[@]}'
+++ [[ Build_gsi == \B\u\i\l\d\_utils ]]
+++ for prg in '${all_prg[@]}'
+++ [[ Build_post == \B\u\i\l\d\_utils ]]
+++ for prg in '${all_prg[@]}'
+++ [[ Build_bufr == \B\u\i\l\d\_utils ]]
+++ for prg in '${all_prg[@]}'
+++ [[ Build_fv3snowbucket == \B\u\i\l\d\_utils ]]
+++ for prg in '${all_prg[@]}'
+++ [[ Build_bucket == \B\u\i\l\d\_utils ]]
+++ for prg in '${all_prg[@]}'
+++ [[ Build_sndp == \B\u\i\l\d\_utils ]]
+++ for prg in '${all_prg[@]}'
+++ [[ Build_stnmlist == \B\u\i\l\d\_utils ]]
+++ for prg in '${all_prg[@]}'
+++ [[ Build_utils == \B\u\i\l\d\_utils ]]
+++ found=true
+++ eval Build_utils=true
++++ Build_utils=true
+++ break
+++ true
+++ read cline
+++ clean_line='Building chgres (chgres) .............................. no'
+++ [[ -z Building chgres (chgres) .............................. no ]]
+++ [[ B == \# ]]
+++ false
+++ first9='Building '
+++ [[ building  == \b\u\i\l\d\i\n\g\  ]]
++++ sed -e 's/.*(\(.*\)).*/\1/'
+++ short_prg=chgres
+++ clean_line='Building chgres (chgres) .............................. no'
+++ build_action=true
+++ last5='.. no'
+++ [[ .. no == \.\ \y\e\s ]]
+++ last4='. no'
+++ [[ . no == \.\ \n\o ]]
+++ build_action=false
+++ found=false
+++ for prg in '${all_prg[@]}'
+++ [[ Build_libs == \B\u\i\l\d\_chgres ]]
+++ for prg in '${all_prg[@]}'
+++ [[ Build_forecast == \B\u\i\l\d\_chgres ]]
+++ for prg in '${all_prg[@]}'
+++ [[ Build_gsi == \B\u\i\l\d\_chgres ]]
+++ for prg in '${all_prg[@]}'
+++ [[ Build_post == \B\u\i\l\d\_chgres ]]
+++ for prg in '${all_prg[@]}'
+++ [[ Build_bufr == \B\u\i\l\d\_chgres ]]
+++ for prg in '${all_prg[@]}'
+++ [[ Build_fv3snowbucket == \B\u\i\l\d\_chgres ]]
+++ for prg in '${all_prg[@]}'
+++ [[ Build_bucket == \B\u\i\l\d\_chgres ]]
+++ for prg in '${all_prg[@]}'
+++ [[ Build_sndp == \B\u\i\l\d\_chgres ]]
+++ for prg in '${all_prg[@]}'
+++ [[ Build_stnmlist == \B\u\i\l\d\_chgres ]]
+++ for prg in '${all_prg[@]}'
+++ [[ Build_utils == \B\u\i\l\d\_chgres ]]
+++ for prg in '${all_prg[@]}'
+++ [[ Build_chgres == \B\u\i\l\d\_chgres ]]
+++ found=true
+++ eval Build_chgres=false
++++ Build_chgres=false
+++ break
+++ true
+++ read cline
+++ clean_line='Building chgres_cube (chgres_cube) .................... yes'
+++ [[ -z Building chgres_cube (chgres_cube) .................... yes ]]
+++ [[ B == \# ]]
+++ false
+++ first9='Building '
+++ [[ building  == \b\u\i\l\d\i\n\g\  ]]
++++ sed -e 's/.*(\(.*\)).*/\1/'
+++ short_prg=chgres_cube
+++ clean_line='Building chgres_cube (chgres_cube) .................... yes'
+++ build_action=true
+++ last5='. yes'
+++ [[ . yes == \.\ \y\e\s ]]
+++ build_action=true
+++ last4=' yes'
+++ [[  yes == \.\ \n\o ]]
+++ found=false
+++ for prg in '${all_prg[@]}'
+++ [[ Build_libs == \B\u\i\l\d\_chgres_cube ]]
+++ for prg in '${all_prg[@]}'
+++ [[ Build_forecast == \B\u\i\l\d\_chgres_cube ]]
+++ for prg in '${all_prg[@]}'
+++ [[ Build_gsi == \B\u\i\l\d\_chgres_cube ]]
+++ for prg in '${all_prg[@]}'
+++ [[ Build_post == \B\u\i\l\d\_chgres_cube ]]
+++ for prg in '${all_prg[@]}'
+++ [[ Build_bufr == \B\u\i\l\d\_chgres_cube ]]
+++ for prg in '${all_prg[@]}'
+++ [[ Build_fv3snowbucket == \B\u\i\l\d\_chgres_cube ]]
+++ for prg in '${all_prg[@]}'
+++ [[ Build_bucket == \B\u\i\l\d\_chgres_cube ]]
+++ for prg in '${all_prg[@]}'
+++ [[ Build_sndp == \B\u\i\l\d\_chgres_cube ]]
+++ for prg in '${all_prg[@]}'
+++ [[ Build_stnmlist == \B\u\i\l\d\_chgres_cube ]]
+++ for prg in '${all_prg[@]}'
+++ [[ Build_utils == \B\u\i\l\d\_chgres_cube ]]
+++ for prg in '${all_prg[@]}'
+++ [[ Build_chgres == \B\u\i\l\d\_chgres_cube ]]
+++ for prg in '${all_prg[@]}'
+++ [[ Build_chgres_cube == \B\u\i\l\d\_chgres_cube ]]
+++ found=true
+++ eval Build_chgres_cube=true
++++ Build_chgres_cube=true
+++ break
+++ true
+++ read cline
+++ clean_line='Building sfc_climo_gen (sfc_climo_gen) ................ no'
+++ [[ -z Building sfc_climo_gen (sfc_climo_gen) ................ no ]]
+++ [[ B == \# ]]
+++ false
+++ first9='Building '
+++ [[ building  == \b\u\i\l\d\i\n\g\  ]]
++++ sed -e 's/.*(\(.*\)).*/\1/'
+++ short_prg=sfc_climo_gen
+++ clean_line='Building sfc_climo_gen (sfc_climo_gen) ................ no'
+++ build_action=true
+++ last5='.. no'
+++ [[ .. no == \.\ \y\e\s ]]
+++ last4='. no'
+++ [[ . no == \.\ \n\o ]]
+++ build_action=false
+++ found=false
+++ for prg in '${all_prg[@]}'
+++ [[ Build_libs == \B\u\i\l\d\_sfc_climo_gen ]]
+++ for prg in '${all_prg[@]}'
+++ [[ Build_forecast == \B\u\i\l\d\_sfc_climo_gen ]]
+++ for prg in '${all_prg[@]}'
+++ [[ Build_gsi == \B\u\i\l\d\_sfc_climo_gen ]]
+++ for prg in '${all_prg[@]}'
+++ [[ Build_post == \B\u\i\l\d\_sfc_climo_gen ]]
+++ for prg in '${all_prg[@]}'
+++ [[ Build_bufr == \B\u\i\l\d\_sfc_climo_gen ]]
+++ for prg in '${all_prg[@]}'
+++ [[ Build_fv3snowbucket == \B\u\i\l\d\_sfc_climo_gen ]]
+++ for prg in '${all_prg[@]}'
+++ [[ Build_bucket == \B\u\i\l\d\_sfc_climo_gen ]]
+++ for prg in '${all_prg[@]}'
+++ [[ Build_sndp == \B\u\i\l\d\_sfc_climo_gen ]]
+++ for prg in '${all_prg[@]}'
+++ [[ Build_stnmlist == \B\u\i\l\d\_sfc_climo_gen ]]
+++ for prg in '${all_prg[@]}'
+++ [[ Build_utils == \B\u\i\l\d\_sfc_climo_gen ]]
+++ for prg in '${all_prg[@]}'
+++ [[ Build_chgres == \B\u\i\l\d\_sfc_climo_gen ]]
+++ for prg in '${all_prg[@]}'
+++ [[ Build_chgres_cube == \B\u\i\l\d\_sfc_climo_gen ]]
+++ for prg in '${all_prg[@]}'
+++ [[ Build_smartinit == \B\u\i\l\d\_sfc_climo_gen ]]
+++ for prg in '${all_prg[@]}'
+++ [[ Build_smartprecip == \B\u\i\l\d\_sfc_climo_gen ]]
+++ for prg in '${all_prg[@]}'
+++ [[ Build_orog == \B\u\i\l\d\_sfc_climo_gen ]]
+++ for prg in '${all_prg[@]}'
+++ [[ Build_sfc_climo_gen == \B\u\i\l\d\_sfc_climo_gen ]]
+++ found=true
+++ eval Build_sfc_climo_gen=false
++++ Build_sfc_climo_gen=false
+++ break
+++ true
+++ read cline
+++ clean_line='Building regional_grid (regional_grid) ................ no'
+++ [[ -z Building regional_grid (regional_grid) ................ no ]]
+++ [[ B == \# ]]
+++ false
+++ first9='Building '
+++ [[ building  == \b\u\i\l\d\i\n\g\  ]]
++++ sed -e 's/.*(\(.*\)).*/\1/'
+++ short_prg=regional_grid
+++ clean_line='Building regional_grid (regional_grid) ................ no'
+++ build_action=true
+++ last5='.. no'
+++ [[ .. no == \.\ \y\e\s ]]
+++ last4='. no'
+++ [[ . no == \.\ \n\o ]]
+++ build_action=false
+++ found=false
+++ for prg in '${all_prg[@]}'
+++ [[ Build_libs == \B\u\i\l\d\_regional_grid ]]
+++ for prg in '${all_prg[@]}'
+++ [[ Build_forecast == \B\u\i\l\d\_regional_grid ]]
+++ for prg in '${all_prg[@]}'
+++ [[ Build_gsi == \B\u\i\l\d\_regional_grid ]]
+++ for prg in '${all_prg[@]}'
+++ [[ Build_post == \B\u\i\l\d\_regional_grid ]]
+++ for prg in '${all_prg[@]}'
+++ [[ Build_bufr == \B\u\i\l\d\_regional_grid ]]
+++ for prg in '${all_prg[@]}'
+++ [[ Build_fv3snowbucket == \B\u\i\l\d\_regional_grid ]]
+++ for prg in '${all_prg[@]}'
+++ [[ Build_bucket == \B\u\i\l\d\_regional_grid ]]
+++ for prg in '${all_prg[@]}'
+++ [[ Build_sndp == \B\u\i\l\d\_regional_grid ]]
+++ for prg in '${all_prg[@]}'
+++ [[ Build_stnmlist == \B\u\i\l\d\_regional_grid ]]
+++ for prg in '${all_prg[@]}'
+++ [[ Build_utils == \B\u\i\l\d\_regional_grid ]]
+++ for prg in '${all_prg[@]}'
+++ [[ Build_chgres == \B\u\i\l\d\_regional_grid ]]
+++ for prg in '${all_prg[@]}'
+++ [[ Build_chgres_cube == \B\u\i\l\d\_regional_grid ]]
+++ for prg in '${all_prg[@]}'
+++ [[ Build_smartinit == \B\u\i\l\d\_regional_grid ]]
+++ for prg in '${all_prg[@]}'
+++ [[ Build_smartprecip == \B\u\i\l\d\_regional_grid ]]
+++ for prg in '${all_prg[@]}'
+++ [[ Build_orog == \B\u\i\l\d\_regional_grid ]]
+++ for prg in '${all_prg[@]}'
+++ [[ Build_sfc_climo_gen == \B\u\i\l\d\_regional_grid ]]
+++ for prg in '${all_prg[@]}'
+++ [[ Build_regional_grid == \B\u\i\l\d\_regional_grid ]]
+++ found=true
+++ eval Build_regional_grid=false
++++ Build_regional_grid=false
+++ break
+++ true
+++ read cline
+++ clean_line='Building orog (orog) .................................. no'
+++ [[ -z Building orog (orog) .................................. no ]]
+++ [[ B == \# ]]
+++ false
+++ first9='Building '
+++ [[ building  == \b\u\i\l\d\i\n\g\  ]]
++++ sed -e 's/.*(\(.*\)).*/\1/'
+++ short_prg=orog
+++ clean_line='Building orog (orog) .................................. no'
+++ build_action=true
+++ last5='.. no'
+++ [[ .. no == \.\ \y\e\s ]]
+++ last4='. no'
+++ [[ . no == \.\ \n\o ]]
+++ build_action=false
+++ found=false
+++ for prg in '${all_prg[@]}'
+++ [[ Build_libs == \B\u\i\l\d\_orog ]]
+++ for prg in '${all_prg[@]}'
+++ [[ Build_forecast == \B\u\i\l\d\_orog ]]
+++ for prg in '${all_prg[@]}'
+++ [[ Build_gsi == \B\u\i\l\d\_orog ]]
+++ for prg in '${all_prg[@]}'
+++ [[ Build_post == \B\u\i\l\d\_orog ]]
+++ for prg in '${all_prg[@]}'
+++ [[ Build_bufr == \B\u\i\l\d\_orog ]]
+++ for prg in '${all_prg[@]}'
+++ [[ Build_fv3snowbucket == \B\u\i\l\d\_orog ]]
+++ for prg in '${all_prg[@]}'
+++ [[ Build_bucket == \B\u\i\l\d\_orog ]]
+++ for prg in '${all_prg[@]}'
+++ [[ Build_sndp == \B\u\i\l\d\_orog ]]
+++ for prg in '${all_prg[@]}'
+++ [[ Build_stnmlist == \B\u\i\l\d\_orog ]]
+++ for prg in '${all_prg[@]}'
+++ [[ Build_utils == \B\u\i\l\d\_orog ]]
+++ for prg in '${all_prg[@]}'
+++ [[ Build_chgres == \B\u\i\l\d\_orog ]]
+++ for prg in '${all_prg[@]}'
+++ [[ Build_chgres_cube == \B\u\i\l\d\_orog ]]
+++ for prg in '${all_prg[@]}'
+++ [[ Build_smartinit == \B\u\i\l\d\_orog ]]
+++ for prg in '${all_prg[@]}'
+++ [[ Build_smartprecip == \B\u\i\l\d\_orog ]]
+++ for prg in '${all_prg[@]}'
+++ [[ Build_orog == \B\u\i\l\d\_orog ]]
+++ found=true
+++ eval Build_orog=false
++++ Build_orog=false
+++ break
+++ true
+++ read cline
+++ clean_line='Building fre-nctools (nctools) ........................ no'
+++ [[ -z Building fre-nctools (nctools) ........................ no ]]
+++ [[ B == \# ]]
+++ false
+++ first9='Building '
+++ [[ building  == \b\u\i\l\d\i\n\g\  ]]
++++ sed -e 's/.*(\(.*\)).*/\1/'
+++ short_prg=nctools
+++ clean_line='Building fre-nctools (nctools) ........................ no'
+++ build_action=true
+++ last5='.. no'
+++ [[ .. no == \.\ \y\e\s ]]
+++ last4='. no'
+++ [[ . no == \.\ \n\o ]]
+++ build_action=false
+++ found=false
+++ for prg in '${all_prg[@]}'
+++ [[ Build_libs == \B\u\i\l\d\_nctools ]]
+++ for prg in '${all_prg[@]}'
+++ [[ Build_forecast == \B\u\i\l\d\_nctools ]]
+++ for prg in '${all_prg[@]}'
+++ [[ Build_gsi == \B\u\i\l\d\_nctools ]]
+++ for prg in '${all_prg[@]}'
+++ [[ Build_post == \B\u\i\l\d\_nctools ]]
+++ for prg in '${all_prg[@]}'
+++ [[ Build_bufr == \B\u\i\l\d\_nctools ]]
+++ for prg in '${all_prg[@]}'
+++ [[ Build_fv3snowbucket == \B\u\i\l\d\_nctools ]]
+++ for prg in '${all_prg[@]}'
+++ [[ Build_bucket == \B\u\i\l\d\_nctools ]]
+++ for prg in '${all_prg[@]}'
+++ [[ Build_sndp == \B\u\i\l\d\_nctools ]]
+++ for prg in '${all_prg[@]}'
+++ [[ Build_stnmlist == \B\u\i\l\d\_nctools ]]
+++ for prg in '${all_prg[@]}'
+++ [[ Build_utils == \B\u\i\l\d\_nctools ]]
+++ for prg in '${all_prg[@]}'
+++ [[ Build_chgres == \B\u\i\l\d\_nctools ]]
+++ for prg in '${all_prg[@]}'
+++ [[ Build_chgres_cube == \B\u\i\l\d\_nctools ]]
+++ for prg in '${all_prg[@]}'
+++ [[ Build_smartinit == \B\u\i\l\d\_nctools ]]
+++ for prg in '${all_prg[@]}'
+++ [[ Build_smartprecip == \B\u\i\l\d\_nctools ]]
+++ for prg in '${all_prg[@]}'
+++ [[ Build_orog == \B\u\i\l\d\_nctools ]]
+++ for prg in '${all_prg[@]}'
+++ [[ Build_sfc_climo_gen == \B\u\i\l\d\_nctools ]]
+++ for prg in '${all_prg[@]}'
+++ [[ Build_regional_grid == \B\u\i\l\d\_nctools ]]
+++ for prg in '${all_prg[@]}'
+++ [[ Build_nctools == \B\u\i\l\d\_nctools ]]
+++ found=true
+++ eval Build_nctools=false
++++ Build_nctools=false
+++ break
+++ true
+++ read cline
+++ clean_line=
+++ [[ -z '' ]]
+++ read cline
+++ clean_line='# -- END --'
+++ [[ -z # -- END -- ]]
+++ [[ # == \# ]]
+++ read cline
+++ clean_line=
+++ [[ -z '' ]]
+++ read cline
+++ false
+++ echo '=== end of partial build setting ==='
++ false
++ true
++ echo ' .... Building forecast .... '
+ .... Building forecast .... 
++ ./build_forecast.sh
++ true
++ echo ' .... Building post .... '
+ .... Building post .... 
++ ./build_post.sh
++ true
++ echo ' .... Building bufr .... '
+ .... Building bufr .... 
++ ./build_bufr.sh
++ true
++ echo ' .... Building sndp .... '
+ .... Building sndp .... 
++ ./build_sndp.sh
++ true
++ echo ' .... Building stnmlist .... '
+ .... Building stnmlist .... 
++ ./build_stnmlist.sh
++ true
++ echo ' .... Building smartinit .... '
+ .... Building smartinit .... 
++ ./build_smartinit.sh
++ true
++ echo ' .... Building smartprecip .... '
+ .... Building smartprecip .... 
++ ./build_smartprecip.sh
++ true
++ echo ' .... Building fv3snowbucket .... '
+ .... Building fv3snowbucket .... 
++ ./build_fv3snowbucket.sh
++ true
++ echo ' .... Building bucket .... '
+ .... Building bucket .... 
++ ./build_bucket.sh
++ true
++ echo ' .... Building utils .... '
+ .... Building utils .... 
++ ./build_utils.sh
++ echo
+
++ echo ' .... Build system finished .... '
+ .... Build system finished .... 
++ exit 0

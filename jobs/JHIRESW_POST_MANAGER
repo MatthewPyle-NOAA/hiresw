@@ -1,0 +1,61 @@
+#!/bin/sh
+
+########################################
+# RUNS HIRESW POST MANAGER JOB
+########################################
+set -xa
+export PS4='$SECONDS + ' 
+date
+
+############################################################# 
+# obtain unique process id (pid) and make temp directories
+############################################################# 
+export DATA=${DATA:-${DATAROOT:?}/${jobid:?}}
+mkdir -m 775 -p $DATA
+cd $DATA
+export INPUT_DATA=${INPUT_DATA:-${DATAROOT:?}/hiresw.forecast_${NEST}_${MODEL}_${cyc}_${envir}}
+
+####################################
+# Run setpdy and initialize PDY variables
+####################################
+# PDY and CDATE are passed in through Rocoto xml
+
+if [ $RUN_ENVIR = 'nco'  ]
+then
+export cycle=${cycle:-t${cyc}z}
+setpdy.sh
+. ./PDY
+fi
+
+export HOMEhiresw=${HOMEhiresw:-${NWROOT:?}/hiresw.${hiresw_ver:?}}
+
+###############################
+# Specify NET and RUN name
+###############################
+export NET=${NET:-hiresw}
+export RUN=${RUN:-hiresw}
+
+export pgmout="OUTPUT.$$"
+
+########################################################
+# Run the ex-script
+#
+
+${HOMEhiresw}/scripts/${MODEL}/exhiresw_pmgr.sh.ecf
+
+export err=$?
+
+#
+########################################################
+
+if [ -e $pgmerr ] ; then
+cat $pgmerr
+fi
+
+if [ -e $pgmout ] ; then
+cat $pgmout
+fi
+
+postmsg "$jlogfile" "$job FOR NEST=${NEST}${MODEL} IS COMPLETE"
+
+date
