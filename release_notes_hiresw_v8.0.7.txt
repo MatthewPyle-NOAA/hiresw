@@ -1,0 +1,62 @@
+﻿HiresW v8.0.7 - released 01/12/2022
+
+
+Google docs version at: 
+
+
+https://docs.google.com/document/d/1gr6qwCRe7tmLNMlfEYKfFb5pvqcJ6K6JpfCYLXEpmOA/edit?usp=sharing
+
+
+
+#####################
+Update overview 
+#####################
+
+
+* Addresses ARW model stability issues seen over Alaska between 23/06Z and 24/06Z December 2021 with a reduction in model time step and a slight adjustment to vertical model levels for the primary ARW run.
+
+
+#####################
+Obtaining the package
+#####################
+
+
+Clone it with this command (but change hiresw.v8.0.7 to whatever you want to call it in the directory that it is cloned into):
+
+
+git clone -b v8.0.7 https://github.com/MatthewPyle-NOAA/hiresw.git hiresw.v8.0.7
+
+
+#############################
+Modified files:
+#############################
+
+
+Makes an adjustment to model levels, sets the model time step to 16 4/11 seconds, and changes the task layout in the _model version of the namelist for these files:
+
+
+parm/arw/hiresw_arw_namelist.input_in_ak
+parm/arw/hiresw_arw_namelist.input_in_ak_model
+
+
+Sets the model time step in these files to 16 4/11 seconds, and changes the task layout in the _model version of the namelist.for these files:
+
+
+parm/arw/hiresw_arw_namelist.input_in_akmem2
+parm/arw/hiresw_arw_namelist.input_in_akmem2_model
+
+
+The “runline” resource specification is changed for the two Alaska runs:
+
+
+scripts/arw/exhiresw_fcst.sh.ecf
+
+
+
+
+#############################
+Resource changes:
+#############################
+
+
+The change in model time step would increase model run times by approximately 4.8% with no increase in computing resources.  But the delivered package expects two more nodes for both the AK (from 54 to 56)  and AKmem2 (from 37 to 39) forecast model jobs to keep model run times relatively unchanged.
