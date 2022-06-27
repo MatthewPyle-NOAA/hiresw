@@ -1,0 +1,43 @@
+#PBS -N hiresw_%MODEL%_%DOMAIN%_gempak_%CYC%
+#PBS -j oe
+#PBS -S /bin/bash
+#PBS -q %QUEUE%
+#PBS -A %PROJ%-%PROJENVIR%
+#PBS -l select=1:ncpus=1:mem=128GB
+#PBS -l walltime=02:30:00
+#PBS -l debug=true
+
+model=hiresw
+%include <head.h>
+%include <envir-p1.h>
+
+set -x
+
+export cyc=%CYC%
+export NEST="%DOMAIN%"
+export MODEL="%MODEL%"
+export MEMBER="ctl"
+
+module load PrgEnv-intel/$PrgEnv_intel_ver
+module load craype/$craype_ver
+module load intel/$intel_ver
+module load gempak/${gempak_ver}
+
+$HOMEhiresw/jobs/JHIRESW_GEMPAK
+
+%include <tail.h>
+%manual
+######################################################################
+#
+#  PURPOSE:
+#
+######################################################################
+
+######################################################################
+# Job specific troubleshooting instructions:
+#  see generic troubleshoot manual page
+#
+######################################################################
+
+# include manual page below
+%end

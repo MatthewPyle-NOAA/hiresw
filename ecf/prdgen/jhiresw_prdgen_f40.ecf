@@ -1,0 +1,57 @@
+#PBS -N hiresw_%MODEL%_%DOMAIN%_prdgen_f40_%CYC%
+#PBS -j oe
+#PBS -S /bin/bash
+#PBS -q %QUEUE%
+#PBS -A %PROJ%-%PROJENVIR%
+#PBS -l select=1:ncpus=%NCPUS%:mpiprocs=%NCPUS%:mem=48GB
+#PBS -l walltime=00:10:00
+#PBS -l debug=true
+
+model=hiresw
+%include <head.h>
+%include <envir-p1.h>
+
+set -x
+
+export cyc=%CYC%
+export fhr=40
+export NEST="%DOMAIN%"
+export MODEL="%MODEL%"
+export MEMBER="ctl"
+export tmmark=%TMMARK%
+
+export OMP_NUM_THREADS=1
+export numprocs=%NCPUS%
+export spanprocs=%SPAN%
+export NTASK=%NCPUS%
+export PTILE=%SPAN%
+
+module load PrgEnv-intel/$PrgEnv_intel_ver
+module load craype/$craype_ver
+module load intel/$intel_ver
+module load cray-mpich/$cray_mpich_ver
+module load netcdf/$netcdf_ver
+module load cray-pals/$cray_pals_ver
+
+module load wgrib2/${wgrib2_ver}
+
+module list
+
+$HOMEhiresw/jobs/JHIRESW_PRDGEN
+
+%include <tail.h>
+%manual
+######################################################################
+#
+#  PURPOSE:
+#
+######################################################################
+
+######################################################################
+# Job specific troubleshooting instructions:
+#  see generic troubleshoot manual page
+#
+######################################################################
+
+# include manual page below
+%end

@@ -1,0 +1,58 @@
+#PBS -N hiresw_%MODEL%_%DOMAIN%_bufrpost_f56_%CYC%
+#PBS -j oe
+#PBS -S /bin/bash
+#PBS -q %QUEUE%
+#PBS -A %PROJ%-%PROJENVIR%
+#PBS -l place=vscatter,select=1:ncpus=%NCPUS%:mem=128GB
+#PBS -l walltime=00:10:00
+#PBS -l debug=true
+
+model=hiresw
+%include <head.h>
+%include <envir-p1.h>
+
+set -x
+
+export cyc=%CYC%
+export fhr=56
+export NEST="%DOMAIN%"
+export MODEL="%MODEL%"
+export MEMBER="ctl"
+export tmmark=%TMMARK%
+
+export OMP_NUM_THREADS=1
+export numprocs=%NCPUS%
+export spanprocs=%NCPUS%
+export TOTAL_TASKS=%NCPUS%
+export NTASK=%NCPUS%
+export PTILE=%NCPUS%
+export NCTSK=%NCPUS%
+
+module load PrgEnv-intel/$PrgEnv_intel_ver
+module load craype/$craype_ver
+module load intel/$intel_ver
+module load cray-mpich/$cray_mpich_ver
+module load cray-pals/$cray_pals_ver
+module load netcdf/$netcdf_ver
+module load bufr_tranjb/$bufr_tranjb_ver
+
+module list
+
+$HOMEhiresw/jobs/JHIRESW_WRFBUFRSND
+
+%include <tail.h>
+%manual
+######################################################################
+#
+#  PURPOSE:
+#
+######################################################################
+
+######################################################################
+# Job specific troubleshooting instructions:
+#  see generic troubleshoot manual page
+#
+######################################################################
+
+# include manual page below
+%end

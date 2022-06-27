@@ -1,0 +1,60 @@
+#PBS -N hiresw_%MODEL%_%DOMAIN%_forecast_%CYC%
+#PBS -j oe
+#PBS -S /bin/bash
+#PBS -q %QUEUE%
+#PBS -A %PROJ%-%PROJENVIR%
+#PBS -l place=vscatter:exclhost,select=%NODES%:ncpus=%SPAN%
+#PBS -l walltime=02:25:00
+#PBS -l debug=true
+
+model=hiresw
+%include <head.h>
+%include <envir-p1.h>
+
+set -x
+
+export cyc=%CYC%
+export NEST="%DOMAIN%"
+export MODEL="%MODEL%"
+export MEMBER="ctl"
+export tmmark=%TMMARK%
+
+export OMP_NUM_THREADS=1
+export numprocs=%TOTAL_TASKS%
+export NTASK=%TOTAL_TASKS%
+export NCTSK=%SPAN%
+export PTILE=%SPAN%
+
+if [ -n "%TOTAL_TASKS:%" ]; then export TOTAL_TASKS=%TOTAL_TASKS:% ; fi
+if [ -n "%TASK_X:%" ]; then export TASK_X=%TASK_X:% ; fi
+if [ -n "%TASK_Y:%" ]; then export TASK_Y=%TASK_Y:% ; fi
+if [ -n "%WG:%" ]; then export WG=%WG:% ; fi
+if [ -n "%WTPG:%" ]; then export WTPG=%WTPG:% ; fi
+
+module load PrgEnv-intel/$PrgEnv_intel_ver
+module load craype/$craype_ver
+module load intel/$intel_ver
+module load cray-mpich/$cray_mpich_ver
+module load cray-pals/$cray_pals_ver
+module load netcdf/$netcdf_ver
+module load hdf5/$hdf5_ver
+
+module list
+$HOMEhiresw/jobs/JHIRESW_FORECAST
+
+%include <tail.h>
+%manual
+######################################################################
+#
+#  PURPOSE:
+#
+######################################################################
+
+######################################################################
+# Job specific troubleshooting instructions:
+#  see generic troubleshoot manual page
+#
+######################################################################
+
+# include manual page below
+%end
