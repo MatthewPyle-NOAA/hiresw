@@ -11,8 +11,10 @@ date
 # obtain unique process id (pid) and make temp directories
 ############################################################# 
 export DATA=${DATA:-${DATAROOT:?}/${jobid:?}}
-mkdir -m 775 -p $DATA
-cd $DATA
+export POST_DATA=${DATA:-${DATAROOT:?}/hiresw.post_${NEST:?}_${MODEL:?}_${cyc:?}_${envir:?}}
+export PRDGEN_DATA=${DATA:-${DATAROOT:?}/hiresw.prdgen_${NEST:?}_${MODEL:?}_${cyc:?}_${envir:?}}
+mkdir -m 775 -p $DATA $POST_DATA $PRDGEN_DATA
+
 export INPUT_DATA=${INPUT_DATA:-${DATAROOT:?}/hiresw.forecast_${NEST}_${MODEL}_${cyc}_${envir}}
 
 ####################################
@@ -20,6 +22,13 @@ export INPUT_DATA=${INPUT_DATA:-${DATAROOT:?}/hiresw.forecast_${NEST}_${MODEL}_$
 ####################################
 
 export cycle=${cycle:-t${cyc}z}
+cd ${POST_DATA}
+setpdy.sh
+. ./PDY
+cd ${PRDGEN_DATA}
+setpdy.sh
+. ./PDY
+cd $DATA
 setpdy.sh
 . ./PDY
 
@@ -53,5 +62,8 @@ cat $pgmout
 fi
 
 postmsg  "$job FOR NEST=${NEST}${MODEL} IS COMPLETE"
+
+cd $DATAROOT
+if [ $KEEPDATA = NO ]; then rm -rf $DATA; fi
 
 date

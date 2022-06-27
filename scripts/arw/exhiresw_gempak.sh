@@ -119,7 +119,7 @@ EOF
 
     if [ $SENDDBN = "YES" ] ; then
       if [ $NEST != "guam" ]; then
-         $DBNROOT/bin/dbn_alert MODEL ${DBN_ALERT_TYPE} $job \
+         $SIPHONROOT/bin/dbn_alert MODEL ${DBN_ALERT_TYPE} $job \
            $COMOUT/gempak/$GEMGRD
       fi
     else

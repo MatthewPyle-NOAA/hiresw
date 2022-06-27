@@ -51,6 +51,6 @@ fi
 
 if [ $SENDDBN = YES ]
 then
-  $DBNROOT/bin/dbn_alert MODEL ${DBN_ALERT_TYPE_SMART} $job  $COMOUT/${RUN}.t${cyc}z.${MODEL}_${res}.f${fhr}.${NEST}.grib2
-  $DBNROOT/bin/dbn_alert MODEL ${DBN_ALERT_TYPE_SMART_WIDX}  $job $COMOUT/${RUN}.t${cyc}z.${MODEL}_${res}.f${fhr}.${NEST}.grib2.idx
+  $SIPHONROOT/bin/dbn_alert MODEL ${DBN_ALERT_TYPE_SMART} $job  $COMOUT/${RUN}.t${cyc}z.${MODEL}_${res}.f${fhr}.${NEST}.grib2
+  $SIPHONROOT/bin/dbn_alert MODEL ${DBN_ALERT_TYPE_SMART_WIDX}  $job $COMOUT/${RUN}.t${cyc}z.${MODEL}_${res}.f${fhr}.${NEST}.grib2.idx
 fi

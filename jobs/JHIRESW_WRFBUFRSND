@@ -47,6 +47,8 @@ export EXEChiresw=${EXEChiresw:-$HOMEhiresw/exec/arw}
 export FIXhiresw=${FIXhiresw:-$HOMEhiresw/fix/arw}
 export PARMhiresw=${PARMhiresw:-$HOMEhiresw/parm/arw}
 export USHhiresw=${USHhiresw:-$HOMEhiresw/ush/arw}
+export GEMPAKhiresw=${GEMPAKhiresw:-$HOMEhiresw/gempak}
+
 else
 export HOMEfv3=${HOMEfv3:-${PACKAGEROOT:?}/hiresw.${hiresw_ver:?}}
 export EXECfv3=${EXECfv3:-$HOMEfv3/exec/fv3}
@@ -55,6 +57,8 @@ export PARMfv3=${PARMfv3:-$HOMEfv3/parm/fv3}
 export USHfv3=${USHfv3:-$HOMEfv3/ush/fv3}
 export FIXsar=${FIXsar:-$HOMEfv3/fix/fv3/fix_sar/$NEST}
 export POSTGPEXEC=${EXECfv3}/hireswfv3_bufr
+export GEMPAKhiresw=${GEMPAKhiresw:-$HOMEfv3/gempak}
+
 . $PARMfv3/run_commands_forecast.config
 fi
 
@@ -68,7 +72,7 @@ export RUN=${RUN:-hiresw}
 # Define COM directories
 #####################################
 #####################################
-export COMIN=${COMIN:-$(compath.py -o $NET/${hiresw_ver})/${RUN}.${PDY}}
+export COMIN=${COMIN:-$(compath.py ${envir}/$NET/${hiresw_ver})/${RUN}.${PDY}}
 export COMOUT=${COMOUT:-$(compath.py -o $NET/${hiresw_ver})/${RUN}.${PDY}}
 mkdir -p $COMOUT
 

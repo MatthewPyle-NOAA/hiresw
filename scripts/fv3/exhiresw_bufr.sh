@@ -250,8 +250,8 @@ export err=$?;err_chk
 ############### Convert BUFR output into format directly readable by GEMPAK namsnd on WCOSS
 
 echo USHobsproc_shared_bufr_cword is ${USHobsproc_shared_bufr_cword}
-${USHobsproc_shared_bufr_cword}/bufr_cword.sh unblk class1.bufr class1.bufr.unb
-${USHobsproc_shared_bufr_cword}/bufr_cword.sh block class1.bufr.unb class1.bufr.wcoss
+$CWORDush unblk class1.bufr class1.bufr.unb
+$CWORDush block class1.bufr.unb class1.bufr.wcoss
 
 if [ $SENDCOM == "YES" ]
 then
@@ -302,8 +302,8 @@ cd ${COMOUT}/bufr.${NEST}${MODEL}${cyc}
 files=`ls`
 for fl in $files
 do
-${USHobsproc_shared_bufr_cword}/bufr_cword.sh unblk ${fl} ${fl}.unb
-${USHobsproc_shared_bufr_cword}/bufr_cword.sh block ${fl}.unb ${fl}.wcoss
+$CWORDush unblk ${fl} ${fl}.unb
+$CWORDush block ${fl}.unb ${fl}.wcoss
 rm ${fl}.unb
 done
 
@@ -313,11 +313,14 @@ done
 
 if [ $SENDDBN == "YES" ]
 then
-  $DBNROOT/bin/dbn_alert MODEL ${DBN_ALERT_TYPE} $job $COMOUT/${RUN}.t${cyc}z.${RUNLOC}.class1.bufr
-  $DBNROOT/bin/dbn_alert MODEL ${DBN_ALERT_TYPE}_TAR $job $COMOUT/${RUN}.t${cyc}z.${RUNLOC}.bufrsnd.tar.gz
+  $SIPHONROOT/bin/dbn_alert MODEL ${DBN_ALERT_TYPE} $job $COMOUT/${RUN}.t${cyc}z.${RUNLOC}.class1.bufr
+  $SIPHONROOT/bin/dbn_alert MODEL ${DBN_ALERT_TYPE}_TAR $job $COMOUT/${RUN}.t${cyc}z.${RUNLOC}.bufrsnd.tar.gz
 fi
 
 fi # f60 if test
+
+# make gempak files
+$USHfv3/hiresw_bfr2gpk.sh
 
 echo EXITING $0 with return code $err
 exit $err

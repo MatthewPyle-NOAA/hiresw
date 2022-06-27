@@ -54,7 +54,7 @@ then
     fi
 
     if [ $SENDDBN_NTC = "YES" ] ; then
-       $DBNROOT/bin/dbn_alert NTC_LOW ${DBN_ALERT_TYPE} $job $COMOUTwmo/grib2.t${cyc}z.awpreg_${RUNLOC}f${fhr}
+       $SIPHONROOT/bin/dbn_alert NTC_LOW ${DBN_ALERT_TYPE} $job $COMOUTwmo/grib2.t${cyc}z.awpreg_${RUNLOC}f${fhr}
     else
        msg="File $output_grb.$job not posted to db_net."
        postmsg "$msg"
@@ -86,7 +86,7 @@ else
     fi
 
     if [ $SENDDBN_NTC = "YES" ] ; then
-       $DBNROOT/bin/dbn_alert NTC_LOW ${DBN_ALERT_TYPE} $job $COMOUTwmo/grib2.t${cyc}z.awpreg_${RUNLOC}f${fhr}
+       $SIPHONROOT/bin/dbn_alert NTC_LOW ${DBN_ALERT_TYPE} $job $COMOUTwmo/grib2.t${cyc}z.awpreg_${RUNLOC}f${fhr}
     else
        msg="File $output_grb.$job not posted to db_net."
        postmsg  "$msg"

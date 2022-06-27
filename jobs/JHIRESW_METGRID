@@ -42,7 +42,7 @@ export RUN=${RUN:-hiresw}
 # Define COM directories
 #####################################
 export COMOUT=${COMOUT:-$(compath.py -o $NET/${hiresw_ver})/${RUN}.${PDY}}
-export COMIN=${COMIN:-$(compath.py -o $NET/${hiresw_ver})/${RUN}.${PDY}}
+export COMIN=${COMIN:-$(compath.py ${envir}/$NET/${hiresw_ver})/${RUN}.${PDY}}
 
 mkdir -p -m 775 $COMOUT
  

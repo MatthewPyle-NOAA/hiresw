@@ -354,6 +354,7 @@ fi
 # do in 13 pieces (conus only??)
 
 INF=${COMIN}/${RUN}.t${cyc}z.${rg}fv3.${natgrd}.f${fhr}.grib2
+CHKF=${INPUT_DATA}/prdgendone${fhr}
 
 loop=1
 looplim=90
@@ -361,7 +362,8 @@ looplim=90
 while [ $loop -le $looplim ]
 do
  echo in while
- if [ -s $INF ]
+ #if [ -s $INF ]
+ if [ -s $CHKF ]
  then
    break
  else
@@ -523,7 +525,7 @@ chmod 775 ./wgrib2.poe
 # export MP_CMDFILE=wgrib2.poe
 #time mpirun.lsf
 # time aprun -n 1 -N 1 -d $NTASK ./wgrib2.poe
-mpiexec -cpu-bind core --configfile ./wgrib2.poe
+mpiexec -cpu-bind verbose,depth --configfile ./wgrib2.poe
 
 export err=$?;  err_chk
 

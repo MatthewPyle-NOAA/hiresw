@@ -105,7 +105,7 @@ export MP_CMDFILE=$DATA/poescript_${fhr}
 # Execute the script.
 #time mpirun.lsf
 # time $command
-mpiexec -cpu-bind core --configfile ${command}
+mpiexec -cpu-bind verbose,depth --configfile ${command}
 export err=$?; err_chk
 
 if [ $NEST = "conus" ]
@@ -139,10 +139,10 @@ $WGRIB2 $COMOUT/hiresw.t${cyc}z.${MODEL}_3km.f${fhr}.conus.subset.grib2 -s > $CO
 
 
     if [ $SENDDBN = YES ]; then
-       $DBNROOT/bin/dbn_alert MODEL HIRESW_3KM_CONUS       $job $COMOUT/hiresw.t${cyc}z.${MODEL}_3km.f${fhr}.conus.subset.grib2
-       $DBNROOT/bin/dbn_alert MODEL HIRESW_3KM_CONUS_WIDX  $job $COMOUT/hiresw.t${cyc}z.${MODEL}_3km.f${fhr}.conus.subset.grib2.idx
-       $DBNROOT/bin/dbn_alert MODEL ${DBN_ALERT_TYPE}      $job $COMOUT/hiresw.t${cyc}z.${MODEL}_5km.f${fhr}.conus.grib2
-       $DBNROOT/bin/dbn_alert MODEL ${DBN_ALERT_TYPE_WIDX} $job $COMOUT/hiresw.t${cyc}z.${MODEL}_5km.f${fhr}.conus.grib2.idx
+       $SIPHONROOT/bin/dbn_alert MODEL HIRESW_3KM_CONUS       $job $COMOUT/hiresw.t${cyc}z.${MODEL}_3km.f${fhr}.conus.subset.grib2
+       $SIPHONROOT/bin/dbn_alert MODEL HIRESW_3KM_CONUS_WIDX  $job $COMOUT/hiresw.t${cyc}z.${MODEL}_3km.f${fhr}.conus.subset.grib2.idx
+       $SIPHONROOT/bin/dbn_alert MODEL ${DBN_ALERT_TYPE}      $job $COMOUT/hiresw.t${cyc}z.${MODEL}_5km.f${fhr}.conus.grib2
+       $SIPHONROOT/bin/dbn_alert MODEL ${DBN_ALERT_TYPE_WIDX} $job $COMOUT/hiresw.t${cyc}z.${MODEL}_5km.f${fhr}.conus.grib2.idx
     fi
 
   fi # SENDCOM
@@ -210,10 +210,10 @@ cat $DATA/hiresw.t${cyc}z.${MODEL}_3km.f${fhr}.conus.grib2_1  > $COMOUT/hiresw.t
 $WGRIB2 $COMOUT/hiresw.t${cyc}z.${MODEL}_3km.f${fhr}.conusmem2.subset.grib2 -s > $COMOUT/hiresw.t${cyc}z.${MODEL}_3km.f${fhr}.conusmem2.subset.grib2.idx
 
     if [ $SENDDBN = YES ]; then
-       $DBNROOT/bin/dbn_alert MODEL HIRESW_3KM_CONUS       $job $COMOUT/hiresw.t${cyc}z.${MODEL}_3km.f${fhr}.conusmem2.subset.grib2
-       $DBNROOT/bin/dbn_alert MODEL HIRESW_3KM_CONUS_WIDX  $job $COMOUT/hiresw.t${cyc}z.${MODEL}_3km.f${fhr}.conusmem2.subset.grib2.idx
-       $DBNROOT/bin/dbn_alert MODEL ${DBN_ALERT_TYPE}      $job $COMOUT/hiresw.t${cyc}z.${MODEL}_5km.f${fhr}.conusmem2.grib2
-       $DBNROOT/bin/dbn_alert MODEL ${DBN_ALERT_TYPE_WIDX} $job $COMOUT/hiresw.t${cyc}z.${MODEL}_5km.f${fhr}.conusmem2.grib2.idx
+       $SIPHONROOT/bin/dbn_alert MODEL HIRESW_3KM_CONUS       $job $COMOUT/hiresw.t${cyc}z.${MODEL}_3km.f${fhr}.conusmem2.subset.grib2
+       $SIPHONROOT/bin/dbn_alert MODEL HIRESW_3KM_CONUS_WIDX  $job $COMOUT/hiresw.t${cyc}z.${MODEL}_3km.f${fhr}.conusmem2.subset.grib2.idx
+       $SIPHONROOT/bin/dbn_alert MODEL ${DBN_ALERT_TYPE}      $job $COMOUT/hiresw.t${cyc}z.${MODEL}_5km.f${fhr}.conusmem2.grib2
+       $SIPHONROOT/bin/dbn_alert MODEL ${DBN_ALERT_TYPE_WIDX} $job $COMOUT/hiresw.t${cyc}z.${MODEL}_5km.f${fhr}.conusmem2.grib2.idx
     fi
 
   fi # SENDCOM
@@ -265,8 +265,8 @@ rm $DATA/hiresw.t${cyc}z.${MODEL}_5km.f${fhr}.${NEST}.grib2_1 $DATA/hiresw.t${cy
 $WGRIB2 $COMOUT/hiresw.t${cyc}z.${MODEL}_5km.f${fhr}.${NEST}.grib2 -s > $COMOUT/hiresw.t${cyc}z.${MODEL}_5km.f${fhr}.${NEST}.grib2.idx
 
     if [ $SENDDBN = YES ]; then
-       $DBNROOT/bin/dbn_alert MODEL ${DBN_ALERT_TYPE}      $job $COMOUT/hiresw.t${cyc}z.${MODEL}_5km.f${fhr}.${NEST}.grib2
-       $DBNROOT/bin/dbn_alert MODEL ${DBN_ALERT_TYPE_WIDX} $job $COMOUT/hiresw.t${cyc}z.${MODEL}_5km.f${fhr}.${NEST}.grib2.idx
+       $SIPHONROOT/bin/dbn_alert MODEL ${DBN_ALERT_TYPE}      $job $COMOUT/hiresw.t${cyc}z.${MODEL}_5km.f${fhr}.${NEST}.grib2
+       $SIPHONROOT/bin/dbn_alert MODEL ${DBN_ALERT_TYPE_WIDX} $job $COMOUT/hiresw.t${cyc}z.${MODEL}_5km.f${fhr}.${NEST}.grib2.idx
     fi
 
 
@@ -290,8 +290,8 @@ $WGRIB2 $COMOUT/hiresw.t${cyc}z.${MODEL}_5km.f${fhr}.${NEST}.grib2 -s > $COMOUT/
 rm $DATA/hiresw.t${cyc}z.${MODEL}_5km.f${fhr}.${NEST}.grib2_0
 
     if [ $SENDDBN = YES ]; then
-       $DBNROOT/bin/dbn_alert MODEL ${DBN_ALERT_TYPE}      $job $COMOUT/hiresw.t${cyc}z.${MODEL}_5km.f${fhr}.${NEST}.grib2
-       $DBNROOT/bin/dbn_alert MODEL ${DBN_ALERT_TYPE_WIDX} $job $COMOUT/hiresw.t${cyc}z.${MODEL}_5km.f${fhr}.${NEST}.grib2.idx 
+       $SIPHONROOT/bin/dbn_alert MODEL ${DBN_ALERT_TYPE}      $job $COMOUT/hiresw.t${cyc}z.${MODEL}_5km.f${fhr}.${NEST}.grib2
+       $SIPHONROOT/bin/dbn_alert MODEL ${DBN_ALERT_TYPE_WIDX} $job $COMOUT/hiresw.t${cyc}z.${MODEL}_5km.f${fhr}.${NEST}.grib2.idx 
     fi
  
   fi

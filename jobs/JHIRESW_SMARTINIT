@@ -67,7 +67,7 @@ export RUN=${RUN:-hiresw}
 #####################################
 # Define COM directories
 #####################################
-export COMIN=${COMIN:-$(compath.py -o $NET/${hiresw_ver})/${RUN}.${PDY}}
+export COMIN=${COMIN:-$(compath.py ${envir}/$NET/${hiresw_ver})/${RUN}.${PDY}}
 export COMOUT=${COMOUT:-$(compath.py -o $NET/${hiresw_ver})/${RUN}.${PDY}}
 
 export COMsref=${COMsref:-$(compath.py -o $NET/${sref_ver})}

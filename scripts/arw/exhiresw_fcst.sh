@@ -348,7 +348,7 @@ fi
 if [ $RUNLOC = "conusarw"  -o $RUNLOC = "conusmem2arw" -o $RUNLOC = "akarw" \
        	-o  $RUNLOC = "akmem2arw" ]
 then
-# runline="mpiexec -cpu-bind core -n $NTASK ./hiresw_wrfarwfcst"
+# runline="mpiexec -cpu-bind verbose,depth -n $NTASK ./hiresw_wrfarwfcst"
     runline="mpiexec -n $NTASK -ppn $PTILE ./hiresw_wrfarwfcst"
 fi
 

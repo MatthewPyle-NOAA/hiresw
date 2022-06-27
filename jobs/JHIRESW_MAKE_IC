@@ -58,7 +58,7 @@ export RUN=${RUN:-hiresw}
 #####################################
 # Define COM directories
 #####################################
-export COMINgfs=${COMINgfs:-$(compath.py ${envir}/com/gfs/${gfs_ver}/gfs.$PDYm6h)}
+export COMINgfs=${COMINgfs:-$(compath.py ${envir}/gfs/${gfs_ver}/gfs)}
 export INIDIR=${COMINgfs}/$cyc
 
 export COMOUT=${COMOUT:-$(compath.py -o $NET/${hiresw_ver})/${RUN}.${PDY}}
