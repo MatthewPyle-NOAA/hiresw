@@ -369,11 +369,10 @@ then
   $SIPHONROOT/bin/dbn_alert MODEL ${DBN_ALERT_TYPE}_TAR $job $COMOUT/${RUN}.t${cyc}z.${RUNLOC}.bufrsnd.tar.gz
 fi
 
-fi # f60 if test
-
 # make gempak files
 $USHhiresw/hiresw_bfr2gpk.sh
 
+fi # f48 if test
 
 echo EXITING $0 with return code $err
 exit $err
