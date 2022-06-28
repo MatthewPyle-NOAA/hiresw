@@ -51,9 +51,9 @@ CYCgfs=`$NDATE -6 ${DATE}${cyc} | cut -c9-10`
 echo DATEgfs $DATEgfs
 echo CYCgfs $CYCgfs
 
-export COMINgfs=`compath.py -e canned gfs/${gfs_ver}/gfs.${DATEgfs}`
-export COMINnam=`compath.py -e canned nam/${nam_ver}/nam.${PDY}`
-export COMINnamold=`compath.py -e canned nam/${nam_ver}/nam.${DATEgfs}`
+export COMINgfs=`compath.py -e prod gfs/${gfs_ver}/gfs.${DATEgfs}`
+export COMINnam=`compath.py -e prod nam/${nam_ver}/nam.${PDY}`
+export COMINnamold=`compath.py -e prod nam/${nam_ver}/nam.${DATEgfs}`
 
 export DATAROOT=/lfs/h2/emc/stmp/Matthew.Pyle/tmp
 export COMROOT=/lfs/h2/emc/ptmp/Matthew.Pyle/${envir}/com
