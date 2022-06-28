@@ -56,7 +56,7 @@ MEM=70
 elif [ $DOM$CORE == "akfv3" ]
 then
 NPROC=16
-MEM=100
+MEM=160
 fi
 
 hours="03 06 09 12 15 18 21 24 27 30 33 36 39 42 45 48 51 54 57 60"
