@@ -57,6 +57,6 @@ export COMOUT=${COMOUT:-$(compath.py -o $NET/${hiresw_ver})/$RUN.${PDY}}
 
 # COMINbase=/lfs/h1/ops/canned/com
 # export COMINrap=${COMINbase}/rap/v5.1/rap.${DATE}
-export COMINrap=`compath.py -e canned rap/${rap_ver}/rap.${DATE}`
+export COMINrap=`compath.py -e prod rap/${rap_ver}/rap.${DATE}`
 
 $HOMEhiresw/jobs/JHIRESW_PREPRAP
