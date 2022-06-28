@@ -40,7 +40,7 @@ module load prod_util/${prod_util_ver}
 if [ $DOM$CORE == "conusfv3" ] 
 then
 NPROC=16
-MEM=130
+MEM=160
 elif [ $DOM$CORE == "prfv3" ]
 then
 NPROC=8

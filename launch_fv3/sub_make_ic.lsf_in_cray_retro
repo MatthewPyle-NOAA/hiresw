@@ -58,7 +58,7 @@ export PDYm6h=${DATEgfs}
 echo DATEgfs $DATEgfs
 echo CYCgfs $CYCgfs
 
-export COMINgfs=`compath.py -e canned gfs/${gfs_ver}/gfs`
+export COMINgfs=`compath.py -e prod gfs/${gfs_ver}/gfs`
 
 export DATAROOT=/lfs/h2/emc/stmp/Matthew.Pyle/tmp
 export COMROOT=/lfs/h2/emc/ptmp/Matthew.Pyle/${envir}/com

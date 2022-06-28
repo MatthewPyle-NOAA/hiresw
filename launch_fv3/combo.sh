@@ -1,10 +1,11 @@
 #! /bin/sh
 
-cyc=12
+cyc=18
 date=20210824
+date=20220626
 
-doms="conus hi guam"
-# doms="ak pr"
+doms="conus"
+doms="pr"
 
 for dom in $doms
 do
