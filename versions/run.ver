@@ -16,15 +16,14 @@ export libpng_ver=1.6.37
 export zlib_ver=1.2.11
 export python_ver=3.8.6
 
-export gempak_ver=7.14.0
+export gempak_ver=7.14.1 # 7.14.00
 export cfp_ver=2.0.4
-export prod_util_ver=2.0.10
-export prod_envir_ver=2.0.5
 export wgrib2_ver=2.0.8_wmo
 export hdf5_ver=1.10.6
 export netcdf_ver=4.7.4
 export libjpeg_ver=9c
+export bufr_tranjb_ver=1.0.2 # 1.0.0
 
 #eventually export obsproc_shared_bufr_cword_ver=v1.1.0
 export obsproc_shared_bufr_cword_ver=v1.0.1
-export bufr_tranjb_ver=1.0.0
+
