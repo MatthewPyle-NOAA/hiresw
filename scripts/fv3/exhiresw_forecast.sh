@@ -42,6 +42,7 @@ resterr=0
 else
 resterr=1
 echo "WARNING: Lack content in RESTART directory to restart properly, so will cold start"
+mv ./err ./err_previous_run
 fi
 
 echo resterr is $resterr
