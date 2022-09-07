@@ -33,8 +33,17 @@ cd $DATA
 
 if [ -e RESTART ]
 then
-files=`ls ${DATA}/RESTART/*00.sfc_data.nc`
-resterr=$?
+# make a count here and set resterr accordingly??
+files=`ls ${DATA}/RESTART/*00.sfc_data.nc | wc -l`
+
+if [ $files -gt 1 ] 
+then
+resterr=0
+else
+resterr=1
+echo "WARNING: Lack content in RESTART directory to restart properly, so will cold start"
+fi
+
 echo resterr is $resterr
 
 else
