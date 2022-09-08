@@ -33,7 +33,7 @@ cd $DATA
 
 if [ -e RESTART ]
 then
-# make a count here and set resterr accordingly??
+# make a count of available times and set resterr accordingly
 files=`ls ${DATA}/RESTART/*00.sfc_data.nc | wc -l`
 
 if [ $files -gt 1 ] 
