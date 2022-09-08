@@ -62,7 +62,7 @@ mv $COMOUT/gempak/.$sfc $COMOUT/gempak/$sfc
 mv $COMOUT/gempak/.$aux $COMOUT/gempak/$aux
 
 if [ "$SENDDBN" = 'YES' ] ; then
-  $SIPHONROOT/bin/dbn_alert MODEL ${DBN_ALERT_TYPE} $job $COMOUT/gempak/$sfc
-  $SIPHONROOT/bin/dbn_alert MODEL ${DBN_ALERT_TYPE} $job $COMOUT/gempak/$aux
-  $SIPHONROOT/bin/dbn_alert MODEL ${DBN_ALERT_TYPE} $job $COMOUT/gempak/$snd
+  $SIPHONROOT/bin/dbn_alert MODEL HIRESW_GEMPAK $job $COMOUT/gempak/$sfc
+  $SIPHONROOT/bin/dbn_alert MODEL HIRESW_GEMPAK $job $COMOUT/gempak/$aux
+  $SIPHONROOT/bin/dbn_alert MODEL HIRESW_GEMPAK $job $COMOUT/gempak/$snd
 fi
