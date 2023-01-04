@@ -21,8 +21,6 @@
 # 2013-07-02  Jeff McQueen  - Modified to create all 00 hour downscaling from NAM parent
 #                             While 03 --> 54/60 created from NAM Nests
 # 2014-01-23  Matthew Pyle  - Adopted for HiresW, split into two separate jobs
-#
-
 
 set -xa
 msg="JOB $job HAS BEGUN"
@@ -45,7 +43,7 @@ if [ -e $DATA/smartinitprdgendone00 ]
 then
 cd $DATA
 lasthour=`ls -1rt smartinitprdgendone?? | tail -1 | cut -c 20-21`
-let "hr=lasthour+3"
+let "hr=lasthour+1"
 typeset -Z2 hr
 fi
 
@@ -74,10 +72,12 @@ do
  fi
 done
 
+if [ $(($hr % 3)) -eq 0 ]
+then
+   $USHhiresw/hiresw_smartinit.sh_justprdgeng2 ${hr}
+fi
 
-$USHhiresw/hiresw_smartinit.sh_justprdgeng2 ${hr}
-
-let "hr=hr+3"
+let "hr=hr+1"
 typeset -Z2 hr
 
 done

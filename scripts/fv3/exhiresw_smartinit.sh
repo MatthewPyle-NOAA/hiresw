@@ -22,8 +22,6 @@
 #                             While 03 --> 54/60 created from NAM Nests
 # 2014-01-23  Matthew Pyle  - Adopted for HiresW, split into two separate jobs
 # 2019-11-13  Matthew Pyle  - Adopted for regional FV3
-#
-
 
 set -xa
 msg="JOB $job HAS BEGUN"
@@ -37,7 +35,6 @@ RUNLOC=${NEST}${MODEL}
   export ENDHR=60
   export RUNTYP=${RUNLOC}
 
-
 hr=00
 
 hrlim=60
@@ -46,12 +43,11 @@ if [ -e $DATA/smartinitprdgendone00 ]
 then
 cd $DATA
 lasthour=`ls -1rt smartinitprdgendone?? | tail -1 | cut -c 20-21`
-let "hr=lasthour+3"
+let "hr=lasthour+1"
 typeset -Z2 hr
 fi
 
 echo start smartinit with hr $hr
-
 
 while [ $hr -le $hrlim ]
 do
@@ -65,7 +61,6 @@ do
 # else
 # INPUT_DATA=$INPUT_DATA_ODD
 # fi
-
 
 looplim=45
 loop=1
@@ -86,10 +81,12 @@ do
  fi
 done
 
+if [ $(($hr % 3)) -eq 0 ]
+then
+   $USHfv3/hiresw_smartinit_prdgen.sh ${hr}
+fi
 
-$USHfv3/hiresw_smartinit_prdgen.sh ${hr}
-
-let "hr=hr+3"
+let "hr=hr+1"
 typeset -Z2 hr
 
 done
