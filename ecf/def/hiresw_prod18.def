@@ -584,10 +584,10 @@ suite prod
               endfamily
               task jhiresw_forecast
                 trigger jhiresw_make_ic == complete and makebc == complete
-                edit TOTAL_TASKS '1200'
+                edit TOTAL_TASKS '1392'
                 edit SPAN '128'
-                edit NODES '10'
-                edit TASK_X '24'
+                edit NODES '11'
+                edit TASK_X '28'
                 edit TASK_Y '48'
                 edit WG '2'
                 edit WTPG '24'
