@@ -31,6 +31,14 @@ ecf/def/hiresw_prod18.def
 
 Makes the changes described below under resource changes.
 
+Also ncludes a few more modifications unrelated to the fix, but needed to build code 
+(fixes some modulefiles).  I mostly wanted to get these into my code base.  
+
+sorc/modulefiles_arw/HIRESW/v8.0.0
+sorc/modulefiles_fv3/build_v8.0.0-cray-intel
+
+sorc/fv3/hireswfv3_post.fd/modulefiles/post/v8.0.0-wcoss2-intel
+sorc/fv3/hireswfv3_forecast.fd/modulefiles/wcoss2/fv3
 
 #############################
 Resource changes:
