@@ -1,0 +1,45 @@
+HiresW v8.1.7 - released 01/06/2023
+
+#####################
+Update overview 
+#####################
+
+* Updates HiresW FV3 forecast for Alaska to make it more stable (shortens the
+acoustic timestep).
+
+#####################
+Obtaining the package
+#####################
+
+Clone it with this command (but change hiresw.v8.1.7 to whatever you want to 
+call it in the directory that it is cloned into):
+
+git clone -b v8.1.7 https://github.com/MatthewPyle-NOAA/hiresw.git hiresw.v8.1.7
+
+#############################
+Modified files:
+#############################
+
+parm/fv3/input_fv3_akccpp.nml_inp
+
+Changes n_split value from 5 to 6, which reduces the acoustic timestep from
+3.6 seconds to 3.0 seconds.
+
+
+ecf/def/hiresw_prod06.def
+ecf/def/hiresw_prod18.def
+
+Makes the changes described below under resource changes.
+
+
+#############################
+Resource changes:
+#############################
+
+Increases the node count from 10 to 11 for the AK FV3 forecast job.  
+The task layout changes from 24x48 to 28x48.
+The task count increases from 1200 to 1392.
+
+In testing the combination of these changes had the model run about 3.5 minutes faster.
+Keeping the node/task count unchanged would add about 6-7 minutes to the run time with
+the n_split value increase.
