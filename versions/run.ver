@@ -1,7 +1,7 @@
 #! /bin/bash
 
-export hiresw_ver=v8.1.0
-export gfs_ver=v16.2
+export hiresw_ver=v8.1.7
+export gfs_ver=v16.3
 export nam_ver=v4.2
 export rap_ver=v5.1
 export sref_ver=v7.1
