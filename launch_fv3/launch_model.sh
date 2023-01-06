@@ -17,8 +17,8 @@ if [ -a .bashrc ]; then
    . ./.bashrc
 fi
 
-export HOMEhiresw=/lfs/h2/emc/lam/noscrub/Matthew.Pyle/hiresw.v8.1.0
-export HOMEfv3=/lfs/h2/emc/lam/noscrub/Matthew.Pyle/hiresw.v8.1.0
+export HOMEhiresw=/lfs/h2/emc/lam/noscrub/Matthew.Pyle/hiresw.v8.1.7
+export HOMEfv3=/lfs/h2/emc/lam/noscrub/Matthew.Pyle/hiresw.v8.1.7
 
 cd ${HOMEhiresw}/launch_fv3/
 
@@ -36,10 +36,10 @@ export WTPG=24
 
 elif [ $DOM == "ak" ]
 then
-export        TOTAL_TASKS=1200
-export        TASK_X=24
+export        TOTAL_TASKS=1392
+export        TASK_X=28
 export        TASK_Y=48
-export        NODES=10
+export        NODES=11
         # quilt stuff
 export        WG=2
 export        WTPG=24
