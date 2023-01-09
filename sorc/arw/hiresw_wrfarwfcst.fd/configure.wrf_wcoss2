@@ -213,7 +213,8 @@ ARCHFLAGS       =    $(COREDEFS) -DIWORDSIZE=$(IWORDSIZE) -DDWORDSIZE=$(DWORDSIZ
                       -DMAX_HISTORY=$(MAX_HISTORY) \
 		      -DNMM_NEST=$(WRF_NMM_NEST)
 CFLAGS          =    $(CFLAGS_LOCAL) -DDM_PARALLEL  \
-                      -DMAX_HISTORY=$(MAX_HISTORY) -DNMM_CORE=$(WRF_NMM_CORE)
+                      -DMAX_HISTORY=$(MAX_HISTORY) -DNMM_CORE=$(WRF_NMM_CORE)\
+                      -DLANDREAD_STUB
 FCFLAGS         =    $(FCOPTIM) $(FCBASEOPTS)
 ESMF_LIB_FLAGS  =    
 # ESMF 5 -- these are defined in esmf.mk, included above
