@@ -20,11 +20,11 @@
 # directory are included, so if no exclude patterns match that file, it will be
 # transfered.
 
-com/hiresw/_ENVIR_/hiresw._PDY_/
+_COMROOT_/hiresw/_SHORTVER_/hiresw._PDY_/
 - /*conus*
 B 400000000
 
-com/hiresw/_ENVIR_/hiresw._PDYm1_/
+_COMROOT_/hiresw/_SHORTVER_/hiresw._PDYm1_/
 - /*conus*
 B 400000000
 
