@@ -64,8 +64,14 @@ export RUN=${RUN:-hiresw}
 
 export COMIN=${COMIN:-$(compath.py ${envir}/$NET/${hiresw_ver})/${RUN}.${PDY}}
 export COMOUT=${COMOUT:-$(compath.py -o $NET/${hiresw_ver})/${RUN}.${PDY}}
+export COMOUTrestart=${COMOUTrestart:-$(compath.py -o $NET/${hiresw_ver})/${RUN}.${PDY}/RESTART}
 
 mkdir -p $COMOUT
+
+if [ $NEST = 'guam' ]
+then
+mkdir -p $COMOUTrestart
+fi
 
 export pgmout="OUTPUT.$$"
 export pgmerr=errfile

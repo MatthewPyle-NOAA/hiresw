@@ -358,25 +358,27 @@ echo APRUNC is $APRUNC
 ${APRUNC} $EXECfv3/hireswfv3_forecast >$pgmout 2>err
 export err=$?;err_chk
 
-# Copy files needed for next analysis
-# use grid_spec.nc file output from model in working directory,
-# NOT the one in the INPUT directory......
-
-# GUESSdir, ANLdir set in J-job
-
-if [ $tmmark != tm00 ] ; then
-  cp grid_spec.nc $GUESSdir/.
+if [ $err -eq 0 -a $NEST = 'guam' ] ; then
   cd RESTART
-  mv ${PDYfcst}.${CYCfcst}0000.coupler.res $GUESSdir/.
-  mv ${PDYfcst}.${CYCfcst}0000.fv_core.res.nc $GUESSdir/.
-  mv ${PDYfcst}.${CYCfcst}0000.fv_core.res.tile1.nc $GUESSdir/.
-  mv ${PDYfcst}.${CYCfcst}0000.fv_tracer.res.tile1.nc $GUESSdir/.
-  mv ${PDYfcst}.${CYCfcst}0000.sfc_data.nc $GUESSdir/.
+  fhrs="06 07 08 09 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24"
 
-# These are not used in GSI but are needed to warmstart FV3
-# so they go directly into ANLdir
-  mv ${PDYfcst}.${CYCfcst}0000.phy_data.nc $ANLdir/phy_data.nc
-  mv ${PDYfcst}.${CYCfcst}0000.fv_srf_wnd.res.tile1.nc $ANLdir/fv_srf_wnd.res.tile1.nc
+  ftypes="coupler.res fv_core.res.nc fv_core.res.tile1.nc \
+	  fv_srf_wnd.res.tile1.nc fv_tracer.res.tile1.nc \
+	  sfc_data.nc phy_data.nc" 
+  for fhr in $fhrs
+  do
+
+   newdate=`$NDATE +$fhr ${PDY}${cyc}`
+   VDATE=`echo $newdate | cut -c1-8`
+   VTIME=`echo $newdate | cut -c9-10`
+
+   for ftype in $ftypes
+   do
+   cp ${VDATE}.${VTIME}0000.${ftype}  \
+	  $COMOUTrestart/hiresw.t${cyc}z.guamfv3.${VDATE}.${VTIME}0000.${ftype}
+   done
+
+  done
 fi
 
 exit
