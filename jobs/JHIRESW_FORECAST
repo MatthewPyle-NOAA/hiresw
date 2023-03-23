@@ -68,7 +68,7 @@ export COMOUTrestart=${COMOUTrestart:-$(compath.py -o $NET/${hiresw_ver})/${RUN}
 
 mkdir -p $COMOUT
 
-if [ $NEST = 'guam' ]
+if [ $NEST = 'guam' -a $MODEL = "fv3"  ]
 then
 mkdir -p $COMOUTrestart
 fi
