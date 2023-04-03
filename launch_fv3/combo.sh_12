@@ -1,7 +1,12 @@
 #! /bin/sh
 
+
+cd /lfs/h2/emc/lam/noscrub/Matthew.Pyle/hiresw.v8.1.9/launch_fv3/
+
 cyc=12
-date=20230315
+date=`cat /lfs/h1/ops/prod/com/date/t${cyc}z | cut -c7-14`
+
+echo $date $cyc 
 
 doms="guam"
 

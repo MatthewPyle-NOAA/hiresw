@@ -1,14 +1,14 @@
 
 #PBS -j oe
-#PBS -o /lfs/h2/emc/lam/noscrub/Matthew.Pyle/hiresw.v8.1.0/launch_fv3/logs/test_fore.out__DOM__CORE__CYC_
-#PBS -e /lfs/h2/emc/lam/noscrub/Matthew.Pyle/hiresw.v8.1.0/launch_fv3/logs/test_fore.err__DOM__CORE__CYC_
+#PBS -o /lfs/h2/emc/lam/noscrub/Matthew.Pyle/hiresw.v8.1.9/launch_fv3/logs/test_fore.out__DOM__CORE__CYC_
+#PBS -e /lfs/h2/emc/lam/noscrub/Matthew.Pyle/hiresw.v8.1.9/launch_fv3/logs/test_fore.err__DOM__CORE__CYC_
 #PBS -l place=vscatter:excl,select=_NODES_:ncpus=128,debug=true
 #PBS -q dev
 #PBS -A HIRESW-DEV
 #PBS -l walltime=01:59:05
 
-export HOMEhiresw=/lfs/h2/emc/lam/noscrub/Matthew.Pyle/hiresw.v8.1.0
-export HOMEfv3=/lfs/h2/emc/lam/noscrub/Matthew.Pyle/hiresw.v8.1.0
+export HOMEhiresw=/lfs/h2/emc/lam/noscrub/Matthew.Pyle/hiresw.v8.1.9
+export HOMEfv3=/lfs/h2/emc/lam/noscrub/Matthew.Pyle/hiresw.v8.1.9
 source ${HOMEhiresw}/versions/run.ver
 
 module purge

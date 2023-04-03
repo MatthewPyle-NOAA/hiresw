@@ -1,15 +1,15 @@
 #! /bin/sh
 
 #PBS -j oe 
-#PBS -o /lfs/h2/emc/lam/noscrub/Matthew.Pyle/hiresw.v8.1.0/launch_fv3/logs/test_make_ic.out__DOM__CORE__CYC_
-#PBS -e /lfs/h2/emc/lam/noscrub/Matthew.Pyle/hiresw.v8.1.0/launch_fv3/logs/test_make_ic.out__DOM__CORE__CYC_
+#PBS -o /lfs/h2/emc/lam/noscrub/Matthew.Pyle/hiresw.v8.1.9/launch_fv3/logs/test_make_ic.out__DOM__CORE__CYC_
+#PBS -e /lfs/h2/emc/lam/noscrub/Matthew.Pyle/hiresw.v8.1.9/launch_fv3/logs/test_make_ic.out__DOM__CORE__CYC_
 #PBS -l select=1:ncpus=16:mem=128GB,debug=true
 #PBS -q dev
 #PBS -A HIRESW-DEV
 #PBS -l walltime=000:15:05
 
-export HOMEhiresw=/lfs/h2/emc/lam/noscrub/Matthew.Pyle/hiresw.v8.1.0
-export HOMEfv3=/lfs/h2/emc/lam/noscrub/Matthew.Pyle/hiresw.v8.1.0
+export HOMEhiresw=/lfs/h2/emc/lam/noscrub/Matthew.Pyle/hiresw.v8.1.9
+export HOMEfv3=/lfs/h2/emc/lam/noscrub/Matthew.Pyle/hiresw.v8.1.9
 source ${HOMEhiresw}/versions/run.ver
 export PACKAGEROOT=/lfs/h2/emc/lam/noscrub/Matthew.Pyle
 
