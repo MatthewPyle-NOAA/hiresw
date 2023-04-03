@@ -4,7 +4,7 @@
 #PBS -q %QUEUE%
 #PBS -A %PROJ%-%PROJENVIR%
 #PBS -l place=vscatter:exclhost,select=%NODES%:ncpus=%SPAN%
-#PBS -l walltime=02:25:00
+#PBS -l walltime=01:40:00
 #PBS -l debug=true
 
 model=hiresw
