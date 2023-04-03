@@ -1,0 +1,75 @@
+﻿HiresW v8.1.9 - released 04/03/2023
+
+
+#####################
+Update overview
+#####################
+
+
+* Makes changes to write Guam FV3 model restart files more frequently, and to save some 
+restart files from the Guam FV3 run for use by the 3DRTMA system under development.
+
+
+#####################
+Obtaining the package
+#####################
+
+
+Clone it with this command (but change hiresw.v8.1.9 to whatever you want to
+call it in the directory that it is cloned into):
+
+
+git clone -b v8.1.9 https://github.com/MatthewPyle-NOAA/hiresw.git hiresw.v8.1.9
+
+
+#############################
+Modified files:
+#############################
+
+
+jobs/JHIRESW_FORECAST
+
+
+Defines a new COMOUTrestart directory ($COMOUT/RESTART), and creates this directory 
+when running for the Guam FV3 run only.
+
+
+scripts/fv3/exhiresw_forecast.sh
+
+
+Eliminates some unused logic saving restart files (for non-tm00 times), and adds 
+a new block to save restart output from f06 to f24 from the Guam FV3 run only.  
+Restart files copied to COMOUTrestart
+
+
+parm/fv3/model_configure_fv3.tmp_guam_ccpp
+
+
+Changes the frequency of restart writes for the Guam FV3 run from every 6 h to every hour.
+
+
+versions/run.ver
+
+
+Updated hiresw_ver to v8.1.9
+
+
+#############################
+Resource changes:
+#############################
+
+Timing and possible compute resources:
+
+Roughly 2.5 minutes longer run time for Guam FV3 forecast job with these changes (about 2 minutes from writing restart files more frequently, and about 30 seconds from the new 
+copying of the restart files to an output directory).  
+
+
+The Guam FV3 forecast job currently just partially fills 2 nodes, so we 
+could increase computing resources without a node usage increase if we want 
+to avoid this delay.  However, in testing, increasing to a possible larger 
+task count resulted in runs several minutes faster than the current operational run.  
+
+Storage:
+
+Adds roughly 36 GB/day to /com type storage, and about 48 GB/cycle to the /tmp 
+run directory for the Guam FV3 forecast job.
