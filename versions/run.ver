@@ -1,6 +1,6 @@
 #! /bin/bash
 
-export hiresw_ver=v8.1.7
+export hiresw_ver=v8.1.9
 export gfs_ver=v16.3
 export nam_ver=v4.2
 export rap_ver=v5.1
