@@ -58,9 +58,9 @@
 
 
  &domains
- time_step                           = 16,
- time_step_fract_num                 = 4,
- time_step_fract_den                 = 11,
+ time_step                           = 15,
+ time_step_fract_num                 = 15,
+ time_step_fract_den                 = 47,
  max_dom                             = 1,
  s_we                                = 1,     
  e_we                                = 1386,    
@@ -99,7 +99,7 @@
 
  &physics
  mp_physics                          = 6,  
- mp_tend_lim                         = 0.07,
+ mp_tend_lim                         = 0.05,
  ra_lw_physics                       = 1,  
  ra_sw_physics                       = 1,   
  radt                                = 10,  
