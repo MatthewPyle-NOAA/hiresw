@@ -1,6 +1,6 @@
 #! /bin/bash
 
-export hiresw_ver=v8.1.9
+export hiresw_ver=v8.1.10
 export gfs_ver=v16.3
 export nam_ver=v4.2
 export rap_ver=v5.1
@@ -26,4 +26,3 @@ export bufr_tranjb_ver=1.0.2 # 1.0.0
 
 #eventually export obsproc_shared_bufr_cword_ver=v1.1.0
 export obsproc_shared_bufr_cword_ver=v1.0.1
-

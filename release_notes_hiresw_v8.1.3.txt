@@ -1,37 +1,9 @@
-HiresW v8.1.3 - released 09/08/2022
+Implemented 9/13/2022 at 16z
 
-Google docs version at: https://docs.google.com/document/d/13NXUb2D5jaZXoGsPlvqbf16ITiFUEC7uQx1u77561xc/edit?usp=sharing
+updated (bug fix) to version v8.1.3 
 
-#####################
-Update overview 
-#####################
+scripts/arw/exhiresw_smartinit.sh 
+scripts/fv3/exhiresw_smartinit.sh
 
-
-* Updates HiresW FV3 model run script to better handle reruns initiated early
-in the forecast (< 12 h into forecast).
-
-#####################
-Obtaining the package
-#####################
-
-Clone it with this command (but change hiresw.v8.1.3 to whatever you want to 
-call it in the directory that it is cloned into):
-
-git clone -b v8.1.3 https://github.com/MatthewPyle-NOAA/hiresw.git hiresw.v8.1.3
-
-#############################
-Modified files:
-#############################
-
-scripts/fv3/exhiresw_forecast.sh:
-
-Modifies logic to ensure that rerunning will work properly without external 
-intervention.  Looks at the number of files in the RESTART directory, and
-based on the count decides whether to do a midrun restart, or to do a fresh
-start from the initial conditions.
-
-#############################
-Resource changes:
-#############################
-
-None.
+to check, sleep, then timeout searching for every file, instead of every 3 like previously. See header of these scripts for more information. This is to address a failure in 08/2022 when files were available out of order, the previous coding assumed the files would be
+sequentially available, so if 3 was ready, so was 2 and 1. This is a more strict check. 

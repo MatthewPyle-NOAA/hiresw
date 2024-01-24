@@ -1,0 +1,39 @@
+HiresW v8.1.10 - released 09/05/2023 (changes from SPA (GM), not from developer)
+
+#####################
+Update overview
+#####################
+
+* Change the j-job JHIRESW_WRFBUFRSND and JHIRESW_PRDGEN to make a unique fhr directory to run setpdy.sh for each fhr job. This eliminates the race condition of several fhr jobs running setpdy.sh in the same shared directory at the same time. This was in response to a recent production failure in 08/23 in JHIRESW_WRFBUFRSND job. The  JHIRESW_PRDGEN job was included because it had the same vulnerability. 
+
+#####################
+Obtaining the package
+#####################
+
+In production as of 9/5/2023
+
+#############################
+Modified files:
+#############################
+
+jobs/JHIRESW_WRFBUFRSND and jobs/JHIRESW_PRDGEN: 
+
+jname=$(echo $ECF_NAME  | awk -F/ '{print $NF}')
+mkdir -p $DATA/setpdy.$jname
+cd $DATA/setpdy.$jname
+
+####################################
+# Run setpdy and initialize PDY variables
+####################################
+
+export cycle=${cycle:-t${cyc}z}
+setpdy.sh
+. ./PDY
+
+cd $DATA
+
+#############################
+Resource changes:
+#############################
+
+None

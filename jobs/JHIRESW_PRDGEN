@@ -19,20 +19,19 @@ export SENDDBN=${SENDDBN:-NO}
 export DATA=${DATA:-${DATAROOT:?}/hiresw.prdgen_${NEST:?}_${MODEL:?}_${cyc:?}_${envir:?}}
 export INPUT_DATA=${INPUT_DATA:-${DATAROOT:?}/hiresw.post_${NEST}_${MODEL}_${cyc}_${envir}}
 
-mkdir -p $DATA
-cd $DATA
+jname=$(echo $ECF_NAME  | awk -F/ '{print $NF}')
+mkdir -p $DATA/setpdy.$jname
+cd $DATA/setpdy.$jname
 
 ####################################
 # Run setpdy and initialize PDY variables
 ####################################
-# PDY and CDATE are passed in through Rocoto xml
 
 export cycle=${cycle:-t${cyc}z}
-
-if [ ! -f ./PDY ];then
-  setpdy.sh
-fi
+setpdy.sh
 . ./PDY
+
+cd $DATA
 
 ####################################
 # Specify Execution Areas

@@ -1,0 +1,2575 @@
+suite prod
+family primary
+ family 18
+  family hiresw
+    edit PACKAGEHOME '/lfs/h1/ops/%ENVIR%/packages/hiresw.%hiresw_ver%'
+    edit PROJ 'HIRESW'
+    edit TMMARK 'tm00'
+    family v8.1
+      task jhiresw_cleanup
+        trigger :TIME >= 1901 and :TIME < 2359
+      family fv3
+        edit MODEL 'fv3'
+        family pr
+          edit DOMAIN 'pr'
+          limit hiresw_post_limit 10
+          limit hiresw_prdgen_limit 10
+          limit hiresw_bufrpost_limit 10
+          task jhiresw_make_ic
+            trigger ((:TIME >= 1923 and :TIME < 2359) or :TIME < 0723) and /prod/primary/12/gfs/v16.3/gfs/atmos/post/jgfs_atmos_post_f066 == complete and ../../jhiresw_cleanup == complete
+          family makebc
+            trigger /prod/primary/12/gfs/v16.3/gfs/atmos/post/jgfs_atmos_post_f066 == complete and ( jhiresw_make_ic == active or jhiresw_make_ic == complete )
+            edit NCPUS '8'
+            edit MEM '75'
+            task jhiresw_make_bc_f00
+            task jhiresw_make_bc_f03
+            task jhiresw_make_bc_f06
+            task jhiresw_make_bc_f09
+            task jhiresw_make_bc_f12
+            task jhiresw_make_bc_f15
+            task jhiresw_make_bc_f18
+            task jhiresw_make_bc_f21
+            task jhiresw_make_bc_f24
+            task jhiresw_make_bc_f27
+            task jhiresw_make_bc_f30
+            task jhiresw_make_bc_f33
+            task jhiresw_make_bc_f36
+            task jhiresw_make_bc_f39
+            task jhiresw_make_bc_f42
+            task jhiresw_make_bc_f45
+            task jhiresw_make_bc_f48
+            task jhiresw_make_bc_f51
+            task jhiresw_make_bc_f54
+            task jhiresw_make_bc_f57
+            task jhiresw_make_bc_f60
+          endfamily
+          task jhiresw_forecast
+            trigger jhiresw_make_ic == complete and makebc == complete
+            edit TOTAL_TASKS '228'
+            edit SPAN '114'
+            edit NODES '2'
+            edit TASK_X '12'
+            edit TASK_Y '18'
+            edit WG '1'
+            edit WTPG '12'
+          family post
+            edit NCPUS '2'
+            edit SPAN '2'
+            inlimit hiresw_post_limit
+            task jhiresw_post_manager
+              trigger ../jhiresw_forecast == active or ../jhiresw_forecast == complete
+              event 1 release_post00
+              event 2 release_post01
+              event 3 release_post02
+              event 4 release_post03
+              event 5 release_post04
+              event 6 release_post05
+              event 7 release_post06
+              event 8 release_post07
+              event 9 release_post08
+              event 10 release_post09
+              event 11 release_post10
+              event 12 release_post11
+              event 13 release_post12
+              event 14 release_post13
+              event 15 release_post14
+              event 16 release_post15
+              event 17 release_post16
+              event 18 release_post17
+              event 19 release_post18
+              event 20 release_post19
+              event 21 release_post20
+              event 22 release_post21
+              event 23 release_post22
+              event 24 release_post23
+              event 25 release_post24
+              event 26 release_post25
+              event 27 release_post26
+              event 28 release_post27
+              event 29 release_post28
+              event 30 release_post29
+              event 31 release_post30
+              event 32 release_post31
+              event 33 release_post32
+              event 34 release_post33
+              event 35 release_post34
+              event 36 release_post35
+              event 37 release_post36
+              event 38 release_post37
+              event 39 release_post38
+              event 40 release_post39
+              event 41 release_post40
+              event 42 release_post41
+              event 43 release_post42
+              event 44 release_post43
+              event 45 release_post44
+              event 46 release_post45
+              event 47 release_post46
+              event 48 release_post47
+              event 49 release_post48
+              event 50 release_post49
+              event 51 release_post50
+              event 52 release_post51
+              event 53 release_post52
+              event 54 release_post53
+              event 55 release_post54
+              event 56 release_post55
+              event 57 release_post56
+              event 58 release_post57
+              event 59 release_post58
+              event 60 release_post59
+              event 61 release_post60
+            task jhiresw_post_f00
+              trigger jhiresw_post_manager:release_post00
+            task jhiresw_post_f01
+              trigger jhiresw_post_manager:release_post01
+            task jhiresw_post_f02
+              trigger jhiresw_post_manager:release_post02
+            task jhiresw_post_f03
+              trigger jhiresw_post_manager:release_post03
+            task jhiresw_post_f04
+              trigger jhiresw_post_manager:release_post04
+            task jhiresw_post_f05
+              trigger jhiresw_post_manager:release_post05
+            task jhiresw_post_f06
+              trigger jhiresw_post_manager:release_post06
+            task jhiresw_post_f07
+              trigger jhiresw_post_manager:release_post07
+            task jhiresw_post_f08
+              trigger jhiresw_post_manager:release_post08
+            task jhiresw_post_f09
+              trigger jhiresw_post_manager:release_post09
+            task jhiresw_post_f10
+              trigger jhiresw_post_manager:release_post10
+            task jhiresw_post_f11
+              trigger jhiresw_post_manager:release_post11
+            task jhiresw_post_f12
+              trigger jhiresw_post_manager:release_post12
+            task jhiresw_post_f13
+              trigger jhiresw_post_manager:release_post13
+            task jhiresw_post_f14
+              trigger jhiresw_post_manager:release_post14
+            task jhiresw_post_f15
+              trigger jhiresw_post_manager:release_post15
+            task jhiresw_post_f16
+              trigger jhiresw_post_manager:release_post16
+            task jhiresw_post_f17
+              trigger jhiresw_post_manager:release_post17
+            task jhiresw_post_f18
+              trigger jhiresw_post_manager:release_post18
+            task jhiresw_post_f19
+              trigger jhiresw_post_manager:release_post19
+            task jhiresw_post_f20
+              trigger jhiresw_post_manager:release_post20
+            task jhiresw_post_f21
+              trigger jhiresw_post_manager:release_post21
+            task jhiresw_post_f22
+              trigger jhiresw_post_manager:release_post22
+            task jhiresw_post_f23
+              trigger jhiresw_post_manager:release_post23
+            task jhiresw_post_f24
+              trigger jhiresw_post_manager:release_post24
+            task jhiresw_post_f25
+              trigger jhiresw_post_manager:release_post25
+            task jhiresw_post_f26
+              trigger jhiresw_post_manager:release_post26
+            task jhiresw_post_f27
+              trigger jhiresw_post_manager:release_post27
+            task jhiresw_post_f28
+              trigger jhiresw_post_manager:release_post28
+            task jhiresw_post_f29
+              trigger jhiresw_post_manager:release_post29
+            task jhiresw_post_f30
+              trigger jhiresw_post_manager:release_post30
+            task jhiresw_post_f31
+              trigger jhiresw_post_manager:release_post31
+            task jhiresw_post_f32
+              trigger jhiresw_post_manager:release_post32
+            task jhiresw_post_f33
+              trigger jhiresw_post_manager:release_post33
+            task jhiresw_post_f34
+              trigger jhiresw_post_manager:release_post34
+            task jhiresw_post_f35
+              trigger jhiresw_post_manager:release_post35
+            task jhiresw_post_f36
+              trigger jhiresw_post_manager:release_post36
+            task jhiresw_post_f37
+              trigger jhiresw_post_manager:release_post37
+            task jhiresw_post_f38
+              trigger jhiresw_post_manager:release_post38
+            task jhiresw_post_f39
+              trigger jhiresw_post_manager:release_post39
+            task jhiresw_post_f40
+              trigger jhiresw_post_manager:release_post40
+            task jhiresw_post_f41
+              trigger jhiresw_post_manager:release_post41
+            task jhiresw_post_f42
+              trigger jhiresw_post_manager:release_post42
+            task jhiresw_post_f43
+              trigger jhiresw_post_manager:release_post43
+            task jhiresw_post_f44
+              trigger jhiresw_post_manager:release_post44
+            task jhiresw_post_f45
+              trigger jhiresw_post_manager:release_post45
+            task jhiresw_post_f46
+              trigger jhiresw_post_manager:release_post46
+            task jhiresw_post_f47
+              trigger jhiresw_post_manager:release_post47
+            task jhiresw_post_f48
+              trigger jhiresw_post_manager:release_post48
+            task jhiresw_post_f49
+              trigger jhiresw_post_manager:release_post49
+            task jhiresw_post_f50
+              trigger jhiresw_post_manager:release_post50
+            task jhiresw_post_f51
+              trigger jhiresw_post_manager:release_post51
+            task jhiresw_post_f52
+              trigger jhiresw_post_manager:release_post52
+            task jhiresw_post_f53
+              trigger jhiresw_post_manager:release_post53
+            task jhiresw_post_f54
+              trigger jhiresw_post_manager:release_post54
+            task jhiresw_post_f55
+              trigger jhiresw_post_manager:release_post55
+            task jhiresw_post_f56
+              trigger jhiresw_post_manager:release_post56
+            task jhiresw_post_f57
+              trigger jhiresw_post_manager:release_post57
+            task jhiresw_post_f58
+              trigger jhiresw_post_manager:release_post58
+            task jhiresw_post_f59
+              trigger jhiresw_post_manager:release_post59
+            task jhiresw_post_f60
+              trigger jhiresw_post_manager:release_post60
+          endfamily
+          family prdgen
+            edit NCPUS '2'
+            edit SPAN '2'
+            inlimit hiresw_prdgen_limit
+            task jhiresw_prdgen_f00
+              trigger ../post/jhiresw_post_f00 == complete
+            task jhiresw_prdgen_f01
+              trigger ../post/jhiresw_post_f01 == complete
+            task jhiresw_prdgen_f02
+              trigger ../post/jhiresw_post_f02 == complete
+            task jhiresw_prdgen_f03
+              trigger ../post/jhiresw_post_f03 == complete
+            task jhiresw_prdgen_f04
+              trigger ../post/jhiresw_post_f04 == complete
+            task jhiresw_prdgen_f05
+              trigger ../post/jhiresw_post_f05 == complete
+            task jhiresw_prdgen_f06
+              trigger ../post/jhiresw_post_f06 == complete
+            task jhiresw_prdgen_f07
+              trigger ../post/jhiresw_post_f07 == complete
+            task jhiresw_prdgen_f08
+              trigger ../post/jhiresw_post_f08 == complete
+            task jhiresw_prdgen_f09
+              trigger ../post/jhiresw_post_f09 == complete
+            task jhiresw_prdgen_f10
+              trigger ../post/jhiresw_post_f10 == complete
+            task jhiresw_prdgen_f11
+              trigger ../post/jhiresw_post_f11 == complete
+            task jhiresw_prdgen_f12
+              trigger ../post/jhiresw_post_f12 == complete
+            task jhiresw_prdgen_f13
+              trigger ../post/jhiresw_post_f13 == complete
+            task jhiresw_prdgen_f14
+              trigger ../post/jhiresw_post_f14 == complete
+            task jhiresw_prdgen_f15
+              trigger ../post/jhiresw_post_f15 == complete
+            task jhiresw_prdgen_f16
+              trigger ../post/jhiresw_post_f16 == complete
+            task jhiresw_prdgen_f17
+              trigger ../post/jhiresw_post_f17 == complete
+            task jhiresw_prdgen_f18
+              trigger ../post/jhiresw_post_f18 == complete
+            task jhiresw_prdgen_f19
+              trigger ../post/jhiresw_post_f19 == complete
+            task jhiresw_prdgen_f20
+              trigger ../post/jhiresw_post_f20 == complete
+            task jhiresw_prdgen_f21
+              trigger ../post/jhiresw_post_f21 == complete
+            task jhiresw_prdgen_f22
+              trigger ../post/jhiresw_post_f22 == complete
+            task jhiresw_prdgen_f23
+              trigger ../post/jhiresw_post_f23 == complete
+            task jhiresw_prdgen_f24
+              trigger ../post/jhiresw_post_f24 == complete
+            task jhiresw_prdgen_f25
+              trigger ../post/jhiresw_post_f25 == complete
+            task jhiresw_prdgen_f26
+              trigger ../post/jhiresw_post_f26 == complete
+            task jhiresw_prdgen_f27
+              trigger ../post/jhiresw_post_f27 == complete
+            task jhiresw_prdgen_f28
+              trigger ../post/jhiresw_post_f28 == complete
+            task jhiresw_prdgen_f29
+              trigger ../post/jhiresw_post_f29 == complete
+            task jhiresw_prdgen_f30
+              trigger ../post/jhiresw_post_f30 == complete
+            task jhiresw_prdgen_f31
+              trigger ../post/jhiresw_post_f31 == complete
+            task jhiresw_prdgen_f32
+              trigger ../post/jhiresw_post_f32 == complete
+            task jhiresw_prdgen_f33
+              trigger ../post/jhiresw_post_f33 == complete
+            task jhiresw_prdgen_f34
+              trigger ../post/jhiresw_post_f34 == complete
+            task jhiresw_prdgen_f35
+              trigger ../post/jhiresw_post_f35 == complete
+            task jhiresw_prdgen_f36
+              trigger ../post/jhiresw_post_f36 == complete
+            task jhiresw_prdgen_f37
+              trigger ../post/jhiresw_post_f37 == complete
+            task jhiresw_prdgen_f38
+              trigger ../post/jhiresw_post_f38 == complete
+            task jhiresw_prdgen_f39
+              trigger ../post/jhiresw_post_f39 == complete
+            task jhiresw_prdgen_f40
+              trigger ../post/jhiresw_post_f40 == complete
+            task jhiresw_prdgen_f41
+              trigger ../post/jhiresw_post_f41 == complete
+            task jhiresw_prdgen_f42
+              trigger ../post/jhiresw_post_f42 == complete
+            task jhiresw_prdgen_f43
+              trigger ../post/jhiresw_post_f43 == complete
+            task jhiresw_prdgen_f44
+              trigger ../post/jhiresw_post_f44 == complete
+            task jhiresw_prdgen_f45
+              trigger ../post/jhiresw_post_f45 == complete
+            task jhiresw_prdgen_f46
+              trigger ../post/jhiresw_post_f46 == complete
+            task jhiresw_prdgen_f47
+              trigger ../post/jhiresw_post_f47 == complete
+            task jhiresw_prdgen_f48
+              trigger ../post/jhiresw_post_f48 == complete
+            task jhiresw_prdgen_f49
+              trigger ../post/jhiresw_post_f49 == complete
+            task jhiresw_prdgen_f50
+              trigger ../post/jhiresw_post_f50 == complete
+            task jhiresw_prdgen_f51
+              trigger ../post/jhiresw_post_f51 == complete
+            task jhiresw_prdgen_f52
+              trigger ../post/jhiresw_post_f52 == complete
+            task jhiresw_prdgen_f53
+              trigger ../post/jhiresw_post_f53 == complete
+            task jhiresw_prdgen_f54
+              trigger ../post/jhiresw_post_f54 == complete
+            task jhiresw_prdgen_f55
+              trigger ../post/jhiresw_post_f55 == complete
+            task jhiresw_prdgen_f56
+              trigger ../post/jhiresw_post_f56 == complete
+            task jhiresw_prdgen_f57
+              trigger ../post/jhiresw_post_f57 == complete
+            task jhiresw_prdgen_f58
+              trigger ../post/jhiresw_post_f58 == complete
+            task jhiresw_prdgen_f59
+              trigger ../post/jhiresw_post_f59 == complete
+            task jhiresw_prdgen_f60
+              trigger ../post/jhiresw_post_f60 == complete
+          endfamily
+          family bufrpost
+            edit NCPUS '1'
+            inlimit hiresw_bufrpost_limit
+            task jhiresw_bufrpost_f00
+              trigger ../post/jhiresw_post_manager:release_post00
+            task jhiresw_bufrpost_f01
+              trigger ../post/jhiresw_post_manager:release_post01
+            task jhiresw_bufrpost_f02
+              trigger ../post/jhiresw_post_manager:release_post02
+            task jhiresw_bufrpost_f03
+              trigger ../post/jhiresw_post_manager:release_post03
+            task jhiresw_bufrpost_f04
+              trigger ../post/jhiresw_post_manager:release_post04
+            task jhiresw_bufrpost_f05
+              trigger ../post/jhiresw_post_manager:release_post05
+            task jhiresw_bufrpost_f06
+              trigger ../post/jhiresw_post_manager:release_post06
+            task jhiresw_bufrpost_f07
+              trigger ../post/jhiresw_post_manager:release_post07
+            task jhiresw_bufrpost_f08
+              trigger ../post/jhiresw_post_manager:release_post08
+            task jhiresw_bufrpost_f09
+              trigger ../post/jhiresw_post_manager:release_post09
+            task jhiresw_bufrpost_f10
+              trigger ../post/jhiresw_post_manager:release_post10
+            task jhiresw_bufrpost_f11
+              trigger ../post/jhiresw_post_manager:release_post11
+            task jhiresw_bufrpost_f12
+              trigger ../post/jhiresw_post_manager:release_post12
+            task jhiresw_bufrpost_f13
+              trigger ../post/jhiresw_post_manager:release_post13
+            task jhiresw_bufrpost_f14
+              trigger ../post/jhiresw_post_manager:release_post14
+            task jhiresw_bufrpost_f15
+              trigger ../post/jhiresw_post_manager:release_post15
+            task jhiresw_bufrpost_f16
+              trigger ../post/jhiresw_post_manager:release_post16
+            task jhiresw_bufrpost_f17
+              trigger ../post/jhiresw_post_manager:release_post17
+            task jhiresw_bufrpost_f18
+              trigger ../post/jhiresw_post_manager:release_post18
+            task jhiresw_bufrpost_f19
+              trigger ../post/jhiresw_post_manager:release_post19
+            task jhiresw_bufrpost_f20
+              trigger ../post/jhiresw_post_manager:release_post20
+            task jhiresw_bufrpost_f21
+              trigger ../post/jhiresw_post_manager:release_post21
+            task jhiresw_bufrpost_f22
+              trigger ../post/jhiresw_post_manager:release_post22
+            task jhiresw_bufrpost_f23
+              trigger ../post/jhiresw_post_manager:release_post23
+            task jhiresw_bufrpost_f24
+              trigger ../post/jhiresw_post_manager:release_post24
+            task jhiresw_bufrpost_f25
+              trigger ../post/jhiresw_post_manager:release_post25
+            task jhiresw_bufrpost_f26
+              trigger ../post/jhiresw_post_manager:release_post26
+            task jhiresw_bufrpost_f27
+              trigger ../post/jhiresw_post_manager:release_post27
+            task jhiresw_bufrpost_f28
+              trigger ../post/jhiresw_post_manager:release_post28
+            task jhiresw_bufrpost_f29
+              trigger ../post/jhiresw_post_manager:release_post29
+            task jhiresw_bufrpost_f30
+              trigger ../post/jhiresw_post_manager:release_post30
+            task jhiresw_bufrpost_f31
+              trigger ../post/jhiresw_post_manager:release_post31
+            task jhiresw_bufrpost_f32
+              trigger ../post/jhiresw_post_manager:release_post32
+            task jhiresw_bufrpost_f33
+              trigger ../post/jhiresw_post_manager:release_post33
+            task jhiresw_bufrpost_f34
+              trigger ../post/jhiresw_post_manager:release_post34
+            task jhiresw_bufrpost_f35
+              trigger ../post/jhiresw_post_manager:release_post35
+            task jhiresw_bufrpost_f36
+              trigger ../post/jhiresw_post_manager:release_post36
+            task jhiresw_bufrpost_f37
+              trigger ../post/jhiresw_post_manager:release_post37
+            task jhiresw_bufrpost_f38
+              trigger ../post/jhiresw_post_manager:release_post38
+            task jhiresw_bufrpost_f39
+              trigger ../post/jhiresw_post_manager:release_post39
+            task jhiresw_bufrpost_f40
+              trigger ../post/jhiresw_post_manager:release_post40
+            task jhiresw_bufrpost_f41
+              trigger ../post/jhiresw_post_manager:release_post41
+            task jhiresw_bufrpost_f42
+              trigger ../post/jhiresw_post_manager:release_post42
+            task jhiresw_bufrpost_f43
+              trigger ../post/jhiresw_post_manager:release_post43
+            task jhiresw_bufrpost_f44
+              trigger ../post/jhiresw_post_manager:release_post44
+            task jhiresw_bufrpost_f45
+              trigger ../post/jhiresw_post_manager:release_post45
+            task jhiresw_bufrpost_f46
+              trigger ../post/jhiresw_post_manager:release_post46
+            task jhiresw_bufrpost_f47
+              trigger ../post/jhiresw_post_manager:release_post47
+            task jhiresw_bufrpost_f48
+              trigger ../post/jhiresw_post_manager:release_post48
+            task jhiresw_bufrpost_f49
+              trigger ../post/jhiresw_post_manager:release_post49
+            task jhiresw_bufrpost_f50
+              trigger ../post/jhiresw_post_manager:release_post50
+            task jhiresw_bufrpost_f51
+              trigger ../post/jhiresw_post_manager:release_post51
+            task jhiresw_bufrpost_f52
+              trigger ../post/jhiresw_post_manager:release_post52
+            task jhiresw_bufrpost_f53
+              trigger ../post/jhiresw_post_manager:release_post53
+            task jhiresw_bufrpost_f54
+              trigger ../post/jhiresw_post_manager:release_post54
+            task jhiresw_bufrpost_f55
+              trigger ../post/jhiresw_post_manager:release_post55
+            task jhiresw_bufrpost_f56
+              trigger ../post/jhiresw_post_manager:release_post56
+            task jhiresw_bufrpost_f57
+              trigger ../post/jhiresw_post_manager:release_post57
+            task jhiresw_bufrpost_f58
+              trigger ../post/jhiresw_post_manager:release_post58
+            task jhiresw_bufrpost_f59
+              trigger ../post/jhiresw_post_manager:release_post59
+            task jhiresw_bufrpost_f60
+              trigger ../post/jhiresw_post_manager:release_post60
+          endfamily
+          family post_processing
+            task jhiresw_smartinit
+              trigger ../prdgen/jhiresw_prdgen_f00 == complete and /prod/primary/12/sref/v7.1/15z/enspost/jsref_enspost:ensgrd_212_ready
+              edit NCPUS '15'
+            task jhiresw_smartinitb
+              trigger ../prdgen/jhiresw_prdgen_f00 == complete and ( jhiresw_smartinit == active or jhiresw_smartinit == complete)
+            task jhiresw_awips
+              trigger ../post/jhiresw_post_f00 == active or ../post/jhiresw_post_f00 == complete
+            task jhiresw_gempak
+              trigger ../post/jhiresw_post_f00 == active or ../post/jhiresw_post_f00 == complete
+          endfamily
+        endfamily
+        family ak
+          edit DOMAIN 'ak'
+          limit hiresw_post_limit 10
+          limit hiresw_prdgen_limit 10
+          limit hiresw_bufrpost_limit 10
+          task jhiresw_make_ic
+            trigger ((:TIME >= 1912 and :TIME < 2359) or :TIME < 0712) and /prod/primary/12/gfs/v16.3/gfs/atmos/post/jgfs_atmos_post_f066 == complete and ../../jhiresw_cleanup == complete
+          family makebc
+            trigger /prod/primary/12/gfs/v16.3/gfs/atmos/post/jgfs_atmos_post_f066 == complete and (jhiresw_make_ic == active or jhiresw_make_ic == complete)
+            edit NCPUS '16'
+            edit MEM '120'
+            task jhiresw_make_bc_f00
+            task jhiresw_make_bc_f03
+            task jhiresw_make_bc_f06
+            task jhiresw_make_bc_f09
+            task jhiresw_make_bc_f12
+            task jhiresw_make_bc_f15
+            task jhiresw_make_bc_f18
+            task jhiresw_make_bc_f21
+            task jhiresw_make_bc_f24
+            task jhiresw_make_bc_f27
+            task jhiresw_make_bc_f30
+            task jhiresw_make_bc_f33
+            task jhiresw_make_bc_f36
+            task jhiresw_make_bc_f39
+            task jhiresw_make_bc_f42
+            task jhiresw_make_bc_f45
+            task jhiresw_make_bc_f48
+            task jhiresw_make_bc_f51
+            task jhiresw_make_bc_f54
+            task jhiresw_make_bc_f57
+            task jhiresw_make_bc_f60
+          endfamily
+          task jhiresw_forecast
+            trigger jhiresw_make_ic == complete and makebc == complete
+            edit TOTAL_TASKS '1392'
+            edit SPAN '128'
+            edit NODES '11'
+            edit TASK_X '28'
+            edit TASK_Y '48'
+            edit WG '2'
+            edit WTPG '24'
+          family post
+            edit NCPUS '12'
+            edit SPAN '12'
+            inlimit hiresw_post_limit
+            task jhiresw_post_manager
+              trigger ../jhiresw_forecast == active or ../jhiresw_forecast == complete
+              event 1 release_post00
+              event 2 release_post01
+              event 3 release_post02
+              event 4 release_post03
+              event 5 release_post04
+              event 6 release_post05
+              event 7 release_post06
+              event 8 release_post07
+              event 9 release_post08
+              event 10 release_post09
+              event 11 release_post10
+              event 12 release_post11
+              event 13 release_post12
+              event 14 release_post13
+              event 15 release_post14
+              event 16 release_post15
+              event 17 release_post16
+              event 18 release_post17
+              event 19 release_post18
+              event 20 release_post19
+              event 21 release_post20
+              event 22 release_post21
+              event 23 release_post22
+              event 24 release_post23
+              event 25 release_post24
+              event 26 release_post25
+              event 27 release_post26
+              event 28 release_post27
+              event 29 release_post28
+              event 30 release_post29
+              event 31 release_post30
+              event 32 release_post31
+              event 33 release_post32
+              event 34 release_post33
+              event 35 release_post34
+              event 36 release_post35
+              event 37 release_post36
+              event 38 release_post37
+              event 39 release_post38
+              event 40 release_post39
+              event 41 release_post40
+              event 42 release_post41
+              event 43 release_post42
+              event 44 release_post43
+              event 45 release_post44
+              event 46 release_post45
+              event 47 release_post46
+              event 48 release_post47
+              event 49 release_post48
+              event 50 release_post49
+              event 51 release_post50
+              event 52 release_post51
+              event 53 release_post52
+              event 54 release_post53
+              event 55 release_post54
+              event 56 release_post55
+              event 57 release_post56
+              event 58 release_post57
+              event 59 release_post58
+              event 60 release_post59
+              event 61 release_post60
+            task jhiresw_post_f00
+              trigger jhiresw_post_manager:release_post00
+            task jhiresw_post_f01
+              trigger jhiresw_post_manager:release_post01
+            task jhiresw_post_f02
+              trigger jhiresw_post_manager:release_post02
+            task jhiresw_post_f03
+              trigger jhiresw_post_manager:release_post03
+            task jhiresw_post_f04
+              trigger jhiresw_post_manager:release_post04
+            task jhiresw_post_f05
+              trigger jhiresw_post_manager:release_post05
+            task jhiresw_post_f06
+              trigger jhiresw_post_manager:release_post06
+            task jhiresw_post_f07
+              trigger jhiresw_post_manager:release_post07
+            task jhiresw_post_f08
+              trigger jhiresw_post_manager:release_post08
+            task jhiresw_post_f09
+              trigger jhiresw_post_manager:release_post09
+            task jhiresw_post_f10
+              trigger jhiresw_post_manager:release_post10
+            task jhiresw_post_f11
+              trigger jhiresw_post_manager:release_post11
+            task jhiresw_post_f12
+              trigger jhiresw_post_manager:release_post12
+            task jhiresw_post_f13
+              trigger jhiresw_post_manager:release_post13
+            task jhiresw_post_f14
+              trigger jhiresw_post_manager:release_post14
+            task jhiresw_post_f15
+              trigger jhiresw_post_manager:release_post15
+            task jhiresw_post_f16
+              trigger jhiresw_post_manager:release_post16
+            task jhiresw_post_f17
+              trigger jhiresw_post_manager:release_post17
+            task jhiresw_post_f18
+              trigger jhiresw_post_manager:release_post18
+            task jhiresw_post_f19
+              trigger jhiresw_post_manager:release_post19
+            task jhiresw_post_f20
+              trigger jhiresw_post_manager:release_post20
+            task jhiresw_post_f21
+              trigger jhiresw_post_manager:release_post21
+            task jhiresw_post_f22
+              trigger jhiresw_post_manager:release_post22
+            task jhiresw_post_f23
+              trigger jhiresw_post_manager:release_post23
+            task jhiresw_post_f24
+              trigger jhiresw_post_manager:release_post24
+            task jhiresw_post_f25
+              trigger jhiresw_post_manager:release_post25
+            task jhiresw_post_f26
+              trigger jhiresw_post_manager:release_post26
+            task jhiresw_post_f27
+              trigger jhiresw_post_manager:release_post27
+            task jhiresw_post_f28
+              trigger jhiresw_post_manager:release_post28
+            task jhiresw_post_f29
+              trigger jhiresw_post_manager:release_post29
+            task jhiresw_post_f30
+              trigger jhiresw_post_manager:release_post30
+            task jhiresw_post_f31
+              trigger jhiresw_post_manager:release_post31
+            task jhiresw_post_f32
+              trigger jhiresw_post_manager:release_post32
+            task jhiresw_post_f33
+              trigger jhiresw_post_manager:release_post33
+            task jhiresw_post_f34
+              trigger jhiresw_post_manager:release_post34
+            task jhiresw_post_f35
+              trigger jhiresw_post_manager:release_post35
+            task jhiresw_post_f36
+              trigger jhiresw_post_manager:release_post36
+            task jhiresw_post_f37
+              trigger jhiresw_post_manager:release_post37
+            task jhiresw_post_f38
+              trigger jhiresw_post_manager:release_post38
+            task jhiresw_post_f39
+              trigger jhiresw_post_manager:release_post39
+            task jhiresw_post_f40
+              trigger jhiresw_post_manager:release_post40
+            task jhiresw_post_f41
+              trigger jhiresw_post_manager:release_post41
+            task jhiresw_post_f42
+              trigger jhiresw_post_manager:release_post42
+            task jhiresw_post_f43
+              trigger jhiresw_post_manager:release_post43
+            task jhiresw_post_f44
+              trigger jhiresw_post_manager:release_post44
+            task jhiresw_post_f45
+              trigger jhiresw_post_manager:release_post45
+            task jhiresw_post_f46
+              trigger jhiresw_post_manager:release_post46
+            task jhiresw_post_f47
+              trigger jhiresw_post_manager:release_post47
+            task jhiresw_post_f48
+              trigger jhiresw_post_manager:release_post48
+            task jhiresw_post_f49
+              trigger jhiresw_post_manager:release_post49
+            task jhiresw_post_f50
+              trigger jhiresw_post_manager:release_post50
+            task jhiresw_post_f51
+              trigger jhiresw_post_manager:release_post51
+            task jhiresw_post_f52
+              trigger jhiresw_post_manager:release_post52
+            task jhiresw_post_f53
+              trigger jhiresw_post_manager:release_post53
+            task jhiresw_post_f54
+              trigger jhiresw_post_manager:release_post54
+            task jhiresw_post_f55
+              trigger jhiresw_post_manager:release_post55
+            task jhiresw_post_f56
+              trigger jhiresw_post_manager:release_post56
+            task jhiresw_post_f57
+              trigger jhiresw_post_manager:release_post57
+            task jhiresw_post_f58
+              trigger jhiresw_post_manager:release_post58
+            task jhiresw_post_f59
+              trigger jhiresw_post_manager:release_post59
+            task jhiresw_post_f60
+              trigger jhiresw_post_manager:release_post60
+          endfamily
+          family prdgen
+            edit NCPUS '5'
+            edit SPAN '5'
+            inlimit hiresw_prdgen_limit
+            task jhiresw_prdgen_f00
+              trigger ../post/jhiresw_post_f00 == complete
+            task jhiresw_prdgen_f01
+              trigger ../post/jhiresw_post_f01 == complete
+            task jhiresw_prdgen_f02
+              trigger ../post/jhiresw_post_f02 == complete
+            task jhiresw_prdgen_f03
+              trigger ../post/jhiresw_post_f03 == complete
+            task jhiresw_prdgen_f04
+              trigger ../post/jhiresw_post_f04 == complete
+            task jhiresw_prdgen_f05
+              trigger ../post/jhiresw_post_f05 == complete
+            task jhiresw_prdgen_f06
+              trigger ../post/jhiresw_post_f06 == complete
+            task jhiresw_prdgen_f07
+              trigger ../post/jhiresw_post_f07 == complete
+            task jhiresw_prdgen_f08
+              trigger ../post/jhiresw_post_f08 == complete
+            task jhiresw_prdgen_f09
+              trigger ../post/jhiresw_post_f09 == complete
+            task jhiresw_prdgen_f10
+              trigger ../post/jhiresw_post_f10 == complete
+            task jhiresw_prdgen_f11
+              trigger ../post/jhiresw_post_f11 == complete
+            task jhiresw_prdgen_f12
+              trigger ../post/jhiresw_post_f12 == complete
+            task jhiresw_prdgen_f13
+              trigger ../post/jhiresw_post_f13 == complete
+            task jhiresw_prdgen_f14
+              trigger ../post/jhiresw_post_f14 == complete
+            task jhiresw_prdgen_f15
+              trigger ../post/jhiresw_post_f15 == complete
+            task jhiresw_prdgen_f16
+              trigger ../post/jhiresw_post_f16 == complete
+            task jhiresw_prdgen_f17
+              trigger ../post/jhiresw_post_f17 == complete
+            task jhiresw_prdgen_f18
+              trigger ../post/jhiresw_post_f18 == complete
+            task jhiresw_prdgen_f19
+              trigger ../post/jhiresw_post_f19 == complete
+            task jhiresw_prdgen_f20
+              trigger ../post/jhiresw_post_f20 == complete
+            task jhiresw_prdgen_f21
+              trigger ../post/jhiresw_post_f21 == complete
+            task jhiresw_prdgen_f22
+              trigger ../post/jhiresw_post_f22 == complete
+            task jhiresw_prdgen_f23
+              trigger ../post/jhiresw_post_f23 == complete
+            task jhiresw_prdgen_f24
+              trigger ../post/jhiresw_post_f24 == complete
+            task jhiresw_prdgen_f25
+              trigger ../post/jhiresw_post_f25 == complete
+            task jhiresw_prdgen_f26
+              trigger ../post/jhiresw_post_f26 == complete
+            task jhiresw_prdgen_f27
+              trigger ../post/jhiresw_post_f27 == complete
+            task jhiresw_prdgen_f28
+              trigger ../post/jhiresw_post_f28 == complete
+            task jhiresw_prdgen_f29
+              trigger ../post/jhiresw_post_f29 == complete
+            task jhiresw_prdgen_f30
+              trigger ../post/jhiresw_post_f30 == complete
+            task jhiresw_prdgen_f31
+              trigger ../post/jhiresw_post_f31 == complete
+            task jhiresw_prdgen_f32
+              trigger ../post/jhiresw_post_f32 == complete
+            task jhiresw_prdgen_f33
+              trigger ../post/jhiresw_post_f33 == complete
+            task jhiresw_prdgen_f34
+              trigger ../post/jhiresw_post_f34 == complete
+            task jhiresw_prdgen_f35
+              trigger ../post/jhiresw_post_f35 == complete
+            task jhiresw_prdgen_f36
+              trigger ../post/jhiresw_post_f36 == complete
+            task jhiresw_prdgen_f37
+              trigger ../post/jhiresw_post_f37 == complete
+            task jhiresw_prdgen_f38
+              trigger ../post/jhiresw_post_f38 == complete
+            task jhiresw_prdgen_f39
+              trigger ../post/jhiresw_post_f39 == complete
+            task jhiresw_prdgen_f40
+              trigger ../post/jhiresw_post_f40 == complete
+            task jhiresw_prdgen_f41
+              trigger ../post/jhiresw_post_f41 == complete
+            task jhiresw_prdgen_f42
+              trigger ../post/jhiresw_post_f42 == complete
+            task jhiresw_prdgen_f43
+              trigger ../post/jhiresw_post_f43 == complete
+            task jhiresw_prdgen_f44
+              trigger ../post/jhiresw_post_f44 == complete
+            task jhiresw_prdgen_f45
+              trigger ../post/jhiresw_post_f45 == complete
+            task jhiresw_prdgen_f46
+              trigger ../post/jhiresw_post_f46 == complete
+            task jhiresw_prdgen_f47
+              trigger ../post/jhiresw_post_f47 == complete
+            task jhiresw_prdgen_f48
+              trigger ../post/jhiresw_post_f48 == complete
+            task jhiresw_prdgen_f49
+              trigger ../post/jhiresw_post_f49 == complete
+            task jhiresw_prdgen_f50
+              trigger ../post/jhiresw_post_f50 == complete
+            task jhiresw_prdgen_f51
+              trigger ../post/jhiresw_post_f51 == complete
+            task jhiresw_prdgen_f52
+              trigger ../post/jhiresw_post_f52 == complete
+            task jhiresw_prdgen_f53
+              trigger ../post/jhiresw_post_f53 == complete
+            task jhiresw_prdgen_f54
+              trigger ../post/jhiresw_post_f54 == complete
+            task jhiresw_prdgen_f55
+              trigger ../post/jhiresw_post_f55 == complete
+            task jhiresw_prdgen_f56
+              trigger ../post/jhiresw_post_f56 == complete
+            task jhiresw_prdgen_f57
+              trigger ../post/jhiresw_post_f57 == complete
+            task jhiresw_prdgen_f58
+              trigger ../post/jhiresw_post_f58 == complete
+            task jhiresw_prdgen_f59
+              trigger ../post/jhiresw_post_f59 == complete
+            task jhiresw_prdgen_f60
+              trigger ../post/jhiresw_post_f60 == complete
+          endfamily
+          family bufrpost
+            edit NCPUS '8'
+            inlimit hiresw_bufrpost_limit
+            task jhiresw_bufrpost_f00
+              trigger ../post/jhiresw_post_manager:release_post00
+            task jhiresw_bufrpost_f01
+              trigger ../post/jhiresw_post_manager:release_post01
+            task jhiresw_bufrpost_f02
+              trigger ../post/jhiresw_post_manager:release_post02
+            task jhiresw_bufrpost_f03
+              trigger ../post/jhiresw_post_manager:release_post03
+            task jhiresw_bufrpost_f04
+              trigger ../post/jhiresw_post_manager:release_post04
+            task jhiresw_bufrpost_f05
+              trigger ../post/jhiresw_post_manager:release_post05
+            task jhiresw_bufrpost_f06
+              trigger ../post/jhiresw_post_manager:release_post06
+            task jhiresw_bufrpost_f07
+              trigger ../post/jhiresw_post_manager:release_post07
+            task jhiresw_bufrpost_f08
+              trigger ../post/jhiresw_post_manager:release_post08
+            task jhiresw_bufrpost_f09
+              trigger ../post/jhiresw_post_manager:release_post09
+            task jhiresw_bufrpost_f10
+              trigger ../post/jhiresw_post_manager:release_post10
+            task jhiresw_bufrpost_f11
+              trigger ../post/jhiresw_post_manager:release_post11
+            task jhiresw_bufrpost_f12
+              trigger ../post/jhiresw_post_manager:release_post12
+            task jhiresw_bufrpost_f13
+              trigger ../post/jhiresw_post_manager:release_post13
+            task jhiresw_bufrpost_f14
+              trigger ../post/jhiresw_post_manager:release_post14
+            task jhiresw_bufrpost_f15
+              trigger ../post/jhiresw_post_manager:release_post15
+            task jhiresw_bufrpost_f16
+              trigger ../post/jhiresw_post_manager:release_post16
+            task jhiresw_bufrpost_f17
+              trigger ../post/jhiresw_post_manager:release_post17
+            task jhiresw_bufrpost_f18
+              trigger ../post/jhiresw_post_manager:release_post18
+            task jhiresw_bufrpost_f19
+              trigger ../post/jhiresw_post_manager:release_post19
+            task jhiresw_bufrpost_f20
+              trigger ../post/jhiresw_post_manager:release_post20
+            task jhiresw_bufrpost_f21
+              trigger ../post/jhiresw_post_manager:release_post21
+            task jhiresw_bufrpost_f22
+              trigger ../post/jhiresw_post_manager:release_post22
+            task jhiresw_bufrpost_f23
+              trigger ../post/jhiresw_post_manager:release_post23
+            task jhiresw_bufrpost_f24
+              trigger ../post/jhiresw_post_manager:release_post24
+            task jhiresw_bufrpost_f25
+              trigger ../post/jhiresw_post_manager:release_post25
+            task jhiresw_bufrpost_f26
+              trigger ../post/jhiresw_post_manager:release_post26
+            task jhiresw_bufrpost_f27
+              trigger ../post/jhiresw_post_manager:release_post27
+            task jhiresw_bufrpost_f28
+              trigger ../post/jhiresw_post_manager:release_post28
+            task jhiresw_bufrpost_f29
+              trigger ../post/jhiresw_post_manager:release_post29
+            task jhiresw_bufrpost_f30
+              trigger ../post/jhiresw_post_manager:release_post30
+            task jhiresw_bufrpost_f31
+              trigger ../post/jhiresw_post_manager:release_post31
+            task jhiresw_bufrpost_f32
+              trigger ../post/jhiresw_post_manager:release_post32
+            task jhiresw_bufrpost_f33
+              trigger ../post/jhiresw_post_manager:release_post33
+            task jhiresw_bufrpost_f34
+              trigger ../post/jhiresw_post_manager:release_post34
+            task jhiresw_bufrpost_f35
+              trigger ../post/jhiresw_post_manager:release_post35
+            task jhiresw_bufrpost_f36
+              trigger ../post/jhiresw_post_manager:release_post36
+            task jhiresw_bufrpost_f37
+              trigger ../post/jhiresw_post_manager:release_post37
+            task jhiresw_bufrpost_f38
+              trigger ../post/jhiresw_post_manager:release_post38
+            task jhiresw_bufrpost_f39
+              trigger ../post/jhiresw_post_manager:release_post39
+            task jhiresw_bufrpost_f40
+              trigger ../post/jhiresw_post_manager:release_post40
+            task jhiresw_bufrpost_f41
+              trigger ../post/jhiresw_post_manager:release_post41
+            task jhiresw_bufrpost_f42
+              trigger ../post/jhiresw_post_manager:release_post42
+            task jhiresw_bufrpost_f43
+              trigger ../post/jhiresw_post_manager:release_post43
+            task jhiresw_bufrpost_f44
+              trigger ../post/jhiresw_post_manager:release_post44
+            task jhiresw_bufrpost_f45
+              trigger ../post/jhiresw_post_manager:release_post45
+            task jhiresw_bufrpost_f46
+              trigger ../post/jhiresw_post_manager:release_post46
+            task jhiresw_bufrpost_f47
+              trigger ../post/jhiresw_post_manager:release_post47
+            task jhiresw_bufrpost_f48
+              trigger ../post/jhiresw_post_manager:release_post48
+            task jhiresw_bufrpost_f49
+              trigger ../post/jhiresw_post_manager:release_post49
+            task jhiresw_bufrpost_f50
+              trigger ../post/jhiresw_post_manager:release_post50
+            task jhiresw_bufrpost_f51
+              trigger ../post/jhiresw_post_manager:release_post51
+            task jhiresw_bufrpost_f52
+              trigger ../post/jhiresw_post_manager:release_post52
+            task jhiresw_bufrpost_f53
+              trigger ../post/jhiresw_post_manager:release_post53
+            task jhiresw_bufrpost_f54
+              trigger ../post/jhiresw_post_manager:release_post54
+            task jhiresw_bufrpost_f55
+              trigger ../post/jhiresw_post_manager:release_post55
+            task jhiresw_bufrpost_f56
+              trigger ../post/jhiresw_post_manager:release_post56
+            task jhiresw_bufrpost_f57
+              trigger ../post/jhiresw_post_manager:release_post57
+            task jhiresw_bufrpost_f58
+              trigger ../post/jhiresw_post_manager:release_post58
+            task jhiresw_bufrpost_f59
+              trigger ../post/jhiresw_post_manager:release_post59
+            task jhiresw_bufrpost_f60
+              trigger ../post/jhiresw_post_manager:release_post60
+          endfamily
+          family post_processing
+            task jhiresw_smartinit
+              trigger ../prdgen/jhiresw_prdgen_f00 == complete and /prod/primary/12/sref/v7.1/15z/enspost/jsref_enspost:ensgrd_216_ready
+              edit NCPUS '15'
+            task jhiresw_smartinitb
+              trigger ../prdgen/jhiresw_prdgen_f00 == complete and ( jhiresw_smartinit == active or jhiresw_smartinit == complete)
+            task jhiresw_awips
+              trigger ../post/jhiresw_post_f00 == active or ../post/jhiresw_post_f00 == complete
+            task jhiresw_gempak
+              trigger ../post/jhiresw_post_f00 == active or ../post/jhiresw_post_f00 == complete
+          endfamily
+        endfamily
+      endfamily
+      family arw
+        edit MODEL 'arw'
+        family mem1
+          family pr
+            edit DOMAIN 'pr'
+            limit hiresw_post_limit 10
+            limit hiresw_prdgen_limit 10
+            limit hiresw_bufrpost_limit 10
+            family prep
+              task jhiresw_preprap
+                trigger ((:TIME >= 1904 and :TIME < 2359) or :TIME < 0704 ) and /prod/primary/18/rap/v5.1/18z/post/post == complete
+              task jhiresw_ungrib
+                trigger /prod/primary/12/gfs/v16.3/gfs/atmos/post/jgfs_atmos_post_f066 == complete and (../../../mem2/pr/prep/jhiresw_ungrib == active or ../../../mem2/pr/prep/jhiresw_ungrib == complete)
+              task jhiresw_metgrid
+                trigger jhiresw_ungrib == complete
+              task jhiresw_prepfinal
+                trigger jhiresw_metgrid == complete
+            endfamily
+            task jhiresw_forecast
+              trigger prep/jhiresw_preprap == complete and prep/jhiresw_prepfinal == complete
+              edit TOTAL_TASKS '158'
+              edit SPAN '79'
+              edit NODES '2'
+            family post
+              edit NCPUS '2'
+              edit SPAN '2'
+              inlimit hiresw_post_limit
+              task jhiresw_post_manager
+                trigger ../jhiresw_forecast == active or ../jhiresw_forecast == complete
+                event 1 release_post00
+                event 2 release_post01
+                event 3 release_post02
+                event 4 release_post03
+                event 5 release_post04
+                event 6 release_post05
+                event 7 release_post06
+                event 8 release_post07
+                event 9 release_post08
+                event 10 release_post09
+                event 11 release_post10
+                event 12 release_post11
+                event 13 release_post12
+                event 14 release_post13
+                event 15 release_post14
+                event 16 release_post15
+                event 17 release_post16
+                event 18 release_post17
+                event 19 release_post18
+                event 20 release_post19
+                event 21 release_post20
+                event 22 release_post21
+                event 23 release_post22
+                event 24 release_post23
+                event 25 release_post24
+                event 26 release_post25
+                event 27 release_post26
+                event 28 release_post27
+                event 29 release_post28
+                event 30 release_post29
+                event 31 release_post30
+                event 32 release_post31
+                event 33 release_post32
+                event 34 release_post33
+                event 35 release_post34
+                event 36 release_post35
+                event 37 release_post36
+                event 38 release_post37
+                event 39 release_post38
+                event 40 release_post39
+                event 41 release_post40
+                event 42 release_post41
+                event 43 release_post42
+                event 44 release_post43
+                event 45 release_post44
+                event 46 release_post45
+                event 47 release_post46
+                event 48 release_post47
+                event 49 release_post48
+              task jhiresw_post_f00
+                trigger jhiresw_post_manager:release_post00
+              task jhiresw_post_f01
+                trigger jhiresw_post_manager:release_post01
+              task jhiresw_post_f02
+                trigger jhiresw_post_manager:release_post02
+              task jhiresw_post_f03
+                trigger jhiresw_post_manager:release_post03
+              task jhiresw_post_f04
+                trigger jhiresw_post_manager:release_post04
+              task jhiresw_post_f05
+                trigger jhiresw_post_manager:release_post05
+              task jhiresw_post_f06
+                trigger jhiresw_post_manager:release_post06
+              task jhiresw_post_f07
+                trigger jhiresw_post_manager:release_post07
+              task jhiresw_post_f08
+                trigger jhiresw_post_manager:release_post08
+              task jhiresw_post_f09
+                trigger jhiresw_post_manager:release_post09
+              task jhiresw_post_f10
+                trigger jhiresw_post_manager:release_post10
+              task jhiresw_post_f11
+                trigger jhiresw_post_manager:release_post11
+              task jhiresw_post_f12
+                trigger jhiresw_post_manager:release_post12
+              task jhiresw_post_f13
+                trigger jhiresw_post_manager:release_post13
+              task jhiresw_post_f14
+                trigger jhiresw_post_manager:release_post14
+              task jhiresw_post_f15
+                trigger jhiresw_post_manager:release_post15
+              task jhiresw_post_f16
+                trigger jhiresw_post_manager:release_post16
+              task jhiresw_post_f17
+                trigger jhiresw_post_manager:release_post17
+              task jhiresw_post_f18
+                trigger jhiresw_post_manager:release_post18
+              task jhiresw_post_f19
+                trigger jhiresw_post_manager:release_post19
+              task jhiresw_post_f20
+                trigger jhiresw_post_manager:release_post20
+              task jhiresw_post_f21
+                trigger jhiresw_post_manager:release_post21
+              task jhiresw_post_f22
+                trigger jhiresw_post_manager:release_post22
+              task jhiresw_post_f23
+                trigger jhiresw_post_manager:release_post23
+              task jhiresw_post_f24
+                trigger jhiresw_post_manager:release_post24
+              task jhiresw_post_f25
+                trigger jhiresw_post_manager:release_post25
+              task jhiresw_post_f26
+                trigger jhiresw_post_manager:release_post26
+              task jhiresw_post_f27
+                trigger jhiresw_post_manager:release_post27
+              task jhiresw_post_f28
+                trigger jhiresw_post_manager:release_post28
+              task jhiresw_post_f29
+                trigger jhiresw_post_manager:release_post29
+              task jhiresw_post_f30
+                trigger jhiresw_post_manager:release_post30
+              task jhiresw_post_f31
+                trigger jhiresw_post_manager:release_post31
+              task jhiresw_post_f32
+                trigger jhiresw_post_manager:release_post32
+              task jhiresw_post_f33
+                trigger jhiresw_post_manager:release_post33
+              task jhiresw_post_f34
+                trigger jhiresw_post_manager:release_post34
+              task jhiresw_post_f35
+                trigger jhiresw_post_manager:release_post35
+              task jhiresw_post_f36
+                trigger jhiresw_post_manager:release_post36
+              task jhiresw_post_f37
+                trigger jhiresw_post_manager:release_post37
+              task jhiresw_post_f38
+                trigger jhiresw_post_manager:release_post38
+              task jhiresw_post_f39
+                trigger jhiresw_post_manager:release_post39
+              task jhiresw_post_f40
+                trigger jhiresw_post_manager:release_post40
+              task jhiresw_post_f41
+                trigger jhiresw_post_manager:release_post41
+              task jhiresw_post_f42
+                trigger jhiresw_post_manager:release_post42
+              task jhiresw_post_f43
+                trigger jhiresw_post_manager:release_post43
+              task jhiresw_post_f44
+                trigger jhiresw_post_manager:release_post44
+              task jhiresw_post_f45
+                trigger jhiresw_post_manager:release_post45
+              task jhiresw_post_f46
+                trigger jhiresw_post_manager:release_post46
+              task jhiresw_post_f47
+                trigger jhiresw_post_manager:release_post47
+              task jhiresw_post_f48
+                trigger jhiresw_post_manager:release_post48
+            endfamily
+            family prdgen
+              edit NCPUS '2'
+              edit SPAN '2'
+              inlimit hiresw_prdgen_limit
+              task jhiresw_prdgen_f00
+                trigger ../post/jhiresw_post_f00 == complete
+              task jhiresw_prdgen_f01
+                trigger ../post/jhiresw_post_f01 == complete
+              task jhiresw_prdgen_f02
+                trigger ../post/jhiresw_post_f02 == complete
+              task jhiresw_prdgen_f03
+                trigger ../post/jhiresw_post_f03 == complete
+              task jhiresw_prdgen_f04
+                trigger ../post/jhiresw_post_f04 == complete
+              task jhiresw_prdgen_f05
+                trigger ../post/jhiresw_post_f05 == complete
+              task jhiresw_prdgen_f06
+                trigger ../post/jhiresw_post_f06 == complete
+              task jhiresw_prdgen_f07
+                trigger ../post/jhiresw_post_f07 == complete
+              task jhiresw_prdgen_f08
+                trigger ../post/jhiresw_post_f08 == complete
+              task jhiresw_prdgen_f09
+                trigger ../post/jhiresw_post_f09 == complete
+              task jhiresw_prdgen_f10
+                trigger ../post/jhiresw_post_f10 == complete
+              task jhiresw_prdgen_f11
+                trigger ../post/jhiresw_post_f11 == complete
+              task jhiresw_prdgen_f12
+                trigger ../post/jhiresw_post_f12 == complete
+              task jhiresw_prdgen_f13
+                trigger ../post/jhiresw_post_f13 == complete
+              task jhiresw_prdgen_f14
+                trigger ../post/jhiresw_post_f14 == complete
+              task jhiresw_prdgen_f15
+                trigger ../post/jhiresw_post_f15 == complete
+              task jhiresw_prdgen_f16
+                trigger ../post/jhiresw_post_f16 == complete
+              task jhiresw_prdgen_f17
+                trigger ../post/jhiresw_post_f17 == complete
+              task jhiresw_prdgen_f18
+                trigger ../post/jhiresw_post_f18 == complete
+              task jhiresw_prdgen_f19
+                trigger ../post/jhiresw_post_f19 == complete
+              task jhiresw_prdgen_f20
+                trigger ../post/jhiresw_post_f20 == complete
+              task jhiresw_prdgen_f21
+                trigger ../post/jhiresw_post_f21 == complete
+              task jhiresw_prdgen_f22
+                trigger ../post/jhiresw_post_f22 == complete
+              task jhiresw_prdgen_f23
+                trigger ../post/jhiresw_post_f23 == complete
+              task jhiresw_prdgen_f24
+                trigger ../post/jhiresw_post_f24 == complete
+              task jhiresw_prdgen_f25
+                trigger ../post/jhiresw_post_f25 == complete
+              task jhiresw_prdgen_f26
+                trigger ../post/jhiresw_post_f26 == complete
+              task jhiresw_prdgen_f27
+                trigger ../post/jhiresw_post_f27 == complete
+              task jhiresw_prdgen_f28
+                trigger ../post/jhiresw_post_f28 == complete
+              task jhiresw_prdgen_f29
+                trigger ../post/jhiresw_post_f29 == complete
+              task jhiresw_prdgen_f30
+                trigger ../post/jhiresw_post_f30 == complete
+              task jhiresw_prdgen_f31
+                trigger ../post/jhiresw_post_f31 == complete
+              task jhiresw_prdgen_f32
+                trigger ../post/jhiresw_post_f32 == complete
+              task jhiresw_prdgen_f33
+                trigger ../post/jhiresw_post_f33 == complete
+              task jhiresw_prdgen_f34
+                trigger ../post/jhiresw_post_f34 == complete
+              task jhiresw_prdgen_f35
+                trigger ../post/jhiresw_post_f35 == complete
+              task jhiresw_prdgen_f36
+                trigger ../post/jhiresw_post_f36 == complete
+              task jhiresw_prdgen_f37
+                trigger ../post/jhiresw_post_f37 == complete
+              task jhiresw_prdgen_f38
+                trigger ../post/jhiresw_post_f38 == complete
+              task jhiresw_prdgen_f39
+                trigger ../post/jhiresw_post_f39 == complete
+              task jhiresw_prdgen_f40
+                trigger ../post/jhiresw_post_f40 == complete
+              task jhiresw_prdgen_f41
+                trigger ../post/jhiresw_post_f41 == complete
+              task jhiresw_prdgen_f42
+                trigger ../post/jhiresw_post_f42 == complete
+              task jhiresw_prdgen_f43
+                trigger ../post/jhiresw_post_f43 == complete
+              task jhiresw_prdgen_f44
+                trigger ../post/jhiresw_post_f44 == complete
+              task jhiresw_prdgen_f45
+                trigger ../post/jhiresw_post_f45 == complete
+              task jhiresw_prdgen_f46
+                trigger ../post/jhiresw_post_f46 == complete
+              task jhiresw_prdgen_f47
+                trigger ../post/jhiresw_post_f47 == complete
+              task jhiresw_prdgen_f48
+                trigger ../post/jhiresw_post_f48 == complete
+            endfamily
+            family bufrpost
+              edit NCPUS '1'
+              inlimit hiresw_bufrpost_limit
+              task jhiresw_bufrpost_f00
+                trigger ../post/jhiresw_post_manager:release_post00
+              task jhiresw_bufrpost_f01
+                trigger ../post/jhiresw_post_manager:release_post01
+              task jhiresw_bufrpost_f02
+                trigger ../post/jhiresw_post_manager:release_post02
+              task jhiresw_bufrpost_f03
+                trigger ../post/jhiresw_post_manager:release_post03
+              task jhiresw_bufrpost_f04
+                trigger ../post/jhiresw_post_manager:release_post04
+              task jhiresw_bufrpost_f05
+                trigger ../post/jhiresw_post_manager:release_post05
+              task jhiresw_bufrpost_f06
+                trigger ../post/jhiresw_post_manager:release_post06
+              task jhiresw_bufrpost_f07
+                trigger ../post/jhiresw_post_manager:release_post07
+              task jhiresw_bufrpost_f08
+                trigger ../post/jhiresw_post_manager:release_post08
+              task jhiresw_bufrpost_f09
+                trigger ../post/jhiresw_post_manager:release_post09
+              task jhiresw_bufrpost_f10
+                trigger ../post/jhiresw_post_manager:release_post10
+              task jhiresw_bufrpost_f11
+                trigger ../post/jhiresw_post_manager:release_post11
+              task jhiresw_bufrpost_f12
+                trigger ../post/jhiresw_post_manager:release_post12
+              task jhiresw_bufrpost_f13
+                trigger ../post/jhiresw_post_manager:release_post13
+              task jhiresw_bufrpost_f14
+                trigger ../post/jhiresw_post_manager:release_post14
+              task jhiresw_bufrpost_f15
+                trigger ../post/jhiresw_post_manager:release_post15
+              task jhiresw_bufrpost_f16
+                trigger ../post/jhiresw_post_manager:release_post16
+              task jhiresw_bufrpost_f17
+                trigger ../post/jhiresw_post_manager:release_post17
+              task jhiresw_bufrpost_f18
+                trigger ../post/jhiresw_post_manager:release_post18
+              task jhiresw_bufrpost_f19
+                trigger ../post/jhiresw_post_manager:release_post19
+              task jhiresw_bufrpost_f20
+                trigger ../post/jhiresw_post_manager:release_post20
+              task jhiresw_bufrpost_f21
+                trigger ../post/jhiresw_post_manager:release_post21
+              task jhiresw_bufrpost_f22
+                trigger ../post/jhiresw_post_manager:release_post22
+              task jhiresw_bufrpost_f23
+                trigger ../post/jhiresw_post_manager:release_post23
+              task jhiresw_bufrpost_f24
+                trigger ../post/jhiresw_post_manager:release_post24
+              task jhiresw_bufrpost_f25
+                trigger ../post/jhiresw_post_manager:release_post25
+              task jhiresw_bufrpost_f26
+                trigger ../post/jhiresw_post_manager:release_post26
+              task jhiresw_bufrpost_f27
+                trigger ../post/jhiresw_post_manager:release_post27
+              task jhiresw_bufrpost_f28
+                trigger ../post/jhiresw_post_manager:release_post28
+              task jhiresw_bufrpost_f29
+                trigger ../post/jhiresw_post_manager:release_post29
+              task jhiresw_bufrpost_f30
+                trigger ../post/jhiresw_post_manager:release_post30
+              task jhiresw_bufrpost_f31
+                trigger ../post/jhiresw_post_manager:release_post31
+              task jhiresw_bufrpost_f32
+                trigger ../post/jhiresw_post_manager:release_post32
+              task jhiresw_bufrpost_f33
+                trigger ../post/jhiresw_post_manager:release_post33
+              task jhiresw_bufrpost_f34
+                trigger ../post/jhiresw_post_manager:release_post34
+              task jhiresw_bufrpost_f35
+                trigger ../post/jhiresw_post_manager:release_post35
+              task jhiresw_bufrpost_f36
+                trigger ../post/jhiresw_post_manager:release_post36
+              task jhiresw_bufrpost_f37
+                trigger ../post/jhiresw_post_manager:release_post37
+              task jhiresw_bufrpost_f38
+                trigger ../post/jhiresw_post_manager:release_post38
+              task jhiresw_bufrpost_f39
+                trigger ../post/jhiresw_post_manager:release_post39
+              task jhiresw_bufrpost_f40
+                trigger ../post/jhiresw_post_manager:release_post40
+              task jhiresw_bufrpost_f41
+                trigger ../post/jhiresw_post_manager:release_post41
+              task jhiresw_bufrpost_f42
+                trigger ../post/jhiresw_post_manager:release_post42
+              task jhiresw_bufrpost_f43
+                trigger ../post/jhiresw_post_manager:release_post43
+              task jhiresw_bufrpost_f44
+                trigger ../post/jhiresw_post_manager:release_post44
+              task jhiresw_bufrpost_f45
+                trigger ../post/jhiresw_post_manager:release_post45
+              task jhiresw_bufrpost_f46
+                trigger ../post/jhiresw_post_manager:release_post46
+              task jhiresw_bufrpost_f47
+                trigger ../post/jhiresw_post_manager:release_post47
+              task jhiresw_bufrpost_f48
+                trigger ../post/jhiresw_post_manager:release_post48
+            endfamily
+            family post_processing
+              task jhiresw_smartinit
+                trigger ../prdgen/jhiresw_prdgen_f00 == complete and /prod/primary/12/sref/v7.1/15z/enspost/jsref_enspost:ensgrd_212_ready
+                edit NCPUS '15'
+              task jhiresw_smartinitb
+                trigger ../prdgen/jhiresw_prdgen_f00 == complete and ( jhiresw_smartinit == active or jhiresw_smartinit == complete)
+              task jhiresw_awips
+                trigger ../post/jhiresw_post_f00 == active or ../post/jhiresw_post_f00 == complete
+              task jhiresw_gempak
+                trigger ../post/jhiresw_post_f00 == active or ../post/jhiresw_post_f00 == complete
+            endfamily
+          endfamily
+          family ak
+            edit DOMAIN 'ak'
+            limit hiresw_post_limit 10
+            limit hiresw_prdgen_limit 10
+            limit hiresw_bufrpost_limit 10
+            family prep
+              task jhiresw_ungrib
+                trigger (( :TIME >= 1942 and :TIME < 2359) or :TIME < 0740) and /prod/primary/12/gfs/v16.3/gfs/atmos/post/jgfs_atmos_post_f066 == complete and (../../../mem2/ak/prep/jhiresw_ungrib == active or ../../../mem2/ak/prep/jhiresw_ungrib == complete)
+              task jhiresw_metgrid
+                trigger jhiresw_ungrib == complete
+              task jhiresw_prepfinal
+                trigger jhiresw_metgrid == complete
+            endfamily
+            task jhiresw_forecast
+              trigger prep/jhiresw_prepfinal == complete
+              edit TOTAL_TASKS '1404'
+              edit SPAN '117'
+              edit NODES '12'
+            family post
+              edit NCPUS '16'
+              edit SPAN '16'
+              inlimit hiresw_post_limit
+              task jhiresw_post_manager
+                trigger ../jhiresw_forecast == active or ../jhiresw_forecast == complete
+                event 1 release_post00
+                event 2 release_post01
+                event 3 release_post02
+                event 4 release_post03
+                event 5 release_post04
+                event 6 release_post05
+                event 7 release_post06
+                event 8 release_post07
+                event 9 release_post08
+                event 10 release_post09
+                event 11 release_post10
+                event 12 release_post11
+                event 13 release_post12
+                event 14 release_post13
+                event 15 release_post14
+                event 16 release_post15
+                event 17 release_post16
+                event 18 release_post17
+                event 19 release_post18
+                event 20 release_post19
+                event 21 release_post20
+                event 22 release_post21
+                event 23 release_post22
+                event 24 release_post23
+                event 25 release_post24
+                event 26 release_post25
+                event 27 release_post26
+                event 28 release_post27
+                event 29 release_post28
+                event 30 release_post29
+                event 31 release_post30
+                event 32 release_post31
+                event 33 release_post32
+                event 34 release_post33
+                event 35 release_post34
+                event 36 release_post35
+                event 37 release_post36
+                event 38 release_post37
+                event 39 release_post38
+                event 40 release_post39
+                event 41 release_post40
+                event 42 release_post41
+                event 43 release_post42
+                event 44 release_post43
+                event 45 release_post44
+                event 46 release_post45
+                event 47 release_post46
+                event 48 release_post47
+                event 49 release_post48
+              task jhiresw_post_f00
+                trigger jhiresw_post_manager:release_post00
+              task jhiresw_post_f01
+                trigger jhiresw_post_manager:release_post01
+              task jhiresw_post_f02
+                trigger jhiresw_post_manager:release_post02
+              task jhiresw_post_f03
+                trigger jhiresw_post_manager:release_post03
+              task jhiresw_post_f04
+                trigger jhiresw_post_manager:release_post04
+              task jhiresw_post_f05
+                trigger jhiresw_post_manager:release_post05
+              task jhiresw_post_f06
+                trigger jhiresw_post_manager:release_post06
+              task jhiresw_post_f07
+                trigger jhiresw_post_manager:release_post07
+              task jhiresw_post_f08
+                trigger jhiresw_post_manager:release_post08
+              task jhiresw_post_f09
+                trigger jhiresw_post_manager:release_post09
+              task jhiresw_post_f10
+                trigger jhiresw_post_manager:release_post10
+              task jhiresw_post_f11
+                trigger jhiresw_post_manager:release_post11
+              task jhiresw_post_f12
+                trigger jhiresw_post_manager:release_post12
+              task jhiresw_post_f13
+                trigger jhiresw_post_manager:release_post13
+              task jhiresw_post_f14
+                trigger jhiresw_post_manager:release_post14
+              task jhiresw_post_f15
+                trigger jhiresw_post_manager:release_post15
+              task jhiresw_post_f16
+                trigger jhiresw_post_manager:release_post16
+              task jhiresw_post_f17
+                trigger jhiresw_post_manager:release_post17
+              task jhiresw_post_f18
+                trigger jhiresw_post_manager:release_post18
+              task jhiresw_post_f19
+                trigger jhiresw_post_manager:release_post19
+              task jhiresw_post_f20
+                trigger jhiresw_post_manager:release_post20
+              task jhiresw_post_f21
+                trigger jhiresw_post_manager:release_post21
+              task jhiresw_post_f22
+                trigger jhiresw_post_manager:release_post22
+              task jhiresw_post_f23
+                trigger jhiresw_post_manager:release_post23
+              task jhiresw_post_f24
+                trigger jhiresw_post_manager:release_post24
+              task jhiresw_post_f25
+                trigger jhiresw_post_manager:release_post25
+              task jhiresw_post_f26
+                trigger jhiresw_post_manager:release_post26
+              task jhiresw_post_f27
+                trigger jhiresw_post_manager:release_post27
+              task jhiresw_post_f28
+                trigger jhiresw_post_manager:release_post28
+              task jhiresw_post_f29
+                trigger jhiresw_post_manager:release_post29
+              task jhiresw_post_f30
+                trigger jhiresw_post_manager:release_post30
+              task jhiresw_post_f31
+                trigger jhiresw_post_manager:release_post31
+              task jhiresw_post_f32
+                trigger jhiresw_post_manager:release_post32
+              task jhiresw_post_f33
+                trigger jhiresw_post_manager:release_post33
+              task jhiresw_post_f34
+                trigger jhiresw_post_manager:release_post34
+              task jhiresw_post_f35
+                trigger jhiresw_post_manager:release_post35
+              task jhiresw_post_f36
+                trigger jhiresw_post_manager:release_post36
+              task jhiresw_post_f37
+                trigger jhiresw_post_manager:release_post37
+              task jhiresw_post_f38
+                trigger jhiresw_post_manager:release_post38
+              task jhiresw_post_f39
+                trigger jhiresw_post_manager:release_post39
+              task jhiresw_post_f40
+                trigger jhiresw_post_manager:release_post40
+              task jhiresw_post_f41
+                trigger jhiresw_post_manager:release_post41
+              task jhiresw_post_f42
+                trigger jhiresw_post_manager:release_post42
+              task jhiresw_post_f43
+                trigger jhiresw_post_manager:release_post43
+              task jhiresw_post_f44
+                trigger jhiresw_post_manager:release_post44
+              task jhiresw_post_f45
+                trigger jhiresw_post_manager:release_post45
+              task jhiresw_post_f46
+                trigger jhiresw_post_manager:release_post46
+              task jhiresw_post_f47
+                trigger jhiresw_post_manager:release_post47
+              task jhiresw_post_f48
+                trigger jhiresw_post_manager:release_post48
+            endfamily
+            family prdgen
+              edit NCPUS '5'
+              edit SPAN '5'
+              inlimit hiresw_prdgen_limit
+              task jhiresw_prdgen_f00
+                trigger ../post/jhiresw_post_f00 == complete
+              task jhiresw_prdgen_f01
+                trigger ../post/jhiresw_post_f01 == complete
+              task jhiresw_prdgen_f02
+                trigger ../post/jhiresw_post_f02 == complete
+              task jhiresw_prdgen_f03
+                trigger ../post/jhiresw_post_f03 == complete
+              task jhiresw_prdgen_f04
+                trigger ../post/jhiresw_post_f04 == complete
+              task jhiresw_prdgen_f05
+                trigger ../post/jhiresw_post_f05 == complete
+              task jhiresw_prdgen_f06
+                trigger ../post/jhiresw_post_f06 == complete
+              task jhiresw_prdgen_f07
+                trigger ../post/jhiresw_post_f07 == complete
+              task jhiresw_prdgen_f08
+                trigger ../post/jhiresw_post_f08 == complete
+              task jhiresw_prdgen_f09
+                trigger ../post/jhiresw_post_f09 == complete
+              task jhiresw_prdgen_f10
+                trigger ../post/jhiresw_post_f10 == complete
+              task jhiresw_prdgen_f11
+                trigger ../post/jhiresw_post_f11 == complete
+              task jhiresw_prdgen_f12
+                trigger ../post/jhiresw_post_f12 == complete
+              task jhiresw_prdgen_f13
+                trigger ../post/jhiresw_post_f13 == complete
+              task jhiresw_prdgen_f14
+                trigger ../post/jhiresw_post_f14 == complete
+              task jhiresw_prdgen_f15
+                trigger ../post/jhiresw_post_f15 == complete
+              task jhiresw_prdgen_f16
+                trigger ../post/jhiresw_post_f16 == complete
+              task jhiresw_prdgen_f17
+                trigger ../post/jhiresw_post_f17 == complete
+              task jhiresw_prdgen_f18
+                trigger ../post/jhiresw_post_f18 == complete
+              task jhiresw_prdgen_f19
+                trigger ../post/jhiresw_post_f19 == complete
+              task jhiresw_prdgen_f20
+                trigger ../post/jhiresw_post_f20 == complete
+              task jhiresw_prdgen_f21
+                trigger ../post/jhiresw_post_f21 == complete
+              task jhiresw_prdgen_f22
+                trigger ../post/jhiresw_post_f22 == complete
+              task jhiresw_prdgen_f23
+                trigger ../post/jhiresw_post_f23 == complete
+              task jhiresw_prdgen_f24
+                trigger ../post/jhiresw_post_f24 == complete
+              task jhiresw_prdgen_f25
+                trigger ../post/jhiresw_post_f25 == complete
+              task jhiresw_prdgen_f26
+                trigger ../post/jhiresw_post_f26 == complete
+              task jhiresw_prdgen_f27
+                trigger ../post/jhiresw_post_f27 == complete
+              task jhiresw_prdgen_f28
+                trigger ../post/jhiresw_post_f28 == complete
+              task jhiresw_prdgen_f29
+                trigger ../post/jhiresw_post_f29 == complete
+              task jhiresw_prdgen_f30
+                trigger ../post/jhiresw_post_f30 == complete
+              task jhiresw_prdgen_f31
+                trigger ../post/jhiresw_post_f31 == complete
+              task jhiresw_prdgen_f32
+                trigger ../post/jhiresw_post_f32 == complete
+              task jhiresw_prdgen_f33
+                trigger ../post/jhiresw_post_f33 == complete
+              task jhiresw_prdgen_f34
+                trigger ../post/jhiresw_post_f34 == complete
+              task jhiresw_prdgen_f35
+                trigger ../post/jhiresw_post_f35 == complete
+              task jhiresw_prdgen_f36
+                trigger ../post/jhiresw_post_f36 == complete
+              task jhiresw_prdgen_f37
+                trigger ../post/jhiresw_post_f37 == complete
+              task jhiresw_prdgen_f38
+                trigger ../post/jhiresw_post_f38 == complete
+              task jhiresw_prdgen_f39
+                trigger ../post/jhiresw_post_f39 == complete
+              task jhiresw_prdgen_f40
+                trigger ../post/jhiresw_post_f40 == complete
+              task jhiresw_prdgen_f41
+                trigger ../post/jhiresw_post_f41 == complete
+              task jhiresw_prdgen_f42
+                trigger ../post/jhiresw_post_f42 == complete
+              task jhiresw_prdgen_f43
+                trigger ../post/jhiresw_post_f43 == complete
+              task jhiresw_prdgen_f44
+                trigger ../post/jhiresw_post_f44 == complete
+              task jhiresw_prdgen_f45
+                trigger ../post/jhiresw_post_f45 == complete
+              task jhiresw_prdgen_f46
+                trigger ../post/jhiresw_post_f46 == complete
+              task jhiresw_prdgen_f47
+                trigger ../post/jhiresw_post_f47 == complete
+              task jhiresw_prdgen_f48
+                trigger ../post/jhiresw_post_f48 == complete
+            endfamily
+            family bufrpost
+              edit NCPUS '1'
+              inlimit hiresw_bufrpost_limit
+              task jhiresw_bufrpost_f00
+                trigger ../post/jhiresw_post_manager:release_post00
+              task jhiresw_bufrpost_f01
+                trigger ../post/jhiresw_post_manager:release_post01
+              task jhiresw_bufrpost_f02
+                trigger ../post/jhiresw_post_manager:release_post02
+              task jhiresw_bufrpost_f03
+                trigger ../post/jhiresw_post_manager:release_post03
+              task jhiresw_bufrpost_f04
+                trigger ../post/jhiresw_post_manager:release_post04
+              task jhiresw_bufrpost_f05
+                trigger ../post/jhiresw_post_manager:release_post05
+              task jhiresw_bufrpost_f06
+                trigger ../post/jhiresw_post_manager:release_post06
+              task jhiresw_bufrpost_f07
+                trigger ../post/jhiresw_post_manager:release_post07
+              task jhiresw_bufrpost_f08
+                trigger ../post/jhiresw_post_manager:release_post08
+              task jhiresw_bufrpost_f09
+                trigger ../post/jhiresw_post_manager:release_post09
+              task jhiresw_bufrpost_f10
+                trigger ../post/jhiresw_post_manager:release_post10
+              task jhiresw_bufrpost_f11
+                trigger ../post/jhiresw_post_manager:release_post11
+              task jhiresw_bufrpost_f12
+                trigger ../post/jhiresw_post_manager:release_post12
+              task jhiresw_bufrpost_f13
+                trigger ../post/jhiresw_post_manager:release_post13
+              task jhiresw_bufrpost_f14
+                trigger ../post/jhiresw_post_manager:release_post14
+              task jhiresw_bufrpost_f15
+                trigger ../post/jhiresw_post_manager:release_post15
+              task jhiresw_bufrpost_f16
+                trigger ../post/jhiresw_post_manager:release_post16
+              task jhiresw_bufrpost_f17
+                trigger ../post/jhiresw_post_manager:release_post17
+              task jhiresw_bufrpost_f18
+                trigger ../post/jhiresw_post_manager:release_post18
+              task jhiresw_bufrpost_f19
+                trigger ../post/jhiresw_post_manager:release_post19
+              task jhiresw_bufrpost_f20
+                trigger ../post/jhiresw_post_manager:release_post20
+              task jhiresw_bufrpost_f21
+                trigger ../post/jhiresw_post_manager:release_post21
+              task jhiresw_bufrpost_f22
+                trigger ../post/jhiresw_post_manager:release_post22
+              task jhiresw_bufrpost_f23
+                trigger ../post/jhiresw_post_manager:release_post23
+              task jhiresw_bufrpost_f24
+                trigger ../post/jhiresw_post_manager:release_post24
+              task jhiresw_bufrpost_f25
+                trigger ../post/jhiresw_post_manager:release_post25
+              task jhiresw_bufrpost_f26
+                trigger ../post/jhiresw_post_manager:release_post26
+              task jhiresw_bufrpost_f27
+                trigger ../post/jhiresw_post_manager:release_post27
+              task jhiresw_bufrpost_f28
+                trigger ../post/jhiresw_post_manager:release_post28
+              task jhiresw_bufrpost_f29
+                trigger ../post/jhiresw_post_manager:release_post29
+              task jhiresw_bufrpost_f30
+                trigger ../post/jhiresw_post_manager:release_post30
+              task jhiresw_bufrpost_f31
+                trigger ../post/jhiresw_post_manager:release_post31
+              task jhiresw_bufrpost_f32
+                trigger ../post/jhiresw_post_manager:release_post32
+              task jhiresw_bufrpost_f33
+                trigger ../post/jhiresw_post_manager:release_post33
+              task jhiresw_bufrpost_f34
+                trigger ../post/jhiresw_post_manager:release_post34
+              task jhiresw_bufrpost_f35
+                trigger ../post/jhiresw_post_manager:release_post35
+              task jhiresw_bufrpost_f36
+                trigger ../post/jhiresw_post_manager:release_post36
+              task jhiresw_bufrpost_f37
+                trigger ../post/jhiresw_post_manager:release_post37
+              task jhiresw_bufrpost_f38
+                trigger ../post/jhiresw_post_manager:release_post38
+              task jhiresw_bufrpost_f39
+                trigger ../post/jhiresw_post_manager:release_post39
+              task jhiresw_bufrpost_f40
+                trigger ../post/jhiresw_post_manager:release_post40
+              task jhiresw_bufrpost_f41
+                trigger ../post/jhiresw_post_manager:release_post41
+              task jhiresw_bufrpost_f42
+                trigger ../post/jhiresw_post_manager:release_post42
+              task jhiresw_bufrpost_f43
+                trigger ../post/jhiresw_post_manager:release_post43
+              task jhiresw_bufrpost_f44
+                trigger ../post/jhiresw_post_manager:release_post44
+              task jhiresw_bufrpost_f45
+                trigger ../post/jhiresw_post_manager:release_post45
+              task jhiresw_bufrpost_f46
+                trigger ../post/jhiresw_post_manager:release_post46
+              task jhiresw_bufrpost_f47
+                trigger ../post/jhiresw_post_manager:release_post47
+              task jhiresw_bufrpost_f48
+                trigger ../post/jhiresw_post_manager:release_post48
+            endfamily
+            family post_processing
+              task jhiresw_smartinit
+                trigger ../prdgen/jhiresw_prdgen_f00 == complete and /prod/primary/12/sref/v7.1/15z/enspost/jsref_enspost:ensgrd_216_ready
+                edit NCPUS '15'
+              task jhiresw_smartinitb
+                trigger ../prdgen/jhiresw_prdgen_f00 == complete and ( jhiresw_smartinit == active or jhiresw_smartinit == complete)
+              task jhiresw_awips
+                trigger ../post/jhiresw_post_f00 == active or ../post/jhiresw_post_f00 == complete
+              task jhiresw_gempak
+                trigger ../post/jhiresw_post_f00 == active or ../post/jhiresw_post_f00 == complete
+            endfamily
+          endfamily
+        endfamily
+        family mem2
+          family pr
+            edit DOMAIN 'prmem2'
+            limit hiresw_post_limit 10
+            limit hiresw_prdgen_limit 10
+            limit hiresw_bufrpost_limit 10
+            family prep
+              task jhiresw_ungrib
+                trigger /prod/primary/18/nam/v4.2/18z/tm00/parent/prdgen/jnam_prdgen_f00 == complete
+              task jhiresw_metgrid
+                trigger jhiresw_ungrib == complete
+              task jhiresw_prepfinal
+                trigger jhiresw_metgrid == complete
+            endfamily
+            task jhiresw_forecast
+              trigger prep/jhiresw_prepfinal == complete
+              edit TOTAL_TASKS '124'
+              edit SPAN '124'
+              edit NODES '1'
+            family post
+              edit NCPUS '2'
+              edit SPAN '2'
+              inlimit hiresw_post_limit
+              task jhiresw_post_manager
+                trigger ../jhiresw_forecast == active or ../jhiresw_forecast == complete
+                event 1 release_post00
+                event 2 release_post01
+                event 3 release_post02
+                event 4 release_post03
+                event 5 release_post04
+                event 6 release_post05
+                event 7 release_post06
+                event 8 release_post07
+                event 9 release_post08
+                event 10 release_post09
+                event 11 release_post10
+                event 12 release_post11
+                event 13 release_post12
+                event 14 release_post13
+                event 15 release_post14
+                event 16 release_post15
+                event 17 release_post16
+                event 18 release_post17
+                event 19 release_post18
+                event 20 release_post19
+                event 21 release_post20
+                event 22 release_post21
+                event 23 release_post22
+                event 24 release_post23
+                event 25 release_post24
+                event 26 release_post25
+                event 27 release_post26
+                event 28 release_post27
+                event 29 release_post28
+                event 30 release_post29
+                event 31 release_post30
+                event 32 release_post31
+                event 33 release_post32
+                event 34 release_post33
+                event 35 release_post34
+                event 36 release_post35
+                event 37 release_post36
+                event 38 release_post37
+                event 39 release_post38
+                event 40 release_post39
+                event 41 release_post40
+                event 42 release_post41
+                event 43 release_post42
+                event 44 release_post43
+                event 45 release_post44
+                event 46 release_post45
+                event 47 release_post46
+                event 48 release_post47
+                event 49 release_post48
+              task jhiresw_post_f00
+                trigger jhiresw_post_manager:release_post00
+              task jhiresw_post_f01
+                trigger jhiresw_post_manager:release_post01
+              task jhiresw_post_f02
+                trigger jhiresw_post_manager:release_post02
+              task jhiresw_post_f03
+                trigger jhiresw_post_manager:release_post03
+              task jhiresw_post_f04
+                trigger jhiresw_post_manager:release_post04
+              task jhiresw_post_f05
+                trigger jhiresw_post_manager:release_post05
+              task jhiresw_post_f06
+                trigger jhiresw_post_manager:release_post06
+              task jhiresw_post_f07
+                trigger jhiresw_post_manager:release_post07
+              task jhiresw_post_f08
+                trigger jhiresw_post_manager:release_post08
+              task jhiresw_post_f09
+                trigger jhiresw_post_manager:release_post09
+              task jhiresw_post_f10
+                trigger jhiresw_post_manager:release_post10
+              task jhiresw_post_f11
+                trigger jhiresw_post_manager:release_post11
+              task jhiresw_post_f12
+                trigger jhiresw_post_manager:release_post12
+              task jhiresw_post_f13
+                trigger jhiresw_post_manager:release_post13
+              task jhiresw_post_f14
+                trigger jhiresw_post_manager:release_post14
+              task jhiresw_post_f15
+                trigger jhiresw_post_manager:release_post15
+              task jhiresw_post_f16
+                trigger jhiresw_post_manager:release_post16
+              task jhiresw_post_f17
+                trigger jhiresw_post_manager:release_post17
+              task jhiresw_post_f18
+                trigger jhiresw_post_manager:release_post18
+              task jhiresw_post_f19
+                trigger jhiresw_post_manager:release_post19
+              task jhiresw_post_f20
+                trigger jhiresw_post_manager:release_post20
+              task jhiresw_post_f21
+                trigger jhiresw_post_manager:release_post21
+              task jhiresw_post_f22
+                trigger jhiresw_post_manager:release_post22
+              task jhiresw_post_f23
+                trigger jhiresw_post_manager:release_post23
+              task jhiresw_post_f24
+                trigger jhiresw_post_manager:release_post24
+              task jhiresw_post_f25
+                trigger jhiresw_post_manager:release_post25
+              task jhiresw_post_f26
+                trigger jhiresw_post_manager:release_post26
+              task jhiresw_post_f27
+                trigger jhiresw_post_manager:release_post27
+              task jhiresw_post_f28
+                trigger jhiresw_post_manager:release_post28
+              task jhiresw_post_f29
+                trigger jhiresw_post_manager:release_post29
+              task jhiresw_post_f30
+                trigger jhiresw_post_manager:release_post30
+              task jhiresw_post_f31
+                trigger jhiresw_post_manager:release_post31
+              task jhiresw_post_f32
+                trigger jhiresw_post_manager:release_post32
+              task jhiresw_post_f33
+                trigger jhiresw_post_manager:release_post33
+              task jhiresw_post_f34
+                trigger jhiresw_post_manager:release_post34
+              task jhiresw_post_f35
+                trigger jhiresw_post_manager:release_post35
+              task jhiresw_post_f36
+                trigger jhiresw_post_manager:release_post36
+              task jhiresw_post_f37
+                trigger jhiresw_post_manager:release_post37
+              task jhiresw_post_f38
+                trigger jhiresw_post_manager:release_post38
+              task jhiresw_post_f39
+                trigger jhiresw_post_manager:release_post39
+              task jhiresw_post_f40
+                trigger jhiresw_post_manager:release_post40
+              task jhiresw_post_f41
+                trigger jhiresw_post_manager:release_post41
+              task jhiresw_post_f42
+                trigger jhiresw_post_manager:release_post42
+              task jhiresw_post_f43
+                trigger jhiresw_post_manager:release_post43
+              task jhiresw_post_f44
+                trigger jhiresw_post_manager:release_post44
+              task jhiresw_post_f45
+                trigger jhiresw_post_manager:release_post45
+              task jhiresw_post_f46
+                trigger jhiresw_post_manager:release_post46
+              task jhiresw_post_f47
+                trigger jhiresw_post_manager:release_post47
+              task jhiresw_post_f48
+                trigger jhiresw_post_manager:release_post48
+            endfamily
+            family prdgen
+              edit NCPUS '2'
+              edit SPAN '2'
+              inlimit hiresw_prdgen_limit
+              task jhiresw_prdgen_f00
+                trigger ../post/jhiresw_post_f00 == complete
+              task jhiresw_prdgen_f01
+                trigger ../post/jhiresw_post_f01 == complete
+              task jhiresw_prdgen_f02
+                trigger ../post/jhiresw_post_f02 == complete
+              task jhiresw_prdgen_f03
+                trigger ../post/jhiresw_post_f03 == complete
+              task jhiresw_prdgen_f04
+                trigger ../post/jhiresw_post_f04 == complete
+              task jhiresw_prdgen_f05
+                trigger ../post/jhiresw_post_f05 == complete
+              task jhiresw_prdgen_f06
+                trigger ../post/jhiresw_post_f06 == complete
+              task jhiresw_prdgen_f07
+                trigger ../post/jhiresw_post_f07 == complete
+              task jhiresw_prdgen_f08
+                trigger ../post/jhiresw_post_f08 == complete
+              task jhiresw_prdgen_f09
+                trigger ../post/jhiresw_post_f09 == complete
+              task jhiresw_prdgen_f10
+                trigger ../post/jhiresw_post_f10 == complete
+              task jhiresw_prdgen_f11
+                trigger ../post/jhiresw_post_f11 == complete
+              task jhiresw_prdgen_f12
+                trigger ../post/jhiresw_post_f12 == complete
+              task jhiresw_prdgen_f13
+                trigger ../post/jhiresw_post_f13 == complete
+              task jhiresw_prdgen_f14
+                trigger ../post/jhiresw_post_f14 == complete
+              task jhiresw_prdgen_f15
+                trigger ../post/jhiresw_post_f15 == complete
+              task jhiresw_prdgen_f16
+                trigger ../post/jhiresw_post_f16 == complete
+              task jhiresw_prdgen_f17
+                trigger ../post/jhiresw_post_f17 == complete
+              task jhiresw_prdgen_f18
+                trigger ../post/jhiresw_post_f18 == complete
+              task jhiresw_prdgen_f19
+                trigger ../post/jhiresw_post_f19 == complete
+              task jhiresw_prdgen_f20
+                trigger ../post/jhiresw_post_f20 == complete
+              task jhiresw_prdgen_f21
+                trigger ../post/jhiresw_post_f21 == complete
+              task jhiresw_prdgen_f22
+                trigger ../post/jhiresw_post_f22 == complete
+              task jhiresw_prdgen_f23
+                trigger ../post/jhiresw_post_f23 == complete
+              task jhiresw_prdgen_f24
+                trigger ../post/jhiresw_post_f24 == complete
+              task jhiresw_prdgen_f25
+                trigger ../post/jhiresw_post_f25 == complete
+              task jhiresw_prdgen_f26
+                trigger ../post/jhiresw_post_f26 == complete
+              task jhiresw_prdgen_f27
+                trigger ../post/jhiresw_post_f27 == complete
+              task jhiresw_prdgen_f28
+                trigger ../post/jhiresw_post_f28 == complete
+              task jhiresw_prdgen_f29
+                trigger ../post/jhiresw_post_f29 == complete
+              task jhiresw_prdgen_f30
+                trigger ../post/jhiresw_post_f30 == complete
+              task jhiresw_prdgen_f31
+                trigger ../post/jhiresw_post_f31 == complete
+              task jhiresw_prdgen_f32
+                trigger ../post/jhiresw_post_f32 == complete
+              task jhiresw_prdgen_f33
+                trigger ../post/jhiresw_post_f33 == complete
+              task jhiresw_prdgen_f34
+                trigger ../post/jhiresw_post_f34 == complete
+              task jhiresw_prdgen_f35
+                trigger ../post/jhiresw_post_f35 == complete
+              task jhiresw_prdgen_f36
+                trigger ../post/jhiresw_post_f36 == complete
+              task jhiresw_prdgen_f37
+                trigger ../post/jhiresw_post_f37 == complete
+              task jhiresw_prdgen_f38
+                trigger ../post/jhiresw_post_f38 == complete
+              task jhiresw_prdgen_f39
+                trigger ../post/jhiresw_post_f39 == complete
+              task jhiresw_prdgen_f40
+                trigger ../post/jhiresw_post_f40 == complete
+              task jhiresw_prdgen_f41
+                trigger ../post/jhiresw_post_f41 == complete
+              task jhiresw_prdgen_f42
+                trigger ../post/jhiresw_post_f42 == complete
+              task jhiresw_prdgen_f43
+                trigger ../post/jhiresw_post_f43 == complete
+              task jhiresw_prdgen_f44
+                trigger ../post/jhiresw_post_f44 == complete
+              task jhiresw_prdgen_f45
+                trigger ../post/jhiresw_post_f45 == complete
+              task jhiresw_prdgen_f46
+                trigger ../post/jhiresw_post_f46 == complete
+              task jhiresw_prdgen_f47
+                trigger ../post/jhiresw_post_f47 == complete
+              task jhiresw_prdgen_f48
+                trigger ../post/jhiresw_post_f48 == complete
+            endfamily
+            family bufrpost
+              edit NCPUS '1'
+              inlimit hiresw_bufrpost_limit
+              task jhiresw_bufrpost_f00
+                trigger ../post/jhiresw_post_manager:release_post00
+              task jhiresw_bufrpost_f01
+                trigger ../post/jhiresw_post_manager:release_post01
+              task jhiresw_bufrpost_f02
+                trigger ../post/jhiresw_post_manager:release_post02
+              task jhiresw_bufrpost_f03
+                trigger ../post/jhiresw_post_manager:release_post03
+              task jhiresw_bufrpost_f04
+                trigger ../post/jhiresw_post_manager:release_post04
+              task jhiresw_bufrpost_f05
+                trigger ../post/jhiresw_post_manager:release_post05
+              task jhiresw_bufrpost_f06
+                trigger ../post/jhiresw_post_manager:release_post06
+              task jhiresw_bufrpost_f07
+                trigger ../post/jhiresw_post_manager:release_post07
+              task jhiresw_bufrpost_f08
+                trigger ../post/jhiresw_post_manager:release_post08
+              task jhiresw_bufrpost_f09
+                trigger ../post/jhiresw_post_manager:release_post09
+              task jhiresw_bufrpost_f10
+                trigger ../post/jhiresw_post_manager:release_post10
+              task jhiresw_bufrpost_f11
+                trigger ../post/jhiresw_post_manager:release_post11
+              task jhiresw_bufrpost_f12
+                trigger ../post/jhiresw_post_manager:release_post12
+              task jhiresw_bufrpost_f13
+                trigger ../post/jhiresw_post_manager:release_post13
+              task jhiresw_bufrpost_f14
+                trigger ../post/jhiresw_post_manager:release_post14
+              task jhiresw_bufrpost_f15
+                trigger ../post/jhiresw_post_manager:release_post15
+              task jhiresw_bufrpost_f16
+                trigger ../post/jhiresw_post_manager:release_post16
+              task jhiresw_bufrpost_f17
+                trigger ../post/jhiresw_post_manager:release_post17
+              task jhiresw_bufrpost_f18
+                trigger ../post/jhiresw_post_manager:release_post18
+              task jhiresw_bufrpost_f19
+                trigger ../post/jhiresw_post_manager:release_post19
+              task jhiresw_bufrpost_f20
+                trigger ../post/jhiresw_post_manager:release_post20
+              task jhiresw_bufrpost_f21
+                trigger ../post/jhiresw_post_manager:release_post21
+              task jhiresw_bufrpost_f22
+                trigger ../post/jhiresw_post_manager:release_post22
+              task jhiresw_bufrpost_f23
+                trigger ../post/jhiresw_post_manager:release_post23
+              task jhiresw_bufrpost_f24
+                trigger ../post/jhiresw_post_manager:release_post24
+              task jhiresw_bufrpost_f25
+                trigger ../post/jhiresw_post_manager:release_post25
+              task jhiresw_bufrpost_f26
+                trigger ../post/jhiresw_post_manager:release_post26
+              task jhiresw_bufrpost_f27
+                trigger ../post/jhiresw_post_manager:release_post27
+              task jhiresw_bufrpost_f28
+                trigger ../post/jhiresw_post_manager:release_post28
+              task jhiresw_bufrpost_f29
+                trigger ../post/jhiresw_post_manager:release_post29
+              task jhiresw_bufrpost_f30
+                trigger ../post/jhiresw_post_manager:release_post30
+              task jhiresw_bufrpost_f31
+                trigger ../post/jhiresw_post_manager:release_post31
+              task jhiresw_bufrpost_f32
+                trigger ../post/jhiresw_post_manager:release_post32
+              task jhiresw_bufrpost_f33
+                trigger ../post/jhiresw_post_manager:release_post33
+              task jhiresw_bufrpost_f34
+                trigger ../post/jhiresw_post_manager:release_post34
+              task jhiresw_bufrpost_f35
+                trigger ../post/jhiresw_post_manager:release_post35
+              task jhiresw_bufrpost_f36
+                trigger ../post/jhiresw_post_manager:release_post36
+              task jhiresw_bufrpost_f37
+                trigger ../post/jhiresw_post_manager:release_post37
+              task jhiresw_bufrpost_f38
+                trigger ../post/jhiresw_post_manager:release_post38
+              task jhiresw_bufrpost_f39
+                trigger ../post/jhiresw_post_manager:release_post39
+              task jhiresw_bufrpost_f40
+                trigger ../post/jhiresw_post_manager:release_post40
+              task jhiresw_bufrpost_f41
+                trigger ../post/jhiresw_post_manager:release_post41
+              task jhiresw_bufrpost_f42
+                trigger ../post/jhiresw_post_manager:release_post42
+              task jhiresw_bufrpost_f43
+                trigger ../post/jhiresw_post_manager:release_post43
+              task jhiresw_bufrpost_f44
+                trigger ../post/jhiresw_post_manager:release_post44
+              task jhiresw_bufrpost_f45
+                trigger ../post/jhiresw_post_manager:release_post45
+              task jhiresw_bufrpost_f46
+                trigger ../post/jhiresw_post_manager:release_post46
+              task jhiresw_bufrpost_f47
+                trigger ../post/jhiresw_post_manager:release_post47
+              task jhiresw_bufrpost_f48
+                trigger ../post/jhiresw_post_manager:release_post48
+            endfamily
+            family post_processing
+              task jhiresw_smartinit
+                trigger ../prdgen/jhiresw_prdgen_f00 == complete and /prod/primary/12/sref/v7.1/15z/enspost/jsref_enspost:ensgrd_212_ready
+                edit NCPUS '11'
+              task jhiresw_smartinitb
+                trigger ../prdgen/jhiresw_prdgen_f00 == complete and ( jhiresw_smartinit == active or jhiresw_smartinit == complete)
+              task jhiresw_gempak
+                trigger ../post/jhiresw_post_f00 == active or ../post/jhiresw_post_f00 == complete
+            endfamily
+          endfamily
+          family ak
+            edit DOMAIN 'akmem2'
+            limit hiresw_post_limit 10
+            limit hiresw_prdgen_limit 10
+            limit hiresw_bufrpost_limit 10
+            family prep
+              task jhiresw_ungrib
+                trigger /prod/primary/18/nam/v4.2/18z/tm00/parent/prdgen/jnam_prdgen_f00 == complete
+              task jhiresw_metgrid
+                trigger jhiresw_ungrib == complete
+              task jhiresw_prepfinal
+                trigger jhiresw_metgrid == complete
+            endfamily
+            task jhiresw_forecast
+              trigger prep/jhiresw_prepfinal == complete
+              edit TOTAL_TASKS '966'
+              edit SPAN '121'
+              edit NODES '8'
+            family post
+              edit NCPUS '16'
+              edit SPAN '16'
+              inlimit hiresw_post_limit
+              task jhiresw_post_manager
+                trigger ../jhiresw_forecast == active or ../jhiresw_forecast == complete
+                event 1 release_post00
+                event 2 release_post01
+                event 3 release_post02
+                event 4 release_post03
+                event 5 release_post04
+                event 6 release_post05
+                event 7 release_post06
+                event 8 release_post07
+                event 9 release_post08
+                event 10 release_post09
+                event 11 release_post10
+                event 12 release_post11
+                event 13 release_post12
+                event 14 release_post13
+                event 15 release_post14
+                event 16 release_post15
+                event 17 release_post16
+                event 18 release_post17
+                event 19 release_post18
+                event 20 release_post19
+                event 21 release_post20
+                event 22 release_post21
+                event 23 release_post22
+                event 24 release_post23
+                event 25 release_post24
+                event 26 release_post25
+                event 27 release_post26
+                event 28 release_post27
+                event 29 release_post28
+                event 30 release_post29
+                event 31 release_post30
+                event 32 release_post31
+                event 33 release_post32
+                event 34 release_post33
+                event 35 release_post34
+                event 36 release_post35
+                event 37 release_post36
+                event 38 release_post37
+                event 39 release_post38
+                event 40 release_post39
+                event 41 release_post40
+                event 42 release_post41
+                event 43 release_post42
+                event 44 release_post43
+                event 45 release_post44
+                event 46 release_post45
+                event 47 release_post46
+                event 48 release_post47
+                event 49 release_post48
+              task jhiresw_post_f00
+                trigger jhiresw_post_manager:release_post00
+              task jhiresw_post_f01
+                trigger jhiresw_post_manager:release_post01
+              task jhiresw_post_f02
+                trigger jhiresw_post_manager:release_post02
+              task jhiresw_post_f03
+                trigger jhiresw_post_manager:release_post03
+              task jhiresw_post_f04
+                trigger jhiresw_post_manager:release_post04
+              task jhiresw_post_f05
+                trigger jhiresw_post_manager:release_post05
+              task jhiresw_post_f06
+                trigger jhiresw_post_manager:release_post06
+              task jhiresw_post_f07
+                trigger jhiresw_post_manager:release_post07
+              task jhiresw_post_f08
+                trigger jhiresw_post_manager:release_post08
+              task jhiresw_post_f09
+                trigger jhiresw_post_manager:release_post09
+              task jhiresw_post_f10
+                trigger jhiresw_post_manager:release_post10
+              task jhiresw_post_f11
+                trigger jhiresw_post_manager:release_post11
+              task jhiresw_post_f12
+                trigger jhiresw_post_manager:release_post12
+              task jhiresw_post_f13
+                trigger jhiresw_post_manager:release_post13
+              task jhiresw_post_f14
+                trigger jhiresw_post_manager:release_post14
+              task jhiresw_post_f15
+                trigger jhiresw_post_manager:release_post15
+              task jhiresw_post_f16
+                trigger jhiresw_post_manager:release_post16
+              task jhiresw_post_f17
+                trigger jhiresw_post_manager:release_post17
+              task jhiresw_post_f18
+                trigger jhiresw_post_manager:release_post18
+              task jhiresw_post_f19
+                trigger jhiresw_post_manager:release_post19
+              task jhiresw_post_f20
+                trigger jhiresw_post_manager:release_post20
+              task jhiresw_post_f21
+                trigger jhiresw_post_manager:release_post21
+              task jhiresw_post_f22
+                trigger jhiresw_post_manager:release_post22
+              task jhiresw_post_f23
+                trigger jhiresw_post_manager:release_post23
+              task jhiresw_post_f24
+                trigger jhiresw_post_manager:release_post24
+              task jhiresw_post_f25
+                trigger jhiresw_post_manager:release_post25
+              task jhiresw_post_f26
+                trigger jhiresw_post_manager:release_post26
+              task jhiresw_post_f27
+                trigger jhiresw_post_manager:release_post27
+              task jhiresw_post_f28
+                trigger jhiresw_post_manager:release_post28
+              task jhiresw_post_f29
+                trigger jhiresw_post_manager:release_post29
+              task jhiresw_post_f30
+                trigger jhiresw_post_manager:release_post30
+              task jhiresw_post_f31
+                trigger jhiresw_post_manager:release_post31
+              task jhiresw_post_f32
+                trigger jhiresw_post_manager:release_post32
+              task jhiresw_post_f33
+                trigger jhiresw_post_manager:release_post33
+              task jhiresw_post_f34
+                trigger jhiresw_post_manager:release_post34
+              task jhiresw_post_f35
+                trigger jhiresw_post_manager:release_post35
+              task jhiresw_post_f36
+                trigger jhiresw_post_manager:release_post36
+              task jhiresw_post_f37
+                trigger jhiresw_post_manager:release_post37
+              task jhiresw_post_f38
+                trigger jhiresw_post_manager:release_post38
+              task jhiresw_post_f39
+                trigger jhiresw_post_manager:release_post39
+              task jhiresw_post_f40
+                trigger jhiresw_post_manager:release_post40
+              task jhiresw_post_f41
+                trigger jhiresw_post_manager:release_post41
+              task jhiresw_post_f42
+                trigger jhiresw_post_manager:release_post42
+              task jhiresw_post_f43
+                trigger jhiresw_post_manager:release_post43
+              task jhiresw_post_f44
+                trigger jhiresw_post_manager:release_post44
+              task jhiresw_post_f45
+                trigger jhiresw_post_manager:release_post45
+              task jhiresw_post_f46
+                trigger jhiresw_post_manager:release_post46
+              task jhiresw_post_f47
+                trigger jhiresw_post_manager:release_post47
+              task jhiresw_post_f48
+                trigger jhiresw_post_manager:release_post48
+            endfamily
+            family prdgen
+              edit NCPUS '5'
+              edit SPAN '5'
+              inlimit hiresw_prdgen_limit
+              task jhiresw_prdgen_f00
+                trigger ../post/jhiresw_post_f00 == complete
+              task jhiresw_prdgen_f01
+                trigger ../post/jhiresw_post_f01 == complete
+              task jhiresw_prdgen_f02
+                trigger ../post/jhiresw_post_f02 == complete
+              task jhiresw_prdgen_f03
+                trigger ../post/jhiresw_post_f03 == complete
+              task jhiresw_prdgen_f04
+                trigger ../post/jhiresw_post_f04 == complete
+              task jhiresw_prdgen_f05
+                trigger ../post/jhiresw_post_f05 == complete
+              task jhiresw_prdgen_f06
+                trigger ../post/jhiresw_post_f06 == complete
+              task jhiresw_prdgen_f07
+                trigger ../post/jhiresw_post_f07 == complete
+              task jhiresw_prdgen_f08
+                trigger ../post/jhiresw_post_f08 == complete
+              task jhiresw_prdgen_f09
+                trigger ../post/jhiresw_post_f09 == complete
+              task jhiresw_prdgen_f10
+                trigger ../post/jhiresw_post_f10 == complete
+              task jhiresw_prdgen_f11
+                trigger ../post/jhiresw_post_f11 == complete
+              task jhiresw_prdgen_f12
+                trigger ../post/jhiresw_post_f12 == complete
+              task jhiresw_prdgen_f13
+                trigger ../post/jhiresw_post_f13 == complete
+              task jhiresw_prdgen_f14
+                trigger ../post/jhiresw_post_f14 == complete
+              task jhiresw_prdgen_f15
+                trigger ../post/jhiresw_post_f15 == complete
+              task jhiresw_prdgen_f16
+                trigger ../post/jhiresw_post_f16 == complete
+              task jhiresw_prdgen_f17
+                trigger ../post/jhiresw_post_f17 == complete
+              task jhiresw_prdgen_f18
+                trigger ../post/jhiresw_post_f18 == complete
+              task jhiresw_prdgen_f19
+                trigger ../post/jhiresw_post_f19 == complete
+              task jhiresw_prdgen_f20
+                trigger ../post/jhiresw_post_f20 == complete
+              task jhiresw_prdgen_f21
+                trigger ../post/jhiresw_post_f21 == complete
+              task jhiresw_prdgen_f22
+                trigger ../post/jhiresw_post_f22 == complete
+              task jhiresw_prdgen_f23
+                trigger ../post/jhiresw_post_f23 == complete
+              task jhiresw_prdgen_f24
+                trigger ../post/jhiresw_post_f24 == complete
+              task jhiresw_prdgen_f25
+                trigger ../post/jhiresw_post_f25 == complete
+              task jhiresw_prdgen_f26
+                trigger ../post/jhiresw_post_f26 == complete
+              task jhiresw_prdgen_f27
+                trigger ../post/jhiresw_post_f27 == complete
+              task jhiresw_prdgen_f28
+                trigger ../post/jhiresw_post_f28 == complete
+              task jhiresw_prdgen_f29
+                trigger ../post/jhiresw_post_f29 == complete
+              task jhiresw_prdgen_f30
+                trigger ../post/jhiresw_post_f30 == complete
+              task jhiresw_prdgen_f31
+                trigger ../post/jhiresw_post_f31 == complete
+              task jhiresw_prdgen_f32
+                trigger ../post/jhiresw_post_f32 == complete
+              task jhiresw_prdgen_f33
+                trigger ../post/jhiresw_post_f33 == complete
+              task jhiresw_prdgen_f34
+                trigger ../post/jhiresw_post_f34 == complete
+              task jhiresw_prdgen_f35
+                trigger ../post/jhiresw_post_f35 == complete
+              task jhiresw_prdgen_f36
+                trigger ../post/jhiresw_post_f36 == complete
+              task jhiresw_prdgen_f37
+                trigger ../post/jhiresw_post_f37 == complete
+              task jhiresw_prdgen_f38
+                trigger ../post/jhiresw_post_f38 == complete
+              task jhiresw_prdgen_f39
+                trigger ../post/jhiresw_post_f39 == complete
+              task jhiresw_prdgen_f40
+                trigger ../post/jhiresw_post_f40 == complete
+              task jhiresw_prdgen_f41
+                trigger ../post/jhiresw_post_f41 == complete
+              task jhiresw_prdgen_f42
+                trigger ../post/jhiresw_post_f42 == complete
+              task jhiresw_prdgen_f43
+                trigger ../post/jhiresw_post_f43 == complete
+              task jhiresw_prdgen_f44
+                trigger ../post/jhiresw_post_f44 == complete
+              task jhiresw_prdgen_f45
+                trigger ../post/jhiresw_post_f45 == complete
+              task jhiresw_prdgen_f46
+                trigger ../post/jhiresw_post_f46 == complete
+              task jhiresw_prdgen_f47
+                trigger ../post/jhiresw_post_f47 == complete
+              task jhiresw_prdgen_f48
+                trigger ../post/jhiresw_post_f48 == complete
+            endfamily
+            family bufrpost
+              edit NCPUS '1'
+              inlimit hiresw_bufrpost_limit
+              task jhiresw_bufrpost_f00
+                trigger ../post/jhiresw_post_manager:release_post00
+              task jhiresw_bufrpost_f01
+                trigger ../post/jhiresw_post_manager:release_post01
+              task jhiresw_bufrpost_f02
+                trigger ../post/jhiresw_post_manager:release_post02
+              task jhiresw_bufrpost_f03
+                trigger ../post/jhiresw_post_manager:release_post03
+              task jhiresw_bufrpost_f04
+                trigger ../post/jhiresw_post_manager:release_post04
+              task jhiresw_bufrpost_f05
+                trigger ../post/jhiresw_post_manager:release_post05
+              task jhiresw_bufrpost_f06
+                trigger ../post/jhiresw_post_manager:release_post06
+              task jhiresw_bufrpost_f07
+                trigger ../post/jhiresw_post_manager:release_post07
+              task jhiresw_bufrpost_f08
+                trigger ../post/jhiresw_post_manager:release_post08
+              task jhiresw_bufrpost_f09
+                trigger ../post/jhiresw_post_manager:release_post09
+              task jhiresw_bufrpost_f10
+                trigger ../post/jhiresw_post_manager:release_post10
+              task jhiresw_bufrpost_f11
+                trigger ../post/jhiresw_post_manager:release_post11
+              task jhiresw_bufrpost_f12
+                trigger ../post/jhiresw_post_manager:release_post12
+              task jhiresw_bufrpost_f13
+                trigger ../post/jhiresw_post_manager:release_post13
+              task jhiresw_bufrpost_f14
+                trigger ../post/jhiresw_post_manager:release_post14
+              task jhiresw_bufrpost_f15
+                trigger ../post/jhiresw_post_manager:release_post15
+              task jhiresw_bufrpost_f16
+                trigger ../post/jhiresw_post_manager:release_post16
+              task jhiresw_bufrpost_f17
+                trigger ../post/jhiresw_post_manager:release_post17
+              task jhiresw_bufrpost_f18
+                trigger ../post/jhiresw_post_manager:release_post18
+              task jhiresw_bufrpost_f19
+                trigger ../post/jhiresw_post_manager:release_post19
+              task jhiresw_bufrpost_f20
+                trigger ../post/jhiresw_post_manager:release_post20
+              task jhiresw_bufrpost_f21
+                trigger ../post/jhiresw_post_manager:release_post21
+              task jhiresw_bufrpost_f22
+                trigger ../post/jhiresw_post_manager:release_post22
+              task jhiresw_bufrpost_f23
+                trigger ../post/jhiresw_post_manager:release_post23
+              task jhiresw_bufrpost_f24
+                trigger ../post/jhiresw_post_manager:release_post24
+              task jhiresw_bufrpost_f25
+                trigger ../post/jhiresw_post_manager:release_post25
+              task jhiresw_bufrpost_f26
+                trigger ../post/jhiresw_post_manager:release_post26
+              task jhiresw_bufrpost_f27
+                trigger ../post/jhiresw_post_manager:release_post27
+              task jhiresw_bufrpost_f28
+                trigger ../post/jhiresw_post_manager:release_post28
+              task jhiresw_bufrpost_f29
+                trigger ../post/jhiresw_post_manager:release_post29
+              task jhiresw_bufrpost_f30
+                trigger ../post/jhiresw_post_manager:release_post30
+              task jhiresw_bufrpost_f31
+                trigger ../post/jhiresw_post_manager:release_post31
+              task jhiresw_bufrpost_f32
+                trigger ../post/jhiresw_post_manager:release_post32
+              task jhiresw_bufrpost_f33
+                trigger ../post/jhiresw_post_manager:release_post33
+              task jhiresw_bufrpost_f34
+                trigger ../post/jhiresw_post_manager:release_post34
+              task jhiresw_bufrpost_f35
+                trigger ../post/jhiresw_post_manager:release_post35
+              task jhiresw_bufrpost_f36
+                trigger ../post/jhiresw_post_manager:release_post36
+              task jhiresw_bufrpost_f37
+                trigger ../post/jhiresw_post_manager:release_post37
+              task jhiresw_bufrpost_f38
+                trigger ../post/jhiresw_post_manager:release_post38
+              task jhiresw_bufrpost_f39
+                trigger ../post/jhiresw_post_manager:release_post39
+              task jhiresw_bufrpost_f40
+                trigger ../post/jhiresw_post_manager:release_post40
+              task jhiresw_bufrpost_f41
+                trigger ../post/jhiresw_post_manager:release_post41
+              task jhiresw_bufrpost_f42
+                trigger ../post/jhiresw_post_manager:release_post42
+              task jhiresw_bufrpost_f43
+                trigger ../post/jhiresw_post_manager:release_post43
+              task jhiresw_bufrpost_f44
+                trigger ../post/jhiresw_post_manager:release_post44
+              task jhiresw_bufrpost_f45
+                trigger ../post/jhiresw_post_manager:release_post45
+              task jhiresw_bufrpost_f46
+                trigger ../post/jhiresw_post_manager:release_post46
+              task jhiresw_bufrpost_f47
+                trigger ../post/jhiresw_post_manager:release_post47
+              task jhiresw_bufrpost_f48
+                trigger ../post/jhiresw_post_manager:release_post48
+            endfamily
+            family post_processing
+              task jhiresw_smartinit
+                trigger ../prdgen/jhiresw_prdgen_f00 == complete and /prod/primary/12/sref/v7.1/15z/enspost/jsref_enspost:ensgrd_216_ready
+                edit NCPUS '11'
+              task jhiresw_smartinitb
+                trigger ../prdgen/jhiresw_prdgen_f00 == complete and ( jhiresw_smartinit == active or jhiresw_smartinit == complete)
+                edit NTASK '1'
+                edit PTILE '1'
+              task jhiresw_gempak
+                trigger ../post/jhiresw_post_f00 == active or ../post/jhiresw_post_f00 == complete
+            endfamily
+          endfamily
+        endfamily
+      endfamily
+    endfamily
+  endfamily
+ endfamily
+endfamily
+endsuite
