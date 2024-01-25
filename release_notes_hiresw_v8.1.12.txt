@@ -20,9 +20,9 @@ git clone -b v8.1.12 https://github.com/MatthewPyle-NOAA/hiresw.git hiresw.v8.1.
 Modified files:
 #############################
 
-parm/hiresw_arw_namelist.input_in_ak_model 
+parm/arw/hiresw_arw_namelist.input_in_ak_model 
 
-Shortens time step from 16 4/11 s to 15 15/47 s
+Shortens time step from 16 4/11 s to 15 15/119 s
 Reduces the microphysics tendency limiter from 0.07 K/s to 0.05 K/s.
 
 versions/run.ver
@@ -33,11 +33,9 @@ Updated hiresw_ver to v8.1.12
 Resource changes:
 #############################
 
-Timing change:
+Timing/Resource change:
 
-In my testing, the shorter time step made the forecast job run about 3 minutes longer. 
-(3350 s ops run, 3536 s in test code).  If we want to avoid this slowdown, it 
-probably would require using 12 nodes rather than the current 11 nodes.  
+Resources are increased from 11 nodes (1404 tasks) to 12 nodes (1532 tasks)
 
-If we do want to go to 12 nodes, then I'd probably want to shorten the time step 
-more dramatically to give more insurance against future failures of this type.
+In my testing after shifting to a 12 node configuration, the timing was relatively
+unchanged (3350 s ops run, 3381 s test run - different cases, though).  

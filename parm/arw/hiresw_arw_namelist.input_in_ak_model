@@ -60,7 +60,7 @@
  &domains
  time_step                           = 15,
  time_step_fract_num                 = 15,
- time_step_fract_den                 = 47,
+ time_step_fract_den                 = 119,
  max_dom                             = 1,
  s_we                                = 1,     
  e_we                                = 1386,    
@@ -93,7 +93,7 @@
  zap_close_levels                    = 1000
  sfcp_to_sfcp                        = .false.
  adjust_heights                      = .false.
- nproc_x = 21
+ nproc_x = 23
  nproc_y = 64
  /
 
