@@ -20,7 +20,7 @@ git clone -b v8.1.12 https://github.com/MatthewPyle-NOAA/hiresw.git hiresw.v8.1.
 Modified files:
 #############################
 
-parm/hiresw_arw_namelist.input_in_ak_model 
+parm/arw/hiresw_arw_namelist.input_in_ak_model 
 
 Shortens time step from 16 4/11 s to 15 15/47 s
 Reduces the microphysics tendency limiter from 0.07 K/s to 0.05 K/s.
