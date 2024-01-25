@@ -1,4 +1,4 @@
-HiresW v8.1.12 - released 01/24/2024
+HiresW v8.1.12 - released 01/25/2024
 
 #####################
 Update overview
@@ -39,3 +39,5 @@ In my testing, the shorter time step made the forecast job run about 3 minutes l
 (3350 s ops run, 3536 s in test code).  If we want to avoid this slowdown, it 
 probably would require using 12 nodes rather than the current 11 nodes.  
 
+If we do want to go to 12 nodes, then I'd probably want to shorten the time step 
+more dramatically to give more insurance against future failures of this type.
