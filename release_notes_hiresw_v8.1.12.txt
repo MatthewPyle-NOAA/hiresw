@@ -29,6 +29,11 @@ versions/run.ver
 
 Updated hiresw_ver to v8.1.12
 
+ecf/def/hiresw_*06.def
+ecf/def/hiresw_*18.def
+
+Updates TOTAL_TASKS and NODES entries for AK ARW forecast job.
+
 #############################
 Resource changes:
 #############################
