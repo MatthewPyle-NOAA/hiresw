@@ -1456,9 +1456,9 @@ suite prod
                 endfamily
                 task jhiresw_forecast
                   trigger prep/jhiresw_prepfinal == complete
-                  edit TOTAL_TASKS '1404'
+                  edit TOTAL_TASKS '1532'
                   edit SPAN '128'
-                  edit NODES '11'
+                  edit NODES '12'
                 family post
                   edit NCPUS '16'
                   edit SPAN '8'
