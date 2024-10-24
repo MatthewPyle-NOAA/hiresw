@@ -19,17 +19,7 @@ fi
 #------------------------------------
 
 . ./partial_build.sh
-# cd hireswfv3_utils_test.fd
-# cd hireswfv3_utils_test_v3.1.fd
 cd hireswfv3_utils.fd
-
-#------------------------------------
-# build chgres
-#------------------------------------
-$Build_chgres && {
-echo " .... Building chgres .... "
-./build_chgres.sh > $logs_dir/build_chgres.log 2>&1
-}
 
 #------------------------------------
 # build chgres_cube
@@ -37,38 +27,6 @@ echo " .... Building chgres .... "
 $Build_chgres_cube && {
 echo " .... Building chgres_cube .... "
 ./build_all.sh > $logs_dir/build_chgres_cube.log 2>&1
-}
-
-#------------------------------------
-# build orog
-#------------------------------------
-$Build_orog && {
-echo " .... Building orog .... "
-./build_orog.sh > $logs_dir/build_orog.log 2>&1
-}
-
-#------------------------------------
-# build fre-nctools
-#------------------------------------
-$Build_nctools && {
-echo " .... Building fre-nctools .... "
-./build_fre-nctools.sh > $logs_dir/build_fre-nctools.log 2>&1
-}
-
-#------------------------------------
-# build sfc_climo_gen
-#------------------------------------
-$Build_sfc_climo_gen && {
-echo " .... Building sfc_climo_gen .... "
-./build_sfc_climo_gen.sh > $logs_dir/build_sfc_climo_gen.log 2>&1
-}
-
-#------------------------------------
-# build regional_grid
-#------------------------------------
-$Build_regional_grid && {
-echo " .... Building regional_grid .... "
-./build_regional_grid.sh > $logs_dir/build_regional_grid.log 2>&1
 }
 
 cd $build_dir

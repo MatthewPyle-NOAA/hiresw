@@ -95,7 +95,7 @@ C
 C--------------------------------------------------------------------
 
       PARAMETER (NSOIL=4)
-      PARAMETER (NSTP=88,  NSTAT=1600)
+      PARAMETER (NSTP=88,  NSTAT=1700)
       PARAMETER (INCR=1, LENGTH=48, NFCST=LENGTH/INCR+1)
 
 

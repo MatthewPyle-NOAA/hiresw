@@ -88,7 +88,7 @@ C              BUFR IN THIS PROGRAM.
 C
 C--------------------------------------------------------------------
       PARAMETER (NSOIL=4,LM=50,LM1=50)
-      PARAMETER (NSTP=88, LCL1SL1=58, NSTAT=1600)
+      PARAMETER (NSTP=88, LCL1SL1=58, NSTAT=1700)
       PARAMETER (INCR=1, LENGTH=48, NFCST=LENGTH/INCR+1)
 
 cZhou      PARAMETER (LM=60,NPNT=85,NSTAT=1400
