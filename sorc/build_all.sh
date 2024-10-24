@@ -8,7 +8,10 @@
 if [ ! -e fv3/hireswfv3_utils.fd ]
 then
 # ./manage_externals/checkout_externals
-git clone -b hrefv3.1-wcoss2 https://github.com/GeorgeGayno-NOAA/UFS_UTILS.git fv3/hireswfv3_utils.fd
+git clone https://github.com/ufs-community/UFS_UTILS.git fv3/hireswfv3_utils.fd
+cd  fv3/hireswfv3_utils.fd
+git checkout tags/ops-hrefv3.2
+cd ../../
 else
 echo "already ran checkout_externals"
 fi
