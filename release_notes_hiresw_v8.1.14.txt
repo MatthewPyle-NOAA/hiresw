@@ -1,0 +1,37 @@
+HiresW v8.1.14 - released 11/21/2024
+
+#####################
+Update overview
+#####################
+
+* Updates the build system for the FV3, as the operational system currently points
+at a nonexisting (on github) version of UFS_UTILS.
+
+#####################
+Obtaining the package
+#####################
+
+Clone it with this command (but change hiresw.v8.1.14 to whatever you want to
+call it in the directory that it is cloned into):
+
+git clone -b feature/v8.1.14 https://github.com/MatthewPyle-NOAA/hiresw.git hiresw.v8.1.14
+
+#############################
+Modified files:
+#############################
+
+sorc/build_all.sh
+
+Points at ops-hrefv3.2 tag of UFS_UTILS
+
+sorc/fv3/build_utils.sh
+
+Simplifies this script to only include the component used with HiresW-FV3.
+
+#############################
+Resource changes:
+#############################
+
+Timing/Resource change:
+
+None
