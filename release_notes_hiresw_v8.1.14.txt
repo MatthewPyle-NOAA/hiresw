@@ -5,16 +5,20 @@ Update overview
 #####################
 
 * Updates the build system for the FV3, as the operational system currently points
-at a nonexisting (on github) version of UFS_UTILS.
+at a nonexistent (on github) version of UFS_UTILS.
 
 #####################
-Obtaining the package
+Obtaining/building the package
 #####################
 
 Clone it with this command (but change hiresw.v8.1.14 to whatever you want to
 call it in the directory that it is cloned into):
 
 git clone -b feature/v8.1.14 https://github.com/MatthewPyle-NOAA/hiresw.git hiresw.v8.1.14
+
+cd sorc
+./build_all.sh (should build FV3 and ARW executables)
+./install_all.sh (should install ARW and FV3 executables)
 
 #############################
 Modified files:
