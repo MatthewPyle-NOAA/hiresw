@@ -21,13 +21,14 @@
 #                             pulls from $PDY rather than copying a file to the working directory
 # 2013-09-30  Matthew Pyle - Broken out from prelim job (non-RAP prelim job now in three distinct pieces)
 # 2016-10-19  Matthew Pyle - Changes to use 6 h old GFS when needed
+# 2026-09-22  Matthew Pyle - Cleanup for Guam-only HiresW
 
 set -x
 
 LENGTH=48
 
-### NEST options are east, west, ak, hi, pr, or conus
-### MODEL is arw or nmm or nmmb
+### NEST option is guam
+### MODEL is arw or fv3
 
 msg="JOB $job FOR WRF NEST=${NEST}${MODEL} HAS BEGUN"
 postmsg  "$msg"
@@ -112,7 +113,6 @@ export CYCLE=$PDY$cyc
 echo "export CYCLE=$CYCLE" >> $COMOUT/hiresw.t${cyc}z.${RUNLOC}.envir.sh
 
 # All domains : Use GFS (0.5 degree pgrb2)
-# CONUS : Also Use RAP (grid 221)
 
 export DATA
 
@@ -122,27 +122,12 @@ mkdir -p $DATA/run_ungrib_2
 mkdir -p $DATA/run_ungrib_3
 mkdir -p $DATA/run_ungrib_4
 
-if [ $NEST != "conusmem2" -a $NEST != "akmem2" -a $NEST != "himem2" -a $NEST != "prmem2" ]
-then
-
 mod=gfs
 type=pgrb2.0p25.f0
 suf=""
 
-else
-
-mod=nam
-type=awp151
-suf=".tm00.grib2"
-sufold=".tm00.grib2"
-
-fi
-
 while [ $whr -le $last ]
 do
-
-if [ $NEST != "conusmem2" -a $NEST != "akmem2" -a $NEST != "himem2" -a $NEST != "prmem2" ]
-then
 
 icnt=0
 
@@ -182,40 +167,6 @@ fi
   cp $PARMhiresw/hiresw_Vtable.GFS  $DATA/run_ungrib_4/Vtable 
 
 export GRIBSRC=GFS
-
-else
-
-echo mem2 branch
-
-icnt=0
-while [ ! -e ${COMINnam}/${mod}.t${cyc}z.${type}00${suf} ]
-do
-  sleep 10
-  if [ $icnt -gt 90 ]; then 
-    msg="FATAL ERROR: ${COMINnam}/${mod}.t${cyc}z.${type}00${suf} STILL NOT AVAILABLE after 15 minutes waiting."
-    export err=911; err_chk
-   else 
-     icnt=$((icnt + 1))
-   fi 
-done
-
-if [ $whr = "06" ]    # first time
-then
-cp ${COMINnam}/${mod}.t${cyc}z.${type}00${suf}  $DATA/.   # get f00 from tm00
-else
-cp ${COMINnamold}/${mod}.t${cycold}z.${type}${whr}${sufold} $DATA/.
-fi
-  export err1=$?
-
-  cp $PARMhiresw/hiresw_Vtable.NAM  $DATA/run_ungrib_1/Vtable 
-  cp $PARMhiresw/hiresw_Vtable.NAM  $DATA/run_ungrib_2/Vtable 
-  cp $PARMhiresw/hiresw_Vtable.NAM  $DATA/run_ungrib_3/Vtable 
-  cp $PARMhiresw/hiresw_Vtable.NAM  $DATA/run_ungrib_4/Vtable 
-
-export GRIBSRC=NAM
-
-
-fi
 
 
 if [ $MODEL != "nmmb" ]
@@ -274,8 +225,6 @@ done
 
 ### Get the needed GRIB files into each of the four run_ungrib subdirectories
 
-if [ $NEST != "conusmem2" -a  $NEST != "akmem2" -a $NEST != "himem2" -a  $NEST != "prmem2" ]
-then
 
 mv ${mod}.t${cycold}z.${type}06${suf} ./run_ungrib_1/GRIBFILE.AAA
 mv ${mod}.t${cycold}z.${type}09${suf} ./run_ungrib_1/GRIBFILE.AAB
@@ -300,36 +249,6 @@ mv ${mod}.t${cycold}z.${type}45${suf} ./run_ungrib_4/GRIBFILE.AAB
 mv ${mod}.t${cycold}z.${type}48${suf} ./run_ungrib_4/GRIBFILE.AAC
 mv ${mod}.t${cycold}z.${type}51${suf} ./run_ungrib_4/GRIBFILE.AAD
 mv ${mod}.t${cycold}z.${type}54${suf} ./run_ungrib_4/GRIBFILE.AAE
-
-else
-
-echo other branch using NAM...only partially cyc old
-
-mv ${mod}.t${cyc}z.${type}00${suf} ./run_ungrib_1/GRIBFILE.AAA
-mv ${mod}.t${cycold}z.${type}09${sufold} ./run_ungrib_1/GRIBFILE.AAB
-mv ${mod}.t${cycold}z.${type}12${sufold} ./run_ungrib_1/GRIBFILE.AAC
-mv ${mod}.t${cycold}z.${type}15${sufold} ./run_ungrib_1/GRIBFILE.AAD
-cp ${mod}.t${cycold}z.${type}18${sufold} ./run_ungrib_1/GRIBFILE.AAE
-
-mv ${mod}.t${cycold}z.${type}18${sufold} ./run_ungrib_2/GRIBFILE.AAA
-mv ${mod}.t${cycold}z.${type}21${sufold} ./run_ungrib_2/GRIBFILE.AAB
-mv ${mod}.t${cycold}z.${type}24${sufold} ./run_ungrib_2/GRIBFILE.AAC
-mv ${mod}.t${cycold}z.${type}27${sufold} ./run_ungrib_2/GRIBFILE.AAD
-cp ${mod}.t${cycold}z.${type}30${sufold} ./run_ungrib_2/GRIBFILE.AAE
-
-mv ${mod}.t${cycold}z.${type}30${sufold} ./run_ungrib_3/GRIBFILE.AAA
-mv ${mod}.t${cycold}z.${type}33${sufold} ./run_ungrib_3/GRIBFILE.AAB
-mv ${mod}.t${cycold}z.${type}36${sufold} ./run_ungrib_3/GRIBFILE.AAC
-mv ${mod}.t${cycold}z.${type}39${sufold} ./run_ungrib_3/GRIBFILE.AAD
-cp ${mod}.t${cycold}z.${type}42${sufold} ./run_ungrib_3/GRIBFILE.AAE
-
-mv ${mod}.t${cycold}z.${type}42${sufold} ./run_ungrib_4/GRIBFILE.AAA
-mv ${mod}.t${cycold}z.${type}45${sufold} ./run_ungrib_4/GRIBFILE.AAB
-mv ${mod}.t${cycold}z.${type}48${sufold} ./run_ungrib_4/GRIBFILE.AAC
-mv ${mod}.t${cycold}z.${type}51${sufold} ./run_ungrib_4/GRIBFILE.AAD
-mv ${mod}.t${cycold}z.${type}54${sufold} ./run_ungrib_4/GRIBFILE.AAE
-
-fi
 
 pwd
 
