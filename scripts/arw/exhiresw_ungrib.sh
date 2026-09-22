@@ -94,20 +94,8 @@ let last=last+6
 echo last is $last
 incr=3
 
-#
-# Check to see how many storms are being run by the GFDL hurricane model.
-# If number is >= 2, do not make any hiresw runs.
-# If number is 1, cancel job if this is a WRF-EM run.
-#
-#if [ "$NEST" != "pr" -a "$NEST" != "hi" -a "$NEST" != "guam" ] ; then
-#  $USHhiresw/hiresw_chkhur.sh $MODEL
-#  err=$?
-#  if [ $err -eq 99 ] ; then
-#    exit
-#  fi
-  echo "export NEST=$NEST" > $COMOUT/hiresw.t${cyc}z.${RUNLOC}.envir.sh
-  echo "export MODEL=$MODEL" >> $COMOUT/hiresw.t${cyc}z.${RUNLOC}.envir.sh
-#fi
+echo "export NEST=$NEST" > $COMOUT/hiresw.t${cyc}z.${RUNLOC}.envir.sh
+echo "export MODEL=$MODEL" >> $COMOUT/hiresw.t${cyc}z.${RUNLOC}.envir.sh
 
 export CYCLE=$PDY$cyc
 echo "export CYCLE=$CYCLE" >> $COMOUT/hiresw.t${cyc}z.${RUNLOC}.envir.sh
