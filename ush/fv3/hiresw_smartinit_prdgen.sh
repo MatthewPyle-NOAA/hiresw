@@ -15,6 +15,7 @@
 # 2012-12-03  JTM : Unified for nam parent and nested region runs
 # 2014-01-23  Matthew Pyle : Overhaul for HiresWindow purposes
 # 2014-11-04  Matthew Pyle : SREF probs taken from GRIB2 files
+# 2026-09-22  Matthew Pyle : Cleanup for Guam Hiresw in RRFS era
 #======================================================================
 
 
@@ -73,14 +74,6 @@ export mdl=$RUNTYP
 #SMARTINIT OUTPUT grid filename extension
 outreg=$rg
 case $RUNTYP in
-  conusmem2arw) rg=conus; outreg=conusmem2; wgrib2def="lambert:265:25:25 238.446:2145:2540 20.192:1377:2540";;
-  conusarw|conusfv3) rg=conus; outreg=conus; wgrib2def="lambert:265:25:25 238.446:2145:2540 20.192:1377:2540";;
-  hiarw|hifv3) rg=hi; compress="c3";outreg=hi; wgrib2def="mercator:20 198.475:321:2500:206.131 18.073:225:2500:23.088";;
-  himem2arw) rg=hi; compress="c3"; outreg=himem2; wgrib2def="mercator:20 198.475:321:2500:206.131 18.073:225:2500:23.088";;
-  prarw|prfv3) rg=pr; compress="c3"; outreg=pr; wgrib2def="mercator:20 291.804:177:2500:296.028 16.829:129:2500:19.747";;
-  prmem2arw) rg=pr;  compress="c3"; outreg=prmem2; wgrib2def="mercator:20 291.804:177:2500:296.028 16.829:129:2500:19.747";;
-  akmem2arw) rg=ak; outreg=akmem2; wgrib2def="nps:210:60 181.429:1649:2976 40.53:1105:2976";;
-  akarw|akfv3) rg=ak; outreg=ak; wgrib2def="nps:210:60 181.429:1649:2976 40.53:1105:2976";;
   guamarw|guamfv3) rg=guam; compress="c3"; outreg=guam; wgrib2def="mercator:20 143.687:193:2500:148.280 12.35:193:2500:16.794";;
 esac
 
@@ -114,27 +107,12 @@ typeset -Z2 srefcyc pcphrl
 
 # prdgfl=meso${rg}.NDFD  # output prdgen grid name (eg: mesocon.NDFD,mesoak...)
 
-if [ $rg = "hi" ]
-then
-rgprdgen=HI
-elif [ $rg = "pr" ]
-then
-rgprdgen=PR
-elif [ $rg = "conus" ]
-then
-rgprdgen=CONUS
-elif [ $rg = "ak" ]
-then
-rgprdgen=AK
-elif [ $rg = "guam" ]
+if [ $rg = "guam" ]
 then
 rgprdgen=GU
 fi
 
-if [ $MODEL = "nmmb" ]
-then
-prdgfl=wrf.${rgprdgen}04
-elif [ $MODEL = "arw" ]
+if [ $MODEL = "arw" ]
 then
 prdgfl=wrf.EM${rgprdgen}04
 elif [ $MODEL = "fv3" ]
@@ -146,7 +124,7 @@ fi
 
 #-------------------------------------------------------------------------
 #   For all grids, set the following:
-#   sgrb : Input SREF grid grib number (eg: 212, 216, 243)
+#   sgrb : Input SREF grid grib number (999 for Guam - no SREF)
 #   grid : output grid to copygb sref precip and nam precip buckets to 
 #          one exception for non-nests where nam precip buckets are 
 #          interpolated to smartinit output (ogrd)
@@ -163,32 +141,8 @@ grdextmerc=" 0 64 2500 2500"
    topopre=hiresw_smarttopo${rg}
    ext=grb
    case $RUNTYP in
-     guamnmmb|guamarw|guamfv3)          sgrb=999;ogrd=199
+     guamarw|guamfv3)          sgrb=999;ogrd=199
       grid="255 1 193 193 12350 143687 128 16794 148280 20000  $grdextmerc";;
-     hiarw)            sgrb=243;ogrd=196
-      grid="255 1 321 225 18067 -161626 128 23082 -153969 20000 $grdextmerc";;
-     himem2arw)            sgrb=243;ogrd=196
-      grid="255 1 321 225 18067 -161626 128 23082 -153969 20000 $grdextmerc";;
-     hinmmb|hifv3)            sgrb=243;ogrd=196
-      grid="255 1 321 225 18067 -161626 128 23082 -153969 20000 $grdextmerc";;
-     prarw)            sgrb=212;ogrd=195
-      grid="255 1 177 129 16829  -68196 128 19747  -63972 20000 $grdextmerc";;
-     prmem2arw)            sgrb=212;ogrd=195
-      grid="255 1 177 129 16829  -68196 128 19747  -63972 20000 $grdextmerc";;
-     prnmmb|prfv3)            sgrb=212;ogrd=195
-      grid="255 1 177 129 16829  -68196 128 19747  -63972 20000 $grdextmerc";;
-     akarw|akmem2arw)  sgrb=216;ogrd=91
-      grid="255 5 1649 1105 40530 181429 8 210000 2976 2976 0 64 0 25000 25000";;
-     aknmmb|akfv3)  sgrb=216;ogrd=91
-      grid="255 5 1649 1105 40530 181429 8 210000 2976 2976 0 64 0 25000 25000";;
-     conusarw|conusmem2arw)  sgrb=212;ogrd=184 
-      grid="255 3 2145 1377 20192 238446 8 265000 2540 2540 $grdext"
-      topopre=ruc2_ndfd_elevtiles.ndfd2.5
-      maskpre=ruc2_ndfd_vegtiles.ndfd2.5;;
-     conusnmmb|conusfv3)  sgrb=212;ogrd=184 
-      grid="255 3 2145 1377 20192 238446 8 265000 2540 2540 $grdext"
-      topopre=ruc2_ndfd_elevtiles.ndfd2.5
-      maskpre=ruc2_ndfd_vegtiles.ndfd2.5;;
 #  NESTS--------------------------------------------------------------------
    *)
       echo RUNTYP  ${RUNTYP} configuration not available $mdlgrd $rg
@@ -215,109 +169,6 @@ let pcphr12=pcphr-12
 let pcphr6=pcphr-6
 let pcphr3=pcphr-3
 
-#======================================================================
-#  CREATE SREF PROB. PRECIP FILES
-#======================================================================
-
-# fhr should be gt 0 since precip is not available at initial time
-if [ $ffhr -gt 0 -a $sgrb -ne 999 ]; then
-
-# get the sref precip fields that we need
-echo srefcyc_3= $srefcyc
-
-# here
-
-loop=1
-looplim=90
-
-filecheck=$COMINsref/sref.t${srefcyc}z.pgrb${sgrb}.prob_3hrly.grib2
-
-while [ $loop -le $looplim ]
-do
- if [ -s $filecheck ]
- then
-   break
- else
-   loop=$((loop+1))
-   sleep 20
- fi
- if [ $loop -ge $looplim ]
-   then
-   msg="FATAL ERROR: ABORTING after 30 minutes of waiting for $filecheck"
-   err_exit $msg
- fi
-done
-
-# end here
-
-  cpfs $COMINsref/sref.t${srefcyc}z.pgrb${sgrb}.prob_3hrly.grib2 SREFPROB
-
-#   if [ ! -s SREFPROB ]; then
-#     cpfs $COMINgefs/${gefscyc}/sref.t${gefscyc}z.pgrb${sgrb}.prob_3hrly.grib2 SREFPROB
-#  fi
-
-  $GRB2INDEX SREFPROB SREFPROBI
-  # check for missing sref data
-  export err=$?; err_chk
-
-  let IP=0
-  if [ $ffhr -lt 6 ]; then pcphr6=;pcphr12=;fi
-  if [ $ffhr -lt 12 ]; then pcphr12=;fi
-  grbpre="2 0 0 0 0"
-  for PHR in $pcphr3 $pcphr6 $pcphr12;do 
-
-### need an offset here to account for the 3 h offset in the SREF data????
-
-#   prob of pcp > 0.01
-
-	echo "get PCP>0.01 over: " ${PHR} ${pcphr}
-
-    $WGRIB2 SREFPROB | grep APCP |  grep "prob >0.25" | grep ":${PHR}-${pcphr} hour" | $WGRIB2 -i SREFPROB  -grib dump
-    export err=$?; err_chk
-    let IP=IP+1
-    mv dump srefpcp$IP
-
-#   prob of pcp > 0.05
-    $WGRIB2 SREFPROB | grep APCP | grep "prob >1.27" | grep ":${PHR}-${pcphr} hour" | $WGRIB2 -i SREFPROB  -grib  dump
-    export err=$?; err_chk
-    let IP=IP+1
-    mv dump srefpcp$IP
-
-#   prob of pcp > 0.10
-    $WGRIB2 SREFPROB | grep APCP |  grep "prob >2.54" | grep ":${PHR}-${pcphr} hour"  | $WGRIB2 -i SREFPROB -grib dump
-    export err=$?; err_chk
-    let IP=IP+1
-    mv dump srefpcp$IP
-
-#   prob of pcp > 0.25
-    $WGRIB2 SREFPROB | grep APCP |  grep "prob >6.35" | grep ":${PHR}-${pcphr} hour"  | $WGRIB2 -i SREFPROB -grib dump
-    export err=$?; err_chk
-    let IP=IP+1
-    mv dump srefpcp$IP
-
-#   prob of pcp > 0.50
-    $WGRIB2 SREFPROB | grep APCP |  grep "prob >12.7" | grep ":${PHR}-${pcphr} hour" | $WGRIB2 -i SREFPROB -grib dump
-    export err=$?; err_chk
-    let IP=IP+1
-    mv dump srefpcp$IP
-  done
-
-  cat srefpcp1 srefpcp2 srefpcp3 srefpcp4 srefpcp5 > srefallpcp
-  if [ $ffhr -ge 6 ]; then
-    cat srefpcp6 srefpcp7 srefpcp8 srefpcp9 srefpcp10 >> srefallpcp
-  fi
-  if [ $ffhr -ge 12 ]; then
-    cat srefpcp11 srefpcp12 srefpcp13 srefpcp14 srefpcp15 >> srefallpcp
-  fi
-
-### budget maybe not correct for probabilities here
-###  $WGRIB2  srefallpcp -set_grib_type ${compress} -new_grid_interpolation budget -new_grid_winds grid -new_grid ${wgrib2def} srefpcp${rg}_${SREF_PDY}${srefcy}cf0${pcphrl}
-  $WGRIB2  srefallpcp -set_grib_type ${compress} -new_grid_winds grid -new_grid ${wgrib2def} srefpcp${rg}_${SREF_PDY}${srefcyc}f0${pcphrl}
-  export err=$?; err_chk
-  $GRB2INDEX srefpcp${rg}_${SREF_PDY}${srefcyc}f0${pcphrl} srefpcp${rg}i_${SREF_PDY}${srefcyc}f0${pcphrl}
-  export err=$?; err_chk
-
-fi #fhr -ge 0
 
 let ffhr1=ffhr-1
 let ffhr2=ffhr-2
@@ -377,8 +228,6 @@ do
  fi
 done
 
-
-
 cp ${PARMfv3}/hiresw_smartinit.parmlist.g2_1 list_1.txt
 cp ${PARMfv3}/hiresw_smartinit.parmlist.g2_2 list_2.txt
 cp ${PARMfv3}/hiresw_smartinit.parmlist.g2_3 list_3.txt
@@ -399,14 +248,11 @@ cp ${PARMfv3}/hiresw_smartinit.parmlist.g2_nn list_nn.txt
 if [ -e inputs.grb2_1 ]
 then
 rm inputs.grb2_1 inputs.grb2_2 inputs.grb2_3 inputs.grb2_4 inputs.grb2_5 inputs.grb2_6 inputs.grb2_7 inputs.grb2_8 
-
-if [ $outreg != "conusmem2" -a $outreg != "himem2" -a  $outreg != "prmem2" -a $outreg != "akmem2" ]
-then
-rm inputs.grb2_9 inputs.grb2_10 inputs.grb2_11 inputs.grb2_12 inputs.grb2_13 inputs.grb2_14  inputs.grb2_nn 
-else
-rm inputs.grb2_9 inputs.grb2_12  inputs.grb2_nn 
 fi
 
+if [ $outreg = "guam" ]
+then
+rm inputs.grb2_9 inputs.grb2_10 inputs.grb2_11 inputs.grb2_12 inputs.grb2_13 inputs.grb2_14  inputs.grb2_nn 
 fi
 
 $WGRIB2 $INF | grep -F -f list_1.txt | $WGRIB2 -i -grib inputs.grb2_1 $INF
@@ -428,7 +274,7 @@ export err=$?; err_chk
 $WGRIB2 $INF | grep -F -f list_9.txt | $WGRIB2 -i -grib inputs.grb2_9 $INF
 export err=$?; err_chk
 
-if [ $outreg != "conusmem2" -a $outreg != "himem2" -a  $outreg != "prmem2" -a $outreg != "akmem2" ]
+if [ $outreg = "guam" ]
 then
 $WGRIB2 $INF | grep -F -f list_10.txt | $WGRIB2 -i -grib inputs.grb2_10 $INF
 export err=$?; err_chk
@@ -534,16 +380,11 @@ sleep 1
 
 # $WGRIB2 inputs.grb2_nn  -set_grib_type ${compress} -new_grid_interpolation neighbor -new_grid_winds grid -new_grid ${wgrib2def} model.ndfd_nn
 
-if [ $outreg != "conusmem2" -a $outreg != "himem2" -a  $outreg != "prmem2" -a $outreg != "akmem2" ]
+if [ $outreg == "guam" ]
 then
 
 while (! cat model.ndfd_1 model.ndfd_2 model.ndfd_3 model.ndfd_4 model.ndfd_5 model.ndfd_6 \
     model.ndfd_7 model.ndfd_8 model.ndfd_9 model.ndfd_10 model.ndfd_11 model.ndfd_12 model.ndfd_13 model.ndfd_14 model.ndfd_nn > NDFD${fhr}.tm00 ) ; do sleep 1; done
-
-else
-
-while (! cat model.ndfd_1 model.ndfd_2 model.ndfd_3 model.ndfd_4 model.ndfd_5 model.ndfd_6 \
-    model.ndfd_7 model.ndfd_8 model.ndfd_9 model.ndfd_12 model.ndfd_nn > NDFD${fhr}.tm00 ) ; do sleep 1; done
 
 fi
 
@@ -567,7 +408,7 @@ fi
 #           eg: fhr=12,24,36
 #     Create 12 hour precip at 00/12 UTC valid times
 #-------------------------------------------------------------
-    if [ $check -eq 0 -a $MODEL != "nmmb" ]
+    if [ $check -eq 0 ]
     then
       mk3p=3
       ppgm=make
@@ -576,14 +417,8 @@ fi
     fi
     if [ $check6 -eq 0 ];then 
       mk6p=6
-	if [ $MODEL = "nmmb" ] 
-        then 
-      ppgm=add
-	echo mk6p and ppgm are $mk6p $ppgm
-        else
       ppgm=make
-        echo for 6h doing ppgm $ppgm
-        fi
+      echo for 6h doing ppgm $ppgm
     fi
 
 #   hr3bkt flag determines when to run smartprecip to create 3 hr buckets
@@ -595,11 +430,6 @@ fi
 #   since we only gather max/min data at those hours to compute 12 hr max/mins
 #-------------------------------------------------------------
 
-	if [ $MODEL = "nmmb" ]
-        then
-      hr3bkt=0
-        fi
-
   fi  #fhr -ne 0
 
 #-------------------------------------------------------------
@@ -607,6 +437,7 @@ fi
 # Except for 6 hr times (18,30,42...) : Already have 6 hour buckets  ### not true hiresw
 # In addition, For 00/12 UTC valid times: Need to make 12 hour accumulations
 #-------------------------------------------------------------
+# note this defines fhr
   case $fhr in 
     ${A6HR[0]}|${A6HR[1]}|${A6HR[2]}|${A6HR[3]}|${A6HR[4]}|${A6HR[5]}|${A6HR[6]} )
 #     off-cycles and  Nests have 3 hr buckets but need 6,12 hour precip
@@ -614,15 +445,9 @@ fi
       mk6p=6
       mk12p=12
 
-	if [ $MODEL = "nmmb" ]
-        then
-      ppgm=add
-        else
       ppgm=make
-        fi
 
       mk12p=12;;
-
   esac 
 
   for MKPCP in $mk3p $mk6p $mk12p;do
@@ -648,13 +473,8 @@ fi
         fi;;
 
         $mk12p )
-	if [ $MODEL = "nmmb" ]
-        then
-        FHRFRQ=$fhr9;freq=12
-        else
         FHRFRQ=$fhr12;freq=12
         pfhr1=$fhr;pfhr2=$fhr12
-        fi
 
         if [ $ppgm = add ];then 
 	echo add block just mk12p or all
@@ -712,49 +532,6 @@ fi
 	$FSYNC WRFPRS${fhr9}.tm00.g2
       mv WRFPRS${fhr9}.tm00.g2 WRFPRS${fhr9}.tm00
 
-	if [ $MODEL = "nmmb" ]
-	then
-
-#          cp $COMIN/${mdl}.t${cyc}z.${natgrd}${fhr3} WRFPRS${fhr3}.tm00
-
-
-        INF=${COMIN}/${RUN}.t${cyc}z.${rg}fv3.${natgrd}.f${fhr3}.grib2
-        $WGRIB2 $INF | grep -F -f $PARMfv3/hiresw_smartinit.g2_rainsnow | $WGRIB2 -i -grib  WRFPRS${fhr3}.tm00.g2 $INF
-        export err=$?; err_chk
-
-	$FSYNC WRFPRS${fhr3}.tm00.g2
-	mv  WRFPRS${fhr3}.tm00.g2 WRFPRS${fhr3}.tm00
-
-#####
-
-	ls -l  WRFPRS${fhr3}.tm00
-
-        $GRB2INDEX WRFPRS${fhr3}.tm00 WRFPRS${fhr3}i.tm00.temp
-        export err=$?; err_chk
-	$FSYNC WRFPRS${fhr3}i.tm00.temp
-	mv WRFPRS${fhr3}i.tm00.temp WRFPRS${fhr3}i.tm00
-
-        INF=${COMIN}/${RUN}.t${cyc}z.${rg}fv3.${natgrd}.f${fhr6}.grib2
-        $WGRIB2 $INF | grep -F -f $PARMfv3/hiresw_smartinit.g2_rainsnow | $WGRIB2 -i -grib  WRFPRS${fhr6}.tm00.g2 $INF
-        export err=$?; err_chk
-
-	$FSYNC WRFPRS${fhr6}.tm00.g2
-       mv WRFPRS${fhr6}.tm00.g2 WRFPRS${fhr6}.tm00
-
-#####
-        $GRB2INDEX WRFPRS${fhr6}.tm00 WRFPRS${fhr6}i.tm00.temp
-        export err=$?; err_chk
-	$FSYNC WRFPRS${fhr6}i.tm00.temp
-	mv WRFPRS${fhr6}i.tm00.temp WRFPRS${fhr6}i.tm00
-
-        lnsf "WRFPRS${fhr6}.tm00"      fort.15    
-        lnsf "WRFPRS${fhr6}i.tm00"     fort.16
-        lnsf "WRFPRS${fhr3}.tm00"      fort.17
-        lnsf "WRFPRS${fhr3}i.tm00"     fort.18
-        lnsf "WRFPRS${fhr}.tm00"       fort.19
-        lnsf "WRFPRS${fhr}i.tm00"      fort.20
-
-	else  ## arw/fv3
 
 #          cp $COMIN/${mdl}.t${cyc}z.${natgrd}${fhr3} WRFPRS${fhr3}.tm00
 
@@ -791,8 +568,6 @@ fi
         lnsf "WRFPRS${fhr}.tm00"       fort.15
         lnsf "WRFPRS${fhr}i.tm00"      fort.16
 
-	fi
-
       fi  # mk12p
 
 #===============================================================
@@ -802,13 +577,7 @@ fi
 
 
 # IARW=1 means no special treatment for snow in smartprecip code
-
-	if [ $MODEL = "arw" ]
-	then
 	IARW=1
-	else
-	IARW=1
-	fi
 
 	echo about to execute hireswfv3_smartprecip
 	ls -l fort.*
@@ -907,7 +676,6 @@ done  #fhr loop
 
 ## rm -f fort.*
 
-
 # how handle this now?
 
 if [ ${fhr} -eq 0 ]
@@ -919,11 +687,6 @@ cp DATE ../
 fi
 
 cp  meso${rg}.NDFDf* meso${rg}.NDFDif* ../
-
-if [ ${fhr} -gt 0 -a $sgrb -ne 999 ]
-then
-    cp  srefpcp${rg}_${SREF_PDY}${srefcyc}f0${pcphrl} srefpcp${rg}i_${SREF_PDY}${srefcyc}f0${pcphrl} ../
-fi
 
 if [ ${fhr} -gt 0 ]
 then
