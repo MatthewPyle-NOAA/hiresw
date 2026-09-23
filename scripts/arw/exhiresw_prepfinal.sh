@@ -19,6 +19,7 @@
 # 2009-09-24  Shawna Cokley - Streamlines way script obtains date information -
 #                             pulls from $PDY rather than copying a file to the working directory
 # 2013-10-30  Matthew Pyle - Breaks out last piece from old prelim script  to run real, just for WRF-ARW
+# 2026-09-22  Matthew Pyle - Simplifies for Guam-only era of RRFS
 
 set -x
 
@@ -147,20 +148,16 @@ mpiexec -n $NTASK -ppn $PTILE  $EXEChiresw/hiresw_wrfarwfcst_init > $pgmout 2>&1
 
 export err=$?; err_chk
 
-# Copy 3 files needed to run WRF forecast to COM (two in case of CONUS domain)
-# CONUS domain input file produced by separate JHIRESW_PREPRAP job
+# Copy 3 files needed to run WRF forecast to COM 
 
 cp wrfbdy_d01 $COMOUT/hiresw.t${cyc}z.${NEST}${MODEL}.wrfbdy_d01
 cp namelist.input_model $COMOUT/hiresw.t${cyc}z.${NEST}${MODEL}.namelist.input
 
-if [ $NEST != "conus" -a $NEST != "pr" ]
-then
- cp wrfinput_d01 $COMOUT/hiresw.t${cyc}z.${NEST}${MODEL}.wrfinput_d01
+cp wrfinput_d01 $COMOUT/hiresw.t${cyc}z.${NEST}${MODEL}.wrfinput_d01
 
- if [ ! -f $COMOUT/hiresw.t${cyc}z.${NEST}${MODEL}.wrfbdy_d01 ] || [ ! -f $COMOUT/hiresw.t${cyc}z.${NEST}${MODEL}.wrfinput_d01 ]; then
-   msg="FATAL ERROR: WRF initial or boundary condition files needed by WRF-ARW model not copied to $COMOUT"
-   err_exit $msg
- fi
+if [ ! -f $COMOUT/hiresw.t${cyc}z.${NEST}${MODEL}.wrfbdy_d01 ] || [ ! -f $COMOUT/hiresw.t${cyc}z.${NEST}${MODEL}.wrfinput_d01 ]; then
+  msg="FATAL ERROR: WRF initial or boundary condition files needed by WRF-ARW model not copied to $COMOUT"
+  err_exit $msg
 fi
 
 cat $DATA/rsl.error.0000 $DATA/rsl.out.0000 >  $COMOUT/hiresw.t${cyc}z.${NEST}${MODEL}.real.log

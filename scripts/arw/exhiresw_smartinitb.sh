@@ -96,7 +96,7 @@ then
 rm $del
 fi
 
-del=`ls MAXMIN? MAXMIN?i SREFPCP SREFPCPi`
+del=`ls MAXMIN? MAXMIN?i`
 err=$?
 
 if [ $err -eq 0 ]
