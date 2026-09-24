@@ -7,14 +7,8 @@ LINK="cp -rp"
 
 pwd=$(pwd -P)
 
-if [[ ${target} == "wcoss_dell_p3" || ${target} == "wcoss" ||  ${target} == "wcoss_cray" ]]; then
-    FIX_DIR="/gpfs/dell2/emc/modeling/noscrub/emc.campara/fix_hrefv3_fv3cam"
-elif [ ${target} == "hera" ]; then
-    FIX_DIR="/scratch2/NCEPDEV/fv3-cam/emc.campara/fix_fv3cam"
-elif [ ${target} == "jet" ]; then
-    FIX_DIR="/scratch4/NCEPDEV/global/save/glopara/git/fv3gfs/fix"
-elif [ ${target} == "wcoss2" ]; then
-    FIX_DIR="/lfs/h2/emc/lam/noscrub/Matthew.Pyle/fix_hrefv3_fv3cam"
+if [ ${target} == "wcoss2" ]; then
+    FIX_DIR="/lfs/h2/emc/lam/noscrub/Matthew.Pyle/fix_guamhiresw_rrfsera"
 else
     echo "Unknown site " ${target}
     exit 1
@@ -31,7 +25,7 @@ ${LINK} $FIX_DIR/fix_sar .
 
 
 
-domains="ak conus guam hi pr"
+domains="guam"
 
 types="facsf maximum_snow_albedo slope_type snowfree_albedo soil_type \
 substrate_temperature vegetation_greenness  vegetation_type"
