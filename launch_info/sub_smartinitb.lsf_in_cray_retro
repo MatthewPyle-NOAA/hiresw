@@ -1,14 +1,14 @@
 
 #PBS -j oe
-#PBS -o /lfs/h2/emc/lam/noscrub/Matthew.Pyle/hiresw.v8.1.0/launch_info/logs/test_smartinitb.out__DOM___CORE___CYC_
-#PBS -e /lfs/h2/emc/lam/noscrub/Matthew.Pyle/hiresw.v8.1.0/launch_info/logs/test_smartinitb.out__DOM___CORE___CYC_
+#PBS -o /lfs/h2/emc/lam/noscrub/Matthew.Pyle/hiresw.v8.1.16/launch_info/logs/test_smartinitb.out__DOM___CORE___CYC_
+#PBS -e /lfs/h2/emc/lam/noscrub/Matthew.Pyle/hiresw.v8.1.16/launch_info/logs/test_smartinitb.out__DOM___CORE___CYC_
 #PBS -l select=1:ncpus=1:mem=32GB
 #PBS -q dev
 #PBS -A HIRESW-DEV
 #PBS -l walltime=001:37:05
 #
 
-export HOMEhiresw=/lfs/h2/emc/lam/noscrub/Matthew.Pyle/hiresw.v8.1.0
+export HOMEhiresw=/lfs/h2/emc/lam/noscrub/Matthew.Pyle/hiresw.v8.1.16
 source ${HOMEhiresw}/versions/run.ver
 
 export SENDCOM=YES
