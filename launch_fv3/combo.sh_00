@@ -1,6 +1,6 @@
 #! /bin/sh
 
-cd /lfs/h2/emc/lam/noscrub/Matthew.Pyle/hiresw.v8.1.9/launch_fv3/
+cd /lfs/h2/emc/lam/noscrub/Matthew.Pyle/hiresw.v8.1.16/launch_fv3/
 cyc=00
 
 date=`cat /lfs/h1/ops/prod/com/date/t${cyc}z | cut -c7-14`
@@ -14,6 +14,8 @@ do
 	./launch_make_bc.sh ${dom} fv3 ${cyc} ${date}
 	./launch_make_ic.sh ${dom} fv3 ${cyc} ${date}
 done
+
+
 	sleep 620
 for dom in $doms
 do
