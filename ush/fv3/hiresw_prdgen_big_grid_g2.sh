@@ -130,7 +130,7 @@ echo to line with wgrib2def $wgrib2def
 $WGRIB2  inputs.grb  -set_grib_type ${compress} -new_grid_winds grid -new_grid ${wgrib2def} ${filenamthree}${fhr}.tm00_bilin
 export err=$?; err_chk
 
-if [ $DOMIN_SMALL != "conus" ] 
+if [ $DOMIN_SMALL = "guam" ] 
 then
 $WGRIB2 $INPUT_DATA/BGDAWP${fhr}.tm00 -match ":(APCP|WEASD):" -grib inputs_budget.grb
 export err=$?; err_chk
@@ -162,7 +162,7 @@ fi
 
 #####
 
-if [ $DOMIN_SMALL != "conus" ]
+if [ $DOMIN_SMALL = "guam" ]
 then
   $WGRIB2 $INPUT_DATA/BGDAWP${fhr}.tm00 -match "HINDEX" -grib nn.grb
   export err=$?; err_chk
@@ -181,7 +181,7 @@ fi
 	echo DOMIN_SMALL $DOMIN_SMALL 
 	echo subpiece $subpiece
 
-if [ $DOMIN_SMALL != "conus" ]
+if [ $DOMIN_SMALL = "guam" ]
 then
   cat ${filenamthree}${fhr}.tm00_bilin ${filenamthree}${fhr}.tm00_budget > ${filenamthree}${fhr}.tm00
 fi
@@ -212,7 +212,7 @@ else  # (not f00)
 
 valcheck=`echo $DOMIN_SMALL | cut -c1-5`
 
-if [ $subpiece = "1" -o $valcheck != "conus" ]
+if [ $subpiece = "1" -o $valcheck = "guam" ]
 then
 
 if [ $subpiece = "1" ]

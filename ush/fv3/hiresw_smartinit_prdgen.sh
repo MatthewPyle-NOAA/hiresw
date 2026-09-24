@@ -52,7 +52,6 @@ lnsf() # safe version of "ln -sf", waits until "ls" shows correct link
 
 
 set -x 
-echo srefcyc_1= $srefcyc
 inest=1  # treat hiresw domains like they are nests
 
 export rg=$RUNTYP
@@ -87,14 +86,11 @@ case $cyc in
   * )    set -A A6HR 18 30 42 54 999;;
 esac
 
-# srefcyc and set in parent job (JHIRESW_SMARTINIT)
 
 # set the variables again here (typeset sometimes does not work correctly for imported variables)
-srefcyc=$srefcyc
-# gefscyc=$gefscyc
 pcphrl=$pcphrl
 
-typeset -Z2 srefcyc pcphrl
+typeset -Z2 pcphrl
 
 #======================================================================
 #  Configure input met grib, land-sea mask and topo file names

@@ -94,14 +94,10 @@ case $cyc in
   * )    set -A A6HR 18 30 42 54 999;;
 esac
 
-# srefcyc and set in parent job (JHIRESW_SMARTINITB)
-
 # set the variables again here (typeset sometimes does not work correctly for imported variables)
-srefcyc=$srefcyc
-# gefscyc=$gefscyc
 pcphrl=$pcphrl
 
-typeset -Z2 srefcyc pcphrl
+typeset -Z2 pcphrl
 
 
 #======================================================================
