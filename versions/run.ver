@@ -6,7 +6,7 @@ export PrgEnv_intel_ver=8.3.3
 export craype_ver=2.7.31
 export cray_pals_ver=1.2.14
 
-export hiresw_ver=v8.1.14
+export hiresw_ver=v8.1.16
 export gfs_ver=v16.3
 
 export ip_ver=3.3.3
