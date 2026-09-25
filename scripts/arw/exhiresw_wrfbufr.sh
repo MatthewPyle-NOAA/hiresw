@@ -287,13 +287,7 @@ startmsg
 echo here RUNLOC  $RUNLOC
 echo here MODEL $MODEL
 
-if [ ${RUNLOC} == "conusmem2arw" -o ${RUNLOC} == "akmem2arw" -o ${RUNLOC} == "himem2arw" -o ${RUNLOC} == "prmem2arw" ]
-then
-echo running mem2 version
-nlev=40
-else
 nlev=50
-fi
 
 echo "${MODEL} $nlev" > itag
 mpiexec -n 1 -ppn 1 $EXEChiresw/hiresw_sndp  < itag >> $pgmout 2>$pgmout

@@ -1,6 +1,6 @@
 #! /bin/sh
 
-cd arw
+cd ./arw
 
 ./install_hiresw.sh
 
