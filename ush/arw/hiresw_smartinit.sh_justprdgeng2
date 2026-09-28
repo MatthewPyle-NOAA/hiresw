@@ -169,7 +169,10 @@ let pcphr3=pcphr-3
 let ffhr1=ffhr-1
 let ffhr2=ffhr-2
 hours="${ffhr}"
-if [ $ffhr -ge 3 ];then hours="${ffhr2} ${ffhr1} ${ffhr}";fi
+
+if [ $ffhr -ge 3 ];then 
+hours="${ffhr2} ${ffhr1} ${ffhr}"
+fi
 
 #===========================================================
 #  CREATE Accum precip buckets if necessary 
@@ -357,6 +360,7 @@ while (! cat model.ndfd_1 model.ndfd_2 model.ndfd_3 model.ndfd_4 model.ndfd_5 mo
       mk6p=6
       ppgm=make
     fi
+    fi
 
 #   hr3bkt flag determines when to run smartprecip to create 3 hr buckets
     let hr3bkt=$((fhr-3))%12
@@ -367,7 +371,8 @@ while (! cat model.ndfd_1 model.ndfd_2 model.ndfd_3 model.ndfd_4 model.ndfd_5 mo
 #   since we only gather max/min data at those hours to compute 12 hr max/mins
 #-------------------------------------------------------------
 
-  fi  #fhr -ne 0
+  fi  #fhr -ne 0 
+
 
 #-------------------------------------------------------------
 # ON-CYCLE:  At 12-hr times:  Need 6 hour buckets as well
@@ -637,10 +642,10 @@ then
     if [ $check -eq 0 -a $MODEL = "arw" ]
     then
      cp  3precip.${fhr}* 3snow.${fhr}* ../
-    err=$?
+     err=$?
 	if [ $err -ne 0 ]
 	then
-	echo "BAD COPY OF 3precip.${fhr} 3snow.${fhr}"
+ 	echo "BAD COPY OF 3precip.${fhr} 3snow.${fhr}"
         fi
     fi
 fi
