@@ -30,9 +30,9 @@ Building the package
 
 Go to sorc/ of the cloned package
 
-./build_all.sh (compiles code)
+  ./build_all.sh (compiles code)
 
-./install_all.sh (copies to exec/ of the package)
+  ./install_all.sh (copies to exec/ of the package)
 
 The build_all.sh step also copies in the fix files to the package.
 
