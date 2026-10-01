@@ -4,16 +4,17 @@
 # FV3 build
 #################################
 
+home=`pwd`
+
 # 1st time only
 if [ ! -e fv3/hireswfv3_utils.fd ]
 then
-# ./manage_externals/checkout_externals
-git clone -b hrefv3.1-wcoss2 https://github.com/GeorgeGayno-NOAA/UFS_UTILS.git fv3/hireswfv3_utils.fd
+git clone -b ops-hrefv3.2 https://github.com/ufs-community/UFS_UTILS.git fv3/hireswfv3_utils.fd
 else
-echo "already ran checkout_externals"
+echo "already cloned fv3/hireswfv3_utils.fd"
 fi
 
-cd fv3
+cd ./fv3
 
 # 1st time only
 if [ ! -e ../../fix/fv3 ]
@@ -35,7 +36,7 @@ module load python/3.8.6
 # ARW build
 #################################
 
-cd ../arw
+cd ${home}/arw
 
 #1st time only
 if [ ! -e ../../fix/arw ]

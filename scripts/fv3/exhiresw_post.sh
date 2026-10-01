@@ -120,23 +120,7 @@ then
 
 ## compute snow by differencing WEASD on native grid
 
-if [ $NEST = "conus" ]
-then
- dim1=2001
- dim2=1201
-elif [ $NEST = "ak" ]
-then
- dim1=1441
- dim2=1185
-elif [ $NEST = "hi" ]
-then
- dim1=433
- dim2=345
-elif [ $NEST = "pr" ]
-then
- dim1=625
- dim2=416
-elif [ $NEST = "guam" ]
+if [ $NEST = "guam" ]
 then
  dim1=449
  dim2=385

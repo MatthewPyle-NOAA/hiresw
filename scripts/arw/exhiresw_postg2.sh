@@ -32,6 +32,7 @@
 # 2014-02-27  Pyle          - Modified to loop through forecast hours (reverting to old style)
 # 2014-12-09  Pyle          - Modified so can start from non-zero time if postdone?? files
 #                             exist
+# 2026-09-22  Pyle          - Removes some non-Guam related blocks
 
 set -x
 
@@ -335,24 +336,6 @@ export FORT_BUFFERED=true
 
 echo RUNLOC $RUNLOC
 
-if [ $RUNLOC = "conusarw"  ]
-then
- export MPICH_RANK_REORDER_METHOD=3
- cp $FIXhiresw/hiresw_post_rank_order_22task MPICH_RANK_ORDER
-elif [ $RUNLOC = "conusmem2arw" ]
-then
- export MPICH_RANK_REORDER_METHOD=3
- cp $FIXhiresw/hiresw_post_rank_order_16task MPICH_RANK_ORDER
-elif [ $RUNLOC = "akarw" ]
-then
- export MPICH_RANK_REORDER_METHOD=3
- cp $FIXhiresw/hiresw_post_rank_order_16task MPICH_RANK_ORDER
-elif [ $RUNLOC = "akmem2arw" ]
-then
- export MPICH_RANK_REORDER_METHOD=3
- cp $FIXhiresw/hiresw_post_rank_order_16task MPICH_RANK_ORDER
-fi
-
 mpiexec  -n $NTASK -ppn $PTILE $EXEChiresw/hiresw_post  <  itag  > $pgmout 2>errfile
 export err=$?;err_chk
 
@@ -366,18 +349,6 @@ cp $pgmout ${DATA}/${pgmout}_${fhr}
 cp errfile ${DATA}/errfile_${fhr}
 
 echo "done executing the post" > $DATA/postdone${fhr}
-# postmsg  "HIRESW ${NEST}${MODEL} POST done for F${fhr}"
-
-# fhr=`expr $fhr + $INCR`
-
-# if [ $fhr -lt 10 ]
-# then
-# fhr=0$fhr
-# fi
-
-# wdate=`$NDATE ${fhr} $CYCLE`
-
-# done
 
 echo EXITING $0
 exit

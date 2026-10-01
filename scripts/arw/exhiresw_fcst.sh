@@ -13,6 +13,7 @@
 # 2009-09-24  Shawna Cokley - Removes copy of date file to nmcdate
 # 2013-02-20  Matthew Pyle - New branch for non-WRF (NMMB) code
 # 2014-12-09  Matthew Pyle - restarting from non-zero capacity
+# 2026-09-22  Matthew Pyle - Removes non-Guam blocks
 
 set -x
 
@@ -22,7 +23,6 @@ postmsg  "$msg"
 cd $DATA
 
 RUNLOC=${NEST}${MODEL}
-
 
 #
 # Get needed variables from exhiresw_prelim.sh.sms
@@ -161,12 +161,7 @@ then
 cp $COMIN/hiresw.t${cyc}z.${NEST}${MODEL}.wrfbdy_d01 wrfbdy_d01
 export err1=$?
 
-if [ $NEST = "conus" -o $NEST = "pr" ]
-then
-cp $COMIN/hiresw.t${cyc}z.${NEST}${MODEL}.wrfinput_d01_rap wrfinput_d01
-else
 cp $COMIN/hiresw.t${cyc}z.${NEST}${MODEL}.wrfinput_d01 wrfinput_d01
-fi
 
 export err2=$?
 
@@ -213,38 +208,6 @@ fi
 
 done
 
-if [ $NEST = "conus" -o $NEST = "pr" ]
-then
-
-### CONUS input based on RAP produced by different job than the boundary files
-### allow to sleep in case RAP job is running late (but should be done before
-### boundaries are built
-
-icnt=0
-
-if [ ! -e $COMIN/hiresw.t${cyc}z.${NEST}${MODEL}.input_domain_01_nemsio_rap ]
-then
-
-while [ $icnt -lt 30 ]
-do
-if [ ! -e $COMIN/hiresw.t${cyc}z.${NEST}${MODEL}.input_domain_01_nemsio_rap ]
-then
-echo "$COMIN/hiresw.t${cyc}z.${NEST}${MODEL}.input_domain_01_nemsio_rap still not available"
-sleep 45
-fi
-let icnt=icnt+1
-done
-
-fi
-
-
-
-cp $COMIN/hiresw.t${cyc}z.${NEST}${MODEL}.input_domain_01_nemsio_rap input_domain_01_nemsio
-else
-cp $COMIN/hiresw.t${cyc}z.${NEST}${MODEL}.input_domain_01_nemsio input_domain_01_nemsio
-fi
-
-export err2=$?
 cat $COMIN/hiresw.t${cyc}z.${NEST}${MODEL}.configure_file | sed s:_RESTART_:${restart}:g >  configure_file
 export err3=$?
 
@@ -342,15 +305,6 @@ fi
 # default runline for small domains
     runline="mpiexec -n $NTASK -ppn $PTILE ./hiresw_wrfarwfcst"
 # fi
-
-
-# special runline for large domains
-if [ $RUNLOC = "conusarw"  -o $RUNLOC = "conusmem2arw" -o $RUNLOC = "akarw" \
-       	-o  $RUNLOC = "akmem2arw" ]
-then
-# runline="mpiexec -cpu-bind verbose,depth -n $NTASK ./hiresw_wrfarwfcst"
-    runline="mpiexec -n $NTASK -ppn $PTILE ./hiresw_wrfarwfcst"
-fi
 
 startmsg
 

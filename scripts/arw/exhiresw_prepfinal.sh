@@ -19,13 +19,14 @@
 # 2009-09-24  Shawna Cokley - Streamlines way script obtains date information -
 #                             pulls from $PDY rather than copying a file to the working directory
 # 2013-10-30  Matthew Pyle - Breaks out last piece from old prelim script  to run real, just for WRF-ARW
+# 2026-09-22  Matthew Pyle - Simplifies for Guam-only era of RRFS
 
 set -x
 
 LENGTH=48
 
-### NEST options are east, west, ak, hi, pr, or conus
-### MODEL is arw or nmm or nmmb
+### NEST option is guam
+### MODEL is arw
 
 msg="JOB $job FOR WRF NEST=${NEST}${MODEL} HAS BEGUN"
 postmsg  "$msg"
@@ -76,11 +77,7 @@ hend=`echo $end | cut -c9-10`
 
 ## for all domains now, special namelist.input files are required for the model
 
-### this could be generalized and simplified
-
-if [ $NEST = "pr" -o $NEST = "prmem2" -o $NEST = "hi" -o  $NEST = "himem2" -o \
-     $NEST = "guam" -o $NEST = "ak" -o $NEST = "conus" -o "conusmem2"  -o $NEST = "akmem2"  ] ; then
-
+if [ $NEST = "guam" ] ; then
   cp $PARMhiresw/hiresw_${MODEL}_namelist.input_in_${NEST} namelist.input_in
   cp $PARMhiresw/hiresw_${MODEL}_namelist.input_in_${NEST}_model namelist.input_in_model
 
@@ -93,12 +90,7 @@ fi
 
 ### number of input levels depends on source model data
 
-if [ $NEST != "conusmem2" -a $NEST != "akmem2" -a $NEST != "prmem2" -a $NEST != "himem2" ]
-then
 NUMLEVS=27
-else
-NUMLEVS=40
-fi
 
 cat namelist.input_in | sed s:YSTART:$ystart: | sed s:MSTART:$mstart: \
  | sed s:DSTART:$dstart: | sed s:HSTART:$cyc: | sed s:YEND:$yend: \
@@ -156,20 +148,16 @@ mpiexec -n $NTASK -ppn $PTILE  $EXEChiresw/hiresw_wrfarwfcst_init > $pgmout 2>&1
 
 export err=$?; err_chk
 
-# Copy 3 files needed to run WRF forecast to COM (two in case of CONUS domain)
-# CONUS domain input file produced by separate JHIRESW_PREPRAP job
+# Copy 3 files needed to run WRF forecast to COM 
 
 cp wrfbdy_d01 $COMOUT/hiresw.t${cyc}z.${NEST}${MODEL}.wrfbdy_d01
 cp namelist.input_model $COMOUT/hiresw.t${cyc}z.${NEST}${MODEL}.namelist.input
 
-if [ $NEST != "conus" -a $NEST != "pr" ]
-then
- cp wrfinput_d01 $COMOUT/hiresw.t${cyc}z.${NEST}${MODEL}.wrfinput_d01
+cp wrfinput_d01 $COMOUT/hiresw.t${cyc}z.${NEST}${MODEL}.wrfinput_d01
 
- if [ ! -f $COMOUT/hiresw.t${cyc}z.${NEST}${MODEL}.wrfbdy_d01 ] || [ ! -f $COMOUT/hiresw.t${cyc}z.${NEST}${MODEL}.wrfinput_d01 ]; then
-   msg="FATAL ERROR: WRF initial or boundary condition files needed by WRF-ARW model not copied to $COMOUT"
-   err_exit $msg
- fi
+if [ ! -f $COMOUT/hiresw.t${cyc}z.${NEST}${MODEL}.wrfbdy_d01 ] || [ ! -f $COMOUT/hiresw.t${cyc}z.${NEST}${MODEL}.wrfinput_d01 ]; then
+  msg="FATAL ERROR: WRF initial or boundary condition files needed by WRF-ARW model not copied to $COMOUT"
+  err_exit $msg
 fi
 
 cat $DATA/rsl.error.0000 $DATA/rsl.out.0000 >  $COMOUT/hiresw.t${cyc}z.${NEST}${MODEL}.real.log

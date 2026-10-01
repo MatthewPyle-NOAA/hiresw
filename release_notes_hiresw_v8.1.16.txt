@@ -1,0 +1,249 @@
+HiresW v8.1.16 - released 09/28/2026
+
+Google docs version at: 
+https://docs.google.com/document/d/140syzOa_pRL0Qdp8Ejq4k2nmL92RJDZ0gP625tiWt8U/edit?usp=sharing
+
+
+#####################
+Update overview 
+#####################
+
+* Trims down the HiresW system to only run for the Guam domain
+* This also removes NAM, RAP, and SREF references from the system
+
+#####################
+Obtaining the package
+#####################
+
+Clone it with this command (but change hiresw.v8.1.16 to whatever you want 
+to call it in the directory that it is cloned into):
+
+
+git clone -b feature/guamonly \
+https://github.com/MatthewPyle-NOAA/hiresw.git hiresw.v8.1.16
+
+
+#####################
+Building the package
+#####################
+
+
+Go to sorc/ of the cloned package
+
+  ./build_all.sh (compiles code)
+
+  ./install_all.sh (copies to exec/ of the package)
+
+The build_all.sh step also copies in the fix files to the package.
+
+
+#############################
+Modified/deleted files:
+#############################
+
+### ecf/def: 
+deletes hiresw_para06.def
+deletes hiresw_para18.def
+deletes hiresw_prod06.def
+deletes hiresw_prod18.def
+modifies hiresw_prod00.def (leaves only Guam family)
+modifies hiresw_prod12.def (leaves only Guam family)
+
+### deletes ecf/jhiresw_preprap.ecf
+
+### deletes jobs/JHIRESW_PREPRAP
+
+launch_fv3 and launch_info test directories have modifications, but are mainly 
+changing the version number in various launch scripts.  Not used in production
+
+### parm/arw:
+
+deletes:
+hiresw_ak_arw.namelist.wps_in
+hiresw_akmem2_arw.namelist.wps_in
+hiresw_arw_namelist.input_in_ak
+hiresw_arw_namelist.input_in_ak_model
+hiresw_arw_namelist.input_in_ak_model.orig
+hiresw_arw_namelist.input_in_ak_model.timestep13
+hiresw_arw_namelist.input_in_akmem2
+hiresw_arw_namelist.input_in_akmem2_model
+hiresw_arw_namelist.input_in_conus
+hiresw_arw_namelist.input_in_conus_model
+hiresw_arw_namelist.input_in_conusmem2
+hiresw_arw_namelist.input_in_conusmem2_model
+hiresw_arw_namelist.input_in_hi
+hiresw_arw_namelist.input_in_hi_model
+hiresw_arw_namelist.input_in_himem2
+hiresw_arw_namelist.input_in_himem2_model
+hiresw_arw_namelist.input_in_pr
+hiresw_arw_namelist.input_in_pr_model
+hiresw_arw_namelist.input_in_prmem2
+hiresw_arw_namelist.input_in_prmem2_model
+hiresw_conus_arw.namelist.wps_in
+hiresw_conus_awp5km.txt_1
+hiresw_conus_awp5km.txt_2
+hiresw_conus_awp5km.txt_3
+hiresw_conus_awp5km.txt_4
+hiresw_conus_awp5km.txt_5
+hiresw_conus_awp5km.txt_6
+hiresw_conus_awpregeastwest.txt_1
+hiresw_conus_awpregeastwest.txt_2
+hiresw_conusmem2_arw.namelist.wps_in
+hiresw_hi_arw.namelist.wps_in
+hiresw_himem2_arw.namelist.wps_in
+hiresw_ndfd.txt_1h_conus_1
+hiresw_ndfd.txt_1h_conus_2
+hiresw_ndfd.txt_1h_conus_3
+hiresw_ndfd.txt_3h_conus_1
+hiresw_ndfd.txt_3h_conus_2
+hiresw_ndfd.txt_3h_conus_3
+hiresw_pr_arw.namelist.wps_in
+hiresw_prmem2_arw.namelist.wps_in
+hiresw_Vtable.NAM
+hiresw_Vtable.RAP
+
+### parm/fv3:
+
+
+deletes:
+hiresw_conus_awp5km.txt_1
+hiresw_conus_awp5km.txt_2
+hiresw_conus_awp5km.txt_3
+hiresw_conus_awp5km.txt_4
+hiresw_conus_awp5km.txt_5
+hiresw_conus_awp5km.txt_6
+hiresw_conus_awpregeastwest.txt_1
+hiresw_conus_awpregeastwest.txt_2
+hiresw_ndfd.txt_1h_conus_1
+hiresw_ndfd.txt_1h_conus_2
+hiresw_ndfd.txt_1h_conus_3
+hiresw_ndfd.txt_3h_conus_1
+hiresw_ndfd.txt_3h_conus_2
+hiresw_ndfd.txt_3h_conus_3
+input_fv3_akccpp.nml_inp
+input_fv3_conusccpp.nml_inp
+input_fv3_hiccpp.nml_inp
+input_fv3_prccpp.nml_inp
+model_configure_fv3.tmp_ak_ccpp
+model_configure_fv3.tmp_ak_ccpp.timestep18
+model_configure_fv3.tmp_conus_ccpp
+model_configure_fv3.tmp_hi_ccpp
+model_configure_fv3.tmp_pr_ccpp
+
+### deletes rocoto and rocoto_arw directories in main directory (no longer used for HiresW testing)
+
+### scripts/arw:
+
+deletes exhiresw_prelim_rap.sh (no RAP processing for Guam)
+
+modifies exhiresw_awips.sh:  removes some special CONUS processing, 
+simplifies/shortens script
+
+modifies exhiresw_fcst.sh: removes some special blocks for RAP-initialized 
+runs that are being terminated
+
+modifies exhiresw_postg2.sh: removes some MPICH rank order logic used for 
+large (AK/CONUS) ARW domains, removes some commented out old lines.
+
+modifies exhiresw_prdgeng2.sh: Removes non-Guam domain logic, greatly 
+shortening the script.
+
+modifies exhiresw_prepfinal.sh: Removes non-Guam domain logic
+
+modifies exhiresw_smartinitb.sh: Changes to account for removal of SREF 
+(not used for Guam)
+
+modifies exhiresw_ungrib.sh: Removes non-Guam domain logic, which also removes 
+references to the RAP and the NAM.  Also removes some commented out old logic 
+to check on the number of hurricane runs for that cycle.
+
+modifies exhiresw_wrfbufr.sh:  Removes “mem2” logic that isn’t needed for Guam 
+domain.
+
+### scripts/fv3:
+
+deletes exhiresw_prdgen.sh.v8.1.7 (old script saved by NCO at some point)
+
+modifies exhiresw_awips.sh: removes some special CONUS processing, 
+simplifies/shortens script
+
+modifies exhiresw_post.sh:  removes non-Guam domain dimension specifications
+
+modifies exhiresw_prdgen.sh:  Removes special CONUS/AK processing blocks
+
+### sorc:
+
+Removed some compilation generated files from the repository, including 
+compiled executables and build log files.  Removed some intermediate 
+compilation files from repository in sorc/fv3/hireswfv3_forecast.fd  
+
+sorc/arw/link_fix.sh: updates FIX_DIR location to point at new Guam-only 
+set of fixed files
+
+sorc/fv3/link_fix.sh:  updates FIX_DIR location to point at new Guam-only 
+set of fixed files
+
+sorc/build_all.sh:  Updates how sorc/fv3/hireswfv3_utils.fd gets populated 
+at build time, pointing at a release branch that actually exists and is
+appropriate.  
+
+sorc/Externals.cfg:  Corrects the ufs_utils tag information
+
+sorc/install_all.sh: Minor change to make the install script slightly more 
+robust.
+
+### ush/arw:
+
+deletes hiresw_chkhur.sh (no longer used)
+deletes hiresw_prdgen_3km_grid.g2.sh (no longer used in a Guam-only system)
+deletes hiresw_prdgen_5km_grid.g2.sh (no longer used in a Guam-only system)
+deletes hiresw_prdgen_oldgrid_g2.sh_5km (no longer used in a Guam-only system)
+deletes hiresw_prdgen_oldgrid_g2.sh_5km.20210303 (old version of ush script no 
+longer used in a Guam-only system)
+
+modifies hiresw_smartinit.sh_justprdgeng2:  removes logic for non-Guam 
+domains, and removes SREF processing not used for Guam.  
+
+modifies hiresw_smartinit.sh_justsmartinit:  removes logic for non-Guam 
+domains and for handling of SREF data not used for Guam.
+
+### ush/fv3/
+
+deletes hiresw_prdgen_3km_grid_g2.sh (no longer used in a Guam-only system)
+deletes hiresw_prdgen_5km_grid_g2.sh (no longer used in a Guam-only system)
+deletes hiresw_prdgen_oldgrid_g2.sh_5km (no longer used in a Guam-only system)
+deletes hiresw_smartinit_prdgen.sh.20210401 (removes old NCO-saved version 
+of script)
+
+modifies hiresw_prdgen_big_grid_g2.sh: removes non-Guam if blocks
+
+modifies hiresw_prdgen_oldgrid_g2.sh: removes non-Guam if blocks, and also 
+removed commented lines from old even/odd hour logic from a much older 
+version of HiresW
+
+modifies hiresw_smartinit_prdgen.sh: removes non-Guam material, SREF 
+processing, and some old nmmb model references
+
+modifies hiresw_smartinit_smartinit.sh:  removes non-Guam blocks, removes 
+some SREF processing logic, removes some old nmmb logic
+
+### versions/run.ver: removes NAM, SREF, and RAP model versions.  
+
+#############################
+Resource changes:
+#############################
+
+Guam resources are unchanged.  Overall HiresW resource usage drops 
+significantly, as is limited to 00Z and 12Z cycles now, and the forecast jobs 
+for Guam only use 1 node (ARW) and 2 nodes (FV3).
+
+WMO products are about 186 MB/day for Guam-only system (current HiresW is 
+about 6 GB/day)
+
+COM storage is about 58 GB/day for this Guam-only system (current HiresW is 
+about 1.2 TB/day)
+
+Volume to HPSS should see a similar level of drop, but was not directly 
+investigated.  An updated runhistory/parm/models/hiresw type file is on 
+cactus/dogwood as 
+/lfs/h2/emc/lam/noscrub/Matthew.Pyle/hiresw.v8.1.16/hpss/hiresw

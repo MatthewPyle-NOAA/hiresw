@@ -16,6 +16,7 @@
 # 2013-08-01  Matthew Pyle - Original script for parallel
 # 2014-02-11  Matthew Pyle - Added brief docblock
 # 2019-11-06  Matthew Pyle - Simplified version for FV3
+# 2026-09-22  Matthew Pyle - Makes more guam-only specific
 
 
 set -x
@@ -44,26 +45,10 @@ fi
 
 DOMOUT=${DOMIN_SMALL}${modelout}
 
-if [ $DOMIN_SMALL = "ak" ]
-then
-  filenamthree="fv3.AK05"
-  wgrib2def="nps:210:60 185.5:825:5000 44.8:603:5000"
-elif [ $DOMIN_SMALL = "hi" ]
-then
-  filenamthree="fv3.HI05"
-  wgrib2def="latlon 197.65:223:.045 16.4:170:.045"
-elif [ $DOMIN_SMALL = "pr" ]
-then
-  filenamthree="fv3.PR05"
-  wgrib2def="latlon 283.41:340:.045 13.5:208:.045"
-elif [ $DOMIN_SMALL = "guam" ]
+if [ $DOMIN_SMALL = "guam" ]
 then
   filenamthree="fv3.GU05"
   wgrib2def="latlon 141.0:223:.045 11.7:170:.045"
-elif [ $DOMIN_SMALL = "conus" ]
-then
-  filenamthree="fv3.CO05"
-  wgrib2def="lambert:265:25:25 226.541:1473:5079 12.190:1025:5079"
 fi
 
 filedir=$DATA
@@ -75,39 +60,7 @@ export tmmark=tm00
 ###############################################################
 ###############################################################
 
-#
-# make GRIB file with pressure data every 25 mb for EMC's FVS
-# verification
-
-if [ $DOMIN_SMALL = "ak" -o $DOMIN_SMALL = "akmem2" ]
-then
-cp $PARMfv3/hiresw_awpreg.txt_${subpiece} regional_grid_extract.txt
-else
 cp $PARMfv3/hiresw_awpreg.txt regional_grid_extract.txt
-fi
-
-
-# INPUT_DATA_FORE=${INPUT_DATA}
-
-# $DATA should be post working directory
-
-# INPUT_DATA=${DATA}
-
-# if [ $DOMIN_SMALL = "conus" ]
-# then
-
-# if [ $fhr -eq 00 ]
-# then
-# INPUT_DATA=$INPUT_DATA_EVEN
-# elif [ $fhr%2 -eq 0 ]
-# then
-# INPUT_DATA=$INPUT_DATA_EVEN
-# else
-# INPUT_DATA=$INPUT_DATA_ODD
-# fi
-
-# fi
-
 
 looplim=90
 loop=1
