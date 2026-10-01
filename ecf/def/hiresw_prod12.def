@@ -22,6 +22,7 @@ suite prod
               family makebc
                 edit NCPUS '8'
                 edit MEM '70'
+                trigger  /prod/primary/06/gfs/v16.3/gfs/atmos/post/jgfs_atmos_post_f066 == complete and ( jhiresw_make_ic == active or jhiresw_make_ic == complete )
                 task jhiresw_make_bc_f00
                   trigger ../jhiresw_make_ic == active or ../jhiresw_make_ic == complete
                 task jhiresw_make_bc_f03
@@ -540,7 +541,7 @@ suite prod
                 limit hiresw_bufrpost_limit 10
                 family prep
                   task jhiresw_ungrib
-                    trigger  :TIME >= 1320 and :TIME < 2359 and  /prod/primary/06/gfs/v16.3/gfs/atmos/post/jgfs_atmos_post_f054 == complete and ../../jhiresw_cleanup == complete
+                    trigger  :TIME >= 1320 and :TIME < 2359 and  /prod/primary/06/gfs/v16.3/gfs/atmos/post/jgfs_atmos_post_f054 == complete and ../../../../jhiresw_cleanup == complete
                   task jhiresw_metgrid
                     trigger jhiresw_ungrib == complete
                   task jhiresw_prepfinal
@@ -933,6 +934,7 @@ suite prod
           family gfs
             family atmos
               family post
+                task jgfs_atmos_post_f054
                 task jgfs_atmos_post_f066
               endfamily
             endfamily

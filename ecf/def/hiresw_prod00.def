@@ -541,7 +541,7 @@ suite prod
                 limit hiresw_bufrpost_limit 10
                 family prep
                   task jhiresw_ungrib
-                    trigger  :TIME >= 0120 and :TIME < 1320 and  /prod/primary/18/gfs/v16.3/gfs/atmos/post/jgfs_atmos_post_f054 == complete and ../../jhiresw_cleanup == complete
+                    trigger  :TIME >= 0120 and :TIME < 1320 and  /prod/primary/18/gfs/v16.3/gfs/atmos/post/jgfs_atmos_post_f054 == complete and ../../../../jhiresw_cleanup == complete
                   task jhiresw_metgrid
                     trigger jhiresw_ungrib == complete
                   task jhiresw_prepfinal
@@ -935,6 +935,7 @@ suite prod
           family gfs
             family atmos
               family post
+                task jgfs_atmos_post_f054 
                 task jgfs_atmos_post_f066 
               endfamily
             endfamily
