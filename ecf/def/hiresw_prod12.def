@@ -540,7 +540,7 @@ suite prod
                 limit hiresw_bufrpost_limit 10
                 family prep
                   task jhiresw_ungrib
-                    trigger ../../conus/prep/jhiresw_preprap == active or ../../conus/prep/jhiresw_preprap == complete
+                    trigger  :TIME >= 1320 and :TIME < 2359 and  /prod/primary/06/gfs/v16.3/gfs/atmos/post/jgfs_atmos_post_f054 == complete and ../../jhiresw_cleanup == complete
                   task jhiresw_metgrid
                     trigger jhiresw_ungrib == complete
                   task jhiresw_prepfinal

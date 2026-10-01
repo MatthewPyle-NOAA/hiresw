@@ -34,7 +34,7 @@ compress="c3 -set_bitmap 1"
 
 mkdir -p ${DATA}/prdgen_full
 
-kdir -p ${DATA}/prdgen_full/${fhr}
+mkdir -p ${DATA}/prdgen_full/${fhr}
 cd ${DATA}/prdgen_full/${fhr}
 
 #cd $DATA
